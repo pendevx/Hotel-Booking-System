@@ -5,6 +5,7 @@
 - Functional booking 
 - Files
 
+
 - Make command line shit working
 	- Figure the basic functionality that a customer/user of the system would use
 	- Implement these features first
@@ -18,3 +19,4 @@
 - Login/Register
 - View personal details/history
 - View personal bookings
+- Change to Standard(2), Family(4), change capacity, set capacity in extended
