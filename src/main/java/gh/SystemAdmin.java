@@ -1,10 +1,14 @@
-package com.group5.hotel;
+package gh;
 
+import com.group5.hotel.Room;
+import com.group5.hotel.Booking;
 import java.util.Date;
 import java.util.List;
 
-public class AdminSystem extends UserSystem {
-	public AdminSystem(Account account, List<Booking> bookings) {
+import com.group5.account.*;
+
+public class SystemAdmin extends SystemUser {
+	public SystemAdmin(Account account, List<Booking> bookings) {
 		super(account, bookings);
 	}
 

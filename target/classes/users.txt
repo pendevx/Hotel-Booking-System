@@ -1,8 +1,0 @@
-admin 0 ADMIN yiny tee @outlook 022111111
-cor 1 USER tony yee @gmail 022333333
-gee 1 USER 12 12 12 12 
-coriandar 123 USER yont eey @proton 021453458234 
-12 12 USER 12 12 12 12 
-qqq qqq USER qq q q q 
-rer er USER er er er er 
-cori 123 USER Tony Yee @gmha 02213 

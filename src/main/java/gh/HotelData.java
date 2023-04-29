@@ -1,5 +1,6 @@
-package com.group5.gh;
+package gh;
 
+import com.group5.hotel.Booking;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;

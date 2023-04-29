@@ -1,15 +1,16 @@
 package com.group5.views;
 
+import gh.SystemAdmin;
+import com.group5.hotel.Booking;
 import com.group5.account.Account;
 import com.group5.util.ParseInput;
 
 import java.util.List;
 import java.util.Scanner;
-import com.group5.gh.*;
 
 public class ViewAdmin extends View {
 
-	public ViewAdmin(Account userAccount, AdminSystem system) {
+	public ViewAdmin(Account userAccount, SystemAdmin system) {
 		super(userAccount, system);
 	}
 

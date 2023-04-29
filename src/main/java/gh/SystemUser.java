@@ -1,5 +1,7 @@
-package com.group5.gh;
+package gh;
 
+import com.group5.hotel.Room;
+import com.group5.hotel.Booking;
 import java.util.Date;
 import java.util.List;
 import java.util.function.Predicate;
@@ -7,10 +9,10 @@ import java.util.stream.Collectors;
 
 import com.group5.account.*;
 
-public abstract class UserSystem {
+public abstract class SystemUser {
 	protected Account account;
 	protected List<Booking> bookings;
-	UserSystem(Account account, List<Booking> bookings) {
+	SystemUser(Account account, List<Booking> bookings) {
 		this.account = account;
 		this.bookings = bookings;
 	}

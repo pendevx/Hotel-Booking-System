@@ -1,5 +1,8 @@
 package com.group5.app;
 
+import gh.SystemAdmin;
+import gh.HotelApp;
+import gh.SystemClient;
 import com.group5.account.Account;
 import com.group5.account.AccountLogin;
 import com.group5.account.AccountNew;
@@ -10,7 +13,6 @@ import com.group5.views.ViewAdmin;
 import com.group5.views.ViewUser;
 import java.util.Scanner;
 
-import com.group5.gh.*;
 
 public class AppSession {
 	View viewType;
@@ -48,10 +50,10 @@ public class AppSession {
 		// send through the account to pick the type of login to use
 		// allows for autologin
 		if (isUser(account)) {
-			ClientSystem system = (ClientSystem) hotelApp.login(account);
+			SystemClient system = (SystemClient) hotelApp.login(account);
 			this.viewType = new ViewUser(account, system);
 		}  else if (isAdmin(account)) {
-			AdminSystem system = (AdminSystem) hotelApp.login(account);
+			SystemAdmin system = (SystemAdmin) hotelApp.login(account);
 			this.viewType = new ViewAdmin(account, system);
 		}
 

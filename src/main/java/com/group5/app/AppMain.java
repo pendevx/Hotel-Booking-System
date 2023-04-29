@@ -8,5 +8,6 @@ public class AppMain {
 		AppSession session = new AppSession();
 		session.sessionMenu(scan);
 		scan.close();
+		//
 	}
 }

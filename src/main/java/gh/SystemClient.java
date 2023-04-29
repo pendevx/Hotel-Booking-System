@@ -1,12 +1,14 @@
-package com.group5.gh;
+package gh;
 
+import com.group5.hotel.Room;
+import com.group5.hotel.Booking;
 import java.util.Date;
 import java.util.List;
 
 import com.group5.account.*;
 
-public class ClientSystem extends UserSystem {
-	public ClientSystem(Account acc, List<Booking> bookings) {
+public class SystemClient extends SystemUser {
+	public SystemClient(Account acc, List<Booking> bookings) {
 		super(acc, bookings);
 	}
 
@@ -15,7 +17,7 @@ public class ClientSystem extends UserSystem {
 	 * @param begin
 	 * @param end
 	 * @param rooms
-	 * @param account account must equal to the account stored inside the ClientSystem's account
+	 * @param account account must equal to the account stored inside the SystemClient's account
 	 * @return
 	 */
 	public Booking makeBooking(Date begin, Date end, List<Room> rooms, Account account) {

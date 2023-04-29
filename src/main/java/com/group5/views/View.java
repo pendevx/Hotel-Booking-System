@@ -1,19 +1,19 @@
 package com.group5.views;
 
+import gh.SystemUser;
 import com.group5.account.Account;
 import com.group5.dataHandler.DataHandlerRead;
 import com.group5.hotel.Hotel;
 
 import java.util.Scanner;
 
-import com.group5.gh.*;
 
 public abstract class View {
 	public Account account;
 	public Hotel hotel;
-	protected UserSystem system;
+	protected SystemUser system;
 
-	public View (Account account, UserSystem system) {
+	public View (Account account, SystemUser system) {
 		this.account = account;
 		this.hotel = DataHandlerRead.loadHotelJson().get(0);
 		this.system = system;

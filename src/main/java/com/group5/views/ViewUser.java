@@ -1,13 +1,13 @@
 package com.group5.views;
 
+import gh.SystemClient;
 import com.group5.account.Account;
 import com.group5.util.ParseInput;
 
 import java.util.Scanner;
-import com.group5.gh.*;
 
 public class ViewUser extends View {
-	public ViewUser(Account userAccount, ClientSystem system) {
+	public ViewUser(Account userAccount, SystemClient system) {
 		super(userAccount, system);
 	}
 
