@@ -1,0 +1,26 @@
+[
+  {
+    "username": "admin",
+    "firstName": "admin",
+    "lastName": "admin",
+    "phone": "5",
+    "email": "admin@hotel.com",
+    "permissions": "ADMIN"
+  },
+  {
+    "username": "user",
+    "firstName": "Guang Heng",
+    "lastName": "Xian",
+    "phone": "21153324",
+    "email": "test2@test.com",
+    "permissions": "USER"
+  },
+  {
+    "username": "user2",
+    "firstName": "Tony",
+    "lastName": "Yee",
+    "phone": "21152297",
+    "email": "test@test.com",
+    "permissions": "USER"
+  }
+]

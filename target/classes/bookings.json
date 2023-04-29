@@ -1,0 +1,24 @@
+[
+  {
+    "bookingID": "1682668052358",
+    "startDate": "2023-04-29",
+    "endDate": "2023-05-05",
+    "roomsBooked": [
+      {
+        "floor": 1,
+        "roomNum": "J",
+        "price": 100.0
+      }
+    ],
+    "totalPrice": 100.0,
+    "isPaid": false,
+    "user": {
+      "username": "user",
+      "firstName": "fn",
+      "lastName": "ln",
+      "phone": "123",
+      "email": "abc@def.com",
+      "permissions": "USER"
+    }
+  }
+]
