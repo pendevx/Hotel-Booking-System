@@ -1,32 +1,31 @@
 package com.group5.app;
 
-import gh.SystemAdmin;
-import gh.HotelApp;
-import gh.SystemClient;
+import com.group5.system.HotelSystemAdmin;
+import com.group5.system.HotelPortal;
+import com.group5.system.HotelSystemUser;
 import com.group5.account.Account;
 import com.group5.account.AccountLogin;
 import com.group5.account.AccountNew;
 import com.group5.account.AccountPermission;
 import com.group5.util.ParseInput;
-import com.group5.views.View;
-import com.group5.views.ViewAdmin;
-import com.group5.views.ViewUser;
+import com.group5.view.View;
+import com.group5.view.ViewAdmin;
+import com.group5.view.ViewUser;
 import java.util.Scanner;
 
 
 public class AppSession {
-	View viewType;
-	HotelApp hotelApp;
+	private View viewType;
+	private HotelPortal hotelPortal;
 
-	AppSession() {
-		hotelApp = new HotelApp();
+	public AppSession() {
+		hotelPortal = new HotelPortal();
 	}
 
 	public void sessionMenu(Scanner scan) {
 		System.out.println("1. Login");
 		System.out.println("2. Create user account");
 		System.out.println("0. QUIT");
-
 		int input = ParseInput.integer(0, 2, scan);
 		if (input == 1) loginPortal(scan);
 		else if (input == 2) createPortal(scan);
@@ -45,20 +44,17 @@ public class AppSession {
 		else System.out.println("Too many failed attempts, program exited");
 	}
 
-	// TODO: take in account, load booking
 	private void login(Scanner scan, Account account) {
-		// send through the account to pick the type of login to use
-		// allows for autologin
 		if (isUser(account)) {
-			SystemClient system = (SystemClient) hotelApp.login(account);
-			this.viewType = new ViewUser(account, system);
-		}  else if (isAdmin(account)) {
-			SystemAdmin system = (SystemAdmin) hotelApp.login(account);
-			this.viewType = new ViewAdmin(account, system);
+//			viewType = new ViewUser(account, (HotelSystemUser) hotelPortal.login(account));
 		}
-
-		this.viewType.confirmLogin();
-		this.viewType.menuMain(scan);
+		else if (isAdmin(account)) {
+//			viewType = new ViewAdmin(account, (HotelSystemAdmin) hotelPortal.login(account));
+			// account is head in HotelSystem
+			viewType = new ViewAdmin((HotelSystemAdmin) hotelPortal.login(account));
+		}
+		viewType.confirmLogin();
+		viewType.menuMain(scan);
 	}
 
 	private boolean isUser(Account user) { return user.getAccountType()== AccountPermission.USER; }

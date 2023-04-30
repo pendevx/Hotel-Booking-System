@@ -16,13 +16,7 @@ public class AccountNew {
 	public AccountNew() {
 		this.credentialsList = DataHandlerRead.loadCredentialsJson();
 		this.accountList = DataHandlerRead.loadAccountsJson();
-		this.userList = getUserList();
-	}
-
-	private List<String> getUserList() {
-		List<String> users = new ArrayList<>();
-		for (AccountCredentials c : this.credentialsList) users.add(c.getUsername());
-		return users;
+		this.userList = DataHandlerRead.getUserList();
 	}
 
 	public Account createUser(Scanner scan) {
@@ -60,9 +54,7 @@ public class AccountNew {
 			System.out.println("Enter new username: ");
 			username = ParseInput.string(scan);
 			isUnique = checkUserName(username);
-			// added edge case handler
-			// test
-			if (username.isEmpty()) isUnique = printIncorrect(attempts);
+			if (username.isEmpty()) isUnique = printInvalid(attempts);
 			else if (!isUnique) printIncorrect(attempts);
 		}
 		return isUnique ? username : "";
@@ -70,12 +62,12 @@ public class AccountNew {
 
 	private boolean checkUserName(String newUsername) { return !this.userList.contains(newUsername); }
 
-	private boolean printIncorrect(int attempts) {
+	private boolean printInvalid(int attempts) {
 		System.out.println("Invalid, attempts remaining " + attempts + "\n");
 		return false;
 	}
 
-	private void printInvalid(int attempts) {
+	private void printIncorrect(int attempts) {
 		System.out.println("User already exists, attempts remaining " + attempts + "\n");
 	}
 }
