@@ -10,9 +10,9 @@ import com.group5.account.*;
 public class HotelSystemUser extends HotelSystem {
 	// renamed from UserSystem
 
-//	public HotelSystemUser(Account account, List<Booking> bookings) {
-//		super(account, bookings);
-//	}
+	public HotelSystemUser(Account account, List<Booking> bookings) {
+		super(account, bookings);
+	}
 //
 //	/**
 //	 *

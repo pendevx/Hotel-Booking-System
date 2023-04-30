@@ -4,8 +4,8 @@ import com.group5.system.HotelSystemAdmin;
 import com.group5.system.HotelPortal;
 import com.group5.system.HotelSystemUser;
 import com.group5.account.Account;
-import com.group5.account.AccountLogin;
-import com.group5.account.AccountNew;
+import com.group5.system.AccountLogin;
+import com.group5.system.AccountNew;
 import com.group5.account.AccountPermission;
 import com.group5.util.ParseInput;
 import com.group5.view.View;
@@ -46,11 +46,9 @@ public class AppSession {
 
 	private void login(Scanner scan, Account account) {
 		if (isUser(account)) {
-//			viewType = new ViewUser(account, (HotelSystemUser) hotelPortal.login(account));
+			viewType = new ViewUser((HotelSystemUser) hotelPortal.login(account));
 		}
 		else if (isAdmin(account)) {
-//			viewType = new ViewAdmin(account, (HotelSystemAdmin) hotelPortal.login(account));
-			// account is head in HotelSystem
 			viewType = new ViewAdmin((HotelSystemAdmin) hotelPortal.login(account));
 		}
 		viewType.confirmLogin();

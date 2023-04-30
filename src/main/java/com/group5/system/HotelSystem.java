@@ -8,14 +8,14 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import com.group5.account.*;
-import com.group5.dataHandler.DataHandlerRead;
 import com.group5.hotel.Hotel;
 
 public abstract class HotelSystem {
 	// renamed from UserSystem
+
 	// chnag epermisison afteer
-	public Account account;
 	public Hotel hotel;
+	public Account account;
 	public List<Booking> bookings;
 
 	public HotelSystem(Account account, List<Booking> bookings) {
@@ -57,11 +57,12 @@ public abstract class HotelSystem {
 //		return true;
 //	}
 
+	
 	public List<Booking> getAllBookings() { return bookings; } // should be moved to admin
 
 	public Account getAccount() { return account; }
 	public String getUserDetails() { return account.toString() + "\n" + account.getAccountDetails() + "\n"; }
-	public String getConfirmLogin() { return "\nnLogged in as" + " " + account.toString() + "\n"; }
+	public String getConfirmLogin() { return "\nLogged in as" + " " + account.toString() + "\n"; }
 	public String getHotelDetails() { return this.hotel.toString(); }
 
 }

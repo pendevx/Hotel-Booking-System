@@ -1,6 +1,6 @@
 package com.group5.view;
 
-import com.group5.system.*;
+import com.group5.system.HotelSystemAdmin;
 import com.group5.hotel.Booking;
 import com.group5.util.ParseInput;
 
@@ -29,8 +29,8 @@ public class ViewAdmin extends View {
 			if(input == 1) printHotelDetails();
 			else if(input == 2) printUserDetails();
 			else if (input == 3) getAllBookings();
-//			else if (input == 4) viewAllUsers();
-//			else if (input == 0) System.exit(0);
+			else if (input == 4) viewAllUsers();
+			else if (input == 0) System.exit(0);
 		}
 		while(true);
 	}
@@ -43,7 +43,6 @@ public class ViewAdmin extends View {
 	}
 
 	private void viewAllUsers() {
-		this.hotelSystem.getUserList();
+		((HotelSystemAdmin)hotelSystem).getUserList();
 	}
-
 }

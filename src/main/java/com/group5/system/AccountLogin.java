@@ -1,6 +1,7 @@
-package com.group5.account;
+package com.group5.system;
 
-import com.group5.dataHandler.DataHandlerRead;
+import com.group5.account.Account;
+import com.group5.account.AccountCredentials;
 import com.group5.util.ParseInput;
 import java.util.List;
 import java.util.Scanner;

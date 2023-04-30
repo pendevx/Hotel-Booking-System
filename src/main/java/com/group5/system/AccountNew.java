@@ -1,7 +1,8 @@
-package com.group5.account;
+package com.group5.system;
 
-import com.group5.dataHandler.DataHandlerRead;
-import com.group5.dataHandler.DataHandlerWrite;
+import com.group5.account.Account;
+import com.group5.account.AccountCredentials;
+import com.group5.account.AccountPermission;
 import com.group5.util.ParseInput;
 import java.util.ArrayList;
 import java.util.List;

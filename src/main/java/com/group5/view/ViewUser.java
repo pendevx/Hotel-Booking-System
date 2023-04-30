@@ -8,17 +8,14 @@ import java.util.Scanner;
 
 public class ViewUser extends View {
 
+	public ViewUser(HotelSystemUser hotelSystem) {
+		super(hotelSystem);
+	}
+
 	@Override
 	public void menuMain(Scanner scan) {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 	}
-//	public HotelSystemUser hotelSystem;
-//
-//	public ViewUser(Account userAccount, HotelSystemUser system) {
-//		super(userAccount);
-//		this.hotelSystem = hotelSystem;
-//	}
-//
+
 //	@Override
 //	public void menuMain(Scanner scan) {
 //		do {
@@ -56,4 +53,5 @@ public class ViewUser extends View {
 //	private void cancelBooking() {
 //		System.out.println("cancelBooking");
 //	}
+
 }

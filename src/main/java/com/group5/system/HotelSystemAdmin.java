@@ -6,9 +6,9 @@ import java.util.Date;
 import java.util.List;
 
 import com.group5.account.*;
-import com.group5.dataHandler.DataHandlerRead;
 
 public class HotelSystemAdmin extends HotelSystem {
+	// renamed from AdminSystem
 
 	public HotelSystemAdmin(Account account, List<Booking> bookings) {
 		super(account, bookings);

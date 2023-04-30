@@ -6,8 +6,6 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import com.group5.account.*;
-import com.group5.dataHandler.DataHandlerRead;
-import com.group5.dataHandler.DataHandlerWrite;
 
 public class BookingData {
 	static List<Booking> bookings;
