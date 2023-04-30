@@ -12,12 +12,12 @@
     ],
     "totalPrice": 100.0,
     "isPaid": false,
-    "user": {
-      "username": "user",
-      "firstName": "fn",
-      "lastName": "ln",
-      "phone": "123",
-      "email": "abc@def.com",
+    "user": {	  
+	  "username": "user",
+	  "firstName": "Guang Heng",
+      "lastName": "Xian",
+      "phone": "21153324",
+      "email": "test2@test.com",
       "permissions": "USER"
     }
   }

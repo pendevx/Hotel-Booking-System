@@ -17,7 +17,7 @@ public class AccountNew {
 	public AccountNew() {
 		this.credentialsList = DataHandlerRead.loadCredentialsJson();
 		this.accountList = DataHandlerRead.loadAccountsJson();
-		this.userList = DataHandlerRead.getUserList();
+		this.userList = getUserList();
 	}
 
 	public Account createUser(Scanner scan) {
@@ -61,7 +61,16 @@ public class AccountNew {
 		return isUnique ? username : "";
 	}
 
-	private boolean checkUserName(String newUsername) { return !this.userList.contains(newUsername); }
+	private List<String> getUserList() {
+		List<AccountCredentials> credentialsList = DataHandlerRead.loadCredentialsJson();
+		List<String> users = new ArrayList<>();
+		for (AccountCredentials c : credentialsList) users.add(c.getUsername());
+		return users;
+	}
+
+	private boolean checkUserName(String newUsername) {
+		return !this.userList.contains(newUsername);
+	}
 
 	private boolean printInvalid(int attempts) {
 		System.out.println("Invalid, attempts remaining " + attempts + "\n");

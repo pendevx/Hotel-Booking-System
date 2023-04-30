@@ -7,11 +7,11 @@ import java.util.stream.Collectors;
 
 import com.group5.account.*;
 
-public class BookingData {
+public class HotelBookingData {
 	static List<Booking> bookings;
 	static List<Account> accounts;
 
-	static void init() {
+	static {
 		bookings = DataHandlerRead.loadBookingJson();
 		accounts = DataHandlerRead.loadAccountsJson();
 	}

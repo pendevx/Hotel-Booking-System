@@ -63,11 +63,4 @@ public class DataHandlerRead extends DataHandler {
 		catch (IOException e) { System.out.println(""); }
 		return hotels;
 	}
-
-	public static List<String> getUserList() {
-		List<AccountCredentials> credentialsList = DataHandlerRead.loadCredentialsJson();
-		List<String> users = new ArrayList<>();
-		for (AccountCredentials c : credentialsList) users.add(c.getUsername());
-		return users;
-	}
 }

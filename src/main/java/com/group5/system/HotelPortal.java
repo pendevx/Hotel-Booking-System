@@ -6,14 +6,10 @@ import java.util.List;
 
 public class HotelPortal {
 
-    public HotelPortal() {
-        BookingData.init();
-    }
-
     public HotelSystem login(Account account) {
         if (account.getAccountType() == AccountPermission.USER) {
-            return new HotelSystemUser(account, BookingData.getBookingsForAccount(account));
+            return new HotelSystemUser(account, HotelBookingData.getBookingsForAccount(account));
         }
-		else return new HotelSystemAdmin(account, BookingData.getBookings());
+		else return new HotelSystemAdmin(account, HotelBookingData.getBookings());
     }
 }
