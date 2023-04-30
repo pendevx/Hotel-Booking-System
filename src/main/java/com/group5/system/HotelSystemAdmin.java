@@ -15,6 +15,18 @@ public class HotelSystemAdmin extends HotelSystem {
 		super(account, bookings);
 	}
 
+	@Override
+	public Booking makeBooking(Date begin, Date end, List<Room> rooms, Account user) {
+		Booking b = super.makeBooking(begin, end, rooms, user, this.account);
+		return b;
+	}
+
+	public Account getUserAccountByUsername(String usernameToFind) {
+		List<Account> foundUser = HotelBookingData.getAccountByUser(usernameToFind);
+		if (!foundUser.isEmpty()) return foundUser.get(0);
+		else return null;
+	}
+
 	public void printUserList() {
 		List<String> users = getUserList();
 		for (String user : users) System.out.println(user);
@@ -29,12 +41,12 @@ public class HotelSystemAdmin extends HotelSystem {
 
 	public void printAllBookings() {
 		List<Booking> bookings = getAllBookings();
-		for (Booking b : bookings) System.out.println(b.toString());
+		for (Booking b : bookings) System.out.println(b.toString() + "\n");
 	}
 
-	@Override
-	public Booking makeBooking(Date begin, Date end, List<Room> rooms, Account user) {
-		Booking b = super.makeBooking(begin, end, rooms, user, account);
-		return b;
+	public void deleteBookingByID(String bookingId) {
+		Booking deleted = super.deleteBooking(bookingId);
+		System.out.println("Deleted:");
+		System.out.println(deleted.toString());
 	}
 }

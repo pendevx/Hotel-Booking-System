@@ -1,5 +1,9 @@
 package com.group5.util;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 
 public class ParseInput {
@@ -27,5 +31,16 @@ public class ParseInput {
 			catch (NumberFormatException e) { System.out.println("Please enter a valid option."); }
 		} while (!(low <= input && input <= max));
 		return input;
+	}
+	
+	public static Date date(Scanner scan) {
+		DateFormat formatter = new SimpleDateFormat("dd/MM/yy");
+		formatter.setLenient(false);
+		Date output = null;
+		do {
+			try { output = formatter.parse(string(scan)); }
+			catch (ParseException e) { System.out.println("Invalid date, please enter again."); }
+		} while (output == null);
+		return output;
 	}
 }

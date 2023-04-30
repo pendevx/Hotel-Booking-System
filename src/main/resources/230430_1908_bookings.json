@@ -1,0 +1,152 @@
+[
+  {
+    "bookingID": "1682837773577",
+    "startDate": "2024-05-30",
+    "endDate": "2024-06-30",
+    "roomsBooked": [
+      {
+        "floor": 10,
+        "roomNum": "A",
+        "price": 100.0
+      }
+    ],
+    "totalPrice": 100.0,
+    "isPaid": false,
+    "user": {
+      "username": "user",
+      "firstName": "Guang Heng",
+      "lastName": "Xian",
+      "phone": "21153324",
+      "email": "test2@test.com",
+      "permissions": "USER"
+    },
+    "bookingManager": {
+      "username": "user",
+      "firstName": "Guang Heng",
+      "lastName": "Xian",
+      "phone": "21153324",
+      "email": "test2@test.com",
+      "permissions": "USER"
+    }
+  },
+  {
+    "bookingID": "1682837790171",
+    "startDate": "2024-05-30",
+    "endDate": "2024-06-30",
+    "roomsBooked": [
+      {
+        "floor": 10,
+        "roomNum": "A",
+        "price": 100.0
+      }
+    ],
+    "totalPrice": 100.0,
+    "isPaid": false,
+    "user": {
+      "username": "user",
+      "firstName": "Guang Heng",
+      "lastName": "Xian",
+      "phone": "21153324",
+      "email": "test2@test.com",
+      "permissions": "USER"
+    },
+    "bookingManager": {
+      "username": "user",
+      "firstName": "Guang Heng",
+      "lastName": "Xian",
+      "phone": "21153324",
+      "email": "test2@test.com",
+      "permissions": "USER"
+    }
+  },
+  {
+    "bookingID": "1682837820233",
+    "startDate": "2024-05-30",
+    "endDate": "2024-06-30",
+    "roomsBooked": [
+      {
+        "floor": 10,
+        "roomNum": "A",
+        "price": 100.0
+      }
+    ],
+    "totalPrice": 100.0,
+    "isPaid": false,
+    "user": {
+      "username": "user",
+      "firstName": "Guang Heng",
+      "lastName": "Xian",
+      "phone": "21153324",
+      "email": "test2@test.com",
+      "permissions": "USER"
+    },
+    "bookingManager": {
+      "username": "user",
+      "firstName": "Guang Heng",
+      "lastName": "Xian",
+      "phone": "21153324",
+      "email": "test2@test.com",
+      "permissions": "USER"
+    }
+  },
+  {
+    "bookingID": "1682837896842",
+    "startDate": "2024-05-30",
+    "endDate": "2024-06-30",
+    "roomsBooked": [
+      {
+        "floor": 10,
+        "roomNum": "A",
+        "price": 100.0
+      }
+    ],
+    "totalPrice": 100.0,
+    "isPaid": false,
+    "user": {
+      "username": "user",
+      "firstName": "Guang Heng",
+      "lastName": "Xian",
+      "phone": "21153324",
+      "email": "test2@test.com",
+      "permissions": "USER"
+    },
+    "bookingManager": {
+      "username": "user",
+      "firstName": "Guang Heng",
+      "lastName": "Xian",
+      "phone": "21153324",
+      "email": "test2@test.com",
+      "permissions": "USER"
+    }
+  },
+  {
+    "bookingID": "1682838179354",
+    "startDate": "2024-05-30",
+    "endDate": "2024-06-30",
+    "roomsBooked": [
+      {
+        "floor": 10,
+        "roomNum": "A",
+        "price": 100.0
+      }
+    ],
+    "totalPrice": 100.0,
+    "isPaid": false,
+    "user": {
+      "username": "user2",
+      "firstName": "Tony",
+      "lastName": "Yee",
+      "phone": "21152297",
+      "email": "test@test.com",
+      "permissions": "USER"
+    },
+    "bookingManager": {
+      "username": "user2",
+      "firstName": "Tony",
+      "lastName": "Yee",
+      "phone": "21152297",
+      "email": "test@test.com",
+      "permissions": "USER"
+    }
+  }
+]

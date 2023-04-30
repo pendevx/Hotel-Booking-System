@@ -22,6 +22,7 @@ public class HotelSystemUser extends HotelSystem {
 	 * @param account account must equal to the account stored inside the HotelSystemUser's account
 	 * @return
 	 */
+	@Override
 	public Booking makeBooking(Date begin, Date end, List<Room> rooms, Account account) {
 		if (!account.equals(this.account)) {
 			return null;
@@ -31,11 +32,14 @@ public class HotelSystemUser extends HotelSystem {
 		return booking;
 	}
 
+	public void updateBookingsForAccount() {
+		bookings = HotelBookingData.getBookingsForAccount(account);
+	}
+
 	public void printUserBookings() {
+		updateBookingsForAccount();
 		if(!bookings.isEmpty()) {
-			for(Booking b : bookings) {
-				System.out.println(b.toString());
-			}
+			for(Booking b : bookings) System.out.println(b.toString() + "\n");
 		}
 		else System.out.println("No bookings to view.");
 	}

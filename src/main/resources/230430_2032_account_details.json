@@ -30,13 +30,5 @@
     "phone": "022100900",
     "email": "@outlook",
     "permissions": "USER"
-  },
-  {
-    "username": "tty",
-    "firstName": "tty",
-    "lastName": "yyt",
-    "phone": "021",
-    "email": "@",
-    "permissions": "USER"
   }
 ]
