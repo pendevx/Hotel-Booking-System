@@ -17,7 +17,7 @@ public class DataBackup {
 	}
 
 	private static String createBackupPath(String sourcePath) {
-		String rootPath = Paths.get(sourcePath).getParent().toString() + "/";
+		String rootPath = Paths.get(sourcePath).getParent().toString() + "/logs/";
 		String originalName = Paths.get(sourcePath).getFileName().toString();
 		String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyMMdd_HHmm"));
 		return rootPath + timestamp + "_" + originalName;

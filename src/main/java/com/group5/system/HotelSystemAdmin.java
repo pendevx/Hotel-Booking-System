@@ -41,6 +41,10 @@ public class HotelSystemAdmin extends HotelSystem {
 
 	public void printAllBookings() {
 		List<Booking> bookings = getAllBookings();
+                if (bookings.size() == 0) {
+                    System.out.println("No bookings to view.");
+                    return;
+                }
 		for (Booking b : bookings) System.out.println(b.toString() + "\n");
 	}
 

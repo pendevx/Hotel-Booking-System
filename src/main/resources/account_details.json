@@ -9,34 +9,18 @@
   },
   {
     "username": "user",
-    "firstName": "Guang Heng",
-    "lastName": "Xian",
-    "phone": "21153324",
-    "email": "test2@test.com",
+    "firstName": "GROUP",
+    "lastName": "5",
+    "phone": "1234567890",
+    "email": "group5@comp603.com",
     "permissions": "USER"
   },
   {
-    "username": "user2",
-    "firstName": "Tony",
-    "lastName": "Yee",
-    "phone": "21152297",
-    "email": "test@test.com",
-    "permissions": "USER"
-  },
-  {
-    "username": "cor",
-    "firstName": "cori",
-    "lastName": "and",
-    "phone": "022100900",
-    "email": "@outlook",
-    "permissions": "USER"
-  },
-  {
-    "username": "tty",
-    "firstName": "tty",
-    "lastName": "yyt",
-    "phone": "021",
-    "email": "@",
+    "username": "example",
+    "firstName": "ex",
+    "lastName": "user",
+    "phone": "12345",
+    "email": "ex@ex.com",
     "permissions": "USER"
   }
 ]

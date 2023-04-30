@@ -20,11 +20,10 @@ public class ViewAdmin extends View {
 			System.out.println("3. View all users.");
 			System.out.println("4. View all bookings.");
 			System.out.println("5. Delete booking.");
-			System.out.println("6. Create booking for user.");
 			System.out.println("0. to QUIT");
 			System.out.println("------------------------------------");
 
-			int input = ParseInput.integer(0, 6, scan);
+			int input = ParseInput.integer(0, 5, scan);
 			if(input == 1) viewHotelDetails();
 			else if(input == 2) viewAdminDetails();
 			else if (input == 3) viewAllUsers();
@@ -44,6 +43,10 @@ public class ViewAdmin extends View {
 		viewAllBookings();
 		System.out.println("Enter id of booking to delete:");
 		String bookingId = ParseInput.string(scan);
-		((HotelSystemAdmin) hotelSystem).deleteBookingByID(bookingId);
+                try {
+                    ((HotelSystemAdmin) hotelSystem).deleteBookingByID(bookingId);
+                } catch (RuntimeException e) {
+                    System.out.println("Invalid booking ID");
+                }
 	}
 }
