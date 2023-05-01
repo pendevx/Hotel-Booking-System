@@ -15,12 +15,12 @@ public class HotelSystemUser extends HotelSystem {
 	}
 
 	/**
-	 *
-	 * @param begin
-	 * @param end
-	 * @param rooms
-	 * @param account account must equal to the account stored inside the HotelSystemUser's account
-	 * @return
+	 * Makes a booking for a user.
+	 * @param begin The beginning date of the booking
+	 * @param end The end date of the booking
+	 * @param rooms The rooms to book
+	 * @param account The account who is creating the booking. account must equal to the account stored inside the HotelSystemUser's account
+	 * @return Returns the booking which was just created
 	 */
 	@Override
 	public Booking makeBooking(Date begin, Date end, List<Room> rooms, Account account) {
@@ -32,10 +32,16 @@ public class HotelSystemUser extends HotelSystem {
 		return booking;
 	}
 
+	/**
+	 * Refreshes the bookings list in the system
+	 */
 	public void updateBookingsForAccount() {
 		bookings = HotelBookingData.getBookingsForAccount(account);
 	}
 
+	/**
+	 * Prints all the bookings for the current user
+	 */
 	public void printUserBookings() {
 		updateBookingsForAccount();
 		if(!bookings.isEmpty()) {

@@ -64,8 +64,8 @@ public class FileIO {
 	 * 
 	 * @return list collection of account credentials
 	 */
-	public static List<AccountCredentials> loadCredentialsJson() {
-		List<AccountCredentials> credentials = null;
+	public static Set<AccountCredentials> loadCredentialsJson() {
+		Set<AccountCredentials> credentials = null;
 		try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(Paths.get(credentialsPath).toFile()));
     		credentials = gson.fromJson(bufferedReader, new TypeToken<List<AccountCredentials>>(){}.getType());
@@ -149,7 +149,7 @@ public class FileIO {
 	 * 
 	 * @param credentials - list collection of credentials
 	 */
-	public static void saveCredentials(List<AccountCredentials> credentials) {
+	public static void saveCredentials(Set<AccountCredentials> credentials) {
 		backupFile(credentialsPath);
 		new Thread(() -> {
 			try {

@@ -17,20 +17,15 @@ public class Booking {
     private Account user;
     private Account bookingManager;
 
-    public Booking(String ID, Date dateBooked, Date endDate, List<Room> roomsBooked, Account user) {
-        bookingID = ID;
-        this.startDate = dateBooked;
-        this.endDate = endDate;
-        this.roomsBooked = roomsBooked;
-        totalPrice = 0;
-        for (int i = 0; i < roomsBooked.size(); i++) {
-            totalPrice += roomsBooked.get(i).price;
-        }
-        isPaid = false;
-        this.user = user;
-        bookingManager = null;
-    }
-
+    /**
+     * Constructor to populate the Booking object
+     * @param ID The ID of the booking
+     * @param dateBooked The starting date for the booking
+     * @param endDate The finishing date for the booking
+     * @param roomsBooked A list of the rooms in the booking
+     * @param user The user who is booking
+     * @param manager The user who managed/created the booking
+     */
     public Booking(String ID, Date dateBooked, Date endDate, List<Room> roomsBooked, Account user, Account manager) {
         bookingID = ID;
         this.startDate = dateBooked;
@@ -45,6 +40,10 @@ public class Booking {
         bookingManager = manager;
     }
 
+    /**
+     *
+     * @return Returns a nicely formatted string which represents a Booking
+     */
 	@Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -64,6 +63,7 @@ public class Booking {
         return sb.toString();
     }
 
+    // Getter functions to return roomsBooked, startDate, endDate, and user
     public List<Room> getRooms() { return roomsBooked; }
     public Date beginDate() { return startDate; }
     public Date endDate() { return endDate; }

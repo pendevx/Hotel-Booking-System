@@ -9,7 +9,7 @@ import java.util.Set;
 import java.util.Scanner;
 
 public class AccountNew {
-	private List<AccountCredentials> credentialsList;
+	private Set<AccountCredentials> credentialsList;
 	private List<Account> accountList;
 	private Set<String> usernamesList;
 

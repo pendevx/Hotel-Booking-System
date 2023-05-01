@@ -5,10 +5,11 @@ import com.group5.account.AccountCredentials;
 import com.group5.util.ParseInput;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 
 
 public class AccountLogin {
-	private List<AccountCredentials> listCredentials;
+	private Set<AccountCredentials> listCredentials;
 	private List<Account> accounts;
 	private Account account;
 
