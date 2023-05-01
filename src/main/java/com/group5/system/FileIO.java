@@ -42,7 +42,7 @@ public class FileIO {
 
 	/***
 	 * Generic for reading json files. Couldn't remember if this would count as
-	 * "3" separate read functions. So used bufferedReader for each file instead.
+	 * "3" separate read functions, so created function per json file.
 	 * 
 	 * @param path - path to json file
 	 * @return E - generic type
