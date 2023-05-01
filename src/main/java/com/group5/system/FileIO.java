@@ -200,7 +200,7 @@ public class FileIO {
 	/***
 	 * Write to json file storing usernames
 	 * 
-	 * @param uniqueUsernames - set collection of usernames
+	 * @param usernames - set collection of usernames
 	 */
 	public static void saveUsernames(Set<String> usernames) {
 		backupFile(usernamesPath, "usernames.json");

@@ -78,7 +78,7 @@ public class ViewUser extends View {
 	}
 
 	/***
-	 * Print warning when
+	 * Print info status when booking is cancelled
 	 */
 	private void printBookingProcessCanclled() {
 		System.out.println("Booking process cancelled");

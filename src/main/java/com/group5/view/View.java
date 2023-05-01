@@ -53,15 +53,19 @@ public abstract class View {
 	public Date getStartDate(Scanner scan) {
 		Date begin = null;
 		while(true) {
-			System.out.println("What date would you like to start your booking? (dd/mm/yyyy)");
+			System.out.println("Date to start your booking? (dd/mm/yyyy), x to cancel");
 			begin = ParseInput.date(scan); // parses in a valid date, based on predefined format
-//			if (begin.compareTo(new Date()) < 0) { // compares date to current
+
+			if (begin == null)
+				break;
+
 			Calendar today = Calendar.getInstance();
 			today.setTime(new Date());
 			today.set(Calendar.HOUR_OF_DAY, 0);
 			today.set(Calendar.MINUTE, 0);
 			today.set(Calendar.SECOND, 0);
 			today.set(Calendar.MILLISECOND, 0);
+
 			if (begin.before(today.getTime())) {
 				System.out.println("Sorry, you cannot begin before today's date!");
 				continue; // breaks one iteration of loop, continues next iteration
@@ -78,13 +82,14 @@ public abstract class View {
      * @param scan - input of date, which is parsed
      * @return valid date
      */
-	public Date getEndDate(Scanner scan, Date start) {
+	public Date getEndDate(Scanner scan, Date date) {
 		Date end = null;
 		while(true) {
 			System.out.println("Date to end your booking? (dd/mm/yyyy), x to cancel");
 			end = ParseInput.date(scan);
 			if (end == null) break;
-			else if (end.compareTo(start) < 0) { // checks that end is not before start date
+			// checks that end is not before start date
+			else if (end.before(date)) {
 				System.out.println("Sorry, you cannot end before your booking's start date!");
 				continue; // breaks one iteration of loop, continues next iteration
 			}
