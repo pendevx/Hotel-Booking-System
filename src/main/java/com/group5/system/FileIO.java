@@ -27,6 +27,7 @@ public class FileIO {
 	private static final String usernamesPath;
 	private static final String hotelPath;
     private static final Gson gson;
+    private static final boolean createLog = false;
 
 	/***
 	 * Paths to json files, and formatter for Gson
@@ -150,7 +151,8 @@ public class FileIO {
 	 * @param credentials - list collection of credentials
 	 */
 	public static void saveCredentials(Set<AccountCredentials> credentials) {
-		backupFile(credentialsPath, "credentials.json");
+        if (createLog) backupFile(credentialsPath, "credentials.json");
+
 		new Thread(() -> {
 			try {
 
@@ -168,7 +170,8 @@ public class FileIO {
 	 * @param accounts - list collection of accounts
 	 */
 	public static void saveAccounts(List<Account> accounts) {
-		backupFile(accountsPath, "account_details.json");
+        if (createLog) backupFile(accountsPath, "account_details.json");
+
 		new Thread(() -> {
 			try {
 				BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(Paths.get(accountsPath).toFile()));
@@ -186,7 +189,8 @@ public class FileIO {
 	 * @param bookings - list collection of bookings
 	 */
 	public static void saveBookings(List<Booking> bookings) {
-		backupFile(bookingsPath, "bookings.json");
+        if (createLog) backupFile(bookingsPath, "bookings.json");
+
 		new Thread(() -> {
 			try {
 				BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(Paths.get(bookingsPath).toFile()));
@@ -203,7 +207,8 @@ public class FileIO {
 	 * @param usernames - set collection of usernames
 	 */
 	public static void saveUsernames(Set<String> usernames) {
-		backupFile(usernamesPath, "usernames.json");
+        if (createLog) backupFile(usernamesPath, "usernames.json");
+
 		new Thread(() -> {
 			try {
 				BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(Paths.get(usernamesPath).toFile()));
