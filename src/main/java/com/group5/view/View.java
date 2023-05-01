@@ -44,15 +44,16 @@ public abstract class View {
 	public void printHotelDetails() { System.out.println(hotelSystem.getHotelDetails()); }
 
     /***
-     * Gets the begin date of the booking that meet
-     * requirements.
+     * Gets the start date of the booking that meet
+ requirements.
      * 
      * @param scan - input of date, which is parsed
      * @return valid date
      */
-	public Date getBeginDate(Scanner scan) {
-		Date begin = null;
+	public Date getStartDate(Scanner scan) {
+		Date start = null;
 		while(true) {
+<<<<<<< HEAD
 			System.out.println("What date would you like to start your booking? (dd/mm/yyyy)");
 			begin = ParseInput.date(scan); // parses in a valid date, based on predefined format
 //			if (begin.compareTo(new Date()) < 0) { // compares date to current
@@ -63,12 +64,18 @@ public abstract class View {
 			today.set(Calendar.SECOND, 0);
 			today.set(Calendar.MILLISECOND, 0);
 			if (begin.before(today.getTime())) {
+=======
+			System.out.println("Date to start your booking? (dd/mm/yyyy), x to cancel");
+			start = ParseInput.date(scan); // parses in a valid date, based on predefined format
+			if (start == null) break;
+			else if (start.compareTo(new Date()) < 0) { // compares date to current
+>>>>>>> c9cbd9a85fe8b0f3bbb31e169b582976b25e9f2c
 				System.out.println("Sorry, you cannot begin before today's date!");
 				continue; // breaks one iteration of loop, continues next iteration
 			}
 			break;
 		}
-		return begin;
+		return start;
 	}
 
     /***
@@ -78,12 +85,13 @@ public abstract class View {
      * @param scan - input of date, which is parsed
      * @return valid date
      */
-	public Date getEndDate(Scanner scan, Date begin) {
+	public Date getEndDate(Scanner scan, Date start) {
 		Date end = null;
 		while(true) {
-			System.out.println("What date would you like to end your booking? (dd/mm/yyyy)");
+			System.out.println("Date to end your booking? (dd/mm/yyyy), x to cancel");
 			end = ParseInput.date(scan);
-			if (end.compareTo(begin) < 0) { // checks that end is not before begin date
+			if (end == null) break;
+			else if (end.compareTo(start) < 0) { // checks that end is not before start date
 				System.out.println("Sorry, you cannot end before your booking's start date!");
 				continue; // breaks one iteration of loop, continues next iteration
 			}
@@ -95,9 +103,14 @@ public abstract class View {
     /***
      * Prints the selected booking period
      */
+<<<<<<< HEAD
 	public void printBookingPeriod(Date begin, Date end) {
 		DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 		System.out.println("Date: " + formatter.format(begin) + " to " + formatter.format(end));
+=======
+	public void printBookingPeriod(Date start, Date end) {
+		System.out.println("Period: " + start + " -> " + end + "\n");
+>>>>>>> c9cbd9a85fe8b0f3bbb31e169b582976b25e9f2c
 	}
 
     /***
@@ -106,11 +119,11 @@ public abstract class View {
      * it is available between the begin and end dates.
      * 
      * @param scan - input of room, as prompted
-     * @param begin - the selected begin date
+     * @param start - the selected start date
      * @param start - the selected end date
      * @return list of chosen rooms to book
      */
-	public List<Room> getBookingRooms(Scanner scan, Date begin, Date end) {
+	public List<Room> getBookingRooms(Scanner scan, Date start, Date end) {
 		System.out.println("Please choose your rooms for booking, e.g. 3F.");
 		System.out.println("Room numbers range from (1-10) and (A-J).");
 		System.out.println("Finish adding rooms by entering an empty  line:");
@@ -119,7 +132,6 @@ public abstract class View {
 
 		while (true) {
 			String room = scan.nextLine().trim().toUpperCase();
-            // change to parse instead
 
 			if (room.equals("")) break; // breaks if empty is entered
 
@@ -141,8 +153,7 @@ public abstract class View {
 
 			Room toBook = new Room(floorNum, roomNum);
 
-			// needs this to check the super as it loads all bookings
-			if (!hotelSystem.roomIsAvailable(toBook, begin)) { // checks if room is availble between begin and end dates
+			if (!hotelSystem.roomIsAvailable(toBook, start)) { // checks if room is availble between start and end dates
 				System.out.println("This room is unavailable, please try again.");
 				continue;
 			}
