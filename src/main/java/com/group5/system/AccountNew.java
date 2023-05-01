@@ -46,9 +46,10 @@ public class AccountNew {
 			System.out.println("Enter phone: ");
 			String phone = ParseInput.string(scan);
 
-			this.credentialsList.add(new AccountCredentials(username, password));
 			newAccount = new Account(username, firstName, lastName, phone, email, AccountPermission.USER);
+			this.credentialsList.add(new AccountCredentials(username, password));
 			this.accountList.add(newAccount);
+			this.usernamesList.add(username);
 
 			FileIO.saveCredentials(credentialsList); // write to json
 			FileIO.saveAccounts(accountList); // write to json

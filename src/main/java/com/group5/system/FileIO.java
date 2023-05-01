@@ -7,16 +7,18 @@ import com.group5.account.Account;
 import com.group5.account.AccountCredentials;
 import com.group5.hotel.Booking;
 import com.group5.hotel.Hotel;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.SortedSet;
 
 public class FileIO {
     private static final String credentialsPath;
@@ -39,89 +41,106 @@ public class FileIO {
 	}
 
 	/***
-	 * Reads from the json file storing credentials 
+	 * Generic for reading json files. Couldn't remember if this would count as
+	 * "3" separate read functions. So used bufferedReader for each file instead.
+	 * 
+	 * @param path - path to json file
+	 * @return E - generic type
+	 */
+//	public static <E> E readJsonFile(String path) {
+//		try {
+//            BufferedReader bufferedReader = new BufferedReader(new FileReader(Paths.get(path).toFile()));
+//			E object = gson.fromJson(bufferedReader, new TypeToken<E>.getType());
+//			bufferedReader.close();
+//			return object;
+//		}	
+// 		catch (IOException e) { throw new RuntimeException(e); }
+//	}
+
+
+	/***
+	 * Reads from the json file storing credentials.
+	 * Implement with BufferedReader, more appropriate for reading in text data.
 	 * 
 	 * @return list collection of account credentials
 	 */
 	public static List<AccountCredentials> loadCredentialsJson() {
 		List<AccountCredentials> credentials = null;
 		try {
-			credentials = gson.fromJson(String.join("\n", Files.readAllLines(Paths.get(credentialsPath))),
-					new TypeToken<List<AccountCredentials>>() {
-					}.getType()
-			);
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(Paths.get(credentialsPath).toFile()));
+    		credentials = gson.fromJson(bufferedReader, new TypeToken<List<AccountCredentials>>(){}.getType());
+            bufferedReader.close();
 		}
-		catch (IOException e) { System.out.println(""); }
+ 		catch (IOException e) { throw new RuntimeException(e); }
 		return credentials;
 	}
 
+
 	/***
 	 * Reads from the json file storing accounts 
+	 * Implement with BufferedReader, more appropriate for reading in text data.
 	 * 
 	 * @return list collection of account 
 	 */
 	public static List<Account> loadAccountsJson() {
 		List<Account> accounts = null;
 		try {
-			accounts = gson.fromJson(
-					String.join("\n", Files.readAllLines(Paths.get(accountsPath))),
-					new TypeToken<List<Account>>() {
-					}.getType()
-			);
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(Paths.get(accountsPath).toFile()));
+    		accounts = gson.fromJson(bufferedReader, new TypeToken<List<Account>>(){}.getType());
+            bufferedReader.close();
 		}
-		catch (IOException e) { System.out.println(""); }
+ 		catch (IOException e) { throw new RuntimeException(e); }
 		return accounts;
 	}
 
 	/***
 	 * Reads from the json file storing bookings 
+	 * Implement with BufferedReader, more appropriate for reading in text data.
 	 * 
 	 * @return list collection of bookings 
 	 */
 	public static List<Booking> loadBookingJson() {
 		List<Booking> bookings = null;
 		try {
-			bookings = gson.fromJson(String.join("\n", Files.readAllLines(Paths.get(bookingsPath))),
-					new TypeToken<List<Booking>>() {
-					}.getType()
-			);
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(Paths.get(bookingsPath).toFile()));
+    		bookings = gson.fromJson(bufferedReader, new TypeToken<List<Booking>>(){}.getType());
+            bufferedReader.close();
 		}
-		catch (IOException e) { System.out.println(""); }
+ 		catch (IOException e) { throw new RuntimeException(e); }
 		return bookings;
 	}
 
 	/***
 	 * Reads from the json file storing bookings 
+	 * Implement with BufferedReader, more appropriate for reading in text data.
 	 * 
 	 * @return list collection of bookings 
 	 */
 	public static Set<String> loadUsernameJson() {
 		Set<String> usernames = null;
 		try {
-			usernames = gson.fromJson(String.join("\n", Files.readAllLines(Paths.get(usernamesPath))),
-					new TypeToken<Set<String>>() {
-					}.getType()
-			);
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(Paths.get(usernamesPath).toFile()));
+    		usernames = gson.fromJson(bufferedReader, new TypeToken<Set<String>>(){}.getType());
+            bufferedReader.close();
 		}
-		catch (IOException e) { System.out.println(""); }
+ 		catch (IOException e) { throw new RuntimeException(e); }
 		return usernames;
 	}
 
 	/***
 	 * Reads from the json file storing hotels
+	 * Implement with BufferedReader, more appropriate for reading in text data.
 	 * 
 	 * @return list collection of hotels 
 	 */
 	public static List<Hotel> loadHotelJson() {
 		List<Hotel> hotels = null;
 		try {
-			hotels = gson.fromJson(
-					String.join("\n", Files.readAllLines(Paths.get(hotelPath))),
-					new TypeToken<List<Hotel>>() {
-					}.getType()
-			);
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(Paths.get(hotelPath).toFile()));
+    		hotels = gson.fromJson(bufferedReader, new TypeToken<List<Hotel>>(){}.getType());
+            bufferedReader.close();
 		}
-		catch (IOException e) { System.out.println(""); }
+ 		catch (IOException e) { throw new RuntimeException(e); }
 		return hotels;
 	}
 
@@ -133,7 +152,12 @@ public class FileIO {
 	public static void saveCredentials(List<AccountCredentials> credentials) {
 		backupFile(credentialsPath);
 		new Thread(() -> {
-			try { Files.write(Paths.get(credentialsPath), gson.toJson(credentials).getBytes()); }
+			try {
+
+				BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(Paths.get(credentialsPath).toFile()));
+				gson.toJson(credentials, bufferedWriter);
+				bufferedWriter.close();
+			}
 			catch (IOException e) { throw new RuntimeException(e); }
 		}).start();
 	}
@@ -146,7 +170,11 @@ public class FileIO {
 	public static void saveAccounts(List<Account> accounts) {
 		backupFile(accountsPath);
 		new Thread(() -> {
-			try { Files.write(Paths.get(accountsPath), gson.toJson(accounts).getBytes()); }
+			try {
+				BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(Paths.get(accountsPath).toFile()));
+				gson.toJson(accounts, bufferedWriter);
+				bufferedWriter.close();
+			}
 			catch (IOException e) { throw new RuntimeException(e); }
 		}).start();
 	}
@@ -161,10 +189,11 @@ public class FileIO {
 		backupFile(bookingsPath);
 		new Thread(() -> {
 			try {
-				Files.write(Paths.get(bookingsPath), gson.toJson(bookings).getBytes());
-			} catch (IOException e) {
-				throw new RuntimeException(e);
+				BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(Paths.get(bookingsPath).toFile()));
+				gson.toJson(bookings, bufferedWriter);
+				bufferedWriter.close();
 			}
+			catch (IOException e) { throw new RuntimeException(e); }
 		}).start();
 	}
 
@@ -173,17 +202,19 @@ public class FileIO {
 	 * 
 	 * @param uniqueUsernames - set collection of usernames
 	 */
-	public static void saveUsernames(Set<String> uniqueUsernames) {
+	public static void saveUsernames(Set<String> usernames) {
 		backupFile(usernamesPath);
 		new Thread(() -> {
 			try {
-				Files.write(Paths.get(usernamesPath), gson.toJson(uniqueUsernames).getBytes());
-			} catch (IOException e) {
-				throw new RuntimeException(e);
+				BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(Paths.get(usernamesPath).toFile()));
+				gson.toJson(usernames, bufferedWriter);
+				bufferedWriter.close();
 			}
+			catch (IOException e) { throw new RuntimeException(e); }
 		}).start();
 	}
 
+	// TODO: implement with FileOutputStream copy.
 	/***
 	 * Write copy of file to disk into the log folder,
 	 * overwrites if there is an existing backup
@@ -196,7 +227,6 @@ public class FileIO {
 			String originalName = Paths.get(sourcePath).getFileName().toString();
 			String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyMMdd_HHmm")); // add time stamp
 			String backupPath = rootPath + timestamp + "_" + originalName;
-
 			Files.copy(Paths.get(sourcePath), Paths.get(backupPath), StandardCopyOption.REPLACE_EXISTING);
 		}
 		catch (Exception ex) { System.out.println("File backup failed."); };
