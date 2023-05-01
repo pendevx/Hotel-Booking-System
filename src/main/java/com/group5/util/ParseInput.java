@@ -8,10 +8,23 @@ import java.util.Scanner;
 
 public class ParseInput {
 	
+    /***
+     * Static function to parse and trim strings
+     * 
+     * @param scan - input nextLine()
+     * @return string that is trim()
+     */
 	public static String string(Scanner scan) {
 		return scan.nextLine().trim();
 	}
 
+    /***
+     * Static function to parse integer from input, handling
+     * invalid integer
+     * 
+     * @param scan - input integer
+     * @return an integer
+     */
 	public static int integer(Scanner scan) {
 		int input = -1;
 		do {
@@ -21,6 +34,14 @@ public class ParseInput {
 		return input;
 	}
 
+    /***
+     * Static function to parse integer from input, between 
+     * a range low - max, handling invalid integer and out
+     * of range values
+     * 
+     * @param scan - input integer
+     * @return a valid integer
+     */
 	public static int integer(int low, int max, Scanner scan) {
 		int input = -1;
 		do {
@@ -33,6 +54,13 @@ public class ParseInput {
 		return input;
 	}
 	
+    /***
+     * Static function to parse a valid date input,
+     * following predefined format.
+     * 
+     * @param scan - input date
+     * @return a valid date
+     */
 	public static Date date(Scanner scan) {
 		DateFormat formatter = new SimpleDateFormat("dd/MM/yy");
 		formatter.setLenient(false);

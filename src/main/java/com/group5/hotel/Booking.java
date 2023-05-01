@@ -45,12 +45,7 @@ public class Booking {
         bookingManager = manager;
     }
 
-    public List<Room> getRooms() { return roomsBooked; }
-    public Date beginDate() { return startDate; }
-    public Date endDate() { return endDate; }
-    public Account getAccount() { return user; }
-    public boolean equals(Booking b) { return bookingID.equals(b.bookingID); }
-
+	@Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
@@ -68,4 +63,10 @@ public class Booking {
 
         return sb.toString();
     }
+
+    public List<Room> getRooms() { return roomsBooked; }
+    public Date beginDate() { return startDate; }
+    public Date endDate() { return endDate; }
+    public Account getAccount() { return user; }
+    public boolean equals(Booking b) { return bookingID.equals(b.bookingID); }
 }

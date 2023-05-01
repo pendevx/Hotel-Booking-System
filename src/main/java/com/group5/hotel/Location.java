@@ -4,9 +4,18 @@ public class Location {
 	public String street;
 	public String suburb;
 	public String city;
-	public String postCode; // handle 0604
+	public String postCode; // will handle 0604
 	public String country;
 
+    /***
+     * Constructor for location, storing address details
+     * 
+     * @param street - street address, including number
+     * @param suburb - of location
+     * @param city - of location
+     * @param postCode - of location
+     * @param country - of location
+     */
 	public Location(String street, String suburb, String city, String postCode, String country) {
 		this.street = street;
 		this.suburb = suburb;
@@ -15,6 +24,9 @@ public class Location {
 		this.country = country;
 	}
 
+    /***
+     * @return formatted string of location details
+     */
 	@Override
 	public String toString() {
 		StringBuilder out = new StringBuilder(this.street + "\n");

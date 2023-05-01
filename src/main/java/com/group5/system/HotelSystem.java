@@ -18,7 +18,7 @@ public abstract class HotelSystem {
 	protected List<Booking> bookings;
 
 	HotelSystem(Account account, List<Booking> bookings) {
-		this.hotel = DataHandlerRead.loadHotelJson().get(0);
+		this.hotel = FileIO.loadHotelJson().get(0);
 		this.account = account;
 		this.bookings = bookings;
 	}
@@ -40,13 +40,16 @@ public abstract class HotelSystem {
 		try {
 			Booking booking = getBookingsWhere(x -> x.bookingID.equals(bookingId)).get(0);
 			bookings.remove(booking);
-			DataHandlerWrite.saveBookings(bookings);
+			FileIO.saveBookings(bookings);
 			return booking;
 		}
 		catch (IndexOutOfBoundsException e) { throw new RuntimeException(e); }
 	}
 
 	public boolean roomIsAvailable(Room room, Date beginDate) {
+		// need an all bookings list to compare against
+		// when the user logins in it on ly loads there bookings,
+		// so only compares these to their own bookings
 		for (Booking b : bookings) {
 			if (!(b.beginDate().before(beginDate) || b.endDate().after(beginDate))) continue;
 

@@ -14,13 +14,5 @@
     "phone": "1234567890",
     "email": "group5@comp603.com",
     "permissions": "USER"
-  },
-  {
-    "username": "tty",
-    "firstName": "t",
-    "lastName": "y",
-    "phone": "020",
-    "email": "@outlook",
-    "permissions": "USER"
   }
 ]

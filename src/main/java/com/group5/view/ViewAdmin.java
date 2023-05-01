@@ -6,10 +6,19 @@ import java.util.Scanner;
 
 public class ViewAdmin extends View {
 
+    /***
+     * Constructor that extends from View. Used to instantiate a
+     * HoteSystemAdmin system, which has admin permission
+     * 
+     * @param hotelSystem - type of system to use
+     */
 	public ViewAdmin(HotelSystemAdmin hotelSystem) {
 		super(hotelSystem);
 	}
 
+    /***
+     * Main menu for admin view, showing what actions admin can perform
+     */
 	@Override
 	public void menuMain(Scanner scan) {
 		do {
@@ -23,9 +32,9 @@ public class ViewAdmin extends View {
 			System.out.println("0. to QUIT");
 			System.out.println("------------------------------------");
 
-			int input = ParseInput.integer(0, 5, scan);
-			if(input == 1) viewHotelDetails();
-			else if(input == 2) viewAdminDetails();
+			int input = ParseInput.integer(0, 5, scan); // parse valid, between 0 - 5
+			if(input == 1) printHotelDetails();
+			else if(input == 2) printAccountDetails();
 			else if (input == 3) viewAllUsers();
 			else if (input == 4) viewAllBookings();
 			else if (input == 5) deleteBooking(scan);
@@ -34,19 +43,31 @@ public class ViewAdmin extends View {
 		while(true);
 	}
 
-	private void viewHotelDetails() { printHotelDetails(); }
-	private void viewAdminDetails() { printUserDetails(); }
-	private void viewAllUsers() { ((HotelSystemAdmin)hotelSystem).printUserList(); }
-	private void viewAllBookings() { ((HotelSystemAdmin)hotelSystem).printAllBookings(); }
+    /***
+     * Print list of all registered users
+     */
+	private void viewAllUsers() {
+		((HotelSystemAdmin) hotelSystem).printUserList();
+	}
 
-	private void deleteBooking(Scanner scan) {
-		viewAllBookings();
+
+    /***
+     * Print list of all bookings made by all users
+     */
+	private void viewAllBookings() {
+		((HotelSystemAdmin) hotelSystem).printAllBookings();
+	}
+
+    /**
+     * Deletes booking based entered bookingID
+     * 
+     * @param scan - input string of ID of booking to delete
+     */
+    private void deleteBooking(Scanner scan) {
+		viewAllBookings(); // list of all bookings
 		System.out.println("Enter id of booking to delete:");
-		String bookingId = ParseInput.string(scan);
-                try {
-                    ((HotelSystemAdmin) hotelSystem).deleteBookingByID(bookingId);
-                } catch (RuntimeException e) {
-                    System.out.println("Invalid booking ID");
-                }
+		String bookingId = ParseInput.string(scan); // parses string input, trim()
+        try { ((HotelSystemAdmin) hotelSystem).deleteBookingByID(bookingId); } // try to delete
+        catch (RuntimeException e) { System.out.println("Invalid booking ID"); } // catches exception if id doesn't match
 	}
 }

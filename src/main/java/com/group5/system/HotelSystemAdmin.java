@@ -33,7 +33,7 @@ public class HotelSystemAdmin extends HotelSystem {
 	}
 
 	private List<String> getUserList() {
-		List<AccountCredentials> credentialsList = DataHandlerRead.loadCredentialsJson();
+		List<AccountCredentials> credentialsList = FileIO.loadCredentialsJson();
 		List<String> users = new ArrayList<>();
 		for (AccountCredentials c : credentialsList) users.add(c.getUsername());
 		return users;

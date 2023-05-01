@@ -12,13 +12,13 @@ public class HotelBookingData {
 	static List<Account> accounts;
 
 	static {
-		bookings = DataHandlerRead.loadBookingJson();
-		accounts = DataHandlerRead.loadAccountsJson();
+		bookings = FileIO.loadBookingJson();
+		accounts = FileIO.loadAccountsJson();
 	}
 
 	static void book(Booking booking) {
 		bookings.add(booking);
-		DataHandlerWrite.saveBookings(bookings);
+		FileIO.saveBookings(bookings);
 	}
 
 	static List<Account> getAccountWhere(Predicate<Account> action) {
