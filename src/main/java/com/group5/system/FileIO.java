@@ -68,7 +68,7 @@ public class FileIO {
 		Set<AccountCredentials> credentials = null;
 		try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(Paths.get(credentialsPath).toFile()));
-    		credentials = gson.fromJson(bufferedReader, new TypeToken<List<AccountCredentials>>(){}.getType());
+    		credentials = gson.fromJson(bufferedReader, new TypeToken<Set<AccountCredentials>>(){}.getType());
             bufferedReader.close();
 		}
  		catch (IOException e) { throw new RuntimeException(e); }
@@ -150,7 +150,7 @@ public class FileIO {
 	 * @param credentials - list collection of credentials
 	 */
 	public static void saveCredentials(Set<AccountCredentials> credentials) {
-		backupFile(credentialsPath);
+		backupFile(credentialsPath, "credentials.json");
 		new Thread(() -> {
 			try {
 
@@ -168,7 +168,7 @@ public class FileIO {
 	 * @param accounts - list collection of accounts
 	 */
 	public static void saveAccounts(List<Account> accounts) {
-		backupFile(accountsPath);
+		backupFile(accountsPath, "account_details.json");
 		new Thread(() -> {
 			try {
 				BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(Paths.get(accountsPath).toFile()));
@@ -186,7 +186,7 @@ public class FileIO {
 	 * @param bookings - list collection of bookings
 	 */
 	public static void saveBookings(List<Booking> bookings) {
-		backupFile(bookingsPath);
+		backupFile(bookingsPath, "bookings.json");
 		new Thread(() -> {
 			try {
 				BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(Paths.get(bookingsPath).toFile()));
@@ -203,7 +203,7 @@ public class FileIO {
 	 * @param uniqueUsernames - set collection of usernames
 	 */
 	public static void saveUsernames(Set<String> usernames) {
-		backupFile(usernamesPath);
+		backupFile(usernamesPath, "usernames.json");
 		new Thread(() -> {
 			try {
 				BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(Paths.get(usernamesPath).toFile()));
@@ -220,7 +220,7 @@ public class FileIO {
 	 * 
 	 * @param sourcePath - path of original file
 	 */
-	public static void backupFile(String sourcePath) {
+	public static void backupFile(String sourcePath, String file) {
 		try {
 			String rootPath = Paths.get(sourcePath).getParent().toString() + "/logs/"; // adds into log folder
 			String originalName = Paths.get(sourcePath).getFileName().toString();
@@ -228,6 +228,6 @@ public class FileIO {
 			String backupPath = rootPath + timestamp + "_" + originalName;
 			Files.copy(Paths.get(sourcePath), Paths.get(backupPath), StandardCopyOption.REPLACE_EXISTING);
 		}
-		catch (Exception ex) { System.out.println("File backup failed."); };
+		catch (Exception ex) { System.out.println("File backup failed: " + file); };
 	}
 }
