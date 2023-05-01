@@ -64,10 +64,15 @@ public class ViewAdmin extends View {
      * @param scan - input string of ID of booking to delete
      */
     private void deleteBooking(Scanner scan) {
-		viewAllBookings(); // list of all bookings
-		System.out.println("Enter id of booking to delete:");
-		String bookingId = ParseInput.string(scan); // parses string input, trim()
-        try { ((HotelSystemAdmin) hotelSystem).deleteBookingByID(bookingId); } // try to delete
-        catch (RuntimeException e) { System.out.println("Invalid booking ID"); } // catches exception if id doesn't match
+		if (!hotelSystem.bookingIsEmpty()) {
+			viewAllBookings(); // list of all bookings
+			System.out.println("Enter id of booking to delete, x to cancel:");
+			String bookingId = ParseInput.string(scan); // parses string input, trim()
+			if (bookingId.equals("x")) return;
+
+			try { ((HotelSystemAdmin) hotelSystem).deleteBookingByID(bookingId); } // try to delete
+			catch (RuntimeException e) { System.out.println("Invalid booking ID"); } // catches exception if id doesn't match
+		}
+		else System.out.println("No bookings to delete.");
 	}
 }

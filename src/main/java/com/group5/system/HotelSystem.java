@@ -102,4 +102,5 @@ public abstract class HotelSystem {
 	public String getConfirmLogin() { return "\nLogged in as" + " " + account.toString() + "\n"; }
 	public String getHotelDetails() { return this.hotel.toString(); }
 	public Account getAccount() { return account; }
+	public boolean bookingIsEmpty() { return bookings.isEmpty(); }
 }
