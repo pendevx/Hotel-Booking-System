@@ -57,14 +57,30 @@ public class ViewUser extends View {
 	 * @param scan - user inputs
 	 */
 	private void createBooking(Scanner scan) {
-		Date begin = super.getBeginDate(scan); 
-		Date end = super.getEndDate(scan, begin); 
-		super.printBookingPeriod(begin, end);
-		List<Room> rooms = getBookingRooms(scan, begin, end);
+		Date start = super.getStartDate(scan); 
+		if (start == null) {
+			printBookingProcessCanclled();
+			return;
+		}
+
+		Date end = super.getEndDate(scan, start); 
+		if (end == null) {
+			printBookingProcessCanclled();
+			return;
+		}
+		super.printBookingPeriod(start, end);
+		List<Room> rooms = getBookingRooms(scan, start, end);
 
 		if (!rooms.isEmpty()) { // creates booking if list of rooms not empty
-			((HotelSystemUser)hotelSystem).makeBooking(begin, end, rooms, hotelSystem.getAccount());
+			((HotelSystemUser)hotelSystem).makeBooking(start, end, rooms, hotelSystem.getAccount());
 		}
 		else System.out.println("No rooms valid rooms selected, no bookings made.");
+	}
+
+	/***
+	 * Print warning when
+	 */
+	private void printBookingProcessCanclled() {
+		System.out.println("Booking process cancelled");
 	}
 }

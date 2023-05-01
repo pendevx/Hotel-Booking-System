@@ -66,7 +66,11 @@ public class ParseInput {
 		formatter.setLenient(false);
 		Date output = null;
 		do {
-			try { output = formatter.parse(string(scan)); }
+			try {
+				String input = string(scan);
+				if (input.equals("x")) break;
+				else output = formatter.parse(input);
+			}
 			catch (ParseException e) { System.out.println("Invalid date, please enter again."); }
 		} while (output == null);
 		return output;
