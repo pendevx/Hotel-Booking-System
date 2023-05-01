@@ -12,11 +12,29 @@ public class Room implements Comparable<Room> {
         this.price = calculatePrice();
     }
 
+    /**
+     * Used to calculate the price of the room.
+     *
+     * For assignment 1, all rooms will share the same common price of 100.
+     * @return Returns the price of the room (100).
+     */
     private double calculatePrice() { return 100d; }
+
+    /**
+     * Gets the room number ("{floor}{roomNum}") as a string
+     * @return Returns the room number string
+     */
     public String getRoomNumber() { return floor + "" + roomNum; }
+
+    // Getter functions for the floor, and roomNum
     public int getFloor() { return floor; }
     public char getRoomNum() { return roomNum; }
 
+    /**
+     * Compares two rooms. Rooms are compared based on their floor numbers.
+     * @param o the object to be compared.
+     * @return Returns -1 if the floor number is less than o's floor number, 0 if the floor number is equal to o's floor number, 1 if the floor number is greater than o's floor number
+     */
     @Override
     public int compareTo(Room o) {
         if (floor < o.floor) return -1;
@@ -24,5 +42,10 @@ public class Room implements Comparable<Room> {
         else return 0;
     }
 
+    /**
+     * Returns whether the room is the same as o
+     * @param o the object to be compared.
+     * @return Returns true if the floor and floor of o, AND the roomNum and roomNum of o are equal. Otherwise, false is returned.
+     */
     public boolean equals(Room o) { return floor == o.floor && roomNum == o.roomNum; }
 }

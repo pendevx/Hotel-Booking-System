@@ -43,11 +43,11 @@ public class FileIO {
 	 * 
 	 * @return list collection of account credentials
 	 */
-	public static List<AccountCredentials> loadCredentialsJson() {
-		List<AccountCredentials> credentials = null;
+	public static Set<AccountCredentials> loadCredentialsJson() {
+		Set<AccountCredentials> credentials = null;
 		try {
 			credentials = gson.fromJson(String.join("\n", Files.readAllLines(Paths.get(credentialsPath))),
-					new TypeToken<List<AccountCredentials>>() {
+					new TypeToken<Set<AccountCredentials>>() {
 					}.getType()
 			);
 		}
@@ -130,7 +130,7 @@ public class FileIO {
 	 * 
 	 * @param credentials - list collection of credentials
 	 */
-	public static void saveCredentials(List<AccountCredentials> credentials) {
+	public static void saveCredentials(Set<AccountCredentials> credentials) {
 		backupFile(credentialsPath);
 		new Thread(() -> {
 			try { Files.write(Paths.get(credentialsPath), gson.toJson(credentials).getBytes()); }
