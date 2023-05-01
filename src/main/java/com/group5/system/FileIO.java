@@ -214,7 +214,6 @@ public class FileIO {
 		}).start();
 	}
 
-	// TODO: implement with FileOutputStream copy.
 	/***
 	 * Write copy of file to disk into the log folder,
 	 * overwrites if there is an existing backup
