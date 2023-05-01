@@ -9,7 +9,13 @@ import com.group5.account.Account;
 
 public class Booking {
     public final String bookingID; // unix timestamp of booking created
+    /**
+     * Rooms booked will not be vacant starting from this date.
+     */
     private Date startDate;
+    /**
+     * Rooms booked will be available again from this date.
+     */
     private Date endDate;
     private List<Room> roomsBooked;
     private double totalPrice;

@@ -1,8 +1,8 @@
 [
   {
-    "bookingID": "1682939584158",
-    "startDate": "2023-05-03",
-    "endDate": "2023-05-10",
+    "bookingID": "1682924802757",
+    "startDate": "2024-01-01",
+    "endDate": "2024-01-02",
     "roomsBooked": [
       {
         "floor": 1,
@@ -30,9 +30,9 @@
     }
   },
   {
-    "bookingID": "1682940475709",
-    "startDate": "2023-05-10",
-    "endDate": "2023-05-11",
+    "bookingID": "1682924878782",
+    "startDate": "2024-01-01",
+    "endDate": "2024-01-02",
     "roomsBooked": [
       {
         "floor": 1,
@@ -43,26 +43,26 @@
     "totalPrice": 100.0,
     "isPaid": false,
     "user": {
-      "username": "user",
-      "firstName": "GROUP",
-      "lastName": "5",
-      "phone": "1234567890",
-      "email": "group5@comp603.com",
+      "username": "tty",
+      "firstName": "t",
+      "lastName": "y",
+      "phone": "020",
+      "email": "@outlook",
       "permissions": "USER"
     },
     "bookingManager": {
-      "username": "user",
-      "firstName": "GROUP",
-      "lastName": "5",
-      "phone": "1234567890",
-      "email": "group5@comp603.com",
+      "username": "tty",
+      "firstName": "t",
+      "lastName": "y",
+      "phone": "020",
+      "email": "@outlook",
       "permissions": "USER"
     }
   },
   {
-    "bookingID": "1682940670133",
-    "startDate": "2023-05-11",
-    "endDate": "2023-05-12",
+    "bookingID": "1682939061830",
+    "startDate": "2024-01-02",
+    "endDate": "2024-01-03",
     "roomsBooked": [
       {
         "floor": 1,
@@ -73,19 +73,19 @@
     "totalPrice": 100.0,
     "isPaid": false,
     "user": {
-      "username": "tty",
-      "firstName": "t",
-      "lastName": "y",
-      "phone": "020",
-      "email": "@outlook",
+      "username": "user",
+      "firstName": "GROUP",
+      "lastName": "5",
+      "phone": "1234567890",
+      "email": "group5@comp603.com",
       "permissions": "USER"
     },
     "bookingManager": {
-      "username": "tty",
-      "firstName": "t",
-      "lastName": "y",
-      "phone": "020",
-      "email": "@outlook",
+      "username": "user",
+      "firstName": "GROUP",
+      "lastName": "5",
+      "phone": "1234567890",
+      "email": "group5@comp603.com",
       "permissions": "USER"
     }
   }

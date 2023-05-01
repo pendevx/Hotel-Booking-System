@@ -2,6 +2,11 @@ package com.group5.system;
 
 import com.group5.hotel.Room;
 import com.group5.hotel.Booking;
+
+import java.time.Duration;
+import java.time.temporal.Temporal;
+import java.time.temporal.TemporalUnit;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.function.Predicate;
@@ -86,12 +91,14 @@ public abstract class HotelSystem {
 		// need an all bookings list to compare against
 		// when the user logins in it on ly loads there bookings,
 		// so only compares these to their own bookings
-		for (Booking b : bookings) {
-			if (!(b.beginDate().before(date) || b.endDate().after(date))) continue;
-
-			for (Room r : b.getRooms()) {
-				if (r.equals(room)) return false;
-			}
+		for (Booking b : HotelBookingData.getBookings()) {
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(b.beginDate());
+			cal.add(Calendar.DATE, -1);
+ 			// if the date is on or after the begin date of this room, AND before (end-1) date of this room, then return true
+			if (date.after(cal.getTime()) && date.before(b.endDate()))
+				for (Room r : b.getRooms())
+					if (r.equals(room)) return false;
 		}
 		return true;
 	}

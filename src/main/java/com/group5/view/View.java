@@ -3,10 +3,10 @@ package com.group5.view;
 import com.group5.hotel.Room;
 import com.group5.system.HotelSystem;
 import com.group5.util.ParseInput;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Scanner;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public abstract class View {
 	public HotelSystem hotelSystem;
@@ -55,7 +55,14 @@ public abstract class View {
 		while(true) {
 			System.out.println("What date would you like to start your booking? (dd/mm/yyyy)");
 			begin = ParseInput.date(scan); // parses in a valid date, based on predefined format
-			if (begin.compareTo(new Date()) < 0) { // compares date to current
+//			if (begin.compareTo(new Date()) < 0) { // compares date to current
+			Calendar today = Calendar.getInstance();
+			today.setTime(new Date());
+			today.set(Calendar.HOUR_OF_DAY, 0);
+			today.set(Calendar.MINUTE, 0);
+			today.set(Calendar.SECOND, 0);
+			today.set(Calendar.MILLISECOND, 0);
+			if (begin.before(today.getTime())) {
 				System.out.println("Sorry, you cannot begin before today's date!");
 				continue; // breaks one iteration of loop, continues next iteration
 			}
@@ -89,7 +96,8 @@ public abstract class View {
      * Prints the selected booking period
      */
 	public void printBookingPeriod(Date begin, Date end) {
-		System.out.println("Period: " + begin + " -> " + end + "\n");
+		DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+		System.out.println("Date: " + formatter.format(begin) + " to " + formatter.format(end));
 	}
 
     /***
