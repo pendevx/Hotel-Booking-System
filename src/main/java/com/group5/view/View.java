@@ -51,9 +51,8 @@ public abstract class View {
      * @return valid date
      */
 	public Date getStartDate(Scanner scan) {
-		Date start = null;
+		Date begin = null;
 		while(true) {
-<<<<<<< HEAD
 			System.out.println("What date would you like to start your booking? (dd/mm/yyyy)");
 			begin = ParseInput.date(scan); // parses in a valid date, based on predefined format
 //			if (begin.compareTo(new Date()) < 0) { // compares date to current
@@ -64,18 +63,12 @@ public abstract class View {
 			today.set(Calendar.SECOND, 0);
 			today.set(Calendar.MILLISECOND, 0);
 			if (begin.before(today.getTime())) {
-=======
-			System.out.println("Date to start your booking? (dd/mm/yyyy), x to cancel");
-			start = ParseInput.date(scan); // parses in a valid date, based on predefined format
-			if (start == null) break;
-			else if (start.compareTo(new Date()) < 0) { // compares date to current
->>>>>>> c9cbd9a85fe8b0f3bbb31e169b582976b25e9f2c
 				System.out.println("Sorry, you cannot begin before today's date!");
 				continue; // breaks one iteration of loop, continues next iteration
 			}
 			break;
 		}
-		return start;
+		return begin;
 	}
 
     /***
@@ -103,14 +96,9 @@ public abstract class View {
     /***
      * Prints the selected booking period
      */
-<<<<<<< HEAD
 	public void printBookingPeriod(Date begin, Date end) {
 		DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 		System.out.println("Date: " + formatter.format(begin) + " to " + formatter.format(end));
-=======
-	public void printBookingPeriod(Date start, Date end) {
-		System.out.println("Period: " + start + " -> " + end + "\n");
->>>>>>> c9cbd9a85fe8b0f3bbb31e169b582976b25e9f2c
 	}
 
     /***
