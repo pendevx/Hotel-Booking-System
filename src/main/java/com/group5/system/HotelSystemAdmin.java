@@ -6,7 +6,6 @@ import java.util.Date;
 import java.util.List;
 
 import com.group5.account.*;
-import java.util.ArrayList;
 import java.util.Set;
 
 public class HotelSystemAdmin extends HotelSystem {
@@ -37,22 +36,11 @@ public class HotelSystemAdmin extends HotelSystem {
 	}
 
 	/**
-	 * Prints the list of users in the system
-	 */
-	public void printUserList() {
-		List<String> users = getUserList();
-		for (String user : users) System.out.println(user);
-	}
-
-	/**
 	 * Gets the list of usernames of each user in the system
 	 * @return Returns the list of usernames of each user in the system
 	 */
-	private List<String> getUserList() {
-		Set<AccountCredentials> credentialsList = FileIO.loadCredentialsJson();
-		List<String> users = new ArrayList<>();
-		for (AccountCredentials c : credentialsList) users.add(c.getUsername());
-		return users;
+	public Set<String> getUserList() {
+		return FileIO.loadUsernameJson();
 	}
 
 	/**
@@ -60,10 +48,10 @@ public class HotelSystemAdmin extends HotelSystem {
 	 */
 	public void printAllBookings() {
 		List<Booking> bookings = getAllBookings();
-                if (bookings.size() == 0) {
-                    System.out.println("No bookings to view.");
-                    return;
-                }
+		if (bookings.size() == 0) {
+			System.out.println("No bookings to view.");
+			return;
+		}
 		for (Booking b : bookings) System.out.println(b.toString() + "\n");
 	}
 

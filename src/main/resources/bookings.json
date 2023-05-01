@@ -1,3 +1,32 @@
 [
-
+  {
+    "bookingID": "1682934606024",
+    "startDate": "2024-01-01",
+    "endDate": "2024-01-02",
+    "roomsBooked": [
+      {
+        "floor": 10,
+        "roomNum": "A",
+        "price": 100.0
+      }
+    ],
+    "totalPrice": 100.0,
+    "isPaid": false,
+    "user": {
+      "username": "user",
+      "firstName": "GROUP",
+      "lastName": "5",
+      "phone": "1234567890",
+      "email": "group5@comp603.com",
+      "permissions": "USER"
+    },
+    "bookingManager": {
+      "username": "user",
+      "firstName": "GROUP",
+      "lastName": "5",
+      "phone": "1234567890",
+      "email": "group5@comp603.com",
+      "permissions": "USER"
+    }
+  }
 ]

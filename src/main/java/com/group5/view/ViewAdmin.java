@@ -3,6 +3,7 @@ package com.group5.view;
 import com.group5.system.HotelSystemAdmin;
 import com.group5.util.ParseInput;
 import java.util.Scanner;
+import java.util.Set;
 
 public class ViewAdmin extends View {
 
@@ -47,7 +48,8 @@ public class ViewAdmin extends View {
      * Print list of all registered users
      */
 	private void viewAllUsers() {
-		((HotelSystemAdmin) hotelSystem).printUserList();
+		Set<String> users = ((HotelSystemAdmin) hotelSystem).getUserList();
+		for (String user : users) System.out.println(user);
 	}
 
 
