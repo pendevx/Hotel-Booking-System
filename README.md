@@ -5,9 +5,9 @@
 --------------------------------------------------
 
 ### _NEW FEATURES TRACKER_
-- [ ] xxx
-- [ ] xxx
-- [ ] xxx
+- [ ] Refer to May 3rd lecture for Hibernate/packages structure
+- [ ] User can request to cancel booking/ cancel
+- [ ] Admin can book for user.
 
 --------------------------------------------------
 
