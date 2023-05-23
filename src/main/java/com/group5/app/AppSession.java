@@ -44,22 +44,19 @@ public class AppSession {
 			enteredUsername = ParseInput.string(scan);
 			System.out.println("Password: ");
 			enteredPassword = ParseInput.string(scan);
-			system = AccountLogin.login(enteredUsername, enteredPassword);
+			system = AccountSystem.login(enteredUsername, enteredPassword);
 
 			if (system != null)
 				break;
+
+			System.out.println("Invalid credentials!");
 		}
 
-		if (system == null)
-			throw new RuntimeException("no login credentials matched lol");
-
-		if (system.getClass() == HotelSystemAdmin.class) {
-			viewType = new ViewAdmin((HotelSystemAdmin) system);
-		} else {
-			viewType = new ViewUser((HotelSystemUser) system);
+		if (system == null) {
+			System.out.println("You entered bad credentials 3 times >=(");
 		}
 
-		init(scan);
+		init(system, scan);
 	}
 
     /***
@@ -74,7 +71,7 @@ public class AppSession {
 		for (int i = 0; i < 3 && usernameExists; i++) {
 			System.out.println("Enter new username: ");
 			username = ParseInput.string(scan);
-			usernameExists = AccountNew.checkUsernameExists(username); // only gets String if username is unique
+			usernameExists = AccountSystem.checkUsernameExists(username); // only gets String if username is unique
 		}
 
 		if (usernameExists) {
@@ -92,25 +89,25 @@ public class AppSession {
 		System.out.println("Enter phone: ");
 		String phone = ParseInput.string(scan);
 
-		Account newAccount = AccountNew.createAccount(username, password, firstName, lastName, phone, email);
+		Account newAccount = AccountSystem.createAccount(username, password, firstName, lastName, phone, email);
 
 		if (newAccount == null) {
-			System.out.println("An error occured when creating your account; please try again.");
+			System.out.println("An error occurred when creating your account; please try again.");
 			return;
 		}
 
-		HotelSystem system = AccountLogin.login(username, password);
+		HotelSystem system = AccountSystem.login(username, password);
 
+		init(system, scan);
+	}
+
+	private void init(HotelSystem system, Scanner scan) {
 		if (system.getClass() == HotelSystemAdmin.class) {
 			viewType = new ViewAdmin((HotelSystemAdmin) system);
 		} else {
 			viewType = new ViewUser((HotelSystemUser) system);
 		}
 
-		init(scan);
-	}
-
-	private void init(Scanner scan) {
 		viewType.confirmLogin();
 		viewType.menuMain(scan);
 	}

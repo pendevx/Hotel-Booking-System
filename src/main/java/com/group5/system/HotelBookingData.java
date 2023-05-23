@@ -2,13 +2,18 @@ package com.group5.system;
 
 import com.group5.hotel.Account;
 import com.group5.hotel.Booking;
+import com.group5.hotel.Credential;
+
+import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-public class HotelBookingData {
-	static List<Booking> bookings;
-	static List<Account> accounts;
+class HotelBookingData {
+	private static final List<Booking> bookings;
+	private static final List<Account> accounts;
+	private static final Set<Credential> credentials;
 
 	/**
 	 * Static initializer to populate bookings and accounts Lists
@@ -16,6 +21,7 @@ public class HotelBookingData {
 	static {
 		bookings = FileIO.loadBookingJson();
 		accounts = FileIO.loadAccountsJson();
+		credentials = FileIO.loadCredentialsJson();
 	}
 
 	/**
@@ -63,6 +69,17 @@ public class HotelBookingData {
 		return getBookingsWhere(x -> x.getAccount().equals(account));
 	}
 
-	// Getter for the bookings
-	static List<Booking> getBookings() { return bookings; }
+	public static void register(Credential credentials, Account account) {
+		if (!credentials.getUsername().equals(account.getUsername()))
+			throw new RuntimeException("Credentials username and account username doesn't match!");
+
+		HotelBookingData.credentials.add(credentials);
+		accounts.add(account);
+	}
+
+	// Getter methods
+
+	static List<Booking> getBookings() { return Collections.unmodifiableList(bookings); }
+	static List<Account> getAccounts() { return Collections.unmodifiableList(accounts); }
+	static Set<Credential> getCredentials() { return Collections.unmodifiableSet(credentials); }
 }
