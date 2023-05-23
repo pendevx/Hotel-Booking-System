@@ -1,11 +1,11 @@
 package com.group5.system;
 
+import com.group5.hotel.Account;
 import com.group5.hotel.Room;
 import com.group5.hotel.Booking;
 import java.util.Date;
 import java.util.List;
 
-import com.group5.account.*;
 import java.util.Set;
 
 public class HotelSystemAdmin extends HotelSystem {

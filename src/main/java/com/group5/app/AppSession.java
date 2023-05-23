@@ -1,31 +1,19 @@
 package com.group5.app;
 
-import com.group5.system.HotelSystemAdmin;
-import com.group5.system.HotelPortal;
-import com.group5.system.HotelSystemUser;
-import com.group5.account.Account;
-import com.group5.system.AccountLogin;
-import com.group5.system.AccountNew;
-import com.group5.account.AccountPermission;
+import com.group5.system.*;
+import com.group5.hotel.Account;
+import com.group5.hotel.AccountPermission;
 import com.group5.util.ParseInput;
 import com.group5.view.View;
 import com.group5.view.ViewAdmin;
 import com.group5.view.ViewUser;
+
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 
 public class AppSession {
 	private View viewType;
-	private HotelPortal hotelPortal;
-
-    /***
-     * Constuctor creates a new hotel portal, used to determine which
-     * account view to show based on if account is a user or admin. Used to
-	 * connect AppSession to the system backend
-     */
-	public AppSession() {
-		hotelPortal = new HotelPortal();
-	}
 
     /***
      * Display main menu in console
@@ -47,9 +35,31 @@ public class AppSession {
      * @param scan - for users input
      */
 	private void loginPortal(Scanner scan) {
-		Account account = new AccountLogin().login(scan); // login process gets the exsiting account
-		if (account != null) login(scan, account); // logs account in
-		else System.out.println("Too many failed attempts, program exited");
+		boolean isSuccess = false;
+		String enteredUsername;
+		String enteredPassword;
+		HotelSystem system = null;
+		for(int attempts = 2; attempts >= 0 && !isSuccess; attempts--) { // handles if correct on third attempt
+			System.out.println("Username: ");
+			enteredUsername = ParseInput.string(scan);
+			System.out.println("Password: ");
+			enteredPassword = ParseInput.string(scan);
+			system = AccountLogin.login(enteredUsername, enteredPassword);
+
+			if (system != null)
+				break;
+		}
+
+		if (system == null)
+			throw new RuntimeException("no login credentials matched lol");
+
+		if (system.getClass() == HotelSystemAdmin.class) {
+			viewType = new ViewAdmin((HotelSystemAdmin) system);
+		} else {
+			viewType = new ViewUser((HotelSystemUser) system);
+		}
+
+		init(scan);
 	}
 
     /***
@@ -58,42 +68,50 @@ public class AppSession {
      * @param scan - for users input
      */
 	private void createPortal(Scanner scan) {
-        Account account = new AccountNew().createUser(scan); // creates user account
-		if(account != null) login(scan, account); // logs account in
-		else System.out.println("Too many failed attempts, program exited");
-	}
+		String username = "";
+		boolean usernameExists = true;
 
-    /***
-     * Checks the account permission of account and loads
-     * appropriate viewType, either user or admin.
-     * 
-     * @param scan - for user input
-     * @param account - that is to be loaded into booking system
-     */
-	private void login(Scanner scan, Account account) {
-		if (isUser(account)) { // checks if is USER
-			viewType = new ViewUser((HotelSystemUser) hotelPortal.login(account)); // sets viewType to user
+		for (int i = 0; i < 3 && usernameExists; i++) {
+			System.out.println("Enter new username: ");
+			username = ParseInput.string(scan);
+			usernameExists = AccountNew.checkUsernameExists(username); // only gets String if username is unique
 		}
-		else if (isAdmin(account)) { // check if account is type ADMIN
-			viewType = new ViewAdmin((HotelSystemAdmin) hotelPortal.login(account)); // set viewType to admin
+
+		if (usernameExists) {
+			System.out.println("Error creating your account: Please see logs for more details, or try again with another username.");
 		}
-		viewType.confirmLogin(); // prints confirmation of login, with formatted string
-		viewType.menuMain(scan); // opens the views menu
+
+		System.out.println("Enter new password: ");
+		String password = ParseInput.string(scan);
+		System.out.println("Enter first name: ");
+		String firstName = ParseInput.string(scan);
+		System.out.println("Enter last name: ");
+		String lastName = ParseInput.string(scan);
+		System.out.println("Enter email: ");
+		String email = ParseInput.string(scan);
+		System.out.println("Enter phone: ");
+		String phone = ParseInput.string(scan);
+
+		Account newAccount = AccountNew.createAccount(username, password, firstName, lastName, phone, email);
+
+		if (newAccount == null) {
+			System.out.println("An error occured when creating your account; please try again.");
+			return;
+		}
+
+		HotelSystem system = AccountLogin.login(username, password);
+
+		if (system.getClass() == HotelSystemAdmin.class) {
+			viewType = new ViewAdmin((HotelSystemAdmin) system);
+		} else {
+			viewType = new ViewUser((HotelSystemUser) system);
+		}
+
+		init(scan);
 	}
 
-    /***
-     * @param account to be checked
-     * @return boolean of if account type is USER
-     */
-	private boolean isUser(Account account) {
-		return account.getAccountType() == AccountPermission.USER;
-	}
-
-    /***
-     * @param account to be checked
-     * @return boolean of if account type is ADMIN
-     */
-	private boolean isAdmin(Account account) {
-		return account.getAccountType() == AccountPermission.ADMIN;
+	private void init(Scanner scan) {
+		viewType.confirmLogin();
+		viewType.menuMain(scan);
 	}
 }

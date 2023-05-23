@@ -1,11 +1,10 @@
 package com.group5.system;
 
+import com.group5.hotel.Account;
 import com.group5.hotel.Booking;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
-
-import com.group5.account.*;
 
 public class HotelBookingData {
 	static List<Booking> bookings;

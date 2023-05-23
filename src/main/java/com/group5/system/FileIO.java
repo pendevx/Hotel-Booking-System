@@ -3,8 +3,8 @@ package com.group5.system;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import com.group5.account.Account;
-import com.group5.account.AccountCredentials;
+import com.group5.hotel.Account;
+import com.group5.hotel.Credential;
 import com.group5.hotel.Booking;
 import com.group5.hotel.Hotel;
 import java.io.BufferedReader;
@@ -65,11 +65,11 @@ public class FileIO {
 	 * 
 	 * @return list collection of account credentials
 	 */
-	public static Set<AccountCredentials> loadCredentialsJson() {
-		Set<AccountCredentials> credentials = null;
+	public static Set<Credential> loadCredentialsJson() {
+		Set<Credential> credentials = null;
 		try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(Paths.get(credentialsPath).toFile()));
-    		credentials = gson.fromJson(bufferedReader, new TypeToken<Set<AccountCredentials>>(){}.getType());
+    		credentials = gson.fromJson(bufferedReader, new TypeToken<Set<Credential>>(){}.getType());
             bufferedReader.close();
 		}
  		catch (IOException e) { throw new RuntimeException(e); }
@@ -150,7 +150,7 @@ public class FileIO {
 	 * 
 	 * @param credentials - list collection of credentials
 	 */
-	public static void saveCredentials(Set<AccountCredentials> credentials) {
+	public static void saveCredentials(Set<Credential> credentials) {
         if (createLog) backupFile(credentialsPath, "credentials.json");
 
 		new Thread(() -> {

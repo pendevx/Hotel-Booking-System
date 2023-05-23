@@ -1,18 +1,15 @@
 package com.group5.system;
 
+import com.group5.hotel.Account;
 import com.group5.hotel.Room;
 import com.group5.hotel.Booking;
 
-import java.time.Duration;
-import java.time.temporal.Temporal;
-import java.time.temporal.TemporalUnit;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-import com.group5.account.*;
 import com.group5.hotel.Hotel;
 
 public abstract class HotelSystem {

@@ -1,4 +1,4 @@
-package com.group5.account;
+package com.group5.hotel;
 
 /***
  * enum for account persmissions

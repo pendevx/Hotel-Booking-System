@@ -1,4 +1,4 @@
-package com.group5.account;
+package com.group5.hotel;
 
 public class Account {
     public final String username;
