@@ -14,7 +14,7 @@ public class HotelSystemAdmin extends HotelSystem {
 	 * @param account The account to create the system with
 	 * @param bookings The bookings which the system contains
 	 */
-	public HotelSystemAdmin(Account account, List<Booking> bookings) {
+	HotelSystemAdmin(Account account, List<Booking> bookings) {
 		super(account, bookings);
 	}
 

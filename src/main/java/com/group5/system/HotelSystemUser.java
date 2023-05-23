@@ -9,7 +9,7 @@ import java.util.List;
 public class HotelSystemUser extends HotelSystem {
 	// renamed from UserSystem
 
-	public HotelSystemUser(Account account, List<Booking> bookings) {
+	HotelSystemUser(Account account, List<Booking> bookings) {
 		super(account, bookings);
 	}
 
