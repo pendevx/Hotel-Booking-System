@@ -31,7 +31,7 @@ public class Account {
     }
 
     /***
-     * @return a formatted string showing account type ans user name
+     * @return a formatted string showing account type and username
      */
 	@Override
 	public String toString() {
@@ -82,7 +82,7 @@ public class Account {
 	public String getEmail() { return this.email; }
 
     /***
-     * @param acccount to compare with
+     * @param acc to compare with
      * @return boolean of if usernames strings are equal
      */
 	public boolean equals(Account acc) {
