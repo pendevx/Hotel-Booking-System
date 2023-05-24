@@ -72,7 +72,7 @@ public class ViewUser extends View {
 		List<Room> rooms = getBookingRooms(scan, start, end);
 
 		if (!rooms.isEmpty()) { // creates booking if list of rooms not empty
-			((HotelSystemUser)hotelSystem).makeBooking(start, end, rooms, hotelSystem.getAccount());
+			hotelSystem.makeBooking(start, end, rooms, hotelSystem.getAccount());
 		}
 		else System.out.println("No rooms valid rooms selected, no bookings made.");
 	}

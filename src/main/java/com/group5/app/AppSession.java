@@ -2,13 +2,11 @@ package com.group5.app;
 
 import com.group5.system.*;
 import com.group5.hotel.Account;
-import com.group5.hotel.AccountPermission;
 import com.group5.util.ParseInput;
 import com.group5.view.View;
 import com.group5.view.ViewAdmin;
 import com.group5.view.ViewUser;
 
-import java.sql.SQLOutput;
 import java.util.Scanner;
 
 
@@ -25,7 +23,7 @@ public class AppSession {
 		System.out.println("0. QUIT");
 		int input = ParseInput.integer(0, 2, scan); // valid input between 0 - 2
 		if (input == 1) loginPortal(scan);
-		else if (input == 2) createPortal(scan);
+		else if (input == 2) registerPortal(scan);
 		else System.out.println("Program quit successfully.");
 	}
 
@@ -44,7 +42,7 @@ public class AppSession {
 			enteredUsername = ParseInput.string(scan);
 			System.out.println("Password: ");
 			enteredPassword = ParseInput.string(scan);
-			system = AccountSystem.login(enteredUsername, enteredPassword);
+			system = AccountManager.login(enteredUsername, enteredPassword);
 
 			if (system != null)
 				break;
@@ -64,14 +62,14 @@ public class AppSession {
      * 
      * @param scan - for users input
      */
-	private void createPortal(Scanner scan) {
+	private void registerPortal(Scanner scan) {
 		String username = "";
 		boolean usernameExists = true;
 
 		for (int i = 0; i < 3 && usernameExists; i++) {
 			System.out.println("Enter new username: ");
 			username = ParseInput.string(scan);
-			usernameExists = AccountSystem.checkUsernameExists(username); // only gets String if username is unique
+			usernameExists = AccountManager.checkUsernameExists(username); // only gets String if username is unique
 		}
 
 		if (usernameExists) {
@@ -89,14 +87,14 @@ public class AppSession {
 		System.out.println("Enter phone: ");
 		String phone = ParseInput.string(scan);
 
-		Account newAccount = AccountSystem.createAccount(username, password, firstName, lastName, phone, email);
+		Account newAccount = AccountManager.createAccount(username, password, firstName, lastName, phone, email);
 
 		if (newAccount == null) {
 			System.out.println("An error occurred when creating your account; please try again.");
 			return;
 		}
 
-		HotelSystem system = AccountSystem.login(username, password);
+		HotelSystem system = AccountManager.login(username, password);
 
 		init(system, scan);
 	}

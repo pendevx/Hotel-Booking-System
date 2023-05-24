@@ -38,7 +38,7 @@ class HotelBookingData {
 	 * @param predicate The predicate to match the accounts to
 	 * @return Returns a list of accounts which match the predicate
 	 */
-	static List<Account> getAccountWhere(Predicate<Account> predicate) {
+	static List<Account> getAccountsWhere(Predicate<Account> predicate) {
 		return accounts.stream().filter(predicate).collect(Collectors.toList());
 	}
 
@@ -47,8 +47,8 @@ class HotelBookingData {
 	 * @param username The username to match the accounts to
 	 * @return Returns a list of accounts which username matches the parameter 'username'. If the size of the list is greater than 1 then there is an error in the data.
 	 */
-	static List<Account> getAccountByUser(String username) {
-		return getAccountWhere(x -> x.getUsername().equals(username));
+	static List<Account> getAccountsByUsername(String username) {
+		return getAccountsWhere(x -> x.getUsername().equals(username));
 	}
 
 	/**

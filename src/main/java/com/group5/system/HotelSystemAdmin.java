@@ -29,8 +29,8 @@ public class HotelSystemAdmin extends HotelSystem {
 	 * @param usernameToFind The username to match the account to
 	 * @return Returns the first match of users which username matches usernameToFind.
 	 */
-	public Account getUserAccountByUsername(String usernameToFind) {
-		List<Account> foundUser = HotelBookingData.getAccountByUser(usernameToFind);
+	public Account getAccountByUsername(String usernameToFind) {
+		List<Account> foundUser = HotelBookingData.getAccountsByUsername(usernameToFind);
 		if (!foundUser.isEmpty()) return foundUser.get(0);
 		else return null;
 	}

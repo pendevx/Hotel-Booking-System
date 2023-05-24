@@ -8,8 +8,8 @@ import java.util.Optional;
 import java.util.stream.Stream;
 import static com.group5.system.HotelBookingData.*;
 
-public class AccountSystem {
-	private AccountSystem() { }
+public class AccountManager {
+	private AccountManager() { }
 	public static boolean checkUsernameExists(String username) {
 		Stream<String> usernames = getCredentials().stream().map(x -> x.getUsername());
 		Optional<String> findMatches = usernames.filter(x -> x.equals(username)).findAny();
