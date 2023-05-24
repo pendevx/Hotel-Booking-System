@@ -40,8 +40,7 @@ public class AccountSystem {
 		Optional<Account> accountMatch = getAccounts().stream().filter(x -> x.username.equals(username)).findFirst();
 
 		if (!accountMatch.isPresent()) {
-			System.out.println("error");
-			return null;
+			throw new RuntimeException("not found");
 		}
 
 		Account account = accountMatch.get();

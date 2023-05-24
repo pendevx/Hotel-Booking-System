@@ -44,24 +44,11 @@ public class HotelSystemAdmin extends HotelSystem {
 	}
 
 	/**
-	 * Prints all the bookings in the system
-	 */
-	public void printAllBookings() {
-		List<Booking> bookings = getAllBookings();
-		if (bookings.size() == 0) {
-			System.out.println("No bookings to view.");
-			return;
-		}
-		for (Booking b : bookings) System.out.println(b.toString() + "\n");
-	}
-
-	/**
 	 * Deletes a booking from the system where the specified ID matches bookingId
 	 * @param bookingId The ID of the booking to delete
 	 */
-	public void deleteBookingByID(String bookingId) {
+	public Booking deleteBookingByID(String bookingId) {
 		Booking deleted = super.deleteBooking(bookingId);
-		System.out.println("Deleted:");
-		System.out.println(deleted.toString());
+		return deleted;
 	}
 }

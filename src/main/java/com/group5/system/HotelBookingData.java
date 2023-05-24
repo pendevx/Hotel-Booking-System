@@ -69,12 +69,19 @@ class HotelBookingData {
 		return getBookingsWhere(x -> x.getAccount().equals(account));
 	}
 
+	/**
+	 * Registers an account into the system
+	 * @param credentials The credentials of the account
+	 * @param account The account object containing user information
+	 */
 	public static void register(Credential credentials, Account account) {
 		if (!credentials.getUsername().equals(account.getUsername()))
 			throw new RuntimeException("Credentials username and account username doesn't match!");
 
 		HotelBookingData.credentials.add(credentials);
 		accounts.add(account);
+		FileIO.saveAccounts(accounts);
+		FileIO.saveCredentials(HotelBookingData.credentials);
 	}
 
 	// Getter methods
