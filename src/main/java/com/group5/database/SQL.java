@@ -4,10 +4,11 @@ public class SQL {
 	//////////////////////////////////////////////////
 	// CREATE TABLE
 	//////////////////////////////////////////////////
+	// need add input limits
 	static String[] createAccountTable() {
 		return new String[]
 		{
-			"CREATE TABLE ACCOUNT ( "
+			"CREATE TABLE account ( "
 				+ "username VARCHAR(50),"
 				+ "firstname VARCHAR(50),"
 				+ "lastname VARCHAR(50),"
@@ -16,18 +17,37 @@ public class SQL {
 				+ "permission VARCHAR(10)"
 				+ ")",
 
-			"INSERT INTO ACCOUNT VALUES "
+			"INSERT INTO account VALUES "
 			+ "('admin', 'admin', 'admin', '21153324', 'admin@hotel.com', 'ADMIN'),"
 			+ "('user', 'user', 'user', '21152297', 'group5@comp603.com', 'USER')"
 		};
 	}
 
-	static String createCredentialTable() {
-		return "";
+	static String[] createCredentialTable() {
+		return new String[]
+		{
+			"CREATE TABLE credential ( "
+				+ "username VARCHAR(50),"
+				+ "password VARCHAR(50)"
+				+ ")",
+
+			"INSERT INTO credential VALUES "
+			+ "('admin', 'admin'),"
+			+ "('user', 'user')"
+		};
 	}
 
-	static String createUsernameTable() {
-		return "";
+	static String[] createUsernameTable() {
+		return new String[]
+		{
+			"CREATE TABLE username ( "
+				+ "username VARCHAR(50)"
+				+ ")",
+
+			"INSERT INTO username VALUES "
+			+ "('admin'),"
+			+ "('user')"
+		};
 	}
 
 	static String createBookingTable() {

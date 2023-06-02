@@ -11,7 +11,12 @@ public class HotelDatabase {
 	public HotelDatabase() {
 		dbManager = new DatabaseManager();
 		this.createTable("account", SQL.createAccountTable());
-		Printer.printAccount(dbManager.query("SELECT * FROM account"));
+		this.createTable("credential", SQL.createCredentialTable());
+		this.createTable("username", SQL.createUsernameTable());
+
+		Printer.printQuery("account", dbManager.query("SELECT * FROM account"));
+		Printer.printQuery("credential", dbManager.query("SELECT * FROM credential"));
+		Printer.printQuery("username", dbManager.query("SELECT * FROM username"));
 	}
 
 	public static void main(String[] args) {
