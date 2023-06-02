@@ -1,53 +1,52 @@
 ## __Project 2__
 ### Due Date
-- Week 12, June 2nd, 5PM
+- Week 13, June 8th, 5PM
 
 --------------------------------------------------
 
 ### _NEW FEATURES TRACKER_
-- [ ] Refer to May 3rd lecture for Hibernate/packages structure
 - [ ] User can request to cancel booking/ cancel
 - [ ] Admin can book for user.
 
 --------------------------------------------------
 
 ### _Requirements_
-- Develop `GUI`.
-- Integrate `database`.
-- Implement `design patterns`.
-- Eliminate `code smell`.
-- Use `git`, commit history must be included, `.git` or from GitHub.
-- Develop `unit tests (JUnit)`, testing some important functionalities.
-- Apply `OOP` (abstraction, encapsulation, inheritance, polymorphism).
-- Follow `SOLID` principles.
-- Create multiple classes with relationships.
-- Bug-free and have `robust error handling`.
+- [ ] Develop `GUI`.
+- [ ] Integrate `database`.
+- [ ] Implement `design patterns`.
+- [ ] Eliminate `code smell`.
+- [x] Use `git`, commit history must be included, `.git` or from GitHub.
+- [ ] Develop `unit tests (JUnit)`, testing some important functionalities.
+- [x] Apply `OOP` (abstraction, encapsulation, inheritance, polymorphism).
+- [ ] Follow `SOLID` principles.
+- [ ] Create multiple classes with relationships.
+- [ ] Bug-free and have `robust error handling`.
 
 #### Requirements Database
-- Include `database`, Apache Derby DB (JavaDB), no other types allowed.
-- Must run without any configuration.
-- DB should be setup automatically without manual configurations
-- DB Service must launch automatically
+- [x] Include `database`, Apache Derby DB (JavaDB), no other types allowed.
+- [x] Must run without any configuration.
+- [x] DB should be setup automatically without manual configurations
+- [x] DB Service must launch automatically
 
 #### Requirements Report
-- Less than one-page.
-- State project setup.
-- GitHub URL (if exists).
-- Contribution of each teammate.
+- [ ] Less than one-page.
+- [ ] State project setup.
+- [ ] GitHub URL (if exists).
+- [ ] Contribution of each teammate.
 
 #### Requirements Video
-- Less than 5min.
-- Demonstration, showing all features by running project.
-- Code explanation, explaining class structures, methods and processess.
+- [ ] Less than 5min.
+- [ ] Demonstration, showing all features by running project.
+- [ ] Code explanation, explaining class structures, methods and processess.
 
 --------------------------------------------------
 
 ### _Submission_
-1. Project folder, all source codes and related files.
-2. Report.
-3. Video.
-4. DB folder `.zip`, can set DB dir inside project folder.
-5. `.git` folder, having all historical commits and branches.
+- [ ] Project folder, all source codes and related files.
+- [ ] Report.
+- [ ] Video.
+- [ ] DB folder `.zip`, can set DB dir inside project folder.
+- [ ] `.git` folder, having all historical commits and branches.
 
 --------------------------------------------------
 
