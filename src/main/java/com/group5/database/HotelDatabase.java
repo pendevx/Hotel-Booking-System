@@ -6,46 +6,41 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class HotelDatabase {
-//	private DatabaseManager dbManager;
-	public DatabaseManager dbManager; // testing only
+	private DatabaseManager dbManager;
 
 	public HotelDatabase() {
 		dbManager = new DatabaseManager();
+		this.createTable("account", SQL.createAccountTable());
+		Printer.printAccount(dbManager.query("SELECT * FROM account"));
 	}
 
 	public static void main(String[] args) {
-		HotelDatabase h = new HotelDatabase();
-		h.checkDuplicateTable("promotion");
-		h.dbManager.update("CREATE TABLE PROMOTION (CATEGORY VARCHAR(20), DISCOUNT INT)");
-h.dbManager.update("INSERT INTO PROMOTION VALUES ('Fiction', 0),\n"
-                    + "('Non-fiction', 10),\n"
-                    + "('Textbook', 20)");
+		HotelDatabase t = new HotelDatabase();
 	}
 
-	public void checkDuplicateTable(String name) {
+	private void createTable(String name, String[] sql) {
+		if (!hasDuplicate(name)) this.dbManager.updateBatch(sql);
+	}
+
+	private boolean hasDuplicate(String name) {
 		try {
 			DatabaseMetaData metadata = getConnection().getMetaData();
 			String[] types = {"TABLE"};
-
 			ResultSet resultSet = metadata.getTables(null, null, null, types);
 			while (resultSet.next()) {
 				String tableName = resultSet.getString("TABLE_NAME");
-				if (tableName.equalsIgnoreCase(name)) {
-					dbManager.update(SQL.dropTable(tableName));
-					System.out.println("Duplicate table [" + name + "] dropped...");
-					break;
-				}
+				if (tableName.equalsIgnoreCase(name)) return true;
 			}
 			resultSet.close();
-		}
-		catch (SQLException ex) { System.out.println(ex.getMessage()); }
+		} catch (SQLException ex) { System.out.println(ex.getMessage()); }
+		return false;
 	}
 
 	private Connection getConnection() {
 		return this.dbManager.getConnection();
 	}
 
-	public void closeConnection() {
+	private void closeConnection() {
 		this.dbManager.closeConnection();
 	}
 }
