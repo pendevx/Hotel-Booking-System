@@ -22,6 +22,8 @@ class HotelBookingData {
 		bookings = FileIO.loadBookingJson();
 		accounts = FileIO.loadAccountsJson();
 		credentials = FileIO.loadCredentialsJson();
+		// load from database as Set<Credentials>
+		// later need to load credentials on each register instance
 	}
 
 	/**

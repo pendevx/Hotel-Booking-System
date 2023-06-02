@@ -16,36 +16,27 @@ public class Printer {
 		catch (SQLException ex) { System.out.println(ex.getMessage());}
 	}
 
-	public static void queryAccount(ResultSet resultSet) {
-		try {
-			do {
-				System.out.print(resultSet.getString("username") + ", ");
-				System.out.print(resultSet.getString("firstname") + ", ");
-				System.out.print(resultSet.getString("lastname") + ", ");
-				System.out.print(resultSet.getString("phone") + ", ");
-				System.out.print(resultSet.getString("email") + ", ");
-				System.out.println(resultSet.getString("permission"));
-			} while (resultSet.next());
-		}
-		catch (SQLException ex) { }
+	public static void queryAccount(ResultSet resultSet) throws SQLException {
+		do {
+			System.out.print(resultSet.getString("username") + ", ");
+			System.out.print(resultSet.getString("firstname") + ", ");
+			System.out.print(resultSet.getString("lastname") + ", ");
+			System.out.print(resultSet.getString("phone") + ", ");
+			System.out.print(resultSet.getString("email") + ", ");
+			System.out.println(resultSet.getString("permission"));
+		} while (resultSet.next());
 	}
 
-	public static void queryCredentials(ResultSet resultSet) {
-		try {
-			do {
-				System.out.print(resultSet.getString("username") + ", ");
-				System.out.println(resultSet.getString("password"));
-			} while (resultSet.next());
-		}
-		catch (SQLException ex) { }
+	public static void queryCredentials(ResultSet resultSet) throws SQLException {
+		do {
+			System.out.print(resultSet.getString("username") + ", ");
+			System.out.println(resultSet.getString("password"));
+		} while (resultSet.next());
 	}
 
-	public static void queryUsername(ResultSet resultSet) {
-		try {
-			do {
-				System.out.println(resultSet.getString("username"));
-			} while (resultSet.next());
-		}
-		catch (SQLException ex) { }
+	public static void queryUsername(ResultSet resultSet) throws SQLException {
+		do {
+			System.out.println(resultSet.getString("username"));
+		} while (resultSet.next());
 	}
 }

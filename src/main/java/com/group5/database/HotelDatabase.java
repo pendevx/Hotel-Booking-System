@@ -1,12 +1,15 @@
 package com.group5.database;
 
+import static com.group5.database.Printer.printQuery;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashSet;
+import java.util.Set;
 
 public class HotelDatabase {
-	private DatabaseManager dbManager;
+	private static DatabaseManager dbManager;
 
 	public HotelDatabase() {
 		dbManager = new DatabaseManager();
@@ -14,13 +17,28 @@ public class HotelDatabase {
 		this.createTable("credential", SQL.createCredentialTable());
 		this.createTable("username", SQL.createUsernameTable());
 
-		Printer.printQuery("account", dbManager.query("SELECT * FROM account"));
-		Printer.printQuery("credential", dbManager.query("SELECT * FROM credential"));
-		Printer.printQuery("username", dbManager.query("SELECT * FROM username"));
+		printQuery("account", dbManager.query(SQL.selectAll("account")));
+		printQuery("credential", dbManager.query(SQL.selectAll("credential")));
+		printQuery("username", dbManager.query(SQL.selectAll("username")));
 	}
 
 	public static void main(String[] args) {
 		HotelDatabase t = new HotelDatabase();
+	}
+
+	public static Set<String> loadUsername() {
+		Set<String> usernames = new HashSet<>();
+		ResultSet resultSet = dbManager.query(SQL.selectAll("username"));
+		try {
+			if (!resultSet.next()) System.out.println("No results");
+			else {
+				do {
+					usernames.add(resultSet.getString("username"));
+				} while (resultSet.next());
+			}
+			resultSet.close();
+		} catch (SQLException ex) { System.out.println(ex.getMessage());}
+		return usernames;
 	}
 
 	private void createTable(String name, String[] sql) {
@@ -31,7 +49,7 @@ public class HotelDatabase {
 		try {
 			DatabaseMetaData metadata = getConnection().getMetaData();
 			String[] types = {"TABLE"};
-			ResultSet resultSet = metadata.getTables(null, null, null, types);
+			ResultSet resultSet = metadata.getTables(null, null, null, null);
 			while (resultSet.next()) {
 				String tableName = resultSet.getString("TABLE_NAME");
 				if (tableName.equalsIgnoreCase(name)) return true;
@@ -41,11 +59,8 @@ public class HotelDatabase {
 		return false;
 	}
 
-	private Connection getConnection() {
-		return this.dbManager.getConnection();
-	}
+	private Connection getConnection() { return this.dbManager.getConnection(); }
 
-	private void closeConnection() {
-		this.dbManager.closeConnection();
-	}
+	// use on logout, close
+	private void closeConnection() { this.dbManager.closeConnection(); }
 }

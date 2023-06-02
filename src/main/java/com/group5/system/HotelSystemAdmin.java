@@ -1,5 +1,6 @@
 package com.group5.system;
 
+import com.group5.database.HotelDatabase;
 import com.group5.hotel.Account;
 import com.group5.hotel.Room;
 import com.group5.hotel.Booking;
@@ -40,7 +41,8 @@ public class HotelSystemAdmin extends HotelSystem {
 	 * @return Returns the list of usernames of each user in the system
 	 */
 	public Set<String> getUserList() {
-		return FileIO.loadUsernameJson();
+//		return FileIO.loadUsernameJson();
+		return HotelDatabase.loadUsername();
 	}
 
 	/**

@@ -44,8 +44,7 @@ public class AppSession {
 			enteredPassword = ParseInput.string(scan);
 			system = AccountManager.login(enteredUsername, enteredPassword);
 
-			if (system != null)
-				break;
+			if (system != null) break;
 
 			System.out.println("Invalid credentials!");
 		}
@@ -70,10 +69,12 @@ public class AppSession {
 			System.out.println("Enter new username: ");
 			username = ParseInput.string(scan);
 			usernameExists = AccountManager.checkUsernameExists(username); // only gets String if username is unique
+			if (usernameExists) System.out.println("Username taken");
 		}
 
 		if (usernameExists) {
 			System.out.println("Error creating your account: Please see logs for more details, or try again with another username.");
+			return;
 		}
 
 		System.out.println("Enter new password: ");
@@ -102,7 +103,8 @@ public class AppSession {
 	private void init(HotelSystem system, Scanner scan) {
 		if (system.getClass() == HotelSystemAdmin.class) {
 			viewType = new ViewAdmin((HotelSystemAdmin) system);
-		} else {
+		}
+		else {
 			viewType = new ViewUser((HotelSystemUser) system);
 		}
 

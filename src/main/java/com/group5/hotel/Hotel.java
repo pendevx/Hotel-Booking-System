@@ -2,6 +2,7 @@ package com.group5.hotel;
 
 public class Hotel {
 	private String hotelName;
+	// spread out
 	private Location location;
 	public String phone;
 	public String email;

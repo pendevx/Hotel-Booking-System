@@ -54,8 +54,10 @@ public class SQL {
 		return "";
 	}
 
-	static String createHotelTable() {
-		return "";
+	static String[] createHotelTable() {
+		return new String[] 
+		{
+		};
 	}
 
 	static String dropTable(String name) {
@@ -75,5 +77,12 @@ public class SQL {
 	}
 
 	static void updateBookingTable() {
+	}
+
+	//////////////////////////////////////////////////
+	// SELECT TABLE
+	//////////////////////////////////////////////////
+	static String selectAll(String name) {
+		return "SELECT * FROM " + name;
 	}
 }
