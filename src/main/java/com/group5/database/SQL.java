@@ -4,8 +4,22 @@ public class SQL {
 	//////////////////////////////////////////////////
 	// CREATE TABLE
 	//////////////////////////////////////////////////
-	static String createAccountTable() {
-		return "";
+	static String[] createAccountTable() {
+		return new String[]
+		{
+			"CREATE TABLE ACCOUNT ( "
+				+ "username VARCHAR(50),"
+				+ "firstname VARCHAR(50),"
+				+ "lastname VARCHAR(50),"
+				+ "phone VARCHAR(50),"
+				+ "email VARCHAR(100),"
+				+ "permission VARCHAR(10)"
+				+ ")",
+
+			"INSERT INTO ACCOUNT VALUES "
+			+ "('admin', 'admin', 'admin', '21153324', 'admin@hotel.com', 'ADMIN'),"
+			+ "('user', 'user', 'user', '21152297', 'group5@comp603.com', 'USER')"
+		};
 	}
 
 	static String createCredentialTable() {
