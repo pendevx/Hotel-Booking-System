@@ -31,17 +31,23 @@ public abstract class View {
     /***
      * Prints the logged in accounts details
      */
-	public void printAccountDetails() { System.out.println(hotelSystem.getUserDetails()); }
+	public void printAccountDetails() {
+		System.out.println(hotelSystem.getUserDetails());
+	}
 
     /***
      * Prints formatted cofirmation of login, showing userType and username
      */
-	public void confirmLogin() { System.out.println(hotelSystem.getConfirmLogin()); }
+	public void confirmLogin() {
+		System.out.println(hotelSystem.getConfirmLogin());
+	}
 
     /***
      * Prints the formatted string of hotel details
      */
-	public void printHotelDetails() { System.out.println(hotelSystem.getHotelDetails()); }
+	public void printHotelDetails() {
+		System.out.println(hotelSystem.getHotelDetails());
+	}
 
     /***
      * Gets the start date of the booking that meet

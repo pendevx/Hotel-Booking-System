@@ -75,19 +75,22 @@ public class SQL {
 
 
 	//////////////////////////////////////////////////
-	// UPDATE TABLE
+	// INSERT TABLE
 	//////////////////////////////////////////////////
-	static void updateAccountTable() {
+	// add this to edit info, email, phone etc GUI only.
+	static String insertAccountTable(String username, String firstname, String lastname, 
+			String phone, String email, String permission) {
+		return "INSERT INTO account VALUES "
+			+ "('"+username+"', '"+firstname+"', '"+lastname+"', '"+phone+"', '"+email+"', '"+permission+"')";
 	}
 
-	static void updateCredentialTable() {
+	static String insertCredentialTable(String username, String password) {
+		return "INSERT INTO credential VALUES "
+				+ "('" + username + "', '" + password + "')";
 	}
 
-	static void updateHotelTable() {
-		// add this to edit the hotel info, email, phone etc GUI only.
-	}
-
-	static void updateBookingTable() {
+	static String insertBookingTable() {
+		return "";
 	}
 
 	//////////////////////////////////////////////////

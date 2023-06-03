@@ -20,16 +20,15 @@ class HotelBookingData {
 	 * Static initializer to populate bookings and accounts Lists
 	 */
 	static {
+		// later need to load credentials on each register instance
+		// close session after logout.
+		// open new session after login.
+		// open a new session after register, make login after, or auto login
 		credentials = HotelDatabase.loadCredentials();
 		accounts = HotelDatabase.loadAccounts();
 		
 		// TODO: bookings
 		bookings = FileIO.loadBookingJson();
-		// load from database as Set<Credentials>
-		// later need to load credentials on each register instance
-		// close session after logout.
-		// open new session after login.
-		// open a new session after register, make login after, or auto login if time
 	}
 
 	/**
@@ -93,14 +92,16 @@ class HotelBookingData {
 		if (!credentials.getUsername().equals(account.getUsername()))
 			throw new RuntimeException("Credentials username and account username doesn't match!");
 
+		// maybe remove this so reads database each time, but then
+		// auto login won't work
 		HotelBookingData.credentials.add(credentials);
 		accounts.add(account);
-		FileIO.saveAccounts(accounts);
-		FileIO.saveCredentials(HotelBookingData.credentials);
+
+		HotelDatabase.insertAccountTable(account);
+		HotelDatabase.insertCredentialTable(credentials);
 	}
 
 	// Getter methods
-
 	static List<Booking> getBookings() { return Collections.unmodifiableList(bookings); }
 	static List<Account> getAccounts() { return Collections.unmodifiableList(accounts); }
 	static Set<Credential> getCredentials() { return Collections.unmodifiableSet(credentials); }

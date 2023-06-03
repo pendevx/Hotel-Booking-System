@@ -107,4 +107,9 @@ public abstract class HotelSystem {
 	public String getHotelDetails() { return this.hotel.toString(); }
 	public Account getAccount() { return account; }
 	public boolean bookingIsEmpty() { return bookings.isEmpty(); }
+
+//	public void updateEmail(String newEmail) {
+//		this.account.updateEmail(newEmail);
+		// write to database, update WHERE username ==
+//	}
 }

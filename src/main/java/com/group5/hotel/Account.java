@@ -5,7 +5,7 @@ public class Account {
     public final String firstName;
     public final String lastName;
     public final String phone;
-    public final String email;
+    public String email;
     final AccountPermission permissions;
 
     /***
@@ -64,6 +64,10 @@ public class Account {
      */
 	public AccountPermission getAccountType() {
 		return this.permissions;
+	}
+
+	public void updateEmail(String newEmail) {
+		this.email = newEmail;
 	}
 
     /***

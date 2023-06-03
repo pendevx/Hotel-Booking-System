@@ -48,11 +48,12 @@ public class AppSession {
 
 			if (system != null) break;
 
-			System.out.println("Invalid credentials!");
+			System.out.println("Invalid credentials! Attempts remaining " + attempts);
 		}
 
 		if (system == null) {
 			System.out.println("You entered bad credentials 3 times >=(");
+			return;
 		}
 
 		init(system, scan);

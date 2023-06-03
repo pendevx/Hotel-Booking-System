@@ -114,8 +114,54 @@ public class HotelDatabase {
 		return accounts;
 	}
 
+	// TODO:
 	public static List<Booking> loadBooking() {
 		return new ArrayList<>();
+	}
+
+	public static void insertCredentialTable(Credential credential) {
+			new Thread(() -> {
+			try {
+				String username = credential.getUsername();
+				String password = credential.getPassword();
+				dbManager.update(SQL.insertCredentialTable(username, password));
+			}
+			catch (Exception e) { throw new RuntimeException(e); }
+		}).start();
+//		String username = credential.getUsername();
+//		String password = credential.getPassword();
+//		dbManager.update(SQL.insertCredentialTable(username, password));
+	}
+
+	public static void insertAccountTable(Account account) {
+			new Thread(() -> {
+			try {
+				String username = account.getUsername();
+				String firstname = account.getFirstName();
+				String lastname = account.getLastName();
+				String phone = account.getPhone();
+				String email = account.getEmail();
+				String permission = account.getAccountTypeName();
+				dbManager.update(SQL.insertAccountTable(username, firstname, lastname, phone, email, permission));
+			}
+			catch (Exception e) { throw new RuntimeException(e); }
+		}).start();
+//		String username = account.getUsername();
+//		String firstname = account.getFirstName();
+//		String lastname = account.getLastName();
+//		String phone = account.getPhone();
+//		String email = account.getEmail();
+//		String permission = account.getAccountTypeName();
+//		dbManager.update(SQL.insertAccountTable(username, firstname, lastname, phone, email, permission));
+	}
+
+	// TODO: MAYBE
+	public static void updateAccountPhone() {}
+	public static void updateAccountEmail() {
+		// need reload database after
+		// change account info in system, then write to database
+		// need modify account, change to no final
+		// only need for account
 	}
 
 	private void createTable(String name, String[] sql) {

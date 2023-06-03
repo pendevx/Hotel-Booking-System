@@ -5,7 +5,7 @@ public class Credential implements Comparable<Credential> {
     private final String password;
 
     /***
-     * Contructor to store the account credentials, used for
+     * Constructor to store the account credentials, used for
      * verifying login
      * 
      * @param username - unique username of user
@@ -20,6 +20,13 @@ public class Credential implements Comparable<Credential> {
      * @return username of credentials
      */
 	public String getUsername() {
+		return username;
+	}
+
+	/**
+	 * @return password of credentials, not secure.
+	 */
+	public String getPassword() {
 		return username;
 	}
 
