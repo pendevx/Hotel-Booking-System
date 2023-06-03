@@ -36,6 +36,13 @@ class HotelBookingData {
 	}
 
 	/**
+	 * @return list of all registered usernames
+	 */
+	static Set<String> getUsernameList() {
+		return getCredentials().stream().map(x -> x.getUsername()).collect(Collectors.toSet());
+	}
+
+	/**
 	 * Gets a list of accounts which match a predicate
 	 * @param predicate The predicate to match the accounts to
 	 * @return Returns a list of accounts which match the predicate

@@ -40,7 +40,7 @@ public class HotelSystemAdmin extends HotelSystem {
 	 * @return Returns the list of usernames of each user in the system
 	 */
 	public Set<String> getUserList() {
-		return AccountManager.getUserlist();
+		return HotelBookingData.getUsernameList();
 	}
 
 	/**
