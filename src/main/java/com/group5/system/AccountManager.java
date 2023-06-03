@@ -7,6 +7,8 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.stream.Stream;
 import static com.group5.system.HotelBookingData.*;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class AccountManager {
 
@@ -19,7 +21,9 @@ public class AccountManager {
 		return findMatches.isPresent();
 	}
 
-	// create loaduserName
+	public static Set<String> getUserlist() {
+		return getCredentials().stream().map(x -> x.getUsername()).collect(Collectors.toSet());
+	}
 
 	public static Account createAccount(String username, String password, String fname, String lname, String phone, String email) {
 		Account account = new Account(username, fname, lname, phone, email, AccountPermission.USER);

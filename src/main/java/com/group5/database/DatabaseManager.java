@@ -1,6 +1,7 @@
 package com.group5.database;
 
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -91,6 +92,7 @@ public final class DatabaseManager {
 	public ResultSet query(String sql) {
 		Statement statement = null;
 		ResultSet resultSet = null;
+
 		try {
 			statement = connection.createStatement();
 			resultSet = statement.executeQuery(sql);

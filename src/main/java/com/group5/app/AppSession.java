@@ -1,5 +1,6 @@
 package com.group5.app;
 
+import com.group5.database.HotelDatabase;
 import com.group5.system.*;
 import com.group5.hotel.Account;
 import com.group5.util.ParseInput;
@@ -12,6 +13,7 @@ import java.util.Scanner;
 
 public class AppSession {
 	private View viewType;
+	private HotelDatabase hotelDatabase = new HotelDatabase();
 
     /***
      * Display main menu in console
