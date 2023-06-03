@@ -1,5 +1,6 @@
 package com.group5.system;
 
+import com.group5.database.HotelDatabase;
 import com.group5.hotel.Account;
 import com.group5.hotel.Booking;
 import com.group5.hotel.Credential;
@@ -19,9 +20,9 @@ class HotelBookingData {
 	 * Static initializer to populate bookings and accounts Lists
 	 */
 	static {
-		bookings = FileIO.loadBookingJson();
+		credentials = HotelDatabase.loadCredentials();
 		accounts = FileIO.loadAccountsJson();
-		credentials = FileIO.loadCredentialsJson();
+		bookings = FileIO.loadBookingJson();
 		// load from database as Set<Credentials>
 		// later need to load credentials on each register instance
 	}

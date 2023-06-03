@@ -6,21 +6,22 @@ public class SQL {
 	//////////////////////////////////////////////////
 
 	// need add input limits
-	static String[] createAccountTable() {
-		return new String[]
+	static String[] createHotelTable() {
+		return new String[] 
 		{
-			"CREATE TABLE account ( "
-				+ "username VARCHAR(50),"
-				+ "firstname VARCHAR(50),"
-				+ "lastname VARCHAR(50),"
+			"CREATE TABLE hotel ( "
+				+ "hotelName VARCHAR(50),"
+				+ "street VARCHAR(50),"
+				+ "suburb VARCHAR(50),"
+				+ "city VARCHAR(50),"
+				+ "postcode VARCHAR(5),"
+				+ "country VARCHAR(50),"
 				+ "phone VARCHAR(50),"
-				+ "email VARCHAR(50),"
-				+ "permission VARCHAR(10)"
+				+ "email VARCHAR(50)"
 				+ ")",
 
-			"INSERT INTO account VALUES "
-			+ "('admin', 'admin', 'admin', '21153324', 'admin@hotel.com', 'ADMIN'),"
-			+ "('user', 'user', 'user', '21152297', 'group5@comp603.com', 'USER')"
+			"INSERT INTO hotel VALUES "
+			+ "('Queens Hotel', '10 Main Street', 'CBD', 'Auckland', '1010', 'New Zealand', '+64090888', 'hotel@hotel.com')"
 		};
 	}
 
@@ -38,35 +39,21 @@ public class SQL {
 		};
 	}
 
-	static String[] createUsernameTable() {
+	static String[] createAccountTable() {
 		return new String[]
 		{
-			"CREATE TABLE username ( "
-				+ "username VARCHAR(50)"
-				+ ")",
-
-			"INSERT INTO username VALUES "
-			+ "('admin'),"
-			+ "('user')"
-		};
-	}
-
-	static String[] createHotelTable() {
-		return new String[] 
-		{
-			"CREATE TABLE hotel ( "
-				+ "hotelName VARCHAR(50),"
-				+ "street VARCHAR(50),"
-				+ "suburb VARCHAR(50),"
-				+ "city VARCHAR(50),"
-				+ "postcode VARCHAR(5),"
-				+ "country VARCHAR(50),"
+			"CREATE TABLE account ( "
+				+ "username VARCHAR(50),"
+				+ "firstname VARCHAR(50),"
+				+ "lastname VARCHAR(50),"
 				+ "phone VARCHAR(50),"
-				+ "email VARCHAR(50)"
+				+ "email VARCHAR(50),"
+				+ "permission VARCHAR(10)"
 				+ ")",
 
-			"INSERT INTO hotel VALUES "
-			+ "('Queens Hotel', '10 Main Street', 'CBD', 'Auckland', '1010', 'New Zealand', '+64090888', 'hotel@hotel.com')"
+			"INSERT INTO account VALUES "
+			+ "('admin', 'admin', 'admin', '21153324', 'admin@hotel.com', 'ADMIN'),"
+			+ "('user', 'user', 'user', '21152297', 'group5@comp603.com', 'USER')"
 		};
 	}
 
@@ -94,7 +81,8 @@ public class SQL {
 	static void updateCredentialTable() {
 	}
 
-	static void updateUsernameTable() {
+	static void updateHotelTable() {
+		// add this to edit the hotel info, email, phone etc GUI only.
 	}
 
 	static void updateBookingTable() {

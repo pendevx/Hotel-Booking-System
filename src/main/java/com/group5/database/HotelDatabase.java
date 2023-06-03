@@ -1,5 +1,8 @@
 package com.group5.database;
 
+import com.group5.hotel.Account;
+import com.group5.hotel.Booking;
+import com.group5.hotel.Credential;
 import com.group5.hotel.Hotel;
 import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
@@ -14,31 +17,34 @@ public class HotelDatabase {
 
 	public HotelDatabase() {
 		dbManager = new DatabaseManager();
-		this.createTable("account", SQL.createAccountTable());
-		this.createTable("credential", SQL.createCredentialTable());
-		this.createTable("username", SQL.createUsernameTable());
 		this.createTable("hotel", SQL.createHotelTable());
+		this.createTable("credential", SQL.createCredentialTable());
+		this.createTable("account", SQL.createAccountTable());
 
-//		Printer.printQuery("account", dbManager.query(SQL.selectAll("account")));
-//		Printer.printQuery("credential", dbManager.query(SQL.selectAll("credential")));
-//		Printer.printQuery("username", dbManager.query(SQL.selectAll("username")));
-//		Printer.printQuery("hotel", dbManager.query(SQL.selectAll("hotel")));
+		// TODO
+//		this.createTable("booking", SQL.createBookingTable());
+//		Printer.printQuery("booking", dbManager.query(SQL.selectAll("booking"))); // for testing
 	}
 
 	public static void main(String[] args) {
 		HotelDatabase t = new HotelDatabase();
 		t.loadHotel();
+		Set<Credential> c = t.loadCredentials();
+		for (Credential cre : c) {
+			System.out.println(cre.getUsername());
+		}
 	}
 
 	public static List<Hotel> loadHotel() {
-		if (!tableExists("hotel")) return null;
+		String tableName = "hotel";
+		if (!tableExists(tableName)) return null;
 
-		List<Hotel> hotelList = null;
-		ResultSet resultSet = dbManager.query(SQL.selectAll("hotel"));
+		List<Hotel> hotels = null;
+		ResultSet resultSet = dbManager.query(SQL.selectAll(tableName));
 		try {
 			if (!resultSet.next()) System.out.println("No results");
 			else {
-				hotelList = new ArrayList<>();
+				hotels = new ArrayList<>();
 				do {
 					String hotelName = resultSet.getString("hotelName");
 					String street = resultSet.getString("street");
@@ -48,13 +54,41 @@ public class HotelDatabase {
 					String country = resultSet.getString("country");
 					String phone = resultSet.getString("phone");
 					String email = resultSet.getString("email");
-
-					hotelList.add(new Hotel(hotelName, street, suburb, city, postcode, country, phone, email));
+					hotels.add(new Hotel(hotelName, street, suburb, city, postcode, country, phone, email));
 				} while (resultSet.next());
 			}
 			resultSet.close();
 		} catch (SQLException ex) { System.out.println(ex.getMessage());}
-		return hotelList;
+		return hotels;
+	}
+
+	public static Set<Credential> loadCredentials() {
+		String tableName = "credential";
+		if (!tableExists(tableName)) return null;
+
+		Set<Credential> credentials = null;
+		ResultSet resultSet = dbManager.query(SQL.selectAll(tableName));
+		try {
+			if (!resultSet.next()) System.out.println("No results");
+			else {
+				credentials = new HashSet<>();
+				do {
+					String username = resultSet.getString("username");
+					String password = resultSet.getString("password");
+					credentials.add(new Credential(username, password));
+				} while (resultSet.next());
+			}
+			resultSet.close();
+		} catch (SQLException ex) { System.out.println(ex.getMessage());}
+		return credentials;
+	}
+
+	public static List<Account> loadAccounts() {
+		return new ArrayList<>();
+	}
+
+	public static List<Booking> loadBooking() {
+		return new ArrayList<>();
 	}
 
 	private void createTable(String name, String[] sql) {
