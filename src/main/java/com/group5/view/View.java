@@ -49,6 +49,26 @@ public abstract class View {
 		System.out.println(hotelSystem.getHotelDetails());
 	}
 
+	public void updateEmail(Scanner scan) {
+		System.out.println("Enter new email, x to cancel");
+		String newEmail = ParseInput.string(scan).trim();
+		if (newEmail.isEmpty() || newEmail.equalsIgnoreCase("x")) System.out.println("Email not updated.");
+		else {
+			hotelSystem.updateEmail(newEmail);
+			System.out.println("Email updated to " + newEmail);
+		}
+	}
+
+	public void updatePhone(Scanner scan) {
+		System.out.println("Enter new phone, x to cancel");
+		String newPhone = ParseInput.string(scan).trim();
+		if (newPhone.isEmpty() || newPhone.equalsIgnoreCase("x")) System.out.println("Phone not updated.");
+		else {
+			hotelSystem.updatePhone(newPhone);
+			System.out.println("Phone updated to " + newPhone);
+		}
+	}
+
     /***
      * Gets the start date of the booking that meet
  requirements.

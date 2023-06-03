@@ -13,6 +13,7 @@ import java.util.Scanner;
 
 public class AppSession {
 	private View viewType;
+	// for reload database after each logout
 	private HotelDatabase hotelDatabase = new HotelDatabase();
 
     /***

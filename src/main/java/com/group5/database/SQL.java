@@ -77,7 +77,6 @@ public class SQL {
 	//////////////////////////////////////////////////
 	// INSERT TABLE
 	//////////////////////////////////////////////////
-	// add this to edit info, email, phone etc GUI only.
 	static String insertAccountTable(String username, String firstname, String lastname, 
 			String phone, String email, String permission) {
 		return "INSERT INTO account VALUES "
@@ -91,6 +90,21 @@ public class SQL {
 
 	static String insertBookingTable() {
 		return "";
+	}
+
+	//////////////////////////////////////////////////
+	// UPDATE TABLE
+	//////////////////////////////////////////////////
+	static String updateAccountEmail(String username, String newEmail) {
+		return "UPDATE account "
+				+ "SET email = '" + newEmail + "' "
+				+ "WHERE username = '" + username + "'";
+	}
+
+	static String updateAccountPhone(String username, String newPhone) {
+		return "UPDATE account "
+				+ "SET email = '" + newPhone + "' "
+				+ "WHERE username = '" + username + "'";
 	}
 
 	//////////////////////////////////////////////////

@@ -108,8 +108,27 @@ public abstract class HotelSystem {
 	public Account getAccount() { return account; }
 	public boolean bookingIsEmpty() { return bookings.isEmpty(); }
 
-//	public void updateEmail(String newEmail) {
-//		this.account.updateEmail(newEmail);
-		// write to database, update WHERE username ==
-//	}
+	/**
+	 * Update the email of account and writes to database.
+	 * 
+	 * @param newEmail 
+	 */
+	public void updateEmail(String newEmail) {
+		if (this.account.getEmail() != null) {
+			this.account.updateEmail(newEmail);
+			HotelDatabase.updateAccountEmail(this.account);
+		}
+	}
+
+	/**
+	 * Update the email of account and writes to database.
+	 * 
+	 * @param newEmail 
+	 */
+	public void updatePhone(String newPhone) {
+		if (this.account.getPhone() != null) {
+			this.account.updatePhone(newPhone);
+			HotelDatabase.updateAccountPhone(this.account);
+		}
+	}
 }

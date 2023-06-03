@@ -128,9 +128,6 @@ public class HotelDatabase {
 			}
 			catch (Exception e) { throw new RuntimeException(e); }
 		}).start();
-//		String username = credential.getUsername();
-//		String password = credential.getPassword();
-//		dbManager.update(SQL.insertCredentialTable(username, password));
 	}
 
 	public static void insertAccountTable(Account account) {
@@ -146,26 +143,26 @@ public class HotelDatabase {
 			}
 			catch (Exception e) { throw new RuntimeException(e); }
 		}).start();
-//		String username = account.getUsername();
-//		String firstname = account.getFirstName();
-//		String lastname = account.getLastName();
-//		String phone = account.getPhone();
-//		String email = account.getEmail();
-//		String permission = account.getAccountTypeName();
-//		dbManager.update(SQL.insertAccountTable(username, firstname, lastname, phone, email, permission));
 	}
 
-	// TODO: MAYBE
-	public static void updateAccountPhone() {}
-	public static void updateAccountEmail() {
-		// need reload database after
-		// change account info in system, then write to database
-		// need modify account, change to no final
-		// only need for account
+	// need reload database after
+	// change account info in system, then write to database
+	// need modify account, change to no final
+	// only need for account
+	public static void updateAccountPhone(Account account) {
+		String username = account.getUsername();
+		String newPhone = account.getPhone();
+		dbManager.update(SQL.updateAccountPhone(username, newPhone));
+	}
+	
+	public static void updateAccountEmail(Account account) {
+		String username = account.getUsername();
+		String newEmail = account.getEmail();
+		dbManager.update(SQL.updateAccountEmail(username, newEmail));
 	}
 
-	private void createTable(String name, String[] sql) {
-		if (!tableExists(name)) this.dbManager.updateBatch(sql);
+	private static void createTable(String name, String[] sql) {
+		if (!tableExists(name)) dbManager.updateBatch(sql);
 	}
 
 	private static boolean tableExists(String name) {
