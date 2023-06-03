@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.Scanner;
 
 public class ParseInput {
+	// add limitier of 50char
 	
     /***
      * Static function to parse and trim strings

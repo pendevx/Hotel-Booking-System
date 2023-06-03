@@ -1,6 +1,7 @@
 package com.group5.database;
 
 import com.group5.hotel.Account;
+import com.group5.hotel.AccountPermission;
 import com.group5.hotel.Booking;
 import com.group5.hotel.Credential;
 import com.group5.hotel.Hotel;
@@ -84,7 +85,33 @@ public class HotelDatabase {
 	}
 
 	public static List<Account> loadAccounts() {
-		return new ArrayList<>();
+		String tableName = "account";
+		if (!tableExists(tableName)) return null;
+
+		List<Account> accounts = null;
+		ResultSet resultSet = dbManager.query(SQL.selectAll(tableName));
+		try {
+			if (!resultSet.next()) System.out.println("No results");
+			else {
+				accounts = new ArrayList<>();
+				do {
+					String username = resultSet.getString("username");
+					String firstName = resultSet.getString("firstname");
+					String lastName = resultSet.getString("lastName");
+					String phone = resultSet.getString("phone");
+					String email = resultSet.getString("email");
+					String permission = resultSet.getString("permission");
+
+					AccountPermission accountPermission = null;
+					if (permission.equalsIgnoreCase("ADMIN")) accountPermission = AccountPermission.ADMIN;
+					else accountPermission = AccountPermission.USER;
+
+					accounts.add(new Account(username, firstName, lastName, phone, email, accountPermission));
+				} while (resultSet.next());
+			}
+			resultSet.close();
+		} catch (SQLException ex) { System.out.println(ex.getMessage());}
+		return accounts;
 	}
 
 	public static List<Booking> loadBooking() {

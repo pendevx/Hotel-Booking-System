@@ -21,10 +21,15 @@ class HotelBookingData {
 	 */
 	static {
 		credentials = HotelDatabase.loadCredentials();
-		accounts = FileIO.loadAccountsJson();
+		accounts = HotelDatabase.loadAccounts();
+		
+		// TODO: bookings
 		bookings = FileIO.loadBookingJson();
 		// load from database as Set<Credentials>
 		// later need to load credentials on each register instance
+		// close session after logout.
+		// open new session after login.
+		// open a new session after register, make login after, or auto login if time
 	}
 
 	/**

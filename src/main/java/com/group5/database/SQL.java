@@ -62,10 +62,12 @@ public class SQL {
 		{
 			"CREATE TABLE booking ( "
 				+ "bookingID VARCHAR(50),"
+				+ "bookingID VARCHAR(50),"
 				+ "bookingID VARCHAR(50)"
 				+ ")",
 
 			"INSERT INTO booking VALUES "
+			+ "(''),"
 			+ "(''),"
 			+ "('')"
 		};
