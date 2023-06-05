@@ -1,15 +1,15 @@
 package com.group5.mvc;
 
 import com.group5.Components.Base;
-import com.group5.Panel.PanelLogin;
-import com.group5.Panel.PanelRegistration;
+import com.group5.Module.CardLogin;
+import com.group5.Module.CardRegister;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 public class ViewGUI extends JFrame {
-	public PanelLogin panelLogin = new PanelLogin();
-	public PanelRegistration panelRegistration = new PanelRegistration();
+	public CardLogin cardLogin;
+	public CardRegister cardRegister;
 	public Base base = new Base();
+	private Controller controller;
 
 	public ViewGUI() {
 		this.setName("Hotel Booking System");
@@ -18,32 +18,45 @@ public class ViewGUI extends JFrame {
 		this.setLocation(500,300);
 		this.setResizable(false);
 		this.setVisible(true);
-		this.renderLogin();
 	}
 
 	public void addController(Controller controller) {
-		this.panelLogin.loginButton.addActionListener(controller);
-		this.panelLogin.registerButton.addActionListener(controller);
-		this.panelRegistration.cancelButton.addActionListener(controller);
-		this.panelRegistration.submitButton.addActionListener(controller);
+		this.controller = controller;
 	}
 
 	public void renderLogin() {
 		if (base != null) base.removeAll();
-		this.base.add(panelLogin);
+		this.cardLogin = new CardLogin(); // fresh new form
+		this.cardLogin.loginButton.addActionListener(controller);
+		this.cardLogin.registerButton.addActionListener(controller);
+		this.base.add(cardLogin);
 		this.renderPanel();
 	}
 
 	public void renderRegistration() {
 		if (base != null) base.removeAll();
-		this.base.add(panelRegistration);
+		this.cardRegister = new CardRegister(); // so fresh new form
+		this.cardRegister.cancelButton.addActionListener(controller);
+		this.cardRegister.submitButton.addActionListener(controller);
+		this.base.add(cardRegister);
 		this.renderPanel();
 	}
 
 	public void renderUser() {
+		if (base != null) base.removeAll();
+		// logout AppSession null
+		// Database close and null
+		// HotelSytem close and null
+
+		this.renderPanel();
+		System.out.println("Rendering User");
 	}
 
 	public void renderAdmin() {
+		if (base != null) base.removeAll();
+
+		this.renderPanel();
+		System.out.println("Rendering Admin");
 	}
 
 	private void renderPanel() {

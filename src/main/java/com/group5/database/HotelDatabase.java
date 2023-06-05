@@ -180,5 +180,7 @@ public class HotelDatabase {
 	}
 
 	// use on logout, close
-	private void closeConnection() { this.dbManager.closeConnection(); }
+	public void closeConnection() {
+		this.dbManager.closeConnection();
+	}
 }

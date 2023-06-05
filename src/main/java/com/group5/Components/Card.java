@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import javax.swing.BorderFactory;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public abstract class Card extends JPanel {
@@ -16,4 +17,8 @@ public abstract class Card extends JPanel {
 		this.WIDTH = width;
 		this.setPreferredSize(new Dimension(WIDTH, height));
 	}
+
+	public void showWarningPopup(String message) {
+        JOptionPane.showMessageDialog(this, message, "Attention", JOptionPane.INFORMATION_MESSAGE);
+    }
 }

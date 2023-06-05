@@ -1,4 +1,4 @@
-package com.group5.Panel;
+package com.group5.Module;
 
 import com.group5.Components.Button;
 import com.group5.Components.Card;
@@ -7,7 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-public class PanelRegistration extends Card {
+public class CardRegister extends Card {
 	public JButton cancelButton = new Button("Cancel", "#9399b2");
 	public JButton submitButton = new Button("Submit", "#94e2d5");
 	public JTextField userFieldNew = new JTextField(40);
@@ -18,7 +18,7 @@ public class PanelRegistration extends Card {
 	public JTextField phoneNew = new JTextField(40);
 	private final int MARGIN = 70;
 
-	public PanelRegistration() {
+	public CardRegister() {
 		super(500, 500, 10, 5);
 		this.add(new EntryField("New Username:", userFieldNew, WIDTH - 50, MARGIN));
 		this.add(new EntryField("New Password:", passFieldNew, WIDTH - 50, MARGIN));

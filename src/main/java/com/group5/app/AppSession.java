@@ -12,22 +12,34 @@ import java.util.Scanner;
 
 
 public class AppSession {
-	private View viewType;
+//	private View viewType;
 	// for reload database after each logout
+
+	public HotelSystem hotelSystem;
 	private HotelDatabase hotelDatabase = new HotelDatabase();
 
     /***
      * Display main menu in console
      * @param scan - for users input
      */
-	public void sessionMenu(Scanner scan) {
-		System.out.println("1. Login");
-		System.out.println("2. Create user account");
-		System.out.println("0. QUIT");
-		int input = ParseInput.integer(0, 2, scan); // valid input between 0 - 2
-		if (input == 1) loginPortal(scan);
-		else if (input == 2) registerPortal(scan);
-		else System.out.println("Program quit successfully.");
+//	public void sessionMenu(Scanner scan) {
+//		System.out.println("1. Login");
+//		System.out.println("2. Create user account");
+//		System.out.println("0. QUIT");
+//		int input = ParseInput.integer(0, 2, scan); // valid input between 0 - 2
+//		if (input == 1) loginPortal(scan);
+//		else if (input == 2) registerPortal(scan);
+//		else System.out.println("Program quit successfully.");
+//	}
+	private void closeDatabaseConnection() {
+		this.hotelDatabase.closeConnection();
+	}
+
+	public void logout() {
+		closeDatabaseConnection();
+		this.hotelSystem = null;
+		this.hotelDatabase = null;
+		System.out.println("Logged out\n");
 	}
 
     /***
@@ -35,29 +47,38 @@ public class AppSession {
      * 
      * @param scan - for users input
      */
-	private void loginPortal(Scanner scan) {
-		boolean isSuccess = false;
-		String enteredUsername;
-		String enteredPassword;
-		HotelSystem system = null;
-		for(int attempts = 2; attempts >= 0 && !isSuccess; attempts--) { // handles if correct on third attempt
-			System.out.println("Username: ");
-			enteredUsername = ParseInput.string(scan);
-			System.out.println("Password: ");
-			enteredPassword = ParseInput.string(scan);
-			system = AccountManager.login(enteredUsername, enteredPassword);
+	public boolean loginPortal(String enteredUsername, String enteredPassword) {
+		this.hotelSystem = AccountManager.login(enteredUsername, enteredPassword);
+		if (hotelSystem != null) return true;
+		else return false;
 
-			if (system != null) break;
+		// check if user or Admin
+		// set system to that
+		// renderUser of renderAdmin based on instanceof
 
-			System.out.println("Invalid credentials! Attempts remaining " + attempts);
-		}
 
-		if (system == null) {
-			System.out.println("You entered bad credentials 3 times >=(");
-			return;
-		}
 
-		init(system, scan);
+//		boolean isSuccess = false;
+//		HotelSystem system = null;
+//		for(int attempts = 2; attempts >= 0 && !isSuccess; attempts--) { // handles if correct on third attempt
+//			System.out.println("Username: ");
+//			enteredUsername = ParseInput.string(scan);
+//			System.out.println("Password: ");
+//			enteredPassword = ParseInput.string(scan);
+
+//			system = AccountManager.login(enteredUsername, enteredPassword);
+
+//			if (system != null) break;
+
+//			System.out.println("Invalid credentials! Attempts remaining " + attempts);
+//		}
+
+//		if (system == null) {
+//			System.out.println("You entered bad credentials 3 times >=(");
+//			return;
+//		}
+
+//		init(system, scan);
 	}
 
     /***
@@ -65,54 +86,54 @@ public class AppSession {
      * 
      * @param scan - for users input
      */
-	private void registerPortal(Scanner scan) {
-		String username = "";
-		boolean usernameExists = true;
+//	private void registerPortal(Scanner scan) {
+//		String username = "";
+//		boolean usernameExists = true;
+//
+//		for (int i = 0; i < 3 && usernameExists; i++) {
+//			System.out.println("Enter new username: ");
+//			username = ParseInput.string(scan);
+//			usernameExists = AccountManager.checkUsernameExists(username); // only gets String if username is unique
+//			if (usernameExists) System.out.println("Username taken");
+//		}
+//
+//		if (usernameExists) {
+//			System.out.println("Error creating your account: Please see logs for more details, or try again with another username.");
+//			return;
+//		}
+//
+//		System.out.println("Enter new password: ");
+//		String password = ParseInput.string(scan);
+//		System.out.println("Enter first name: ");
+//		String firstName = ParseInput.string(scan);
+//		System.out.println("Enter last name: ");
+//		String lastName = ParseInput.string(scan);
+//		System.out.println("Enter email: ");
+//		String email = ParseInput.string(scan);
+//		System.out.println("Enter phone: ");
+//		String phone = ParseInput.string(scan);
+//
+//		Account newAccount = AccountManager.createAccount(username, password, firstName, lastName, phone, email);
+//
+//		if (newAccount == null) {
+//			System.out.println("An error occurred when creating your account; please try again.");
+//			return;
+//		}
+//
+//		HotelSystem system = AccountManager.login(username, password);
+//
+//		init(system, scan);
+//	}
 
-		for (int i = 0; i < 3 && usernameExists; i++) {
-			System.out.println("Enter new username: ");
-			username = ParseInput.string(scan);
-			usernameExists = AccountManager.checkUsernameExists(username); // only gets String if username is unique
-			if (usernameExists) System.out.println("Username taken");
-		}
-
-		if (usernameExists) {
-			System.out.println("Error creating your account: Please see logs for more details, or try again with another username.");
-			return;
-		}
-
-		System.out.println("Enter new password: ");
-		String password = ParseInput.string(scan);
-		System.out.println("Enter first name: ");
-		String firstName = ParseInput.string(scan);
-		System.out.println("Enter last name: ");
-		String lastName = ParseInput.string(scan);
-		System.out.println("Enter email: ");
-		String email = ParseInput.string(scan);
-		System.out.println("Enter phone: ");
-		String phone = ParseInput.string(scan);
-
-		Account newAccount = AccountManager.createAccount(username, password, firstName, lastName, phone, email);
-
-		if (newAccount == null) {
-			System.out.println("An error occurred when creating your account; please try again.");
-			return;
-		}
-
-		HotelSystem system = AccountManager.login(username, password);
-
-		init(system, scan);
-	}
-
-	private void init(HotelSystem system, Scanner scan) {
-		if (system.getClass() == HotelSystemAdmin.class) {
-			viewType = new ViewAdmin((HotelSystemAdmin) system);
-		}
-		else {
-			viewType = new ViewUser((HotelSystemUser) system);
-		}
-
-		viewType.confirmLogin();
-		viewType.menuMain(scan);
-	}
+//	private void init(HotelSystem system, Scanner scan) {
+//		if (system.getClass() == HotelSystemAdmin.class) {
+//			viewType = new ViewAdmin((HotelSystemAdmin) system);
+//		}
+//		else {
+//			viewType = new ViewUser((HotelSystemUser) system);
+//		}
+//
+//		viewType.confirmLogin();
+//		viewType.menuMain(scan);
+//	}
 }
