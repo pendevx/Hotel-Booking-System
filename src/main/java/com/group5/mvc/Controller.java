@@ -3,6 +3,7 @@ package com.group5.mvc;
 import com.group5.module.CardLogin;
 import com.group5.module.CardRegister;
 import com.group5.app.AppSession;
+import com.group5.module.CardAccount;
 import com.group5.system.HotelSystemAdmin;
 import com.group5.system.HotelSystemUser;
 import java.awt.event.ActionEvent;
@@ -19,10 +20,9 @@ public class Controller implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == getCardLogin().loginButton) {
+		if (getCardLogin() != null && e.getSource() == getCardLogin().loginButton) {
 			String usr = getCardLogin().usernameField.getText();
 			String pwd = getCardLogin().passwordField.getText();
-			model.loginPortal(usr, pwd);
 
 			if(model.loginPortal(usr, pwd)) {
 				if (model.hotelSystem instanceof HotelSystemUser) view.renderUser();
@@ -30,13 +30,15 @@ public class Controller implements ActionListener {
 			}
 			else getCardLogin().showWarningPopup("Incorrect username or password!");
 		}
-		else if (e.getSource() == getCardLogin().registerButton) {
+		else if (getCardLogin() != null && e.getSource() == getCardLogin().registerButton) {
 			view.renderRegistration();
 		}
-//		else if (e.getSource() == getCardRegister().cancelButton) {
-//			view.renderLogin();
-//		}
-		else if (e.getSource() == getCardRegister().submitButton) {
+		else if (getCardRegister() != null && e.getSource() == getCardRegister().cancelButton) {
+			this.model.logout();
+			this.model = new AppSession();
+			view.renderLogin();
+		}
+		else if (getCardRegister() != null && e.getSource() == getCardRegister().submitButton) {
 			String usr = getCardRegister().userFieldNew.getText();
 			String pwd = getCardRegister().passFieldNew.getText();
 			String fname = getCardRegister().firstNameNew.getText();
@@ -48,7 +50,7 @@ public class Controller implements ActionListener {
 				System.out.println("OK");
 			}
 		}
-		else if (e.getSource() == getCardRegister().cancelButton) {
+		else if (e.getSource() == getCardAccount().logoutButton) {
 			this.model.logout();
 			this.model = new AppSession();
 			view.renderLogin();
@@ -67,4 +69,5 @@ public class Controller implements ActionListener {
 
 	private CardLogin getCardLogin() { return (CardLogin) view.cardLogin; }
 	private CardRegister getCardRegister() { return (CardRegister) view.cardRegister; }
+	private CardAccount getCardAccount() { return (CardAccount) view.cardAccount; }
 }

@@ -8,7 +8,7 @@ import javax.swing.JComponent;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-public class CardRegister extends Card {
+public class CardRegister extends Card implements KeyPressListener {
 	public JButton cancelButton = new Button("Cancel", "#9399b2");
 	public JButton submitButton = new Button("Submit", "#94e2d5");
 	public JTextField userFieldNew = new JTextField(40);

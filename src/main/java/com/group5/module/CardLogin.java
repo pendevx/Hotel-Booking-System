@@ -8,7 +8,7 @@ import javax.swing.JComponent;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-public class CardLogin extends Card {
+public class CardLogin extends Card implements KeyPressListener {
 	public JButton loginButton = new Button("Login", "#94e2d5");
 	public JButton registerButton = new Button("Register", "#9399b2");
 	public JTextField usernameField = new JTextField(40);

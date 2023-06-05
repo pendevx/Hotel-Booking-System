@@ -7,7 +7,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-public abstract class Card extends JPanel implements KeyPressListener{
+public abstract class Card extends JPanel {
 	public final int WIDTH;
 
 	public Card(int width, int height, int hGap, int vGap) {

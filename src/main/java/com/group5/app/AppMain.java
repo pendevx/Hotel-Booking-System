@@ -21,5 +21,6 @@ public class AppMain {
 		Controller controller = new Controller(view);
 		view.addController(controller);
 		view.renderLogin();
+//		view.renderUser();
 	}
 }
