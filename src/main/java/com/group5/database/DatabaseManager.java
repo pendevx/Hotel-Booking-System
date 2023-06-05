@@ -50,7 +50,7 @@ public final class DatabaseManager {
 		if (connection != null) {
 			try {
 				connection.close();
-				System.out.println("Closed: " + dbName);
+				System.out.println("Disconnected: " + dbName);
 			}
 			catch (SQLException ex) { System.out.println(ex.getMessage()); }
 		}

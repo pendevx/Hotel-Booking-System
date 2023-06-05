@@ -37,25 +37,28 @@ public class Controller implements ActionListener {
 //			view.renderLogin();
 //		}
 		else if (e.getSource() == getCardRegister().submitButton) {
-//			System.out.println("Submit button clicked.");
-//			// check this
-//			String usr = getCardRegister().userFieldNew.getText();
-			getCardRegister().showWarningPopup("Username exists!");
-//
-//			if (true) {
-//				String pwd = getCardRegister().passFieldNew.getText();
-//				String fname = getCardRegister().firstNameNew.getText();
-//				String lname = getCardRegister().lastNameNew.getText();
-//				String email = getCardRegister().emailNew.getText();
-//				String phone = getCardRegister().phoneNew.getText();
-//			}
-//
-//			view.renderRegistration();
+			String usr = getCardRegister().userFieldNew.getText();
+			String pwd = getCardRegister().passFieldNew.getText();
+			String fname = getCardRegister().firstNameNew.getText();
+			String lname = getCardRegister().lastNameNew.getText();
+			String email = getCardRegister().emailNew.getText();
+			String phone = getCardRegister().phoneNew.getText();
+
+			this.checkEmptyField(usr, pwd, fname, lname, email, phone);
 		}
 		else if (e.getSource() == getCardRegister().cancelButton) {
 			this.model.logout();
 			this.model = new AppSession();
 			view.renderLogin();
+		}
+	}
+
+	private void checkEmptyField(String...fields) {
+		for (String s : fields) {
+			if (s.isEmpty()) {
+				getCardRegister().showWarningPopup("Please fill in all empty sections...");
+				return;
+			}
 		}
 	}
 
