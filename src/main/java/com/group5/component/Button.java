@@ -1,4 +1,4 @@
-package com.group5.Components;
+package com.group5.component;
 
 import java.awt.Color;
 import javax.swing.JButton;

@@ -1,9 +1,10 @@
 package com.group5.module;
 
-import com.group5.Components.Button;
-import com.group5.Components.Card;
-import com.group5.Components.EntryField;
+import com.group5.component.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
@@ -28,7 +29,18 @@ public class CardRegister extends Card {
 		this.add(new EntryField("Phone:", phoneNew, WIDTH - 50, MARGIN));
 		this.add(cancelButton);
 		this.add(submitButton);
-		// checks the username here
-		// need popup warning if not correct
+		this.addEnterKeyListener(userFieldNew, passFieldNew, firstNameNew, lastNameNew, emailNew, phoneNew);
+	}
+
+	@Override
+	public void addEnterKeyListener(JComponent... components) {
+		for (JComponent c : components) {
+			c.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyPressed(KeyEvent e) {
+					if(e.getKeyCode() == KeyEvent.VK_ENTER) submitButton.doClick();
+				}
+			});
+		}
 	}
 }

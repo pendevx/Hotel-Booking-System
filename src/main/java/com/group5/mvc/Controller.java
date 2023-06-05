@@ -44,7 +44,9 @@ public class Controller implements ActionListener {
 			String email = getCardRegister().emailNew.getText();
 			String phone = getCardRegister().phoneNew.getText();
 
-			this.checkEmptyField(usr, pwd, fname, lname, email, phone);
+			if (!hasEmptyField(usr, pwd, fname, lname, email, phone)) {
+				System.out.println("OK");
+			}
 		}
 		else if (e.getSource() == getCardRegister().cancelButton) {
 			this.model.logout();
@@ -53,15 +55,16 @@ public class Controller implements ActionListener {
 		}
 	}
 
-	private void checkEmptyField(String...fields) {
+	private boolean hasEmptyField(String...fields) {
 		for (String s : fields) {
 			if (s.isEmpty()) {
 				getCardRegister().showWarningPopup("Please fill in all empty sections...");
-				return;
+				return true;
 			}
 		}
+		return false;
 	}
 
-	private CardLogin getCardLogin() { return view.cardLogin; }
-	private CardRegister getCardRegister() { return view.cardRegister; }
+	private CardLogin getCardLogin() { return (CardLogin) view.cardLogin; }
+	private CardRegister getCardRegister() { return (CardRegister) view.cardRegister; }
 }

@@ -1,13 +1,15 @@
 package com.group5.mvc;
 
-import com.group5.Components.Base;
+import com.group5.component.*;
 import com.group5.module.CardLogin;
 import com.group5.module.CardRegister;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 public class ViewGUI extends JFrame {
-	public CardLogin cardLogin;
-	public CardRegister cardRegister;
+	public Card cardLogin;
+	public Card cardRegister;
+	public Card cardAccount;
 	private Base base = new Base();
 	private Controller controller;
 
@@ -25,41 +27,31 @@ public class ViewGUI extends JFrame {
 	}
 
 	public void renderLogin() {
-		if (base != null) base.removeAll();
 		this.cardLogin = new CardLogin(); // fresh new form
-		this.cardLogin.loginButton.addActionListener(controller);
-		this.cardLogin.registerButton.addActionListener(controller);
-		this.base.add(cardLogin);
-		this.renderPanel();
+		((CardLogin) cardLogin).loginButton.addActionListener(controller);
+		((CardLogin) cardLogin).registerButton.addActionListener(controller);
+		this.renderPanel(cardLogin);
 	}
 
 	public void renderRegistration() {
-		if (base != null) base.removeAll();
 		this.cardRegister = new CardRegister(); // so fresh new form
-		this.cardRegister.cancelButton.addActionListener(controller);
-		this.cardRegister.submitButton.addActionListener(controller);
-		this.base.add(cardRegister);
-		this.renderPanel();
+		((CardRegister) cardRegister).cancelButton.addActionListener(controller);
+		((CardRegister) cardRegister).submitButton.addActionListener(controller);
+		this.renderPanel(cardRegister);
 	}
 
 	public void renderUser() {
-		if (base != null) base.removeAll();
-		// logout AppSession null
-		// Database close and null
-		// HotelSytem close and null
-
-		this.renderPanel();
+		
 		System.out.println("Rendering User");
 	}
 
 	public void renderAdmin() {
-		if (base != null) base.removeAll();
-
-		this.renderPanel();
 		System.out.println("Rendering Admin");
 	}
 
-	private void renderPanel() {
+	private void renderPanel(JPanel p) {
+		if (this.base != null) this.base.removeAll();
+		this.base.add(p);
 		this.add(this.base);
 		this.revalidate();
 		this.repaint();
