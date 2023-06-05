@@ -1,7 +1,7 @@
 package com.group5.mvc;
 
-import com.group5.Module.CardLogin;
-import com.group5.Module.CardRegister;
+import com.group5.module.CardLogin;
+import com.group5.module.CardRegister;
 import com.group5.app.AppSession;
 import com.group5.system.HotelSystemAdmin;
 import com.group5.system.HotelSystemUser;

@@ -1,14 +1,14 @@
 package com.group5.mvc;
 
 import com.group5.Components.Base;
-import com.group5.Module.CardLogin;
-import com.group5.Module.CardRegister;
+import com.group5.module.CardLogin;
+import com.group5.module.CardRegister;
 import javax.swing.JFrame;
 
 public class ViewGUI extends JFrame {
 	public CardLogin cardLogin;
 	public CardRegister cardRegister;
-	public Base base = new Base();
+	private Base base = new Base();
 	private Controller controller;
 
 	public ViewGUI() {

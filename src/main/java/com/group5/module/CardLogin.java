@@ -1,4 +1,4 @@
-package com.group5.Module;
+package com.group5.module;
 
 import com.group5.Components.Button;
 import com.group5.Components.Card;
