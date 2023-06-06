@@ -52,6 +52,7 @@ public class ViewAdmin extends View {
      */
 	private void viewAllUsers() {
 		Set<String> users = ((HotelSystemAdmin) hotelSystem).getUserList();
+		if (users == null) return;
 		for (String user : users) System.out.println(user);
 	}
 

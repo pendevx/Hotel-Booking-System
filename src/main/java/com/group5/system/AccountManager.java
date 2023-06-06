@@ -9,8 +9,11 @@ import java.util.stream.Stream;
 import static com.group5.system.HotelBookingData.*;
 
 public class AccountManager {
+
 	private AccountManager() { }
+
 	public static boolean checkUsernameExists(String username) {
+		// streams in credentials and then checks usernames
 		Stream<String> usernames = getCredentials().stream().map(x -> x.getUsername());
 		Optional<String> findMatches = usernames.filter(x -> x.equals(username)).findAny();
 		return findMatches.isPresent();

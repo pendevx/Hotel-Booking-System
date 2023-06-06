@@ -1,5 +1,6 @@
 package com.group5.system;
 
+import com.group5.database.HotelDatabase;
 import com.group5.hotel.Account;
 import com.group5.hotel.Room;
 import com.group5.hotel.Booking;
@@ -23,7 +24,7 @@ public abstract class HotelSystem {
 	 * @param bookings The bookings which the system contains
 	 */
 	HotelSystem(Account account, List<Booking> bookings) {
-		this.hotel = FileIO.loadHotelJson().get(0);
+		this.hotel = HotelDatabase.loadHotel().get(0);
 		this.account = account;
 		this.bookings = bookings;
 	}
@@ -94,8 +95,7 @@ public abstract class HotelSystem {
 			cal.add(Calendar.DATE, -1);
  			// if the date is on or after the begin date of this room, AND before (end-1) date of this room, then return true
 			if (date.after(cal.getTime()) && date.before(b.endDate()))
-				for (Room r : b.getRooms())
-					if (r.equals(room)) return false;
+				for (Room r : b.getRooms()) if (r.equals(room)) return false;
 		}
 		return true;
 	}
@@ -107,4 +107,28 @@ public abstract class HotelSystem {
 	public String getHotelDetails() { return this.hotel.toString(); }
 	public Account getAccount() { return account; }
 	public boolean bookingIsEmpty() { return bookings.isEmpty(); }
+
+	/**
+	 * Update the email of account and writes to database.
+	 * 
+	 * @param newEmail 
+	 */
+	public void updateEmail(String newEmail) {
+		if (this.account.getEmail() != null) {
+			this.account.updateEmail(newEmail);
+			HotelDatabase.updateAccountEmail(this.account);
+		}
+	}
+
+	/**
+	 * Update the email of account and writes to database.
+	 * 
+	 * @param newEmail 
+	 */
+	public void updatePhone(String newPhone) {
+		if (this.account.getPhone() != null) {
+			this.account.updatePhone(newPhone);
+			HotelDatabase.updateAccountPhone(this.account);
+		}
+	}
 }

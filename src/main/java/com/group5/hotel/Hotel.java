@@ -2,7 +2,11 @@ package com.group5.hotel;
 
 public class Hotel {
 	private String hotelName;
-	private Location location;
+	public String street;
+	public String suburb;
+	public String city;
+	public String postcode; // will handle 0604
+	public String country;
 	public String phone;
 	public String email;
 
@@ -10,15 +14,25 @@ public class Hotel {
      * Constructor for hotel, storing details about the hotel
      * 
      * @param hotelName - name of hotel
-     * @param location - location of hotel
+	 * @param street
+	 * @param suburb
+	 * @param city
+	 * @param postcode
+	 * @param country
      * @param phone - contact number
      * @param email - contact email
      */
-	public Hotel(String hotelName, Location location, String phone, String email) {
+	public Hotel(String hotelName,
+			String street, String suburb, String city, String postcode, String country, 
+			String phone, String email) {
 		this.hotelName = hotelName;
-		this.location = location;
-		this.email = email;
+		this.street = street;
+		this.suburb = suburb;
+		this.city = city;
+		this.postcode = postcode;
+		this.country = country;
 		this.phone = phone;
+		this.email = email;
 	}
 
     /***
@@ -40,7 +54,12 @@ public class Hotel {
      * @return toString location of hotel
      */
 	public String getAddress() {
-		return this.location.toString();
+		StringBuilder out = new StringBuilder(this.street + "\n");
+		out.append(this.suburb+"\n");
+		out.append(this.city+", ");
+		out.append(this.postcode+"\n");
+		out.append(this.country);
+		return out.toString();
 	}
 
     /***
