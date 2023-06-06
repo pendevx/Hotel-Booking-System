@@ -1,14 +1,14 @@
 package com.group5.mvc;
 
-import com.group5.module.CardLogin;
-import com.group5.module.CardRegister;
+import com.group5.card.CardLogin;
+import com.group5.card.CardRegister;
 import com.group5.app.AppSession;
 import com.group5.component.*;
 import com.group5.component.Text.FontSize;
 import com.group5.database.HotelDatabase;
 import com.group5.hotel.Account;
-import com.group5.module.CardAccount;
-import com.group5.module.CardAccountEdit;
+import com.group5.card.CardAccount;
+import com.group5.card.CardAccountEdit;
 import com.group5.system.AccountManager;
 import com.group5.system.HotelSystemAdmin;
 import com.group5.system.HotelSystemUser;

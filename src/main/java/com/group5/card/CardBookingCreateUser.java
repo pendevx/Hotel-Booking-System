@@ -1,4 +1,4 @@
-package com.group5.module;
+package com.group5.card;
 
 import com.group5.component.*;
 import com.group5.component.Text.FontSize;

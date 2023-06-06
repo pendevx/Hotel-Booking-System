@@ -1,12 +1,12 @@
 package com.group5.mvc;
 
 import com.group5.component.*;
-import com.group5.module.CardAccount;
-import com.group5.module.CardAccountEdit;
-import com.group5.module.CardBookingCreateUser;
-import com.group5.module.CardBookingListUser;
-import com.group5.module.CardLogin;
-import com.group5.module.CardRegister;
+import com.group5.card.CardAccount;
+import com.group5.card.CardAccountEdit;
+import com.group5.card.CardBookingCreateUser;
+import com.group5.card.CardBookingListUser;
+import com.group5.card.CardLogin;
+import com.group5.card.CardRegister;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JFrame;
