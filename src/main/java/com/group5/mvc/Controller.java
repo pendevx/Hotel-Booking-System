@@ -117,29 +117,8 @@ public class Controller implements ActionListener {
 				if(model.loginPortal(usr, pwd)) this.renderView();
 				else getCardLogin().showWarningPopup("Incorrect username or password!");
 			}
-//			if (!model.registerPortal(usr, pwd, fname, lname, email, phone)) {
-//			}
 			else getCardRegister().showWarningPopup("Username is taken.");
-//			if (!model.checkUserExist(usr)) {
-//			if (!AccountManager.checkUsernameExists(usr)) {
-//			if (model.checkUserExist(usr)) {
-//				System.out.println("all good");
-
-				// write to db
-//				if(model.loginPortal(usr, pwd)) this.renderView();
-//			}
 		}
-//		usernameExists = AccountManager.checkUsernameExists(username); // only gets String if username is unique
-//			if (usernameExists) System.out.println("Username taken");
-//
-//		Account newAccount = AccountManager.createAccount(username, password, firstName, lastName, phone, email);
-////
-//		if (newAccount == null) {
-//			System.out.println("An error occurred when creating your account; please try again.");
-//			return;
-//		}
-////
-//		HotelSystem system = AccountManager.login(username, password);
 	}
 
 	private boolean hasEmptyField(Card card, String...fields) {

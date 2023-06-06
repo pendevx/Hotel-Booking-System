@@ -9,26 +9,37 @@ public class AppSession {
 	public HotelSystem hotelSystem;
 	private HotelDatabase hotelDatabase = new HotelDatabase();
 
-	public boolean checkUserNameExists(String usr) {
-		return AccountManager.checkUsernameExists(usr); 
+	/***
+	 * @param username, to be checked
+	 * @return boolean value of if username exists.
+	 */
+	public boolean checkUserNameExists(String username) {
+		return AccountManager.checkUsernameExists(username); 
 	}
 
-    /***
-     * Take user through to login process.
-     * 
-     * @param scan - for users input
-     */
+	/***
+	 * Logs user in and instanitates the correct hotelSystem, either USER or ADMIN.
+	 * 
+	 * @param enteredUsername
+	 * @param enteredPassword
+	 * @return boolean value if it loaded the hotelSystem
+	 */
 	public boolean loginPortal(String enteredUsername, String enteredPassword) {
 		this.hotelSystem = AccountManager.login(enteredUsername, enteredPassword);
 		if (hotelSystem != null) return true;
 		else return false;
 	}
 
-    /***
-     * Take user through to account registration process.
-     * 
-     * @param scan - for users input
-     */
+	/***
+	 * Creates a new account, and saves to database.
+	 * 
+	 * @param usr, entered username
+	 * @param pwd, entered password
+	 * @param fname, entered firstname
+	 * @param lname, entered lastname
+	 * @param email, entered email
+	 * @param phone, entered phone
+	 */
 	public void registerPortal(String usr, String pwd, String fname, String lname, String email, String phone) {
 		Account newAccount = AccountManager.createAccount(usr, pwd, fname, lname, phone, email);
 		if (newAccount == null) {
@@ -37,6 +48,9 @@ public class AppSession {
 		}
 	}
 
+	/***
+	 * Logout process, closes connection to database and sets class attributes to null.
+	 */
 	public void logout() {
 		this.hotelDatabase.closeConnection();
 		this.hotelSystem = null;
