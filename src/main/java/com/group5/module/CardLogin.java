@@ -9,20 +9,20 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 public class CardLogin extends Card implements KeyPressListener {
-	public JButton loginButton = new Button("Login", "#94e2d5");
-	public JButton registerButton = new Button("Register", "#9399b2");
-	public JTextField usernameField = new JTextField(40);
-	public JTextField passwordField = new JPasswordField(40);
+	public JButton loginButton = new Button("Login", "#94e2d5", 100, 25);
+	public JButton registerButton = new Button("Register", "#9399b2", 100, 25);
+	public JTextField usernameField = new JTextField(30);
+	public JTextField passwordField = new JPasswordField(30);
 	private final int MARGIN = 70;
 
 	public CardLogin() {
 		super(500, 500, 10, 20);
-		this.add(new EntryField("Username:", usernameField, WIDTH - 50, MARGIN));
-		this.add(new EntryField("Password:", passwordField, WIDTH - 50, MARGIN));
-		this.add(loginButton);
-		this.add(registerButton);
+		this.add(new Container(WIDTH - 120, 100));
+		this.add(new Container(WIDTH - 120, MARGIN, usernameField, "Username:"));
+		this.add(new Container(WIDTH - 120, MARGIN, passwordField, "Password:"));
+		this.add(new Container(WIDTH - 120, 40, loginButton));
+		this.add(new Container(WIDTH - 120, 40, registerButton));
 		this.addEnterKeyListener(usernameField, passwordField);
-
 	}
 
 	@Override

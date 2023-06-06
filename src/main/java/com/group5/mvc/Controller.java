@@ -8,6 +8,7 @@ import com.group5.system.HotelSystemAdmin;
 import com.group5.system.HotelSystemUser;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 
 public class Controller implements ActionListener {
 	public ViewGUI view;
@@ -20,40 +21,51 @@ public class Controller implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (getCardLogin() != null && e.getSource() == getCardLogin().loginButton) {
-			String usr = getCardLogin().usernameField.getText();
-			String pwd = getCardLogin().passwordField.getText();
+		if (getCardLogin() != null) {
+			if (e.getSource() == getCardLogin().loginButton) loginHandler();
+			else if (e.getSource() == getCardLogin().registerButton) view.renderRegistration();
+		}
 
-			if(model.loginPortal(usr, pwd)) {
-				if (model.hotelSystem instanceof HotelSystemUser) view.renderUser();
-				else if (model.hotelSystem instanceof HotelSystemAdmin) view.renderAdmin();
-			}
-			else getCardLogin().showWarningPopup("Incorrect username or password!");
+		if (getCardRegister()!= null) {
+			if (e.getSource() == getCardRegister().cancelButton) view.renderLogin();
+			else if (e.getSource() == getCardRegister().submitButton) registerHandler();
 		}
-		else if (getCardLogin() != null && e.getSource() == getCardLogin().registerButton) {
-			view.renderRegistration();
+
+		if (getCardAccount()!= null) {
+			if (e.getSource() == getCardAccount().logoutButton) logoutHandler();
 		}
-		else if (getCardRegister() != null && e.getSource() == getCardRegister().cancelButton) {
+	}
+
+	private void loginHandler() {
+		String usr = getCardLogin().usernameField.getText();
+		String pwd = getCardLogin().passwordField.getText();
+
+		if(model.loginPortal(usr, pwd)) {
+			if (model.hotelSystem instanceof HotelSystemUser) view.renderUser();
+			else if (model.hotelSystem instanceof HotelSystemAdmin) view.renderAdmin();
+		}
+		else getCardLogin().showWarningPopup("Incorrect username or password!");
+	}
+
+	private void logoutHandler() {
+		int result = JOptionPane.showConfirmDialog(view, "Logout?", "Confirm", JOptionPane.YES_NO_OPTION);
+		if (result == JOptionPane.YES_OPTION) {
 			this.model.logout();
 			this.model = new AppSession();
 			view.renderLogin();
 		}
-		else if (getCardRegister() != null && e.getSource() == getCardRegister().submitButton) {
-			String usr = getCardRegister().userFieldNew.getText();
-			String pwd = getCardRegister().passFieldNew.getText();
-			String fname = getCardRegister().firstNameNew.getText();
-			String lname = getCardRegister().lastNameNew.getText();
-			String email = getCardRegister().emailNew.getText();
-			String phone = getCardRegister().phoneNew.getText();
+	}
 
-			if (!hasEmptyField(usr, pwd, fname, lname, email, phone)) {
-				System.out.println("OK");
-			}
-		}
-		else if (e.getSource() == getCardAccount().logoutButton) {
-			this.model.logout();
-			this.model = new AppSession();
-			view.renderLogin();
+	private void registerHandler() {
+		String usr = getCardRegister().userFieldNew.getText();
+		String pwd = getCardRegister().passFieldNew.getText();
+		String fname = getCardRegister().firstNameNew.getText();
+		String lname = getCardRegister().lastNameNew.getText();
+		String email = getCardRegister().emailNew.getText();
+		String phone = getCardRegister().phoneNew.getText();
+
+		if (!hasEmptyField(usr, pwd, fname, lname, email, phone)) {
+			System.out.println("OK");
 		}
 	}
 
