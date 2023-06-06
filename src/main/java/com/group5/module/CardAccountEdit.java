@@ -1,10 +1,13 @@
 package com.group5.module;
 
 import com.group5.component.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JTextField;
 
-public class CardAccountEdit extends Card {
+public class CardAccountEdit extends Card implements KeyPressListener{
 
 	public JButton cancelButton = new Button("Cancel", "#9399b2", 100, 25);
 	public JButton saveButton = new Button("Save", "#94e2d5", 100, 25);
@@ -20,6 +23,7 @@ public class CardAccountEdit extends Card {
 		this.add(new Container(W, MARGIN, "New email:", emailNew));
 		this.add(new Container(W, MARGIN, "New phone:", phoneNew));
 		this.add(new Container(W, 50, cancelButton, saveButton));
+		this.addEnterKeyListener(emailNew, phoneNew);
 	}
 
 	public void setTextEmail(String exsitingEmail) {
@@ -28,5 +32,17 @@ public class CardAccountEdit extends Card {
 
 	public void setTextPhone(String exsitingPhone) {
 		phoneNew.setText(exsitingPhone);
+	}
+
+	@Override
+	public void addEnterKeyListener(JComponent... components) {
+		for (JComponent c : components) {
+			c.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyPressed(KeyEvent e) {
+					if(e.getKeyCode() == KeyEvent.VK_ENTER) saveButton.doClick();
+				}
+			});
+		}
 	}
 }

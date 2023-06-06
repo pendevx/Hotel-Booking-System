@@ -52,8 +52,8 @@ public class SQL {
 				+ ")",
 
 			"INSERT INTO account VALUES "
-			+ "('admin', 'admin', 'admin', '21153324', 'admin@hotel.com', 'ADMIN'),"
-			+ "('user', 'user', 'user', '21152297', 'group5@comp603.com', 'USER')"
+			+ "('admin', 'admin', 'admin', '+21153324', 'admin@hotel.com', 'ADMIN'),"
+			+ "('user', 'user', 'user', '+21152297', 'group5@comp603.com', 'USER')"
 		};
 	}
 
