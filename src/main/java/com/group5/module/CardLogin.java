@@ -13,15 +13,17 @@ public class CardLogin extends Card implements KeyPressListener {
 	public JButton registerButton = new Button("Register", "#9399b2", 100, 25);
 	public JTextField usernameField = new JTextField(30);
 	public JTextField passwordField = new JPasswordField(30);
-	private final int MARGIN = 70;
 
 	public CardLogin() {
 		super(500, 500, 10, 20);
-		this.add(new Container(WIDTH - 120, 100));
-		this.add(new Container(WIDTH - 120, MARGIN, usernameField, "Username:"));
-		this.add(new Container(WIDTH - 120, MARGIN, passwordField, "Password:"));
-		this.add(new Container(WIDTH - 120, 40, loginButton));
-		this.add(new Container(WIDTH - 120, 40, registerButton));
+		final int MARGIN = 70;
+		final int W = super.WIDTH - 120;
+
+		this.add(new Container(W, 100));
+		this.add(new Container(W, MARGIN, "Username:", usernameField));
+		this.add(new Container(W, MARGIN, "Password:", passwordField));
+		this.add(new Container(W, 40, loginButton));
+		this.add(new Container(W, 40, registerButton));
 		this.addEnterKeyListener(usernameField, passwordField);
 	}
 

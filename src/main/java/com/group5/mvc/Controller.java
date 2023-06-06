@@ -3,9 +3,12 @@ package com.group5.mvc;
 import com.group5.module.CardLogin;
 import com.group5.module.CardRegister;
 import com.group5.app.AppSession;
+import com.group5.component.*;
+import com.group5.component.Text.FontSize;
 import com.group5.module.CardAccount;
 import com.group5.system.HotelSystemAdmin;
 import com.group5.system.HotelSystemUser;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
@@ -41,7 +44,17 @@ public class Controller implements ActionListener {
 		String pwd = getCardLogin().passwordField.getText();
 
 		if(model.loginPortal(usr, pwd)) {
-			if (model.hotelSystem instanceof HotelSystemUser) view.renderUser();
+			String accountType = model.hotelSystem.getAccount().toString();
+			String fullname = model.hotelSystem.getAccount().getFullName();
+			String email = model.hotelSystem.getAccount().email;
+			String phone = model.hotelSystem.getAccount().phone;
+
+			Container acc = new Container(FlowLayout.LEFT,300, 50, new Text(accountType, FontSize.H1));
+			Container nme = new Container(FlowLayout.LEFT, 300, 50, new Text(fullname, FontSize.H1));
+			Container eml = new Container(FlowLayout.LEFT, 300, 50, new Text(email, FontSize.H1));
+			Container phn = new Container(FlowLayout.LEFT, 300, 50, new Text(phone, FontSize.H1));
+
+			if (model.hotelSystem instanceof HotelSystemUser) view.renderUser(acc, nme, eml, phn);
 			else if (model.hotelSystem instanceof HotelSystemAdmin) view.renderAdmin();
 		}
 		else getCardLogin().showWarningPopup("Incorrect username or password!");

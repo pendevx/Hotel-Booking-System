@@ -9,6 +9,7 @@ import com.group5.module.CardRegister;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 public class ViewGUI extends JFrame {
 	public Card cardLogin;
@@ -50,16 +51,16 @@ public class ViewGUI extends JFrame {
 		this.renderPanel();
 	}
 
-	public void renderUser() {
+	public void renderUser(Container...accountInfo) {
 		System.out.println("Rendering User");
 		if (this.base != null) this.base.removeAll();
-		this.cardAccount = new CardAccount();
+		this.cardAccount = new CardAccount(accountInfo);
 		this.cardBookingList = new CardBookingListUser();
 		this.cardBookingCreate = new CardBookingCreateUser();
 		((CardAccount) cardAccount).logoutButton.addActionListener(controller);
 		this.base.addWithGap(cardAccount);
-		this.base.addWithGap(cardBookingList);
 		this.base.addWithGap(cardBookingCreate);
+		this.base.addWithGap(cardBookingList);
 		this.renderPanel();
 	}
 

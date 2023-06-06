@@ -1,0 +1,19 @@
+package com.group5.component;
+
+import java.awt.Font;
+import javax.swing.JLabel;
+
+public class Text extends JLabel {
+	public enum FontSize {
+		H1(20), H2(16), H3(12);
+
+		private final int size;
+		private FontSize(int size) { this.size = size; }
+		public int getSize() { return this.size; }
+	}
+
+	public Text(String text, FontSize size) {
+		super(text);
+		this.setFont(new Font(getFont().getFontName(), Font.BOLD, size.getSize()));
+	}
+}

@@ -9,8 +9,14 @@ import javax.swing.JPanel;
 
 public class Container extends JPanel {
 	public Container(int width, int height) {
-		this.setBackground(Color.RED);
+		this.setBackground(Color.GRAY);
 		setPreferredSize(new Dimension(width, height));
+	}
+
+	public Container(int align, int width, int height, JComponent...components) {
+		this(width, height);
+		this.setLayout(new FlowLayout(align));
+		for (JComponent c : components) this.add(c);
 	}
 
 	public Container(int width, int height, JComponent...components) {
@@ -18,17 +24,13 @@ public class Container extends JPanel {
 		for (JComponent c : components) this.add(c);
 	}
 
-	public Container(int width, int height, JComponent p, String label) {
+	public Container(int width, int height, String label) {
 		this(width, height);
 		this.add(new JLabel(label));
-		this.add(p);
 	}
 
-//	public EntryField(String label, JTextField field ,int width, int height) {
-//		this.setLayout(new FlowLayout(FlowLayout.CENTER));
-//		this.setPreferredSize(new Dimension(width, height));
-//		this.setBackground(Color.WHITE);
-//		this.add(new JLabel(label));
-//		this.add(field);
-//	}
+	public Container(int width, int height, String label, JComponent component) {
+		this(width, height, label);
+		this.add(component);
+	}
 }
