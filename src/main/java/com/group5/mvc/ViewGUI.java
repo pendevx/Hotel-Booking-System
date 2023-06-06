@@ -71,6 +71,20 @@ public class ViewGUI extends JFrame {
 		this.renderPanel();
 	}
 
+	public void renderAdmin(Container...accountInfo) {
+		if (this.base != null) this.base.removeAll();
+		if (accountInfo.length > 0) this.cardAccount = new CardAccount(accountInfo);
+		((CardAccount) cardAccount).editAccountButton.addActionListener(controller);
+		((CardAccount) cardAccount).logoutButton.addActionListener(controller);
+//		this.cardBookingList = new CardBookingListAdmin();
+//		this.cardBookingCreate = new CardBookingCreateAdmin();
+		this.base.addWithGap(cardAccount);
+//		this.base.addWithGap(cardBookingCreate);
+//		this.base.addWithGap(cardBookingList);
+		this.renderPanel();
+	}
+
+
 	public void renderAccountEdit() {
 		if (this.base != null) this.base.removeAll();
 		this.cardAccountEdit = new CardAccountEdit();
@@ -78,10 +92,6 @@ public class ViewGUI extends JFrame {
 		((CardAccountEdit) cardAccountEdit).saveButton.addActionListener(controller);
 		this.base.add(cardAccountEdit);
 		this.renderPanel();
-	}
-
-	public void renderAdmin() {
-		System.out.println("Rendering Admin");
 	}
 
 	private void renderPanel() {

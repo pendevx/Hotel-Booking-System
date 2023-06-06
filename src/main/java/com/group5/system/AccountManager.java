@@ -13,9 +13,8 @@ public class AccountManager {
 	private AccountManager() { }
 
 	public static boolean checkUsernameExists(String username) {
-		// streams in credentials and then checks usernames
 		Stream<String> usernames = getCredentials().stream().map(x -> x.getUsername());
-		Optional<String> findMatches = usernames.filter(x -> x.equals(username)).findAny();
+		Optional<String> findMatches = usernames.filter(x -> x.equalsIgnoreCase(username)).findAny();
 		return findMatches.isPresent();
 	}
 

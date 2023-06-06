@@ -24,7 +24,7 @@ public class CardRegister extends Card implements KeyPressListener {
 		final int W = super.WIDTH - 120;
 
 		this.add(new Container(W, MARGIN, "New Username:", userFieldNew));
-		this.add(new Container(W, MARGIN, "New Username:", passFieldNew));
+		this.add(new Container(W, MARGIN, "New Password:", passFieldNew));
 		this.add(new Container(W, MARGIN, "First name:", firstNameNew));
 		this.add(new Container(W, MARGIN, "Last name:", lastNameNew));
 		this.add(new Container(W, MARGIN, "Email address:", emailNew));
