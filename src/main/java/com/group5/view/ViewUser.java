@@ -25,25 +25,25 @@ public class ViewUser extends View {
 	@Override
 	public void menuMain(Scanner scan) {
 		do {
-			System.out.println("------------------------------------");
-			System.out.println("What would you like to do?");
+//			System.out.println("------------------------------------");
+//			System.out.println("What would you like to do?");
 			System.out.println("1. View hotel details");
-			System.out.println("2. View user details");
+//			System.out.println("2. View user details");
 			System.out.println("3. View my bookings.");
 			System.out.println("4. Create new booking.");
-			System.out.println("5. Update email.");
-			System.out.println("6. Update phone.");
-			System.out.println("0. to QUIT");
-			System.out.println("------------------------------------");
+			// System.out.println("5. Update email.");
+			// System.out.println("6. Update phone.");
+//			System.out.println("0. to QUIT");
+//			System.out.println("------------------------------------");
 
-			int input = ParseInput.integer(0, 6, scan); // parse valid, between 0 - 4
-			if(input == 1) printHotelDetails();
-			else if(input == 2) printAccountDetails();
-			else if(input == 3) viewBookings();
-			else if(input == 4) createBooking(scan);
-			else if(input == 5) updateEmail(scan);
-			else if(input == 6) updatePhone(scan);
-			else if (input == 0) System.exit(0);
+//			int input = ParseInput.integer(0, 6, scan); // parse valid, between 0 - 4
+//			if(input == 1) printHotelDetails();
+//			else if(input == 2) printAccountDetails();
+//			else if(input == 3) viewBookings();
+//			else if(input == 4) createBooking(scan);
+//			else if(input == 5) updateEmail(scan);
+//			else if(input == 6) updatePhone(scan);
+//			else if (input == 0) System.exit(0);
 		}
 		while(true);
 	}

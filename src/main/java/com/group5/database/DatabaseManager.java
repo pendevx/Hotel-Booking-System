@@ -48,7 +48,10 @@ public final class DatabaseManager {
 	 */
 	public void closeConnection() {
 		if (connection != null) {
-			try { connection.close(); }
+			try {
+				connection.close();
+				System.out.println("Disconnected: " + dbName);
+			}
 			catch (SQLException ex) { System.out.println(ex.getMessage()); }
 		}
 	}

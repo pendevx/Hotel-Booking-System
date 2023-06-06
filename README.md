@@ -30,7 +30,7 @@
 
 #### Requirements Report
 - [ ] Less than one-page.
-- [ ] State project setup.
+- [x] State project setup.
 - [ ] GitHub URL (if exists).
 - [ ] Contribution of each teammate.
 

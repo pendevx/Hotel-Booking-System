@@ -26,23 +26,23 @@ public class ViewAdmin extends View {
 	@Override
 	public void menuMain(Scanner scan) {
 		do {
-			System.out.println("------------------------------------");
-			System.out.println("What would you like to do?");
+//			System.out.println("------------------------------------");
+//			System.out.println("What would you like to do?");
 			System.out.println("1. View hotel details");
-			System.out.println("2. View admin details");
+//			System.out.println("2. View admin details");
 			System.out.println("3. View all users.");
 			System.out.println("4. View all bookings.");
 			System.out.println("5. Delete booking.");
-			System.out.println("0. to QUIT");
-			System.out.println("------------------------------------");
+//			System.out.println("0. to QUIT");
+//			System.out.println("------------------------------------");
 
-			int input = ParseInput.integer(0, 5, scan); // parse valid, between 0 - 5
-			if(input == 1) printHotelDetails();
-			else if(input == 2) printAccountDetails();
-			else if (input == 3) viewAllUsers();
-			else if (input == 4) viewAllBookings();
-			else if (input == 5) deleteBooking(scan);
-			else if (input == 0) System.exit(0);
+//			int input = ParseInput.integer(0, 5, scan); // parse valid, between 0 - 5
+//			if(input == 1) printHotelDetails();
+//			else if(input == 2) printAccountDetails();
+//			else if (input == 3) viewAllUsers();
+//			else if (input == 4) viewAllBookings();
+//			else if (input == 5) deleteBooking(scan);
+//			else if (input == 0) System.exit(0);
 		}
 		while(true);
 	}

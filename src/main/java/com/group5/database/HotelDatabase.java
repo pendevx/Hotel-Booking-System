@@ -119,10 +119,12 @@ public class HotelDatabase {
 		return new ArrayList<>();
 	}
 
+	// Added to LOWERCASE username UNTESTED
 	public static void insertCredentialTable(Credential credential) {
 			new Thread(() -> {
 			try {
-				String username = credential.getUsername();
+				String username = credential.getUsername().toLowerCase();
+				System.out.println(username);
 				String password = credential.getPassword();
 				dbManager.update(SQL.insertCredentialTable(username, password));
 			}
@@ -130,14 +132,15 @@ public class HotelDatabase {
 		}).start();
 	}
 
+	// Added to LOWERCASE username UNTESTED
 	public static void insertAccountTable(Account account) {
 			new Thread(() -> {
 			try {
-				String username = account.getUsername();
+				String username = account.getUsername().toLowerCase();
 				String firstname = account.getFirstName();
 				String lastname = account.getLastName();
 				String phone = account.getPhone();
-				String email = account.getEmail();
+				String email = account.getEmail().toLowerCase();
 				String permission = account.getAccountTypeName();
 				dbManager.update(SQL.insertAccountTable(username, firstname, lastname, phone, email, permission));
 			}
@@ -157,7 +160,7 @@ public class HotelDatabase {
 	
 	public static void updateAccountEmail(Account account) {
 		String username = account.getUsername();
-		String newEmail = account.getEmail();
+		String newEmail = account.getEmail().toLowerCase();
 		dbManager.update(SQL.updateAccountEmail(username, newEmail));
 	}
 
@@ -180,5 +183,7 @@ public class HotelDatabase {
 	}
 
 	// use on logout, close
-	private void closeConnection() { this.dbManager.closeConnection(); }
+	public void closeConnection() {
+		this.dbManager.closeConnection();
+	}
 }

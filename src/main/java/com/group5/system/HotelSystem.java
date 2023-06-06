@@ -103,7 +103,7 @@ public abstract class HotelSystem {
 	// Getter methods for bookings, user details, login confirmation, hotel details, and account.
 	public List<Booking> getAllBookings() { return bookings; }
 	public String getUserDetails() { return account.toString() + "\n" + account.getAccountDetails() + "\n"; }
-	public String getConfirmLogin() { return "\nLogged in as" + " " + account.toString() + "\n"; }
+	public String getConfirmLogin() { return "\nLogged in as " + account.toString() + "\n"; }
 	public String getHotelDetails() { return this.hotel.toString(); }
 	public Account getAccount() { return account; }
 	public boolean bookingIsEmpty() { return bookings.isEmpty(); }
