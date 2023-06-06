@@ -1,11 +1,11 @@
 package com.group5.system;
 
+import com.group5.hotel.Account;
 import com.group5.hotel.Room;
 import com.group5.hotel.Booking;
 import java.util.Date;
 import java.util.List;
 
-import com.group5.account.*;
 import java.util.Set;
 
 public class HotelSystemAdmin extends HotelSystem {
@@ -14,7 +14,7 @@ public class HotelSystemAdmin extends HotelSystem {
 	 * @param account The account to create the system with
 	 * @param bookings The bookings which the system contains
 	 */
-	public HotelSystemAdmin(Account account, List<Booking> bookings) {
+	HotelSystemAdmin(Account account, List<Booking> bookings) {
 		super(account, bookings);
 	}
 
@@ -29,8 +29,8 @@ public class HotelSystemAdmin extends HotelSystem {
 	 * @param usernameToFind The username to match the account to
 	 * @return Returns the first match of users which username matches usernameToFind.
 	 */
-	public Account getUserAccountByUsername(String usernameToFind) {
-		List<Account> foundUser = HotelBookingData.getAccountByUser(usernameToFind);
+	public Account getAccountByUsername(String usernameToFind) {
+		List<Account> foundUser = HotelBookingData.getAccountsByUsername(usernameToFind);
 		if (!foundUser.isEmpty()) return foundUser.get(0);
 		else return null;
 	}
@@ -44,24 +44,11 @@ public class HotelSystemAdmin extends HotelSystem {
 	}
 
 	/**
-	 * Prints all the bookings in the system
-	 */
-	public void printAllBookings() {
-		List<Booking> bookings = getAllBookings();
-		if (bookings.size() == 0) {
-			System.out.println("No bookings to view.");
-			return;
-		}
-		for (Booking b : bookings) System.out.println(b.toString() + "\n");
-	}
-
-	/**
 	 * Deletes a booking from the system where the specified ID matches bookingId
 	 * @param bookingId The ID of the booking to delete
 	 */
-	public void deleteBookingByID(String bookingId) {
+	public Booking deleteBookingByID(String bookingId) {
 		Booking deleted = super.deleteBooking(bookingId);
-		System.out.println("Deleted:");
-		System.out.println(deleted.toString());
+		return deleted;
 	}
 }

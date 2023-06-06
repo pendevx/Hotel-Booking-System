@@ -5,8 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import com.group5.account.Account;
-
 public class Booking {
     public final String bookingID; // unix timestamp of booking created
     /**

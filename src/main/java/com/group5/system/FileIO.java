@@ -3,16 +3,19 @@ package com.group5.system;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import com.group5.account.Account;
-import com.group5.account.AccountCredentials;
+import com.group5.hotel.Account;
+import com.group5.hotel.Credential;
 import com.group5.hotel.Booking;
 import com.group5.hotel.Hotel;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.time.LocalDateTime;
@@ -48,15 +51,17 @@ public class FileIO {
 	 * @param path - path to json file
 	 * @return E - generic type
 	 */
-//	public static <E> E readJsonFile(String path) {
-//		try {
-//            BufferedReader bufferedReader = new BufferedReader(new FileReader(Paths.get(path).toFile()));
-//			E object = gson.fromJson(bufferedReader, new TypeToken<E>.getType());
-//			bufferedReader.close();
-//			return object;
-//		}	
-// 		catch (IOException e) { throw new RuntimeException(e); }
-//	}
+	private static <E> E readJsonFile(String path, Type type) {
+		try {
+			Path filePath = Paths.get(path);
+			if (!Files.exists(filePath)) throw new FileNotFoundException("Missing");
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(Paths.get(path).toFile()));
+			E object = gson.fromJson(bufferedReader, type); // type erasure if use new TypeToken here
+			bufferedReader.close();
+			return object;
+		}	
+ 		catch (IOException e) { throw new RuntimeException(e); }
+	}
 
 
 	/***
@@ -65,17 +70,9 @@ public class FileIO {
 	 * 
 	 * @return list collection of account credentials
 	 */
-	public static Set<AccountCredentials> loadCredentialsJson() {
-		Set<AccountCredentials> credentials = null;
-		try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(Paths.get(credentialsPath).toFile()));
-    		credentials = gson.fromJson(bufferedReader, new TypeToken<Set<AccountCredentials>>(){}.getType());
-            bufferedReader.close();
-		}
- 		catch (IOException e) { throw new RuntimeException(e); }
-		return credentials;
+	public static Set<Credential> loadCredentialsJson() {
+		return readJsonFile(credentialsPath, new TypeToken<Set<Credential>>(){}.getType());
 	}
-
 
 	/***
 	 * Reads from the json file storing accounts 
@@ -84,14 +81,7 @@ public class FileIO {
 	 * @return list collection of account 
 	 */
 	public static List<Account> loadAccountsJson() {
-		List<Account> accounts = null;
-		try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(Paths.get(accountsPath).toFile()));
-    		accounts = gson.fromJson(bufferedReader, new TypeToken<List<Account>>(){}.getType());
-            bufferedReader.close();
-		}
- 		catch (IOException e) { throw new RuntimeException(e); }
-		return accounts;
+		return readJsonFile(accountsPath, new TypeToken<List<Account>>(){}.getType());
 	}
 
 	/***
@@ -101,14 +91,7 @@ public class FileIO {
 	 * @return list collection of bookings 
 	 */
 	public static List<Booking> loadBookingJson() {
-		List<Booking> bookings = null;
-		try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(Paths.get(bookingsPath).toFile()));
-    		bookings = gson.fromJson(bufferedReader, new TypeToken<List<Booking>>(){}.getType());
-            bufferedReader.close();
-		}
- 		catch (IOException e) { throw new RuntimeException(e); }
-		return bookings;
+		return readJsonFile(bookingsPath, new TypeToken<List<Booking>>(){}.getType());
 	}
 
 	/***
@@ -118,14 +101,7 @@ public class FileIO {
 	 * @return list collection of bookings 
 	 */
 	public static Set<String> loadUsernameJson() {
-		Set<String> usernames = null;
-		try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(Paths.get(usernamesPath).toFile()));
-    		usernames = gson.fromJson(bufferedReader, new TypeToken<Set<String>>(){}.getType());
-            bufferedReader.close();
-		}
- 		catch (IOException e) { throw new RuntimeException(e); }
-		return usernames;
+		return readJsonFile(usernamesPath, new TypeToken<Set<String>>(){}.getType());
 	}
 
 	/***
@@ -135,14 +111,7 @@ public class FileIO {
 	 * @return list collection of hotels 
 	 */
 	public static List<Hotel> loadHotelJson() {
-		List<Hotel> hotels = null;
-		try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(Paths.get(hotelPath).toFile()));
-    		hotels = gson.fromJson(bufferedReader, new TypeToken<List<Hotel>>(){}.getType());
-            bufferedReader.close();
-		}
- 		catch (IOException e) { throw new RuntimeException(e); }
-		return hotels;
+		return readJsonFile(hotelPath, new TypeToken<List<Hotel>>(){}.getType());
 	}
 
 	/***
@@ -150,7 +119,7 @@ public class FileIO {
 	 * 
 	 * @param credentials - list collection of credentials
 	 */
-	public static void saveCredentials(Set<AccountCredentials> credentials) {
+	public static void saveCredentials(Set<Credential> credentials) {
         if (createLog) backupFile(credentialsPath, "credentials.json");
 
 		new Thread(() -> {

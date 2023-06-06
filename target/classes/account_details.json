@@ -14,13 +14,5 @@
     "phone": "1234567890",
     "email": "group5@comp603.com",
     "permissions": "USER"
-  },
-  {
-    "username": "gh",
-    "firstName": "x",
-    "lastName": "x",
-    "phone": "x",
-    "email": "x",
-    "permissions": "USER"
   }
 ]

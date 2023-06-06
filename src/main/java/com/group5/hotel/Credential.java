@@ -1,6 +1,6 @@
-package com.group5.account;
+package com.group5.hotel;
 
-public class AccountCredentials implements Comparable<AccountCredentials> {
+public class Credential implements Comparable<Credential> {
     private final String username;
     private final String password;
 
@@ -11,7 +11,7 @@ public class AccountCredentials implements Comparable<AccountCredentials> {
      * @param username - unique username of user
      * @param password - used to secure account
      */
-    public AccountCredentials(String username, String password) {
+    public Credential(String username, String password) {
         this.username = username;
         this.password = password;
     }
@@ -29,7 +29,7 @@ public class AccountCredentials implements Comparable<AccountCredentials> {
      * @return compareTo values of string username && password
      */
     @Override
-    public int compareTo(AccountCredentials o) {
+    public int compareTo(Credential o) {
         return username.equals(o.username) && password.equals(o.password) ? 0 : -1;
     }
 
@@ -38,7 +38,7 @@ public class AccountCredentials implements Comparable<AccountCredentials> {
      * @param o - credentials to check for string equality
      * @return boolean of string equality of password && username
      */
-    public boolean equals(AccountCredentials o) {
+    public boolean equals(Credential o) {
         return username.equals(o.username) && password.equals(o.password);
     }
 }

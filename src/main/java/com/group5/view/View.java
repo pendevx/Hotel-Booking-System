@@ -51,7 +51,7 @@ public abstract class View {
      * @return valid date
      */
 	public Date getStartDate(Scanner scan) {
-		Date begin = null;
+		Date begin;
 		while(true) {
 			System.out.println("Date to start your booking? (dd/mm/yyyy), x to cancel");
 			begin = ParseInput.date(scan); // parses in a valid date, based on predefined format
@@ -83,7 +83,7 @@ public abstract class View {
      * @return valid date
      */
 	public Date getEndDate(Scanner scan, Date date) {
-		Date end = null;
+		Date end;
 		while(true) {
 			System.out.println("Date to end your booking? (dd/mm/yyyy), x to cancel");
 			end = ParseInput.date(scan);

@@ -1,16 +1,15 @@
 package com.group5.system;
 
+import com.group5.hotel.Account;
 import com.group5.hotel.Room;
 import com.group5.hotel.Booking;
 import java.util.Date;
 import java.util.List;
 
-import com.group5.account.*;
-
 public class HotelSystemUser extends HotelSystem {
 	// renamed from UserSystem
 
-	public HotelSystemUser(Account account, List<Booking> bookings) {
+	HotelSystemUser(Account account, List<Booking> bookings) {
 		super(account, bookings);
 	}
 
@@ -27,6 +26,7 @@ public class HotelSystemUser extends HotelSystem {
 		if (!account.equals(this.account)) {
 			return null;
 		}
+
 		Booking booking = super.makeBooking(begin, end, rooms, account, this.account);
 		bookings.add(booking);
 		return booking;
@@ -35,7 +35,7 @@ public class HotelSystemUser extends HotelSystem {
 	/**
 	 * Refreshes the bookings list in the system
 	 */
-	public void updateBookingsForAccount() {
+	private void updateBookingsForAccount() {
 		bookings = HotelBookingData.getBookingsForAccount(account);
 	}
 
@@ -44,9 +44,13 @@ public class HotelSystemUser extends HotelSystem {
 	 */
 	public void printUserBookings() {
 		updateBookingsForAccount();
-		if(!bookings.isEmpty()) {
-			for(Booking b : bookings) System.out.println(b.toString() + "\n");
+
+		if (bookings.isEmpty()) {
+			System.out.println("No bookings to view.");
+			return;
 		}
-		else System.out.println("No bookings to view.");
+
+		for (Booking b : bookings)
+			System.out.println(b.toString() + "\n");
 	}
 }

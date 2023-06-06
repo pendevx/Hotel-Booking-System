@@ -1,7 +1,10 @@
 package com.group5.view;
 
+import com.group5.hotel.Booking;
 import com.group5.system.HotelSystemAdmin;
 import com.group5.util.ParseInput;
+
+import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -57,24 +60,42 @@ public class ViewAdmin extends View {
      * Print list of all bookings made by all users
      */
 	private void viewAllBookings() {
-		((HotelSystemAdmin) hotelSystem).printAllBookings();
+		List<Booking> bookings = hotelSystem.getAllBookings();
+
+		if (bookings.size() == 0) {
+			System.out.println("No bookings to view.");
+			return;
+		}
+
+		for (Booking b : bookings)
+			System.out.println(b.toString() + "\n");
 	}
 
     /**
      * Deletes booking based entered bookingID
      * 
-     * @param scan - input string of ID of booking to delete
+     * @param scan - scanner to receive user input
      */
     private void deleteBooking(Scanner scan) {
-		if (!hotelSystem.bookingIsEmpty()) {
-			viewAllBookings(); // list of all bookings
-			System.out.println("Enter id of booking to delete, x to cancel:");
-			String bookingId = ParseInput.string(scan); // parses string input, trim()
-			if (bookingId.equals("x")) return;
-
-			try { ((HotelSystemAdmin) hotelSystem).deleteBookingByID(bookingId); } // try to delete
-			catch (RuntimeException e) { System.out.println("Invalid booking ID"); } // catches exception if id doesn't match
+		if (hotelSystem.bookingIsEmpty()) {
+			System.out.println("No bookings to delete.");
+			return;
 		}
-		else System.out.println("No bookings to delete.");
+
+		viewAllBookings(); // list of all bookings
+		System.out.println("Enter id of booking to delete, x to cancel:");
+		String bookingId = ParseInput.string(scan); // parses string input, trim()
+		if (bookingId.equals("x")) return;
+
+		try {
+			// try to delete
+			Booking deleted = ((HotelSystemAdmin) hotelSystem).deleteBookingByID(bookingId);
+			System.out.println("Deleted:");
+			System.out.println(deleted.toString());
+		} catch (RuntimeException e) {
+			// catches exception if id doesn't match
+			System.out.println("Invalid booking ID");
+		}
+
 	}
 }
