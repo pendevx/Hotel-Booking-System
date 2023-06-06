@@ -20,7 +20,7 @@ public class AppMain {
 		ViewGUI view = new ViewGUI();
 		Controller controller = new Controller(view);
 		view.addController(controller);
-//		view.renderLogin();
-		view.renderUser();
+		view.renderLogin();
+//		view.renderUser();
 	}
 }

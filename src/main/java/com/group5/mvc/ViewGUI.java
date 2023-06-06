@@ -2,6 +2,7 @@ package com.group5.mvc;
 
 import com.group5.component.*;
 import com.group5.module.CardAccount;
+import com.group5.module.CardAccountEdit;
 import com.group5.module.CardBookingCreateUser;
 import com.group5.module.CardBookingListUser;
 import com.group5.module.CardLogin;
@@ -13,10 +14,15 @@ import javax.swing.JLabel;
 
 public class ViewGUI extends JFrame {
 	public Card cardLogin;
+
 	public Card cardRegister;
+
 	public Card cardAccount;
+	public Card cardAccountEdit;
+
 	public Card cardBookingList;
 	public Card cardBookingCreate;
+
 	private Base base = new Base();
 	private Controller controller;
 
@@ -52,15 +58,25 @@ public class ViewGUI extends JFrame {
 	}
 
 	public void renderUser(Container...accountInfo) {
-		System.out.println("Rendering User");
 		if (this.base != null) this.base.removeAll();
-		this.cardAccount = new CardAccount(accountInfo);
-		this.cardBookingList = new CardBookingListUser();
-		this.cardBookingCreate = new CardBookingCreateUser();
+		if (accountInfo.length > 0) this.cardAccount = new CardAccount(accountInfo);
+		((CardAccount) cardAccount).editAccountButton.addActionListener(controller);
 		((CardAccount) cardAccount).logoutButton.addActionListener(controller);
+
+//		this.cardBookingList = new CardBookingListUser();
+//		this.cardBookingCreate = new CardBookingCreateUser();
 		this.base.addWithGap(cardAccount);
-		this.base.addWithGap(cardBookingCreate);
-		this.base.addWithGap(cardBookingList);
+//		this.base.addWithGap(cardBookingCreate);
+//		this.base.addWithGap(cardBookingList);
+		this.renderPanel();
+	}
+
+	public void renderAccountEdit() {
+		if (this.base != null) this.base.removeAll();
+		this.cardAccountEdit = new CardAccountEdit();
+		((CardAccountEdit) cardAccountEdit).cancelButton.addActionListener(controller);
+		((CardAccountEdit) cardAccountEdit).saveButton.addActionListener(controller);
+		this.base.add(cardAccountEdit);
 		this.renderPanel();
 	}
 
