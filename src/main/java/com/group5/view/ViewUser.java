@@ -36,14 +36,14 @@ public class ViewUser extends View {
 //			System.out.println("0. to QUIT");
 //			System.out.println("------------------------------------");
 
-			int input = ParseInput.integer(0, 6, scan); // parse valid, between 0 - 4
-			if(input == 1) printHotelDetails();
-			else if(input == 2) printAccountDetails();
-			else if(input == 3) viewBookings();
-			else if(input == 4) createBooking(scan);
-			else if(input == 5) updateEmail(scan);
-			else if(input == 6) updatePhone(scan);
-			else if (input == 0) System.exit(0);
+//			int input = ParseInput.integer(0, 6, scan); // parse valid, between 0 - 4
+//			if(input == 1) printHotelDetails();
+//			else if(input == 2) printAccountDetails();
+//			else if(input == 3) viewBookings();
+//			else if(input == 4) createBooking(scan);
+//			else if(input == 5) updateEmail(scan);
+//			else if(input == 6) updatePhone(scan);
+//			else if (input == 0) System.exit(0);
 		}
 		while(true);
 	}

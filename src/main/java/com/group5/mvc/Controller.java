@@ -1,21 +1,16 @@
 package com.group5.mvc;
 
-import com.group5.card.CardLogin;
-import com.group5.card.CardRegister;
 import com.group5.app.AppSession;
+import com.group5.card.*;
 import com.group5.component.*;
 import com.group5.component.Text.FontSize;
-import com.group5.database.HotelDatabase;
 import com.group5.hotel.Account;
-import com.group5.card.CardAccount;
-import com.group5.card.CardAccountEdit;
-import com.group5.system.AccountManager;
 import com.group5.system.HotelSystemAdmin;
 import com.group5.system.HotelSystemUser;
+import javax.swing.JOptionPane;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JOptionPane;
 
 public class Controller implements ActionListener {
 	public ViewGUI view;
@@ -35,7 +30,7 @@ public class Controller implements ActionListener {
 
 		if (getCardRegister()!= null) {
 			if (e.getSource() == getCardRegister().cancelButton) view.renderLogin();
-			else if (e.getSource() == getCardRegister().submitButton) registerHandler();
+			else if (e.getSource() == getCardRegister().submitButton) registrationHandler();
 		}
 
 		if (getCardAccount()!= null) {
@@ -49,6 +44,10 @@ public class Controller implements ActionListener {
 		}
 	}
 
+
+
+
+
 	private void loginHandler() {
 		String usr = getCardLogin().usernameField.getText().toLowerCase();
 		String pwd = getCardLogin().passwordField.getText();
@@ -56,6 +55,47 @@ public class Controller implements ActionListener {
 		if(model.loginPortal(usr, pwd)) this.renderView();
 		else getCardLogin().showWarningPopup("Incorrect username or password!");
 	}
+
+	private void registrationHandler() {
+		String usr = getCardRegister().userFieldNew.getText().toLowerCase();
+		String pwd = getCardRegister().passFieldNew.getText();
+		String fname = getCardRegister().firstNameNew.getText();
+		String lname = getCardRegister().lastNameNew.getText();
+		String email = getCardRegister().emailNew.getText().toLowerCase();
+		String phone = getCardRegister().phoneNew.getText();
+
+		if (!hasEmptyField(getCardRegister(), usr, pwd, fname, lname, email, phone)) {
+			if (!model.checkUserNameExists(usr)) {
+				model.registerPortal(usr, pwd, fname, lname, email, phone);
+				if(model.loginPortal(usr, pwd)) this.renderView();
+				else getCardLogin().showWarningPopup("Incorrect username or password!");
+			}
+			else getCardRegister().showWarningPopup("Username is taken.");
+		}
+	}
+
+	private void editAccountHandler() {
+		String newEmail = getCardAccountEdit().emailNew.getText();
+		String newPhone = getCardAccountEdit().phoneNew.getText();
+		if (!hasEmptyField(getCardAccountEdit(), newEmail, newPhone)) {
+			model.hotelSystem.updateEmail(newEmail);
+			model.hotelSystem.updatePhone(newPhone);
+			renderView();
+		}
+	}
+
+	private void logoutHandler() {
+		int result = JOptionPane.showConfirmDialog(view, "Logout?", "Confirm", JOptionPane.YES_NO_OPTION);
+		if (result == JOptionPane.YES_OPTION) {
+			this.model.logout();
+			this.model = new AppSession();
+			view.renderLogin();
+		}
+	}
+
+
+
+
 
 	private Container[] getAccountInfo() {
 		if (model.hotelSystem != null) {
@@ -73,15 +113,6 @@ public class Controller implements ActionListener {
 		return null;
 	}
 
-	private void logoutHandler() {
-		int result = JOptionPane.showConfirmDialog(view, "Logout?", "Confirm", JOptionPane.YES_NO_OPTION);
-		if (result == JOptionPane.YES_OPTION) {
-			this.model.logout();
-			this.model = new AppSession();
-			view.renderLogin();
-		}
-	}
-
 	private void renderView() {
 		if (model.hotelSystem instanceof HotelSystemUser) view.renderUser(getAccountInfo());
 		else if (model.hotelSystem instanceof HotelSystemAdmin) view.renderAdmin(getAccountInfo());
@@ -91,34 +122,6 @@ public class Controller implements ActionListener {
 		view.renderAccountEdit();
 		getCardAccountEdit().setTextEmail(getAccount().email);
 		getCardAccountEdit().setTextPhone(getAccount().phone);
-	}
-
-	private void editAccountHandler() {
-		String newEmail = getCardAccountEdit().emailNew.getText();
-		String newPhone = getCardAccountEdit().phoneNew.getText();
-		if (!hasEmptyField(getCardAccountEdit(), newEmail, newPhone)) {
-			model.hotelSystem.updateEmail(newEmail);
-			model.hotelSystem.updatePhone(newPhone);
-			renderView();
-		}
-	}
-
-	private void registerHandler() {
-		String usr = getCardRegister().userFieldNew.getText().toLowerCase();
-		String pwd = getCardRegister().passFieldNew.getText();
-		String fname = getCardRegister().firstNameNew.getText();
-		String lname = getCardRegister().lastNameNew.getText();
-		String email = getCardRegister().emailNew.getText().toLowerCase();
-		String phone = getCardRegister().phoneNew.getText();
-
-		if (!hasEmptyField(getCardRegister(), usr, pwd, fname, lname, email, phone)) {
-			if (!model.checkUserNameExists(usr)) {
-				model.registerPortal(usr, pwd, fname, lname, email, phone);
-				if(model.loginPortal(usr, pwd)) this.renderView();
-				else getCardLogin().showWarningPopup("Incorrect username or password!");
-			}
-			else getCardRegister().showWarningPopup("Username is taken.");
-		}
 	}
 
 	private boolean hasEmptyField(Card card, String...fields) {

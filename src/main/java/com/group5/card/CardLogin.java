@@ -22,8 +22,7 @@ public class CardLogin extends Card implements KeyPressListener {
 		this.add(new Container(W, 100));
 		this.add(new Container(W, MARGIN, "Username:", usernameField));
 		this.add(new Container(W, MARGIN, "Password:", passwordField));
-		this.add(new Container(W, 40, loginButton));
-		this.add(new Container(W, 40, registerButton));
+		this.add(new Container(W, 40, loginButton, registerButton));
 		this.addEnterKeyListener(usernameField, passwordField);
 	}
 

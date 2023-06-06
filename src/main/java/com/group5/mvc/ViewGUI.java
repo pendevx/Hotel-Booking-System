@@ -12,6 +12,9 @@ import java.awt.Insets;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+
 public class ViewGUI extends JFrame {
 	public Card cardLogin;
 
@@ -46,6 +49,25 @@ public class ViewGUI extends JFrame {
 		((CardLogin) cardLogin).registerButton.addActionListener(controller);
 		this.base.add(cardLogin);
 		this.renderPanel();
+
+		//////////////////////////////////////////////////
+		// TEST ONLY
+		//////////////////////////////////////////////////
+		((CardLogin) cardLogin).usernameField.setText("user");
+		((CardLogin) cardLogin).passwordField.setText("user");
+
+		((CardLogin) cardLogin).addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode() == KeyEvent.VK_ENTER) ((CardLogin) cardLogin).loginButton.doClick();
+			}
+		});
+		((CardLogin) cardLogin).setFocusable(true);
+		((CardLogin) cardLogin).requestFocusInWindow();
+		//////////////////////////////////////////////////
+		// TEST ONLY
+		//////////////////////////////////////////////////
+		
 	}
 
 	public void renderRegistration() {
@@ -63,12 +85,36 @@ public class ViewGUI extends JFrame {
 		((CardAccount) cardAccount).editAccountButton.addActionListener(controller);
 		((CardAccount) cardAccount).logoutButton.addActionListener(controller);
 
-//		this.cardBookingList = new CardBookingListUser();
-//		this.cardBookingCreate = new CardBookingCreateUser();
+		this.cardBookingCreate = new CardBookingCreateUser();
+		
+		// button that makes a sql query with booking ID;
+		// booking is in Booking Continer, make new coniner per booking
+		// need make scrollable
+
+		// opens up to boooking view that only shows info
+
+
+		this.cardBookingList = new CardBookingListUser();
 		this.base.addWithGap(cardAccount);
-//		this.base.addWithGap(cardBookingCreate);
-//		this.base.addWithGap(cardBookingList);
+		this.base.addWithGap(cardBookingCreate);
+		this.base.addWithGap(cardBookingList);
 		this.renderPanel();
+
+
+		//////////////////////////////////////////////////
+		// TEST ONLY
+		//////////////////////////////////////////////////
+		((CardAccount) cardAccount).addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode() == KeyEvent.VK_ENTER) ((CardAccount) cardAccount).logoutButton.doClick();
+			}
+		});
+		((CardAccount) cardAccount).setFocusable(true);
+		((CardAccount) cardAccount).requestFocusInWindow();
+		//////////////////////////////////////////////////
+		// TEST ONLY
+		//////////////////////////////////////////////////
 	}
 
 	public void renderAdmin(Container...accountInfo) {

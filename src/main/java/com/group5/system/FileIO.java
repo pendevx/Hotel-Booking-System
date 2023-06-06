@@ -63,26 +63,13 @@ public class FileIO {
  		catch (IOException e) { throw new RuntimeException(e); }
 	}
 
-
-	/***
-	 * Reads from the json file storing credentials.
-	 * Implement with BufferedReader, more appropriate for reading in text data.
-	 * 
-	 * @return list collection of account credentials
-	 */
-	public static Set<Credential> loadCredentialsJson() {
-		return readJsonFile(credentialsPath, new TypeToken<Set<Credential>>(){}.getType());
-	}
-
-	/***
-	 * Reads from the json file storing accounts 
-	 * Implement with BufferedReader, more appropriate for reading in text data.
-	 * 
-	 * @return list collection of account 
-	 */
-	public static List<Account> loadAccountsJson() {
-		return readJsonFile(accountsPath, new TypeToken<List<Account>>(){}.getType());
-	}
+//	public static Set<Credential> loadCredentialsJson() {
+//		return readJsonFile(credentialsPath, new TypeToken<Set<Credential>>(){}.getType());
+//	}
+//
+//	public static List<Account> loadAccountsJson() {
+//		return readJsonFile(accountsPath, new TypeToken<List<Account>>(){}.getType());
+//	}
 
 	/***
 	 * Reads from the json file storing bookings 
@@ -94,62 +81,40 @@ public class FileIO {
 		return readJsonFile(bookingsPath, new TypeToken<List<Booking>>(){}.getType());
 	}
 
-	/***
-	 * Reads from the json file storing bookings 
-	 * Implement with BufferedReader, more appropriate for reading in text data.
-	 * 
-	 * @return list collection of bookings 
-	 */
-	public static Set<String> loadUsernameJson() {
-		return readJsonFile(usernamesPath, new TypeToken<Set<String>>(){}.getType());
-	}
+//	public static Set<String> loadUsernameJson() {
+//		return readJsonFile(usernamesPath, new TypeToken<Set<String>>(){}.getType());
+//	}
+//
+//	public static List<Hotel> loadHotelJson() {
+//		return readJsonFile(hotelPath, new TypeToken<List<Hotel>>(){}.getType());
+//	}
 
-	/***
-	 * Reads from the json file storing hotels
-	 * Implement with BufferedReader, more appropriate for reading in text data.
-	 * 
-	 * @return list collection of hotels 
-	 */
-	public static List<Hotel> loadHotelJson() {
-		return readJsonFile(hotelPath, new TypeToken<List<Hotel>>(){}.getType());
-	}
+//	public static void saveCredentials(Set<Credential> credentials) {
+//        if (createLog) backupFile(credentialsPath, "credentials.json");
+//
+//		new Thread(() -> {
+//			try {
+//
+//				BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(Paths.get(credentialsPath).toFile()));
+//				gson.toJson(credentials, bufferedWriter);
+//				bufferedWriter.close();
+//			}
+//			catch (IOException e) { throw new RuntimeException(e); }
+//		}).start();
+//	}
 
-	/***
-	 * Write to json file storing credentials
-	 * 
-	 * @param credentials - list collection of credentials
-	 */
-	public static void saveCredentials(Set<Credential> credentials) {
-        if (createLog) backupFile(credentialsPath, "credentials.json");
-
-		new Thread(() -> {
-			try {
-
-				BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(Paths.get(credentialsPath).toFile()));
-				gson.toJson(credentials, bufferedWriter);
-				bufferedWriter.close();
-			}
-			catch (IOException e) { throw new RuntimeException(e); }
-		}).start();
-	}
-
-	/***
-	 * Write to json file storing accounts
-	 * 
-	 * @param accounts - list collection of accounts
-	 */
-	public static void saveAccounts(List<Account> accounts) {
-        if (createLog) backupFile(accountsPath, "account_details.json");
-
-		new Thread(() -> {
-			try {
-				BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(Paths.get(accountsPath).toFile()));
-				gson.toJson(accounts, bufferedWriter);
-				bufferedWriter.close();
-			}
-			catch (IOException e) { throw new RuntimeException(e); }
-		}).start();
-	}
+//	public static void saveAccounts(List<Account> accounts) {
+//        if (createLog) backupFile(accountsPath, "account_details.json");
+//
+//		new Thread(() -> {
+//			try {
+//				BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(Paths.get(accountsPath).toFile()));
+//				gson.toJson(accounts, bufferedWriter);
+//				bufferedWriter.close();
+//			}
+//			catch (IOException e) { throw new RuntimeException(e); }
+//		}).start();
+//	}
 
 	/***
 	 * 
@@ -158,7 +123,7 @@ public class FileIO {
 	 * @param bookings - list collection of bookings
 	 */
 	public static void saveBookings(List<Booking> bookings) {
-        if (createLog) backupFile(bookingsPath, "bookings.json");
+//        if (createLog) backupFile(bookingsPath, "bookings.json");
 
 		new Thread(() -> {
 			try {
@@ -170,38 +135,27 @@ public class FileIO {
 		}).start();
 	}
 
-	/***
-	 * Write to json file storing usernames
-	 * 
-	 * @param usernames - set collection of usernames
-	 */
-	public static void saveUsernames(Set<String> usernames) {
-        if (createLog) backupFile(usernamesPath, "usernames.json");
+//	public static void saveUsernames(Set<String> usernames) {
+//        if (createLog) backupFile(usernamesPath, "usernames.json");
+//
+//		new Thread(() -> {
+//			try {
+//				BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(Paths.get(usernamesPath).toFile()));
+//				gson.toJson(usernames, bufferedWriter);
+//				bufferedWriter.close();
+//			}
+//			catch (IOException e) { throw new RuntimeException(e); }
+//		}).start();
+//	}
 
-		new Thread(() -> {
-			try {
-				BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(Paths.get(usernamesPath).toFile()));
-				gson.toJson(usernames, bufferedWriter);
-				bufferedWriter.close();
-			}
-			catch (IOException e) { throw new RuntimeException(e); }
-		}).start();
-	}
-
-	/***
-	 * Write copy of file to disk into the log folder,
-	 * overwrites if there is an existing backup
-	 * 
-	 * @param sourcePath - path of original file
-	 */
-	public static void backupFile(String sourcePath, String file) {
-		try {
-			String rootPath = Paths.get(sourcePath).getParent().toString() + "/logs/"; // adds into log folder
-			String originalName = Paths.get(sourcePath).getFileName().toString();
-			String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyMMdd_HHmm")); // add time stamp
-			String backupPath = rootPath + timestamp + "_" + originalName;
-			Files.copy(Paths.get(sourcePath), Paths.get(backupPath), StandardCopyOption.REPLACE_EXISTING);
-		}
-		catch (Exception ex) { System.out.println("File backup failed: " + file); };
-	}
+//	public static void backupFile(String sourcePath, String file) {
+//		try {
+//			String rootPath = Paths.get(sourcePath).getParent().toString() + "/logs/"; // adds into log folder
+//			String originalName = Paths.get(sourcePath).getFileName().toString();
+//			String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyMMdd_HHmm")); // add time stamp
+//			String backupPath = rootPath + timestamp + "_" + originalName;
+//			Files.copy(Paths.get(sourcePath), Paths.get(backupPath), StandardCopyOption.REPLACE_EXISTING);
+//		}
+//		catch (Exception ex) { System.out.println("File backup failed: " + file); };
+//	}
 }
