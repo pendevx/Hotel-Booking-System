@@ -23,7 +23,6 @@ public class HotelDatabase {
 		createTable("accounts", SQL.createAccountTable());
 		createTable("bookings", SQL.createBookingTable());
 		createTable("rooms", SQL.createRoomsTable());
-		createTable("bookingRooms", SQL.createBookingRoomsTable());
 
 //		Printer.printQuery("hotel", dbManager.query(SQL.selectAll("hotel"))); // for testing
 //		Printer.printQuery("credential", dbManager.query(SQL.selectAll("credential"))); // for testing
