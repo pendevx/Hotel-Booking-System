@@ -81,6 +81,7 @@ public class Controller implements ActionListener {
 			model.hotelSystem.updateEmail(newEmail);
 			model.hotelSystem.updatePhone(newPhone);
 			renderView();
+			System.out.println("Details updated.");
 		}
 	}
 
@@ -88,6 +89,7 @@ public class Controller implements ActionListener {
 		int result = JOptionPane.showConfirmDialog(view, "Logout?", "Confirm", JOptionPane.YES_NO_OPTION);
 		if (result == JOptionPane.YES_OPTION) {
 			this.model.logout();
+			this.model = null;
 			this.model = new AppSession();
 			view.renderLogin();
 		}

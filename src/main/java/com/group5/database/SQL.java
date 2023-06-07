@@ -103,7 +103,7 @@ public class SQL {
 
 	static String updateAccountPhone(String username, String newPhone) {
 		return "UPDATE account "
-				+ "SET email = '" + newPhone + "' "
+				+ "SET phone = '" + newPhone + "' "
 				+ "WHERE username = '" + username + "'";
 	}
 
