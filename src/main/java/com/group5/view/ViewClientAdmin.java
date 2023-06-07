@@ -4,7 +4,7 @@ import com.group5.card.CardAccount;
 import com.group5.card.CardBookingCreate;
 import com.group5.card.CardBookingList;
 import com.group5.component.*;
-import com.group5.mvc.Controller;
+import com.group5.controller.Controller;
 
 public class ViewClientAdmin extends ViewClient {
 	

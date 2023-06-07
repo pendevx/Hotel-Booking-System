@@ -1,7 +1,8 @@
 package com.group5.view;
 
 import com.group5.card.CardRegister;
-import com.group5.mvc.Controller;
+import com.group5.component.Base;
+import com.group5.controller.Controller;
 
 public class ViewRegister extends View {
 	private CardRegister cardRegister;
@@ -19,7 +20,5 @@ public class ViewRegister extends View {
 		super.addToBase(cardRegister);
 	}
 
-	public CardRegister getCard() {
-		return this.cardRegister;
-	}
+	public CardRegister getCard() { return this.cardRegister; }
 }

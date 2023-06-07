@@ -1,7 +1,7 @@
 package com.group5.view;
 
 import com.group5.component.Base;
-import com.group5.mvc.Controller;
+import com.group5.controller.Controller;
 import javax.swing.JPanel;
 
 public abstract class View extends JPanel {

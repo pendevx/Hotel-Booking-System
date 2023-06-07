@@ -2,7 +2,7 @@ package com.group5.view;
 
 import com.group5.card.*;
 import com.group5.component.*;
-import com.group5.mvc.Controller;
+import com.group5.controller.Controller;
 
 public abstract class ViewClient extends View {
 	private CardAccount cardAccount;
