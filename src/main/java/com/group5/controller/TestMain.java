@@ -1,6 +1,7 @@
 package com.group5.controller;
 
-import com.group5.mvc.ViewGUI;
+import com.group5.component.Base;
+
 
 public class TestMain {
 	public static void main(String[] args) {
@@ -8,12 +9,7 @@ public class TestMain {
 	}
 
 	public TestMain() {
-		ViewGUI view = new ViewGUI();
-		TestController controller = new TestController(view) {};
-//		view.addController(controller);
-		view.renderLogin();
-//		view.renderUser();
-//		view.renderRegistration();
+		TestViewGUI view = new TestViewGUI();
+		Controller c = new ControllerLogin(view);
 	}
-	
 }

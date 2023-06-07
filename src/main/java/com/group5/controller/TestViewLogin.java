@@ -5,9 +5,9 @@ import com.group5.card.*;
 import com.group5.controller.*;
 
 public class TestViewLogin extends TestView {
-	private CardLogin cardLogin;
+	public CardLogin cardLogin;
 
-	public TestViewLogin(TestController controller) {
+	public TestViewLogin(ControllerLogin controller) {
 		super(controller);
 		init();
 	}
@@ -18,9 +18,4 @@ public class TestViewLogin extends TestView {
 		this.cardLogin.loginButton.addActionListener(getController());
 		super.addToBase(cardLogin);
 	}
-
-	public CardLogin getCard() {
-		return this.cardLogin;
-	}
-
 }

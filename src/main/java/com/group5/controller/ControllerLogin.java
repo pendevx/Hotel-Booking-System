@@ -1,31 +1,31 @@
 package com.group5.controller;
 
-import com.group5.mvc.ViewGUI;
-import com.group5.view.ViewLogin;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ControllerLogin extends TestController implements ActionListener {
-	public ViewLogin viewLogin;
+public class ControllerLogin extends Controller {
+	public TestViewLogin login;
 
-	public ControllerLogin(ViewGUI view) {
+	// master holds the view abd ni
+
+	public ControllerLogin(TestViewGUI view) {
 		super(view);
-		this.viewLogin = new ViewLogin(this);
+		init();
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (getCardLogin() != null) {
-			if (e.getSource() == getCardLogin().loginButton) loginHandler();
-//			else if (e.getSource() == getCardLogin().registerButton) view.renderRegistration();
+//		if (e.getSource() == login.cardLogin.loginButton) System.out.println("Login");
+		// new ControllerRegister()
+		if (e.getSource() == login.cardLogin.loginButton) {
+			ControllerRegister r = new ControllerRegister(view);
+
 		}
 	}
 
-	private void loginHandler() {
-		System.out.println("hi");
-//		String usr = getCardLogin().usernameField.getText().toLowerCase();
-//		String pwd = getCardLogin().passwordField.getText();
-//		if(model.loginPortal(usr, pwd)) this.renderView();
-//		else getCardLogin().showWarningPopup("Incorrect username or password!");
+	@Override
+	protected void init() {
+		this.login = new TestViewLogin(this);
+		this.view.updateDisplay(login.getBasePanel());
 	}
 }

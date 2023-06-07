@@ -6,14 +6,14 @@ import javax.swing.JPanel;
 public abstract class TestView extends JPanel {
 
 	private Base base = new Base();
-	private TestController controller;
+	private Controller controller;
 
-	public TestView(TestController controller) {
+	public TestView(Controller controller) {
 		this.controller = controller;
 	}
 
-	public TestController getController() {
-		return this.controller;
+	public Controller getController() {
+		return controller;
 	}
 
 	public void addToBase(JPanel p) {
