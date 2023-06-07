@@ -22,6 +22,7 @@ public class HotelDatabase {
 		this.createTable("credential", SQL.createCredentialTable());
 		this.createTable("account", SQL.createAccountTable());
 
+//		Printer.printQuery("account", dbManager.query(SQL.selectAll("account"))); // for testing
 		// TODO
 //		this.createTable("booking", SQL.createBookingTable());
 //		Printer.printQuery("booking", dbManager.query(SQL.selectAll("booking"))); // for testing
@@ -29,11 +30,6 @@ public class HotelDatabase {
 
 	public static void main(String[] args) {
 		HotelDatabase t = new HotelDatabase();
-		t.loadHotel();
-		Set<Credential> c = t.loadCredentials();
-		for (Credential cre : c) {
-			System.out.println(cre.getUsername());
-		}
 	}
 
 	public static List<Hotel> loadHotel() {
