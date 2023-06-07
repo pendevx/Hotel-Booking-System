@@ -6,7 +6,7 @@ import com.group5.component.Text.FontSize;
 public class CardBookingView extends Card {
 
 	public CardBookingView() {
-		super(550, 10, 20);
+		super(500);
 		final int W = this.WIDTH - 50;
 
 		// load booking content

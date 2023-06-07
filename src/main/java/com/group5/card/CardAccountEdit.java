@@ -15,9 +15,9 @@ public class CardAccountEdit extends Card implements KeyPressListener{
 	public JTextField phoneNew = new JTextField(30);
 	
 	public CardAccountEdit() {
-		super(400, 10, 20);
-		final int W = this.WIDTH - 50;
-		final int MARGIN = 70;
+		super(500);
+		final int W = this.WIDTH - 100;
+		final int MARGIN = 100;
 
 		this.add(new Container(W, 300, new CardAccountPic(300, 300)));
 		this.add(new Container(W, MARGIN, "New email:", emailNew));

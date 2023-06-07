@@ -15,7 +15,7 @@ public class CardLogin extends Card implements KeyPressListener {
 	public JTextField passwordField = new JPasswordField(30);
 
 	public CardLogin() {
-		super(500, 500, 10, 20);
+		super(500, 500);
 		final int MARGIN = 70;
 		final int W = super.WIDTH - 120;
 

@@ -8,7 +8,7 @@ public class CardAccount extends Card {
 	public JButton logoutButton = new Button("Logout", "#94e2d5", 100, 25);
 	
 	public CardAccount(Container...accountInfo) {
-		super(300, 10, 20);
+		super(300);
 		final int W = this.WIDTH - 50;
 		this.add(new Container(W, 250, new CardAccountPic(250, 250)));
 		this.addAccountInfo(W, accountInfo);
