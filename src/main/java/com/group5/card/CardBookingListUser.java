@@ -6,6 +6,7 @@ import com.group5.component.Text.FontSize;
 public class CardBookingListUser extends Card {
 	
 	public CardBookingListUser() {
+		// show booking for a user, resusing in admin view to filter bookings
 		super(500);
 		final int W = this.WIDTH - 50;
 

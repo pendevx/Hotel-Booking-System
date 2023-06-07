@@ -18,5 +18,6 @@ public class AppMain {
 		view.addController(controller);
 		view.renderLogin();
 //		view.renderUser();
+//		view.renderRegistration();
 	}
 }

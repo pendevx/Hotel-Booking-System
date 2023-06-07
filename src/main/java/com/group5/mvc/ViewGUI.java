@@ -7,24 +7,34 @@ import com.group5.card.CardBookingCreateUser;
 import com.group5.card.CardBookingListUser;
 import com.group5.card.CardLogin;
 import com.group5.card.CardRegister;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
+import com.group5.view.View;
+import com.group5.view.ViewClient;
+import com.group5.view.ViewClientUser;
+import com.group5.view.ViewLogin;
+import com.group5.view.ViewRegister;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 
+// DEV ONLY
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 public class ViewGUI extends JFrame {
+	// login view
 	public Card cardLogin;
 
+	// register view
 	public Card cardRegister;
 
+	// account view abstract
 	public Card cardAccount;
 	public Card cardAccountEdit;
-
 	public Card cardBookingList;
 	public Card cardBookingCreate;
+
+	public ViewLogin loginView;
+	public ViewRegister registerView;
+	public ViewClient clientView;
+
 
 	private Base base = new Base();
 	private Controller controller;
@@ -43,81 +53,74 @@ public class ViewGUI extends JFrame {
 	}
 
 	public void renderLogin() {
-		if (this.base != null) this.base.removeAll();
-		this.cardLogin = new CardLogin(); // fresh new form
-		((CardLogin) cardLogin).loginButton.addActionListener(controller);
-		((CardLogin) cardLogin).registerButton.addActionListener(controller);
-		this.base.add(cardLogin);
-		this.renderPanel();
-
-		//////////////////////////////////////////////////
-		// TEST ONLY
-		//////////////////////////////////////////////////
-		((CardLogin) cardLogin).usernameField.setText("user");
-		((CardLogin) cardLogin).passwordField.setText("user");
-
-		((CardLogin) cardLogin).addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent e) {
-				if(e.getKeyCode() == KeyEvent.VK_ENTER) ((CardLogin) cardLogin).loginButton.doClick();
-			}
-		});
-		((CardLogin) cardLogin).setFocusable(true);
-		((CardLogin) cardLogin).requestFocusInWindow();
-		//////////////////////////////////////////////////
-		// TEST ONLY
-		//////////////////////////////////////////////////
-		
+		refreshFrame();
+		this.loginView = new ViewLogin(this.controller);
+		this.base = loginView.getBasePanel();
+		renderPanel();
 	}
 
 	public void renderRegistration() {
-		if (this.base != null) this.base.removeAll();
-		this.cardRegister = new CardRegister(); // so fresh new form
-		((CardRegister) cardRegister).cancelButton.addActionListener(controller);
-		((CardRegister) cardRegister).submitButton.addActionListener(controller);
-		this.base.add(cardRegister);
-		this.renderPanel();
+		refreshFrame();
+		this.registerView = new ViewRegister(controller);
+		this.base = registerView.getBasePanel();
+		renderPanel();
 	}
 
-	public void renderUser(Container...accountInfo) {
-		if (this.base != null) this.base.removeAll();
-		if (accountInfo.length > 0) this.cardAccount = new CardAccount(accountInfo);
-		((CardAccount) cardAccount).editAccountButton.addActionListener(controller);
-		((CardAccount) cardAccount).logoutButton.addActionListener(controller);
-
-		this.cardBookingCreate = new CardBookingCreateUser();
-		
-		// button that makes a sql query with booking ID;
-		// booking is in Booking Continer, make new coniner per booking
-		// need make scrollable
-
-		// opens up to boooking view that only shows info
+	// split off these methods
+	// into view
+	// viewLogin extends View
+	// viewRegister extends View
+	// viewUser extends View
+	// viewAdmin extends View
 
 
-		this.cardBookingList = new CardBookingListUser();
-		this.base.addWithGap(cardAccount);
-		this.base.addWithGap(cardBookingCreate);
-		this.base.addWithGap(cardBookingList);
-		this.renderPanel();
+	public void renderUser(Container[] accountInfo, Container[] hotelInfo) {
+		refreshFrame();
+		this.clientView = new ViewClientUser(controller, accountInfo, hotelInfo);
+		this.base = clientView.getBasePanel();
+		renderPanel();
 
-
-		//////////////////////////////////////////////////
-		// TEST ONLY
-		//////////////////////////////////////////////////
-		((CardAccount) cardAccount).addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent e) {
-				if(e.getKeyCode() == KeyEvent.VK_ENTER) ((CardAccount) cardAccount).logoutButton.doClick();
-			}
-		});
-		((CardAccount) cardAccount).setFocusable(true);
-		((CardAccount) cardAccount).requestFocusInWindow();
-		//////////////////////////////////////////////////
-		// TEST ONLY
-		//////////////////////////////////////////////////
+//		refreshFrame();
+//		if (this.base != null) this.base.removeAll();
+//		if (accountInfo.length > 0) this.cardAccount = new CardAccount(accountInfo);
+//		((CardAccount) cardAccount).editAccountButton.addActionListener(controller);
+//		((CardAccount) cardAccount).logoutButton.addActionListener(controller);
+//
+//		this.cardBookingCreate = new CardBookingCreateUser(hotelInfo);
+//		
+//		// button that makes a sql query with booking ID;
+//		// booking is in Booking Continer, make new coniner per booking
+//		// need make scrollable
+//
+//		// opens up to boooking view that only shows info
+//
+//
+//		this.cardBookingList = new CardBookingListUser();
+//		this.base.addWithGap(cardAccount);
+//		this.base.addWithGap(cardBookingCreate);
+//		this.base.addWithGap(cardBookingList);
+//		this.renderPanel();
+//
+//
+//		//////////////////////////////////////////////////
+//		// TEST ONLY
+//		//////////////////////////////////////////////////
+//		((CardAccount) cardAccount).addKeyListener(new KeyAdapter() {
+//			@Override
+//			public void keyPressed(KeyEvent e) {
+//				if(e.getKeyCode() == KeyEvent.VK_ENTER) ((CardAccount) cardAccount).logoutButton.doClick();
+//			}
+//		});
+//		((CardAccount) cardAccount).setFocusable(true);
+//		((CardAccount) cardAccount).requestFocusInWindow();
+//		//////////////////////////////////////////////////
+//		// TEST ONLY
+//		//////////////////////////////////////////////////
 	}
 
 	public void renderAdmin(Container...accountInfo) {
+		refreshFrame();
+
 		if (this.base != null) this.base.removeAll();
 		if (accountInfo.length > 0) this.cardAccount = new CardAccount(accountInfo);
 		((CardAccount) cardAccount).editAccountButton.addActionListener(controller);
@@ -131,13 +134,26 @@ public class ViewGUI extends JFrame {
 	}
 
 
-	public void renderAccountEdit() {
-		if (this.base != null) this.base.removeAll();
-		this.cardAccountEdit = new CardAccountEdit();
-		((CardAccountEdit) cardAccountEdit).cancelButton.addActionListener(controller);
-		((CardAccountEdit) cardAccountEdit).saveButton.addActionListener(controller);
-		this.base.add(cardAccountEdit);
-		this.renderPanel();
+	// client view
+//	public void renderAccountEdit() {
+//		if (this.base != null) this.base.removeAll();
+//		this.cardAccountEdit = new CardAccountEdit();
+//		((CardAccountEdit) cardAccountEdit).cancelButton.addActionListener(controller);
+//		((CardAccountEdit) cardAccountEdit).saveButton.addActionListener(controller);
+//		this.base.add(cardAccountEdit);
+//		this.renderPanel();
+//	}
+
+
+
+
+
+
+	private void refreshFrame() {
+		if (this.base != null) {
+			this.getContentPane().removeAll();
+			this.base = null;
+		}
 	}
 
 	private void renderPanel() {
