@@ -32,7 +32,7 @@ public class ViewGUI extends JFrame {
 	public ViewGUI() {
 		this.setName("Hotel Booking System");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(1600,900);
+		this.setSize(1366,768);
 		this.setLocation(500,300);
 		this.setResizable(false);
 		this.setVisible(true);

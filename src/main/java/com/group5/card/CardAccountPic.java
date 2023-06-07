@@ -1,12 +1,14 @@
 package com.group5.card;
 
-import com.group5.component.Card;
 import java.awt.Color;
+import java.awt.Dimension;
+import javax.swing.JPanel;
 
-public class CardAccountPic extends Card {
+public class CardAccountPic extends JPanel {
 	
 	public CardAccountPic(int width, int height) {
-		super(width, height, 0, 0);
+//		super(width, height, 0, 0);
+		this.setPreferredSize(new Dimension(width, height));
 		this.setBackground(Color.BLACK);
 	}
 }

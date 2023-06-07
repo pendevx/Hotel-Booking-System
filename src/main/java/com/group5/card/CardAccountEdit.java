@@ -15,7 +15,7 @@ public class CardAccountEdit extends Card implements KeyPressListener{
 	public JTextField phoneNew = new JTextField(30);
 	
 	public CardAccountEdit() {
-		super(400, 800, 10, 20);
+		super(400, 10, 20);
 		final int W = this.WIDTH - 50;
 		final int MARGIN = 70;
 
