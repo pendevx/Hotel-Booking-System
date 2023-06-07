@@ -1,5 +1,7 @@
 package com.group5.database;
 
+import com.group5.hotel.Booking;
+
 public class SQL {
 	//////////////////////////////////////////////////
 	// CREATE TABLE
@@ -88,8 +90,9 @@ public class SQL {
 				+ "('" + username + "', '" + password + "')";
 	}
 
-	static String insertBookingTable() {
-		return "";
+	static String insertBookingTable(Booking booking) {
+//		return "";
+		return "INSERT INTO Bookings VALUES (" + booking.bookingID + ""
 	}
 
 	//////////////////////////////////////////////////

@@ -186,4 +186,8 @@ public class HotelDatabase {
 	public void closeConnection() {
 		this.dbManager.closeConnection();
 	}
+
+	public Booking createBooking(Booking b) {
+		String query = "INSERT INTO Bookings ("
+	}
 }
