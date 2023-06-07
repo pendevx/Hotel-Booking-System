@@ -8,16 +8,14 @@ import com.group5.hotel.Account;
 import com.group5.hotel.Hotel;
 import com.group5.system.HotelSystemAdmin;
 import com.group5.system.HotelSystemUser;
-import com.group5.view.ViewLogin;
-import com.group5.view.ViewRegister;
 import javax.swing.JOptionPane;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Controller implements ActionListener {
-	public ViewGUI view;
-	public AppSession model;
+	private ViewGUI view;
+	private AppSession model;
 
 	public Controller(ViewGUI view) {
 		this.view = view;
@@ -37,8 +35,11 @@ public class Controller implements ActionListener {
 		}
 
 		if (getCardAccount()!= null) {
-			if (e.getSource() == getCardAccount().editAccountButton) renderAccountEdit();
-//			if (e.getSource() == getCardAccount().editAccountButton) System.out.println("Edit");
+			if (e.getSource() == getCardAccount().editAccountButton) {
+				view.renderAccountEdit();
+				getCardAccountEdit().setTextEmail(getAccount().email);
+				getCardAccountEdit().setTextPhone(getAccount().phone);
+			}
 			else if (e.getSource() == getCardAccount().logoutButton) logoutHandler();
 		}
 
@@ -62,12 +63,6 @@ public class Controller implements ActionListener {
 		if(model.loginPortal(usr, pwd)) this.renderView();
 		else getCardLogin().showWarningPopup("Incorrect username or password!");
 	}
-
-
-
-
-
-
 
 	private void registrationHandler() {
 		String usr = getCardRegister().userFieldNew.getText().toLowerCase();
@@ -110,28 +105,14 @@ public class Controller implements ActionListener {
 
 	private void renderView() {
 		if (model.hotelSystem instanceof HotelSystemUser) {
-			// ViewClientUser
 			view.renderUser(getAccountInfo(), getHotelInfo());
 		}
 		else if (model.hotelSystem instanceof HotelSystemAdmin) {
-			// ViewClientAdmin
-			view.renderAdmin(getAccountInfo());
+			view.renderAdmin(getAccountInfo(), getHotelInfo());
 		}
 	}
 
-	private void renderAccountEdit() {
-////		view.renderAccountEdit();
-		view.clientView.renderAccountEdit();
-//		System.out.println("Edit");
-		getCardAccountEdit().setTextEmail(getAccount().email);
-		getCardAccountEdit().setTextPhone(getAccount().phone);
-	}
-
-
-
-
-
-
+	// ControllerAccount
 	private Container[] getAccountInfo() {
 		if (model.hotelSystem != null) {
 			final int width = 250;
@@ -179,26 +160,24 @@ public class Controller implements ActionListener {
 		return false;
 	}
 
-//	private CardLogin getCardLogin() { return (CardLogin) view.cardLogin; }
 	private CardLogin getCardLogin() {
-		if (view.loginView == null) return null;
-		else return view.loginView.getCard();
+		if (view.getLoginView() == null) return null;
+		else return view.getLoginView().getCard();
 	}
 
-
-//	private CardRegister getCardRegister() { return (CardRegister) view.cardRegister; }
 	private CardRegister getCardRegister() {
-		if (view.registerView == null) return null;
-		else return view.registerView.getCard();
+		if (view.getRegisetView() == null) return null;
+		else return view.getRegisetView().getCard();
 	}
 
 	private CardAccount getCardAccount() {
-		if (view.clientView == null) return null;
-		else return view.clientView.getCardAccount();
+		if (this.view.getClientView() == null) return null;
+		else return view.getClientView().getCardAccount();
 	}
 
 	private CardAccountEdit getCardAccountEdit() {
-		return (CardAccountEdit) view.cardAccountEdit;
+		if (view.getClientView() == null) return null;
+		return view.getClientView().getCardAccountEdit();
 	}
 
 	private Account getAccount() { return model.hotelSystem.getAccount(); }

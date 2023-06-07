@@ -4,14 +4,14 @@ import com.group5.card.CardRegister;
 import com.group5.mvc.Controller;
 
 public class ViewRegister extends View {
-	public CardRegister cardRegister;
+	private CardRegister cardRegister;
 	
 	public ViewRegister(Controller controller) {
 		super(controller);
 		init();
 	}
 
-	public void init() {
+	private void init() {
 		super.resetBasePanel();
 		this.cardRegister = new CardRegister(); // so fresh new form
 		this.cardRegister.cancelButton.addActionListener(getController());

@@ -4,14 +4,14 @@ import com.group5.card.*;
 import com.group5.mvc.Controller;
 
 public class ViewLogin extends View {
-	public CardLogin cardLogin;
+	private CardLogin cardLogin;
 
 	public ViewLogin(Controller controller) {
 		super(controller);
 		init();
 	}
 
-	public void init() {
+	private void init() {
 		super.resetBasePanel();
 		this.cardLogin = new CardLogin(); // fresh new form
 		this.cardLogin.loginButton.addActionListener(getController());

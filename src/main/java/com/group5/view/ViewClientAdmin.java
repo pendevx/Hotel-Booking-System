@@ -6,9 +6,9 @@ import com.group5.card.CardBookingList;
 import com.group5.component.*;
 import com.group5.mvc.Controller;
 
-public class ViewClientUser extends ViewClient {
-
-	public ViewClientUser(Controller controller, Container[] accountInfo, Container[] hotelInfo) {
+public class ViewClientAdmin extends ViewClient {
+	
+	public ViewClientAdmin(Controller controller, Container[] accountInfo, Container[] hotelInfo) {
 		super(controller);
 		init(accountInfo, hotelInfo);
 	}
@@ -22,4 +22,5 @@ public class ViewClientUser extends ViewClient {
 		setCardBookingList(new CardBookingList());
 		super.addToBaseWithGap(getCardAccount(), getCardBookingCreate(), getCardBookingList());
 	}
+	
 }

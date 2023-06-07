@@ -5,11 +5,10 @@ import com.group5.component.*;
 import com.group5.mvc.Controller;
 
 public abstract class ViewClient extends View {
-	public CardAccount cardAccount;
-	public CardAccountEdit cardAccountEdit;
-
-	public Card cardBookingList;
-	public Card cardBookingCreate;
+	private CardAccount cardAccount;
+	private CardAccountEdit cardAccountEdit;
+	private Card cardBookingList;
+	private Card cardBookingCreate;
 
 	public ViewClient(Controller controller) {
 		super(controller);
@@ -23,19 +22,12 @@ public abstract class ViewClient extends View {
 		addToBase(cardAccountEdit);
 	}
 
-	public CardAccount getCardAccount() {
-		return this.cardAccount;
-	}
+	public CardAccount getCardAccount() { return this.cardAccount; }
+	public CardAccountEdit getCardAccountEdit() { return this.cardAccountEdit; }
+	public Card getCardBookingList() { return this.cardBookingList; }
+	public Card getCardBookingCreate() { return this.cardBookingCreate; }
 
-	public CardAccountEdit getCardAccountEdit() {
-		return this.cardAccountEdit;
-	}
-
-	public Card getCardBookingList() {
-		return this.cardBookingList;
-	}
-
-	public Card getCardBookingCreate() {
-		return this.cardBookingCreate;
-	}
+	public void setCardAccount(CardAccount c) { this.cardAccount = c; }
+	public void setCardBookingCreate(CardBookingCreate c) { this.cardBookingCreate = c; }
+	public void setCardBookingList(CardBookingList c) { this.cardBookingList = c; }
 }

@@ -3,9 +3,9 @@ package com.group5.card;
 import com.group5.component.*;
 import com.group5.component.Text.FontSize;
 
-public class CardBookingCreateUser extends Card {
+public class CardBookingCreate extends Card {
 
-	public CardBookingCreateUser(Container...hotelInfo) {
+	public CardBookingCreate(Container...hotelInfo) {
 		// takes user as input so create booking for user
 		// extends this class for admin
 		// show Booking of for...

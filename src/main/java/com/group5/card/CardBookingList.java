@@ -3,9 +3,9 @@ package com.group5.card;
 import com.group5.component.*;
 import com.group5.component.Text.FontSize;
 
-public class CardBookingListUser extends Card {
+public class CardBookingList extends Card {
 	
-	public CardBookingListUser() {
+	public CardBookingList() {
 		// show booking for a user, resusing in admin view to filter bookings
 		super(500);
 		final int W = this.WIDTH - 50;
