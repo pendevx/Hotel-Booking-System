@@ -144,6 +144,10 @@ public class SQL {
 				+ "WHERE username = '" + username + "'";
 	}
 
+	static String deleteBooking(String bookingID) {
+		return "DELETE FROM Bookings WHERE bookingID = '" + bookingID + "'";
+	}
+
 	//////////////////////////////////////////////////
 	// SELECT TABLE
 	//////////////////////////////////////////////////

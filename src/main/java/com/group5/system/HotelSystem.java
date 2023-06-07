@@ -73,7 +73,8 @@ public abstract class HotelSystem {
 		try {
 			Booking booking = getBookingsWhere(x -> x.bookingID.equals(bookingId)).get(0);
 			bookings.remove(booking);
-			FileIO.saveBookings(bookings);
+//			FileIO.saveBookings(bookings);
+			HotelDatabase.deleteBooking(booking);
 			return booking;
 		}
 		catch (IndexOutOfBoundsException e) { throw new RuntimeException(e); }

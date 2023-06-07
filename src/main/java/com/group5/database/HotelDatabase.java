@@ -145,20 +145,6 @@ public class HotelDatabase {
 		return BookingRooms.rooms;
 	}
 
-	/*
-			"CREATE TABLE Bookings (\n" +
-			"    bookingID VARCHAR(22),\n" +
-			"    startDate DATE NOT NULL,\n" +
-			"    endDate DATE NOT NULL,\n" +
-			"    price REAL NOT NULL,\n" +
-			"    booker VARCHAR(20) NOT NULL,\n" +
-			"    manager VARCHAR(20) NOT NULL,\n" +
-			"\n" +
-			"    PRIMARY KEY (bookingID),\n" +
-			"    FOREIGN KEY (booker) REFERENCES Accounts(username),\n" +
-			"    FOREIGN KEY (manager) REFERENCES Accounts(username)\n" +
-			")",
-	 */
 	public static List<Booking> loadBookings() {
 		Map<String, List<Room>> bookingRooms = getRooms();
 		String tableName = "bookings";
@@ -246,6 +232,10 @@ public class HotelDatabase {
 		String username = account.getUsername();
 		String newEmail = account.getEmail().toLowerCase();
 		dbManager.update(SQL.updateAccountEmail(username, newEmail));
+	}
+
+	public static void deleteBooking(Booking booking) {
+		dbManager.update(SQL.deleteBooking(booking.bookingID));
 	}
 
 	private static void createTable(String name, String...sql) {
