@@ -56,7 +56,6 @@ public class Controller implements ActionListener {
 	// controllerRegister extends controller
 	// controllerUser extends controller
 	// controllerAdmin extends controller
-
 	private void loginHandler() {
 		String usr = getCardLogin().usernameField.getText().toLowerCase();
 		String pwd = getCardLogin().passwordField.getText();
