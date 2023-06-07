@@ -18,9 +18,12 @@ public class HotelDatabase {
 
 	public HotelDatabase() {
 		dbManager = new DatabaseManager();
-		this.createTable("hotel", SQL.createHotelTable());
-		this.createTable("credential", SQL.createCredentialTable());
-		this.createTable("account", SQL.createAccountTable());
+		createTable("hotel", SQL.createHotelTable());
+		createTable("credentials", SQL.createCredentialTable());
+		createTable("accounts", SQL.createAccountTable());
+		createTable("bookings", SQL.createBookingTable());
+		createTable("rooms", SQL.createRoomsTable());
+		createTable("bookingRooms", SQL.createBookingRoomsTable());
 
 //		Printer.printQuery("hotel", dbManager.query(SQL.selectAll("hotel"))); // for testing
 //		Printer.printQuery("credential", dbManager.query(SQL.selectAll("credential"))); // for testing
@@ -186,6 +189,7 @@ public class HotelDatabase {
 	}
 
 	public Booking createBooking(Booking b) {
-		String query = "INSERT INTO Bookings ("
+		String query = "INSERT INTO Bookings (";
+		return null;
 	}
 }

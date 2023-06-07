@@ -73,4 +73,5 @@ public class Booking {
     public Date endDate() { return endDate; }
     public Account getAccount() { return user; }
     public boolean equals(Booking b) { return bookingID.equals(b.bookingID); }
+    public Account getBookingManager() { return bookingManager; }
 }
