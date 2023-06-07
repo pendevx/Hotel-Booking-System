@@ -85,7 +85,9 @@ public final class DatabaseManager {
 			statement = connection.createStatement();
 			resultSet = statement.executeQuery(sql);
 		}
-		catch (SQLException ex) { System.out.println(ex.getMessage()); }
+		catch (SQLException ex) {
+			System.out.println(ex.getMessage());
+		}
 		return resultSet;
 	}
 }

@@ -5,6 +5,7 @@ import com.group5.hotel.Account;
 import com.group5.hotel.Booking;
 import com.group5.hotel.Credential;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -105,6 +106,8 @@ class HotelBookingData {
 
 	// Getter methods
 	static List<Booking> getBookings() { return Collections.unmodifiableList(bookings); }
-	static List<Account> getAccounts() { return Collections.unmodifiableList(accounts); }
+	static List<Account> getAccounts() {
+		return Collections.unmodifiableList(accounts);
+	}
 	static Set<Credential> getCredentials() { return Collections.unmodifiableSet(credentials); }
 }

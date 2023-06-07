@@ -35,9 +35,9 @@ public class Booking {
         this.endDate = endDate;
         this.roomsBooked = roomsBooked;
         totalPrice = 0;
-        for (int i = 0; i < roomsBooked.size(); i++) {
-            totalPrice += roomsBooked.get(i).price;
-        }
+//        for (int i = 0; i < roomsBooked.size(); i++) {
+//            totalPrice += roomsBooked.get(i).price;
+//        }
         this.user = user;
         bookingManager = manager;
     }

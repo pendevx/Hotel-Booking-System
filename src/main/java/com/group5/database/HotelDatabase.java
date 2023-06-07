@@ -1,17 +1,11 @@
 package com.group5.database;
 
-import com.group5.hotel.Account;
-import com.group5.hotel.AccountPermission;
-import com.group5.hotel.Booking;
-import com.group5.hotel.Credential;
-import com.group5.hotel.Hotel;
+import com.group5.hotel.*;
+
 import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class HotelDatabase {
 	private static DatabaseManager dbManager;
@@ -24,12 +18,25 @@ public class HotelDatabase {
 		createTable("bookings", SQL.createBookingTable());
 		createTable("rooms", SQL.createRoomsTable());
 
+		Account acc = new Account("user", null, null, null, null, AccountPermission.USER);
+		List<Room> roomsBooked = new LinkedList<Room>();
+		roomsBooked.add(new Room(1, 'A'));
+		roomsBooked.add(new Room(1, 'B'));
+//		Booking booking = new Booking("1", new Date(), new Date(), roomsBooked, acc, acc);
+//
+//		String[] roomQueries = SQL.insertRoomsTable(booking);
+//		for (String str : roomQueries) {
+//			dbManager.update(str);
+//		}
+//
+//		dbManager.update(SQL.insertBookingTable(booking));
+//
 //		Printer.printQuery("hotel", dbManager.query(SQL.selectAll("hotel"))); // for testing
-//		Printer.printQuery("credential", dbManager.query(SQL.selectAll("credential"))); // for testing
-//		Printer.printQuery("account", dbManager.query(SQL.selectAll("account"))); // for testing
-		// TODO
-//		this.createTable("booking", SQL.createBookingTable());
-//		Printer.printQuery("booking", dbManager.query(SQL.selectAll("booking"))); // for testing
+//		Printer.printQuery("credentials", dbManager.query(SQL.selectAll("credentials"))); // for testing
+//		Printer.printQuery("accounts", dbManager.query(SQL.selectAll("accounts"))); // for testing
+//		// TODO
+//		Printer.printQuery("bookings", dbManager.query(SQL.selectAll("bookings"))); // for testing
+//		Printer.printQuery("rooms", dbManager.query(SQL.selectAll("rooms")));
 	}
 
 	public static void main(String[] args) {
@@ -64,7 +71,7 @@ public class HotelDatabase {
 	}
 
 	public static Set<Credential> loadCredentials() {
-		String tableName = "credential";
+		String tableName = "credentials";
 		if (!tableExists(tableName)) return null;
 
 		Set<Credential> credentials = null;
@@ -85,7 +92,7 @@ public class HotelDatabase {
 	}
 
 	public static List<Account> loadAccounts() {
-		String tableName = "account";
+		String tableName = "accounts";
 		if (!tableExists(tableName)) return null;
 
 		List<Account> accounts = null;
@@ -100,7 +107,7 @@ public class HotelDatabase {
 					String lastName = resultSet.getString("lastName");
 					String phone = resultSet.getString("phone");
 					String email = resultSet.getString("email");
-					String permission = resultSet.getString("permission");
+					String permission = resultSet.getString("permissions");
 
 					AccountPermission accountPermission = null;
 					if (permission.equalsIgnoreCase("ADMIN")) accountPermission = AccountPermission.ADMIN;
