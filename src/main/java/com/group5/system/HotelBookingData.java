@@ -26,9 +26,7 @@ class HotelBookingData {
 		// open a new session after register, make login after, or auto login
 		credentials = HotelDatabase.loadCredentials();
 		accounts = HotelDatabase.loadAccounts();
-		
-		// TODO: bookings
-		bookings = FileIO.loadBookingJson();
+		bookings = HotelDatabase.loadBookings();
 	}
 
 	/**
@@ -37,7 +35,8 @@ class HotelBookingData {
 	 */
 	static void book(Booking booking) {
 		bookings.add(booking);
-		FileIO.saveBookings(bookings);
+
+		HotelDatabase.insertBookingTable(booking);
 	}
 
 	/**
@@ -103,6 +102,8 @@ class HotelBookingData {
 
 	// Getter methods
 	static List<Booking> getBookings() { return Collections.unmodifiableList(bookings); }
-	static List<Account> getAccounts() { return Collections.unmodifiableList(accounts); }
+	static List<Account> getAccounts() {
+		return Collections.unmodifiableList(accounts);
+	}
 	static Set<Credential> getCredentials() { return Collections.unmodifiableSet(credentials); }
 }

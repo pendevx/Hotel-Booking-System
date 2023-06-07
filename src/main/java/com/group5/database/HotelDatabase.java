@@ -1,33 +1,44 @@
 package com.group5.database;
 
-import com.group5.hotel.Account;
-import com.group5.hotel.AccountPermission;
-import com.group5.hotel.Booking;
-import com.group5.hotel.Credential;
-import com.group5.hotel.Hotel;
+import com.group5.hotel.*;
+
 import java.sql.DatabaseMetaData;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class HotelDatabase {
 	private static DatabaseManager dbManager;
+	private static List<Account> cacheAccounts;
 
 	public HotelDatabase() {
 		dbManager = new DatabaseManager();
-		this.createTable("hotel", SQL.createHotelTable());
-		this.createTable("credential", SQL.createCredentialTable());
-		this.createTable("account", SQL.createAccountTable());
+		createTable("hotel", SQL.createHotelTable());
+		createTable("credentials", SQL.createCredentialTable());
+		createTable("accounts", SQL.createAccountTable());
+		createTable("bookings", SQL.createBookingTable());
+		createTable("rooms", SQL.createRoomsTable());
 
+//		Account acc = new Account("user", null, null, null, null, AccountPermission.USER);
+//		List<Room> roomsBooked = new LinkedList<Room>();
+//		roomsBooked.add(new Room(1, 'A'));
+//		roomsBooked.add(new Room(1, 'B'));
+//		Booking booking = new Booking("1", new java.util.Date(), new java.util.Date(), roomsBooked, roomsBooked.size()*100, acc, acc);
+//
+//		String[] roomQueries = SQL.insertRoomsTable(booking);
+//		for (String str : roomQueries) {
+//			dbManager.update(str);
+//		}
+//
+//		dbManager.update(SQL.insertBookingTable(booking));
+//
 //		Printer.printQuery("hotel", dbManager.query(SQL.selectAll("hotel"))); // for testing
-//		Printer.printQuery("credential", dbManager.query(SQL.selectAll("credential"))); // for testing
-//		Printer.printQuery("account", dbManager.query(SQL.selectAll("account"))); // for testing
-		// TODO
-//		this.createTable("booking", SQL.createBookingTable());
-//		Printer.printQuery("booking", dbManager.query(SQL.selectAll("booking"))); // for testing
+//		Printer.printQuery("credentials", dbManager.query(SQL.selectAll("credentials"))); // for testing
+//		Printer.printQuery("accounts", dbManager.query(SQL.selectAll("accounts"))); // for testing
+//		// TODO
+//		Printer.printQuery("bookings", dbManager.query(SQL.selectAll("bookings"))); // for testing
+//		Printer.printQuery("rooms", dbManager.query(SQL.selectAll("rooms")));
 	}
 
 	public static void main(String[] args) {
@@ -62,7 +73,7 @@ public class HotelDatabase {
 	}
 
 	public static Set<Credential> loadCredentials() {
-		String tableName = "credential";
+		String tableName = "credentials";
 		if (!tableExists(tableName)) return null;
 
 		Set<Credential> credentials = null;
@@ -83,7 +94,7 @@ public class HotelDatabase {
 	}
 
 	public static List<Account> loadAccounts() {
-		String tableName = "account";
+		String tableName = "accounts";
 		if (!tableExists(tableName)) return null;
 
 		List<Account> accounts = null;
@@ -98,7 +109,7 @@ public class HotelDatabase {
 					String lastName = resultSet.getString("lastName");
 					String phone = resultSet.getString("phone");
 					String email = resultSet.getString("email");
-					String permission = resultSet.getString("permission");
+					String permission = resultSet.getString("permissions");
 
 					AccountPermission accountPermission = null;
 					if (permission.equalsIgnoreCase("ADMIN")) accountPermission = AccountPermission.ADMIN;
@@ -109,17 +120,68 @@ public class HotelDatabase {
 			}
 			resultSet.close();
 		} catch (SQLException ex) { System.out.println(ex.getMessage());}
+		cacheAccounts = accounts;
 		return accounts;
 	}
 
-	// TODO:
-	public static List<Booking> loadBooking() {
-		return new ArrayList<>();
+	private static Map<String, List<Room>> getRooms() {
+		String tableName = "rooms";
+		if (!tableExists(tableName)) return null;
+
+		ResultSet resultSet = dbManager.query(SQL.selectAll(tableName));
+		try {
+			if (!resultSet.next()) System.out.println("No results");
+			else {
+				do {
+					String bookingID = resultSet.getString("bookingID");
+					String room = resultSet.getString("room");
+					Room roomObj = new Room(room.charAt(0), room.charAt(1));
+
+					BookingRooms.addRoom(bookingID, roomObj);
+				} while (resultSet.next());
+			}
+			resultSet.close();
+		} catch (SQLException ex) { System.out.println(ex.getMessage());}
+		return BookingRooms.rooms;
+	}
+
+	public static List<Booking> loadBookings() {
+		Map<String, List<Room>> bookingRooms = getRooms();
+		String tableName = "bookings";
+		if (!tableExists(tableName)) return null;
+
+		List<Booking> bookings = null;
+		ResultSet resultSet = dbManager.query(SQL.selectAll(tableName));
+		try {
+			if (!resultSet.next()) System.out.println("No results");
+			else {
+				bookings = new ArrayList<>();
+				do {
+					String bookingID = resultSet.getString("bookingID");
+					java.util.Date startDate = resultSet.getTimestamp("startDate");
+					java.util.Date endDate = resultSet.getTimestamp("endDate");
+					float price = resultSet.getFloat("price");
+					String booker = resultSet.getString("booker");
+					String manager = resultSet.getString("manager");
+
+					List<Room> currentRooms = bookingRooms.get(bookingID);
+					Optional<Account> bookerAcc = cacheAccounts.stream().filter(x -> x.getUsername().equals(booker)).findFirst();
+ 					Optional<Account> managerAcc = cacheAccounts.stream().filter(x -> x.getUsername().equals(manager)).findFirst();
+
+					Booking booking = new Booking(bookingID, startDate, endDate, currentRooms, price, bookerAcc.get(), managerAcc.get());
+					bookings.add(booking);
+				} while (resultSet.next());
+			}
+			resultSet.close();
+		} catch (SQLException ex) { System.out.println(ex.getMessage());}
+
+		cacheAccounts = null;
+		return bookings;
 	}
 
 	// Added to LOWERCASE username UNTESTED
 	public static void insertCredentialTable(Credential credential) {
-			new Thread(() -> {
+		new Thread(() -> {
 			try {
 				String username = credential.getUsername().toLowerCase();
 				System.out.println(username);
@@ -132,7 +194,7 @@ public class HotelDatabase {
 
 	// Added to LOWERCASE username UNTESTED
 	public static void insertAccountTable(Account account) {
-			new Thread(() -> {
+		new Thread(() -> {
 			try {
 				String username = account.getUsername().toLowerCase();
 				String firstname = account.getFirstName();
@@ -144,6 +206,16 @@ public class HotelDatabase {
 			}
 			catch (Exception e) { throw new RuntimeException(e); }
 		}).start();
+	}
+
+	public static void insertBookingTable(Booking booking) {
+		new Thread(() -> {
+			try {
+				dbManager.update(SQL.insertBookingTable(booking));
+			} catch (Exception e) {
+				throw new RuntimeException(e);
+			}
+		});
 	}
 
 	// need reload database after
@@ -160,6 +232,10 @@ public class HotelDatabase {
 		String username = account.getUsername();
 		String newEmail = account.getEmail().toLowerCase();
 		dbManager.update(SQL.updateAccountEmail(username, newEmail));
+	}
+
+	public static void deleteBooking(Booking booking) {
+		dbManager.update(SQL.deleteBooking(booking.bookingID));
 	}
 
 	private static void createTable(String name, String...sql) {

@@ -49,7 +49,7 @@ public abstract class HotelSystem {
 	 * @return Returns a booking object which represents the booking
 	 */
 	protected Booking makeBooking(Date begin, Date end, List<Room> rooms, Account account, Account manager) {
-		Booking booking = new Booking(String.valueOf(System.currentTimeMillis()), begin, end, rooms, account, manager);
+		Booking booking = new Booking(String.valueOf(System.currentTimeMillis()), begin, end, rooms, rooms.size() * 100, account, manager);
 		HotelBookingData.book(booking);
 		bookings.add(booking);
 		return booking;
@@ -73,7 +73,8 @@ public abstract class HotelSystem {
 		try {
 			Booking booking = getBookingsWhere(x -> x.bookingID.equals(bookingId)).get(0);
 			bookings.remove(booking);
-			FileIO.saveBookings(bookings);
+//			FileIO.saveBookings(bookings);
+			HotelDatabase.deleteBooking(booking);
 			return booking;
 		}
 		catch (IndexOutOfBoundsException e) { throw new RuntimeException(e); }
