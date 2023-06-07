@@ -9,12 +9,19 @@ import javax.swing.JPanel;
 
 public abstract class Card extends JPanel {
 	public final int WIDTH;
+	public final int HEIGHT = 700;
 
-	public Card(int width, int height, int hGap, int vGap) {
-		this.setLayout(new FlowLayout(FlowLayout.CENTER, hGap, vGap));
+	public Card(int width) {
+//	public Card(int width, int hGap, int vGap) {
+		this.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 20));
 		this.setBackground(Color.WHITE);
 		this.setBorder(BorderFactory.createRaisedSoftBevelBorder());
 		this.WIDTH = width;
+		this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
+	}
+
+	public Card(int width, int height) {
+		this(width);
 		this.setPreferredSize(new Dimension(WIDTH, height));
 	}
 

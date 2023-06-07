@@ -6,10 +6,10 @@ import com.group5.component.Text.FontSize;
 public class CardBookingListUser extends Card {
 	
 	public CardBookingListUser() {
-		super(550, 800, 10, 20);
+		super(500);
 		final int W = this.WIDTH - 50;
 
 		this.add(new Container(W, 50, new Text("Manage Bookings", FontSize.H1)));
-		this.add(new Container(W, 690 ));
+//		this.add(new Container(W, 690 ));
 	}
 }

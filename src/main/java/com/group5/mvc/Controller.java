@@ -99,15 +99,16 @@ public class Controller implements ActionListener {
 
 	private Container[] getAccountInfo() {
 		if (model.hotelSystem != null) {
+			final int width = 250;
 			String accountType = getAccount().toString();
 			String fullname = getAccount().getFullName();
 			String email = getAccount().email;
 			String phone = getAccount().phone;
 			Container[] accountInfo = new Container[4];
-			accountInfo[0] = new Container(FlowLayout.LEFT,300, 50, new Text(accountType, FontSize.H1));
-			accountInfo[1] = new Container(FlowLayout.LEFT, 300, 50, new Text(fullname, FontSize.H1));
-			accountInfo[2] = new Container(FlowLayout.LEFT, 300, 50, new Text(email, FontSize.H1));
-			accountInfo[3] = new Container(FlowLayout.LEFT, 300, 50, new Text(phone, FontSize.H1));
+			accountInfo[0] = new Container(FlowLayout.LEFT, width, 45, new Text(accountType, FontSize.H2));
+			accountInfo[1] = new Container(FlowLayout.LEFT, width, 45, new Text(fullname, FontSize.H2));
+			accountInfo[2] = new Container(FlowLayout.LEFT, width, 45, new Text(email, FontSize.H2));
+			accountInfo[3] = new Container(FlowLayout.LEFT, width, 45, new Text(phone, FontSize.H2));
 			return accountInfo;
 		}
 		return null;
