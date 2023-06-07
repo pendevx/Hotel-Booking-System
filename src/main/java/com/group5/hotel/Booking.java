@@ -29,15 +29,12 @@ public class Booking {
      * @param user The user who is booking
      * @param manager The user who managed/created the booking
      */
-    public Booking(String ID, Date dateBooked, Date endDate, List<Room> roomsBooked, Account user, Account manager) {
+    public Booking(String ID, Date dateBooked, Date endDate, List<Room> roomsBooked, double totalPrice, Account user, Account manager) {
         bookingID = ID;
         this.startDate = dateBooked;
         this.endDate = endDate;
         this.roomsBooked = roomsBooked;
-        totalPrice = 0;
-//        for (int i = 0; i < roomsBooked.size(); i++) {
-//            totalPrice += roomsBooked.get(i).price;
-//        }
+        this.totalPrice = totalPrice;
         this.user = user;
         bookingManager = manager;
     }

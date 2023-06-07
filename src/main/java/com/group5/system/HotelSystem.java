@@ -49,7 +49,7 @@ public abstract class HotelSystem {
 	 * @return Returns a booking object which represents the booking
 	 */
 	protected Booking makeBooking(Date begin, Date end, List<Room> rooms, Account account, Account manager) {
-		Booking booking = new Booking(String.valueOf(System.currentTimeMillis()), begin, end, rooms, account, manager);
+		Booking booking = new Booking(String.valueOf(System.currentTimeMillis()), begin, end, rooms, rooms.size() * 100, account, manager);
 		HotelBookingData.book(booking);
 		bookings.add(booking);
 		return booking;

@@ -3,12 +3,14 @@ package com.group5.database;
 import com.group5.hotel.*;
 
 import java.sql.DatabaseMetaData;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
 public class HotelDatabase {
 	private static DatabaseManager dbManager;
+	private static List<Account> cacheAccounts;
 
 	public HotelDatabase() {
 		dbManager = new DatabaseManager();
@@ -18,11 +20,11 @@ public class HotelDatabase {
 		createTable("bookings", SQL.createBookingTable());
 		createTable("rooms", SQL.createRoomsTable());
 
-		Account acc = new Account("user", null, null, null, null, AccountPermission.USER);
-		List<Room> roomsBooked = new LinkedList<Room>();
-		roomsBooked.add(new Room(1, 'A'));
-		roomsBooked.add(new Room(1, 'B'));
-//		Booking booking = new Booking("1", new Date(), new Date(), roomsBooked, acc, acc);
+//		Account acc = new Account("user", null, null, null, null, AccountPermission.USER);
+//		List<Room> roomsBooked = new LinkedList<Room>();
+//		roomsBooked.add(new Room(1, 'A'));
+//		roomsBooked.add(new Room(1, 'B'));
+//		Booking booking = new Booking("1", new java.util.Date(), new java.util.Date(), roomsBooked, roomsBooked.size()*100, acc, acc);
 //
 //		String[] roomQueries = SQL.insertRoomsTable(booking);
 //		for (String str : roomQueries) {
@@ -118,12 +120,77 @@ public class HotelDatabase {
 			}
 			resultSet.close();
 		} catch (SQLException ex) { System.out.println(ex.getMessage());}
+		cacheAccounts = accounts;
 		return accounts;
 	}
 
-	// TODO:
-	public static List<Booking> loadBooking() {
-		return new ArrayList<>();
+	private static Map<String, List<Room>> getRooms() {
+		String tableName = "rooms";
+		if (!tableExists(tableName)) return null;
+
+		ResultSet resultSet = dbManager.query(SQL.selectAll(tableName));
+		try {
+			if (!resultSet.next()) System.out.println("No results");
+			else {
+				do {
+					String bookingID = resultSet.getString("bookingID");
+					String room = resultSet.getString("room");
+					Room roomObj = new Room(room.charAt(0), room.charAt(1));
+
+					BookingRooms.addRoom(bookingID, roomObj);
+				} while (resultSet.next());
+			}
+			resultSet.close();
+		} catch (SQLException ex) { System.out.println(ex.getMessage());}
+		return BookingRooms.rooms;
+	}
+
+	/*
+			"CREATE TABLE Bookings (\n" +
+			"    bookingID VARCHAR(22),\n" +
+			"    startDate DATE NOT NULL,\n" +
+			"    endDate DATE NOT NULL,\n" +
+			"    price REAL NOT NULL,\n" +
+			"    booker VARCHAR(20) NOT NULL,\n" +
+			"    manager VARCHAR(20) NOT NULL,\n" +
+			"\n" +
+			"    PRIMARY KEY (bookingID),\n" +
+			"    FOREIGN KEY (booker) REFERENCES Accounts(username),\n" +
+			"    FOREIGN KEY (manager) REFERENCES Accounts(username)\n" +
+			")",
+	 */
+	public static List<Booking> loadBookings() {
+		Map<String, List<Room>> bookingRooms = getRooms();
+		String tableName = "bookings";
+		if (!tableExists(tableName)) return null;
+
+		List<Booking> bookings = null;
+		ResultSet resultSet = dbManager.query(SQL.selectAll(tableName));
+		try {
+			if (!resultSet.next()) System.out.println("No results");
+			else {
+				bookings = new ArrayList<>();
+				do {
+					String bookingID = resultSet.getString("bookingID");
+					java.util.Date startDate = resultSet.getTimestamp("startDate");
+					java.util.Date endDate = resultSet.getTimestamp("endDate");
+					float price = resultSet.getFloat("price");
+					String booker = resultSet.getString("booker");
+					String manager = resultSet.getString("manager");
+
+					List<Room> currentRooms = bookingRooms.get(bookingID);
+					Optional<Account> bookerAcc = cacheAccounts.stream().filter(x -> x.getUsername().equals(booker)).findFirst();
+ 					Optional<Account> managerAcc = cacheAccounts.stream().filter(x -> x.getUsername().equals(manager)).findFirst();
+
+					Booking booking = new Booking(bookingID, startDate, endDate, currentRooms, price, bookerAcc.get(), managerAcc.get());
+					bookings.add(booking);
+				} while (resultSet.next());
+			}
+			resultSet.close();
+		} catch (SQLException ex) { System.out.println(ex.getMessage());}
+
+		cacheAccounts = null;
+		return bookings;
 	}
 
 	// Added to LOWERCASE username UNTESTED

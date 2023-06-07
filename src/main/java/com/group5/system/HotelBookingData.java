@@ -5,7 +5,6 @@ import com.group5.hotel.Account;
 import com.group5.hotel.Booking;
 import com.group5.hotel.Credential;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -27,9 +26,7 @@ class HotelBookingData {
 		// open a new session after register, make login after, or auto login
 		credentials = HotelDatabase.loadCredentials();
 		accounts = HotelDatabase.loadAccounts();
-		
-		// TODO: bookings
-		bookings = FileIO.loadBookingJson();
+		bookings = HotelDatabase.loadBookings();
 	}
 
 	/**
@@ -38,7 +35,6 @@ class HotelBookingData {
 	 */
 	static void book(Booking booking) {
 		bookings.add(booking);
-		FileIO.saveBookings(bookings);
 
 		HotelDatabase.insertBookingTable(booking);
 	}
