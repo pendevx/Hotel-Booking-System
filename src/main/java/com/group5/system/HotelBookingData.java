@@ -38,6 +38,8 @@ class HotelBookingData {
 	static void book(Booking booking) {
 		bookings.add(booking);
 		FileIO.saveBookings(bookings);
+
+		HotelDatabase.insertBookingTable(booking);
 	}
 
 	/**

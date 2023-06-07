@@ -121,7 +121,7 @@ public class HotelDatabase {
 
 	// Added to LOWERCASE username UNTESTED
 	public static void insertCredentialTable(Credential credential) {
-			new Thread(() -> {
+		new Thread(() -> {
 			try {
 				String username = credential.getUsername().toLowerCase();
 				System.out.println(username);
@@ -134,7 +134,7 @@ public class HotelDatabase {
 
 	// Added to LOWERCASE username UNTESTED
 	public static void insertAccountTable(Account account) {
-			new Thread(() -> {
+		new Thread(() -> {
 			try {
 				String username = account.getUsername().toLowerCase();
 				String firstname = account.getFirstName();
@@ -146,6 +146,16 @@ public class HotelDatabase {
 			}
 			catch (Exception e) { throw new RuntimeException(e); }
 		}).start();
+	}
+
+	public static void insertBookingTable(Booking booking) {
+		new Thread(() -> {
+			try {
+				dbManager.update(SQL.insertBookingTable(booking));
+			} catch (Exception e) {
+				throw new RuntimeException(e);
+			}
+		});
 	}
 
 	// need reload database after
@@ -185,10 +195,5 @@ public class HotelDatabase {
 	// use on logout, close
 	public void closeConnection() {
 		this.dbManager.closeConnection();
-	}
-
-	public Booking createBooking(Booking b) {
-		String query = "INSERT INTO Bookings (";
-		return null;
 	}
 }

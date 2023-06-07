@@ -17,7 +17,6 @@ public class Booking {
     private Date endDate;
     private List<Room> roomsBooked;
     private double totalPrice;
-    private boolean isPaid;
     private Account user;
     private Account bookingManager;
 
@@ -39,7 +38,6 @@ public class Booking {
         for (int i = 0; i < roomsBooked.size(); i++) {
             totalPrice += roomsBooked.get(i).price;
         }
-        isPaid = false;
         this.user = user;
         bookingManager = manager;
     }
