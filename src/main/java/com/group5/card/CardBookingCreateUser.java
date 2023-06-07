@@ -6,7 +6,7 @@ import com.group5.component.Text.FontSize;
 public class CardBookingCreateUser extends Card {
 
 	public CardBookingCreateUser() {
-		super(500, 10, 20);
+		super(500);
 		final int W = this.WIDTH - 50;
 
 		this.add(new Container(W, 50, new Text("Make Booking", FontSize.H1)));

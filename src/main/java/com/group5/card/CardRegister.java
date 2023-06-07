@@ -19,8 +19,8 @@ public class CardRegister extends Card implements KeyPressListener {
 	public JTextField phoneNew = new JTextField(30);
 
 	public CardRegister() {
-		super(500, 500, 10, 5);
-		final int MARGIN = 70;
+		super(500, 500);
+		final int MARGIN = 50;
 		final int W = super.WIDTH - 120;
 
 		this.add(new Container(W, MARGIN, "New Username:", userFieldNew));

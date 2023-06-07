@@ -57,25 +57,11 @@ public final class DatabaseManager {
 	}
 
 	/**
-	 * Execute single update command on database.
-	 * 
-	 * @param sql statement to execute
-	 */
-	public void update(String sql) {
-		Statement statement = null;
-		try {
-			statement = connection.createStatement();
-			statement.executeUpdate(sql);
-		}
-		catch (SQLException ex) { System.out.println(ex.getMessage()); }
-	}
-
-	/**
-	 * Execute batch update command on database.
+	 * Execute batch/single update command on database.
 	 * 
 	 * @param sql statements to execute as array.
 	 */
-	public void updateBatch(String[] sql) {
+	public void update(String...sql) {
 		Statement statement = null;
 		try {
 			statement = connection.createStatement();
