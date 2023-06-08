@@ -2,7 +2,6 @@ package com.group5.controller;
 
 import com.group5.app.AppSession;
 import com.group5.card.CardRegister;
-import com.group5.component.Base;
 import com.group5.view.ViewGUI;
 import com.group5.view.ViewRegister;
 import java.awt.event.ActionEvent;
@@ -19,7 +18,7 @@ public class ControllerRegister extends Controller {
 	@Override
 	protected void init() {
 		this.registerView = new ViewRegister(this);
-		this.view.updateDisplay(registerView.getBasePanel());
+		super.updateDisplay(registerView.getBasePanel());
 	}
 
 	@Override
@@ -31,15 +30,25 @@ public class ControllerRegister extends Controller {
 	}
 
 	private void cancelHandler() {
-		view.updateDisplay(new ControllerLogin(view, getModel()).getLoginPanel());
+		new ControllerLogin(getView(), getModel());
 	}
 
 	private void submitHandler() {
-		System.out.println("submitted");
-	}
+		String usr = getCardRegister().userFieldNew.getText().toLowerCase();
+		String pwd = getCardRegister().passFieldNew.getText();
+		String fname = getCardRegister().firstNameNew.getText();
+		String lname = getCardRegister().lastNameNew.getText();
+		String email = getCardRegister().emailNew.getText().toLowerCase();
+		String phone = getCardRegister().phoneNew.getText();
 
-	public Base getRegisterPanel() {
-		return this.registerView.getBasePanel();
+		if (!hasEmptyField(getCardRegister(), usr, pwd, fname, lname, email, phone)) {
+			if (!getModel().checkUserNameExists(usr)) {
+				getModel().registerPortal(usr, pwd, fname, lname, email, phone);
+				if(getModel().loginPortal(usr, pwd)) super.renderClient();
+				else getCardRegister().showWarningPopup("Incorrect username or password!");
+			}
+			else getCardRegister().showWarningPopup("Username is taken.");
+		}
 	}
 
 	private CardRegister getCardRegister() {

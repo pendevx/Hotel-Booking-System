@@ -6,7 +6,6 @@ import com.group5.controller.Controller;
 
 public abstract class ViewClient extends View {
 	private CardAccount cardAccount;
-	private CardAccountEdit cardAccountEdit;
 	private Card cardBookingList;
 	private Card cardBookingCreate;
 
@@ -14,16 +13,8 @@ public abstract class ViewClient extends View {
 		super(controller);
 	}
 
-	public void renderAccountEdit() {
-		super.resetBasePanel();
-		this.cardAccountEdit = new CardAccountEdit();
-		cardAccountEdit.cancelButton.addActionListener(getController());
-		cardAccountEdit.saveButton.addActionListener(getController());
-		addToBase(cardAccountEdit);
-	}
-
 	public CardAccount getCardAccount() { return this.cardAccount; }
-	public CardAccountEdit getCardAccountEdit() { return this.cardAccountEdit; }
+//	public CardAccountEdit getCardAccountEdit() { return this.cardAccountEdit; }
 	public Card getCardBookingList() { return this.cardBookingList; }
 	public Card getCardBookingCreate() { return this.cardBookingCreate; }
 

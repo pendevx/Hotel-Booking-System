@@ -2,7 +2,6 @@ package com.group5.controller;
 
 import com.group5.app.AppSession;
 import com.group5.card.CardLogin;
-import com.group5.component.Base;
 import com.group5.component.KeyPressListener;
 import com.group5.view.ViewGUI;
 import com.group5.view.ViewLogin;
@@ -22,8 +21,14 @@ public class ControllerLogin extends Controller implements KeyPressListener {
 	@Override
 	protected void init() {
 		this.loginView = new ViewLogin(this);
-		this.view.updateDisplay(loginView.getBasePanel());
+		super.updateDisplay(loginView.getBasePanel());
 		addEnterKeyListener(loginView.getCardComponents());
+
+		/*** TEST ONLY ***/
+		getCardLogin().usernameField.setText("user");
+		getCardLogin().passwordField.setText("user");
+		/*** TEST ONLY ***/
+
 	}
 
 	@Override
@@ -46,23 +51,15 @@ public class ControllerLogin extends Controller implements KeyPressListener {
 		}
 	}
 
-	public Base getLoginPanel() {
-		return this.loginView.getBasePanel();
-	}
-
 	private void loginHandler() {
 		String usr = getCardLogin().usernameField.getText().toLowerCase();
 		String pwd = getCardLogin().passwordField.getText();
-		if(getModel().loginPortal(usr, pwd)) renderClient();
+		if(getModel().loginPortal(usr, pwd)) super.renderClient();
 		else getCardLogin().showWarningPopup("Incorrect username or password!");
 	}
 
-	private void renderClient() {
-		view.updateDisplay(new Base());
-	}
-
 	private void registerHandler() {
-		view.updateDisplay(new ControllerRegister(view, getModel()).getRegisterPanel());
+		new ControllerRegister(getView(), getModel());
 	}
 
 	private CardLogin getCardLogin() {
