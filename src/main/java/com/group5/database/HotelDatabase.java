@@ -181,7 +181,6 @@ public class HotelDatabase {
 		return bookings;
 	}
 
-	// Added to LOWERCASE username UNTESTED
 	public static void insertCredentialTable(Credential credential) {
 		new Thread(() -> {
 			try {
@@ -192,7 +191,6 @@ public class HotelDatabase {
 		}).start();
 	}
 
-	// Added to LOWERCASE username UNTESTED
 	public static void insertAccountTable(Account account) {
 		new Thread(() -> {
 			try {
@@ -202,6 +200,7 @@ public class HotelDatabase {
 			}
 		}).start();
 	}
+
 
 	public static void insertBookingTable(Booking booking) {
 		new Thread(() -> {

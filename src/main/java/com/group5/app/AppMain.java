@@ -1,7 +1,8 @@
 package com.group5.app;
 
-import com.group5.mvc.Controller;
-import com.group5.mvc.ViewGUI;
+import com.group5.controller.Controller;
+import com.group5.controller.ControllerLogin;
+import com.group5.view.ViewGUI;
 
 public class AppMain {
 
@@ -14,9 +15,6 @@ public class AppMain {
 
 	public AppMain() {
 		ViewGUI view = new ViewGUI();
-		Controller controller = new Controller(view);
-		view.addController(controller);
-		view.renderLogin();
-//		view.renderUser();
+		Controller controller = new ControllerLogin(view, new AppSession());
 	}
 }
