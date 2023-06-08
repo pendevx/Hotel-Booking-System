@@ -1,6 +1,7 @@
 package com.group5.system;
 
 import com.group5.database.HotelDatabase;
+import com.group5.exceptions.MismatchingCredentialsException;
 import com.group5.hotel.Account;
 import com.group5.hotel.Booking;
 import com.group5.hotel.Credential;
@@ -43,7 +44,7 @@ class HotelBookingData {
 	 * @return list of all registered usernames
 	 */
 	static Set<String> getUsernameList() {
-		return getCredentials().stream().map(x -> x.getUsername()).collect(Collectors.toSet());
+		return credentials.stream().map(x -> x.getUsername()).collect(Collectors.toSet());
 	}
 
 	/**
@@ -87,9 +88,9 @@ class HotelBookingData {
 	 * @param credentials The credentials of the account
 	 * @param account The account object containing user information
 	 */
-	public static void register(Credential credentials, Account account) {
+	public static void register(Credential credentials, Account account) throws MismatchingCredentialsException {
 		if (!credentials.getUsername().equals(account.getUsername()))
-			throw new RuntimeException("Credentials username and account username doesn't match!");
+			throw new MismatchingCredentialsException("The credentials and account provided do not match.");
 
 		// maybe remove this so reads database each time, but then
 		// auto login won't work

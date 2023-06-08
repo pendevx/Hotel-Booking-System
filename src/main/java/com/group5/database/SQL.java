@@ -1,6 +1,8 @@
 package com.group5.database;
 
+import com.group5.hotel.Account;
 import com.group5.hotel.Booking;
+import com.group5.hotel.Credential;
 import com.group5.hotel.Room;
 
 import java.util.List;
@@ -95,18 +97,19 @@ public class SQL {
 	//////////////////////////////////////////////////
 	// INSERT TABLE
 	//////////////////////////////////////////////////
-	static String insertAccountTable(String username, String firstname, String lastname, 
-			String phone, String email, String permission) {
-		return "INSERT INTO accounts VALUES "
-			+ "('"+username+"', '"+firstname+"', '"+lastname+"', '"+phone+"', '"+email+"', '"+permission+"')";
+
+	static String insertAccountTable(Account account) {
+		return String.format("INSERT INTO accounts VALUES ('%s', '%s', '%s', '%s', '%s', '%s')",
+			account.username, account.firstName, account.lastName, account.phone, account.email, account.getAccountTypeName());
 	}
 
-	static String insertCredentialTable(String username, String password) {
-		return "INSERT INTO credentials VALUES "
-				+ "('" + username + "', '" + password + "')";
+	static String insertCredentialTable(Credential credential) {
+		return String.format("INSERT INTO credentials VALUES ('%s', '%s')", credential.getUsername(), credential.getPassword());
 	}
 
 	static String insertBookingTable(Booking booking) {
+		insertRoomsTable(booking);
+
 		double price = booking.getRooms().size() * 100;
 		return
 			"INSERT INTO Bookings VALUES ('" +
@@ -118,13 +121,10 @@ public class SQL {
 				booking.getBookingManager().username + "')";
 	}
 
-	static String[] insertRoomsTable(Booking booking) {
+	private static String[] insertRoomsTable(Booking booking) {
 		String[] queries = new String[booking.getRooms().size()];
-		for (int i = 0; i < queries.length; i++) {
-			queries[i] = "INSERT INTO Rooms VALUES ('" +
-				booking.bookingID + "','" +
-				booking.getRooms().get(i).getRoomNumber() + "')";
-		}
+		for (int i = 0; i < queries.length; i++)
+			queries[i] = String.format("INSERT INTO Rooms VALUES ('%s', '%s')", booking.bookingID, booking.getRooms().get(i).getRoomNumber());
 
 		return queries;
 	}
@@ -133,19 +133,24 @@ public class SQL {
 	// UPDATE TABLE
 	//////////////////////////////////////////////////
 	static String updateAccountEmail(String username, String newEmail) {
-		return "UPDATE accounts "
-				+ "SET email = '" + newEmail + "' "
-				+ "WHERE username = '" + username + "'";
+//		return "UPDATE accounts "
+//				+ "SET email = '" + newEmail + "' "
+//				+ "WHERE username = '" + username + "'";
+
+		return String.format("UPDATE accounts SET email = '%s' WHERE username = '%s'", newEmail, username);
 	}
 
 	static String updateAccountPhone(String username, String newPhone) {
-		return "UPDATE accounts "
-				+ "SET phone = '" + newPhone + "' "
-				+ "WHERE username = '" + username + "'";
+//		return "UPDATE accounts "
+//				+ "SET phone = '" + newPhone + "' "
+//				+ "WHERE username = '" + username + "'";
+
+		return String.format("UPDATE accounts SET phone = '%s' WHERE username = '%s'", newPhone, username);
 	}
 
 	static String deleteBooking(String bookingID) {
-		return "DELETE FROM Bookings WHERE bookingID = '" + bookingID + "'";
+//		return "DELETE FROM Bookings WHERE bookingID = '" + bookingID + "'";
+		return String.format("DELETE FROM Bookings WHERE bookingID = '%s'", bookingID);
 	}
 
 	//////////////////////////////////////////////////

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="f857e03f-5a4e-4e4a-bf9b-26a30ef847a6" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/group5/app/AppSession.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/group5/app/AppSession.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/group5/database/HotelDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/group5/database/HotelDatabase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/group5/system/HotelBookingData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/group5/system/HotelBookingData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/account_details.json" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/account_details.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/group5/app/AppMain.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/group5/app/AppMain.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/group5/app/AppSession.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/group5/app/AppSession.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/group5/card/CardAccount.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/group5/card/CardAccount.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/group5/card/CardAccountEdit$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/group5/card/CardAccountEdit$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/group5/card/CardAccountEdit.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/group5/card/CardAccountEdit.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/group5/card/CardAccountPic.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/group5/card/CardAccountPic.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/group5/card/CardLogin$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/group5/card/CardLogin$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/group5/card/CardLogin.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/group5/card/CardLogin.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/group5/card/CardRegister$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/group5/card/CardRegister$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/group5/card/CardRegister.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/group5/card/CardRegister.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/group5/card/ScrollTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/group5/card/ScrollTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/group5/component/Base.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/group5/component/Base.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/group5/component/Button.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/group5/component/Button.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/group5/component/Card.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/group5/component/Card.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/group5/component/Container.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/group5/component/Container.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/group5/component/KeyPressListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/group5/component/KeyPressListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/group5/component/Text$FontSize.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/group5/component/Text$FontSize.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/group5/component/Text.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/group5/component/Text.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/group5/database/DatabaseManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/group5/database/DatabaseManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/group5/database/HotelDatabase.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/group5/database/HotelDatabase.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/group5/hotel/Account.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/group5/hotel/Account.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/group5/hotel/Credential.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/group5/hotel/Credential.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/group5/hotel/Hotel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/group5/hotel/Hotel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/group5/mvc/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/group5/mvc/Controller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/group5/mvc/ViewGUI$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/group5/mvc/ViewGUI$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/group5/mvc/ViewGUI$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/group5/mvc/ViewGUI$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/group5/mvc/ViewGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/group5/mvc/ViewGUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/group5/system/AccountManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/group5/system/AccountManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/group5/system/FileIO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/group5/system/FileIO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/group5/system/HotelBookingData.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/group5/system/HotelBookingData.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/group5/system/HotelSystem.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/group5/system/HotelSystem.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/group5/system/HotelSystemAdmin.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/group5/system/HotelSystemAdmin.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/group5/system/HotelSystemUser.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/group5/system/HotelSystemUser.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/group5/util/ParseInput.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/group5/util/ParseInput.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/group5/view/View.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/group5/view/View.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/group5/view/ViewAdmin.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/group5/view/ViewAdmin.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/group5/view/ViewUser.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/group5/view/ViewUser.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/credentials.json" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/credentials.json" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="2Q3bBzRbA6wleLWfm8LRaavhQSt" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Projects/Hotel-Booking-System&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
+  }
+}</component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f857e03f-5a4e-4e4a-bf9b-26a30ef847a6" name="Changes" comment="" />
+      <created>1684585081318</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1684585081318</updated>
+    </task>
+    <servers />
+  </component>
+</project>
