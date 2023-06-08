@@ -7,7 +7,6 @@ import javax.swing.JPanel;
 public class CardAccountPic extends JPanel {
 	
 	public CardAccountPic(int width, int height) {
-//		super(width, height, 0, 0);
 		this.setPreferredSize(new Dimension(width, height));
 		this.setBackground(Color.BLACK);
 	}

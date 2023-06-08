@@ -54,10 +54,10 @@ public class Hotel {
      * @return toString location of hotel
      */
 	public String getAddress() {
-		StringBuilder out = new StringBuilder(this.street + "\n");
-		out.append(this.suburb+"\n");
+		StringBuilder out = new StringBuilder(this.street + ", \n");
+		out.append(this.suburb+", \n");
 		out.append(this.city+", ");
-		out.append(this.postcode+"\n");
+		out.append(this.postcode+", \n");
 		out.append(this.country);
 		return out.toString();
 	}

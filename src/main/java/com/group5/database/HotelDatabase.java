@@ -179,7 +179,6 @@ public class HotelDatabase {
 		return bookings;
 	}
 
-	// Added to LOWERCASE username UNTESTED
 	public static void insertCredentialTable(Credential credential) {
 		new Thread(() -> {
 			try {
@@ -192,7 +191,6 @@ public class HotelDatabase {
 		}).start();
 	}
 
-	// Added to LOWERCASE username UNTESTED
 	public static void insertAccountTable(Account account) {
 		new Thread(() -> {
 			try {
@@ -208,6 +206,7 @@ public class HotelDatabase {
 		}).start();
 	}
 
+
 	public static void insertBookingTable(Booking booking) {
 		new Thread(() -> {
 			try {
@@ -218,26 +217,32 @@ public class HotelDatabase {
 		});
 	}
 
-	// need reload database after
-	// change account info in system, then write to database
-	// need modify account, change to no final
-	// only need for account
-	public static void updateAccountPhone(Account account) {
-		String username = account.getUsername();
-		String newPhone = account.getPhone();
-		dbManager.update(SQL.updateAccountPhone(username, newPhone));
-	}
-	
 	public static void updateAccountEmail(Account account) {
-		String username = account.getUsername();
-		String newEmail = account.getEmail().toLowerCase();
-		dbManager.update(SQL.updateAccountEmail(username, newEmail));
+		new Thread(() -> {
+			try {
+				String username = account.getUsername();
+				String newEmail = account.getEmail().toLowerCase();
+				dbManager.update(SQL.updateAccountEmail(username, newEmail));
+			}
+			catch (Exception e) { throw new RuntimeException(e); }
+		}).start();
 	}
 
 	public static void deleteBooking(Booking booking) {
 		dbManager.update(SQL.deleteBooking(booking.bookingID));
 	}
 
+	public static void updateAccountPhone(Account account) {
+		new Thread(() -> {
+			try {
+				String username = account.getUsername();
+				String newPhone = account.getPhone();
+				dbManager.update(SQL.updateAccountPhone(username, newPhone));
+			}
+			catch (Exception e) { throw new RuntimeException(e); }
+		}).start();
+	}
+	
 	private static void createTable(String name, String...sql) {
 		if (!tableExists(name)) dbManager.update(sql);
 	}
