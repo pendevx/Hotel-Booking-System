@@ -26,8 +26,7 @@ class HotelBookingData {
 		// open a new session after register, make login after, or auto login
 		credentials = HotelDatabase.loadCredentials();
 		accounts = HotelDatabase.loadAccounts();
-//		bookings = HotelDatabase.loadBookings();
-		bookings = FileIO.loadBookingJson();
+		bookings = HotelDatabase.loadBookings();
 	}
 
 	/**

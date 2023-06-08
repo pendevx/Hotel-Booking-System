@@ -19,6 +19,7 @@ public class HotelDatabase {
 		createTable("accounts", SQL.createAccountTable());
 		createTable("bookings", SQL.createBookingTable());
 		createTable("rooms", SQL.createRoomsTable());
+//		loadBookings();
 
 //		Account acc = new Account("user", null, null, null, null, AccountPermission.USER);
 //		List<Room> roomsBooked = new LinkedList<Room>();
@@ -38,6 +39,7 @@ public class HotelDatabase {
 //		Printer.printQuery("accounts", dbManager.query(SQL.selectAll("accounts"))); // for testing
 //		// TODO
 //		Printer.printQuery("bookings", dbManager.query(SQL.selectAll("bookings"))); // for testing
+//		System.out.println(tableExists("bookings"));
 //		Printer.printQuery("rooms", dbManager.query(SQL.selectAll("rooms")));
 	}
 
@@ -176,6 +178,7 @@ public class HotelDatabase {
 		} catch (SQLException ex) { System.out.println(ex.getMessage());}
 
 		cacheAccounts = null;
+		if (bookings == null) bookings = new ArrayList<>();
 		return bookings;
 	}
 
