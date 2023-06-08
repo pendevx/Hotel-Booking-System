@@ -52,6 +52,8 @@ public class ControllerLogin extends Controller implements KeyPressListener {
 	}
 
 	private void loginHandler() {
+		// handle input of '' ""
+		// handle input of '' "" for email and phonee
 		String usr = getCardLogin().usernameField.getText().toLowerCase();
 		String pwd = getCardLogin().passwordField.getText();
 		if(getModel().loginPortal(usr, pwd)) super.renderClient();
