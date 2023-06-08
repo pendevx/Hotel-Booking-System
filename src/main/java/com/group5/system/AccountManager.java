@@ -42,7 +42,7 @@ public class AccountManager {
 
 		// If no matching credentials were found, throw an exception
 		if (!match.isPresent())
-			return null;
+			throw new AccountNotFoundException("The username did not match any existing account.");
 
 		// This will only run if a pair of matching credentials were found.
 		// Therefore, it is safe to filter through via the username parameter directly.

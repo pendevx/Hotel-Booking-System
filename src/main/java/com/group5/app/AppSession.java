@@ -25,6 +25,8 @@ public class AppSession {
 	 * @param enteredPassword
 	 * @return boolean value if it loaded the hotelSystem
 	 */
+	// exception go one level deeperin into AccountManager instead
+	// not able to return boolean false
 	public boolean loginPortal(String enteredUsername, String enteredPassword) {
 		try {
 			this.hotelSystem = AccountManager.login(enteredUsername, enteredPassword);

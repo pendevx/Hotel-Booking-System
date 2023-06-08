@@ -2,11 +2,15 @@ package com.group5.controller;
 
 import com.group5.app.AppSession;
 import com.group5.card.CardRegister;
+import com.group5.component.KeyPressListener;
 import com.group5.view.ViewGUI;
 import com.group5.view.ViewRegister;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import javax.swing.JComponent;
 
-public class ControllerRegister extends Controller {
+public class ControllerRegister extends Controller implements KeyPressListener {
 
 	private ViewRegister registerView;
 
@@ -19,6 +23,7 @@ public class ControllerRegister extends Controller {
 	protected void init() {
 		this.registerView = new ViewRegister(this);
 		super.updateDisplay(registerView.getBasePanel());
+		addEnterKeyListener(registerView.getCardComponents());
 	}
 
 	@Override
@@ -27,6 +32,19 @@ public class ControllerRegister extends Controller {
 			if (e.getSource() == getCardRegister().cancelButton) cancelHandler();
 			else if (e.getSource() == getCardRegister().submitButton) submitHandler();
 		}
+	}
+
+	@Override
+	public void addEnterKeyListener(JComponent... components) {
+		for (JComponent c : components) {
+			c.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyPressed(KeyEvent e) {
+					if(e.getKeyCode() == KeyEvent.VK_ENTER) getCardRegister().submitButton.doClick();
+				}
+			});
+		}
+
 	}
 
 	private void cancelHandler() {

@@ -82,7 +82,7 @@
 - [x] No manual configurations.
 - [ ] Functionality of program, is complex enough, having most common features of the project implemented.
 - [ ] Implemented features are robust.
-- [x]] Any input can be handled perfectly without throwing exceptions.
+- [x] Any input can be handled perfectly without throwing exceptions.
 - [x] Messages can be prompted to end-user for correct input.
 ```
 
