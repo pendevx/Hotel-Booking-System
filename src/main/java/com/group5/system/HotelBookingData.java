@@ -44,7 +44,7 @@ class HotelBookingData {
 	 * @return list of all registered usernames
 	 */
 	static Set<String> getUsernameList() {
-		return getCredentials().stream().map(x -> x.getUsername()).collect(Collectors.toSet());
+		return credentials.stream().map(x -> x.getUsername()).collect(Collectors.toSet());
 	}
 
 	/**

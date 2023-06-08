@@ -185,12 +185,10 @@ public class HotelDatabase {
 	public static void insertCredentialTable(Credential credential) {
 		new Thread(() -> {
 			try {
-				String username = credential.getUsername().toLowerCase();
-				System.out.println(username);
-				String password = credential.getPassword();
-				dbManager.update(SQL.insertCredentialTable(username, password));
+				dbManager.update(SQL.insertCredentialTable(credential));
+			} catch (SQLException e) {
+				throw new RuntimeException(e);
 			}
-			catch (Exception e) { throw new RuntimeException(e); }
 		}).start();
 	}
 
@@ -198,15 +196,10 @@ public class HotelDatabase {
 	public static void insertAccountTable(Account account) {
 		new Thread(() -> {
 			try {
-				String username = account.getUsername().toLowerCase();
-				String firstname = account.getFirstName();
-				String lastname = account.getLastName();
-				String phone = account.getPhone();
-				String email = account.getEmail().toLowerCase();
-				String permission = account.getAccountTypeName();
-				dbManager.update(SQL.insertAccountTable(username, firstname, lastname, phone, email, permission));
+				dbManager.update(SQL.insertAccountTable(account));
+			} catch (Exception e) {
+				throw new RuntimeException(e);
 			}
-			catch (Exception e) { throw new RuntimeException(e); }
 		}).start();
 	}
 
@@ -230,17 +223,18 @@ public class HotelDatabase {
 		try {
 			dbManager.update(SQL.updateAccountPhone(username, newPhone));
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
+			throw new RuntimeException(e);
 		}
 	}
 	
 	public static void updateAccountEmail(Account account) {
 		String username = account.getUsername();
 		String newEmail = account.getEmail().toLowerCase();
+
 		try {
 			dbManager.update(SQL.updateAccountEmail(username, newEmail));
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
+			throw new RuntimeException(e);
 		}
 	}
 
@@ -248,6 +242,7 @@ public class HotelDatabase {
 		try {
 			ResultSet result = dbManager.query("SELECT * FROM Bookings WHERE bookingID = '" + booking + "'");
 			dbManager.update(SQL.deleteBooking(booking.bookingID));
+
 			if (!result.next()) {
 				throw new BookingNotFoundException("The booking ID does not exist.");
 			}
@@ -267,14 +262,19 @@ public class HotelDatabase {
 	private static boolean tableExists(String name) {
 		try {
 			DatabaseMetaData metadata = dbManager.getConnection().getMetaData();
-			String[] types = {"TABLE"};
 			ResultSet resultSet = metadata.getTables(null, null, null, null);
+
 			while (resultSet.next()) {
 				String tableName = resultSet.getString("TABLE_NAME");
-				if (tableName.equalsIgnoreCase(name)) return true;
+
+				if (tableName.equalsIgnoreCase(name))
+					return true;
 			}
 			resultSet.close();
-		} catch (SQLException ex) { System.out.println(ex.getMessage()); }
+		} catch (SQLException ex) {
+			System.out.println(ex.getMessage());
+		}
+
 		return false;
 	}
 

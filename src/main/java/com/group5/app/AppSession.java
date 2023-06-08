@@ -28,28 +28,10 @@ public class AppSession {
 	public boolean loginPortal(String enteredUsername, String enteredPassword) {
 		try {
 			this.hotelSystem = AccountManager.login(enteredUsername, enteredPassword);
+			return true;
 		} catch (AccountNotFoundException e) {
-			/*
-
-
-
-
-
-
-
-			handle exception
-
-
-
-
-
-
-
-
-			 */
+			return false;
 		}
-		if (hotelSystem != null) return true;
-		else return false;
 	}
 
 	/***
