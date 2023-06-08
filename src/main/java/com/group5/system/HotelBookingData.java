@@ -97,8 +97,8 @@ class HotelBookingData {
 		HotelBookingData.credentials.add(credentials);
 		accounts.add(account);
 
-		HotelDatabase.insertAccountTable(account);
 		HotelDatabase.insertCredentialTable(credentials);
+		HotelDatabase.insertAccountTable(account);
 	}
 
 	// Getter methods

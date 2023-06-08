@@ -255,7 +255,7 @@ public class HotelDatabase {
 
 	private static void createTable(String name, String...sql) {
 		try {
-			if (!tableExists(name)) dbManager.update(sql);
+			if (!tableExists(name)) dbManager.updateBatch(sql);
 		} catch (SQLException e) {
 			System.out.println("Table " + name + " exists.");
 		}

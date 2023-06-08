@@ -61,7 +61,12 @@ public final class DatabaseManager {
 	 * 
 	 * @param sql statements to execute as array.
 	 */
-	public void update(String...sql) throws SQLException {
+	public void update(String sql) throws SQLException {
+		Statement statement = connection.createStatement();
+		statement.execute(sql);
+	}
+
+	public void updateBatch(String... sql) throws SQLException {
 		Statement statement = connection.createStatement();
 		for (String s : sql) statement.addBatch(s);
 		statement.executeBatch();
