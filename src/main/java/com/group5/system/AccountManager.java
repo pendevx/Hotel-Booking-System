@@ -1,5 +1,7 @@
 package com.group5.system;
 
+import com.group5.exceptions.AccountNotFoundException;
+import com.group5.exceptions.MismatchingCredentialsException;
 import com.group5.hotel.Account;
 import com.group5.hotel.AccountPermission;
 import com.group5.hotel.Credential;
@@ -21,12 +23,17 @@ public class AccountManager {
 	public static Account createAccount(String username, String password, String fname, String lname, String phone, String email) {
 		Account account = new Account(username, fname, lname, phone, email, AccountPermission.USER);
 		Credential credentials = new Credential(username, password);
-		register(credentials, account);
+
+		try {
+			register(credentials, account);
+		} catch (MismatchingCredentialsException e) {
+			return null;
+		}
 
 		return account;
 	}
 
-	public static HotelSystem login(String username, String password) {
+	public static HotelSystem login(String username, String password) throws AccountNotFoundException {
 		Credential providedCredentials = new Credential(username, password);
 		HashSet<Credential> credentialsHS = new HashSet<Credential>(getCredentials());
 
@@ -42,7 +49,7 @@ public class AccountManager {
 		Optional<Account> accountMatch = getAccounts().stream().filter(x -> x.username.equals(username)).findFirst();
 
 		if (!accountMatch.isPresent()) {
-			throw new RuntimeException("not found");
+			throw new AccountNotFoundException("The username did not match any existing account.");
 		}
 
 		Account account = accountMatch.get();
@@ -53,6 +60,6 @@ public class AccountManager {
 			return new HotelSystemUser(account, HotelBookingData.getBookingsWhere(x -> x.getAccount().equals(account)));
 		}
 
-		throw new RuntimeException("not found");
+		throw new AccountNotFoundException("The username did not match any existing account.");
 	}
 }

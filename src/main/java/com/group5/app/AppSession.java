@@ -1,6 +1,7 @@
 package com.group5.app;
 
 import com.group5.database.HotelDatabase;
+import com.group5.exceptions.AccountNotFoundException;
 import com.group5.system.*;
 import com.group5.hotel.Account;
 
@@ -25,7 +26,28 @@ public class AppSession {
 	 * @return boolean value if it loaded the hotelSystem
 	 */
 	public boolean loginPortal(String enteredUsername, String enteredPassword) {
-		this.hotelSystem = AccountManager.login(enteredUsername, enteredPassword);
+		try {
+			this.hotelSystem = AccountManager.login(enteredUsername, enteredPassword);
+		} catch (AccountNotFoundException e) {
+			/*
+
+
+
+
+
+
+
+			handle exception
+
+
+
+
+
+
+
+
+			 */
+		}
 		if (hotelSystem != null) return true;
 		else return false;
 	}

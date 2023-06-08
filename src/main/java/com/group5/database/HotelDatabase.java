@@ -1,7 +1,9 @@
 package com.group5.database;
 
+import com.group5.exceptions.BookingNotFoundException;
 import com.group5.hotel.*;
 
+import java.awt.print.Book;
 import java.sql.DatabaseMetaData;
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -225,21 +227,41 @@ public class HotelDatabase {
 	public static void updateAccountPhone(Account account) {
 		String username = account.getUsername();
 		String newPhone = account.getPhone();
-		dbManager.update(SQL.updateAccountPhone(username, newPhone));
+		try {
+			dbManager.update(SQL.updateAccountPhone(username, newPhone));
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 	
 	public static void updateAccountEmail(Account account) {
 		String username = account.getUsername();
 		String newEmail = account.getEmail().toLowerCase();
-		dbManager.update(SQL.updateAccountEmail(username, newEmail));
+		try {
+			dbManager.update(SQL.updateAccountEmail(username, newEmail));
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 
-	public static void deleteBooking(Booking booking) {
-		dbManager.update(SQL.deleteBooking(booking.bookingID));
+	public static void deleteBooking(Booking booking) throws BookingNotFoundException {
+		try {
+			ResultSet result = dbManager.query("SELECT * FROM Bookings WHERE bookingID = '" + booking + "'");
+			dbManager.update(SQL.deleteBooking(booking.bookingID));
+			if (!result.next()) {
+				throw new BookingNotFoundException("The booking ID does not exist.");
+			}
+		} catch (SQLException e) {
+			throw new BookingNotFoundException("The booking ID does not exist.");
+		}
 	}
 
 	private static void createTable(String name, String...sql) {
-		if (!tableExists(name)) dbManager.update(sql);
+		try {
+			if (!tableExists(name)) dbManager.update(sql);
+		} catch (SQLException e) {
+			System.out.println("Table " + name + " exists.");
+		}
 	}
 
 	private static boolean tableExists(String name) {
