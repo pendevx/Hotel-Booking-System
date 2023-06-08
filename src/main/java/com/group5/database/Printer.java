@@ -9,10 +9,12 @@ public class Printer {
 		if (resultSet == null) return;
 		try {
 			if (!resultSet.next()) System.out.println("No results");
-			else if (query.equals("account")) queryAccount(resultSet);
-			else if (query.equals("credential")) queryCredentials(resultSet);
+			else if (query.equals("accounts")) queryAccount(resultSet);
+			else if (query.equals("credentials")) queryCredentials(resultSet);
 			else if (query.equals("username")) queryUsername(resultSet);
 			else if (query.equals("hotel")) queryHotel(resultSet);
+			else if (query.equals("bookings")) queryBookings(resultSet);
+			else if (query.equals("rooms")) queryRooms(resultSet);
 			resultSet.close();
 		}
 		catch (SQLException ex) { System.out.println(ex.getMessage());}
@@ -25,7 +27,7 @@ public class Printer {
 			System.out.print(resultSet.getString("lastname") + ", ");
 			System.out.print(resultSet.getString("phone") + ", ");
 			System.out.print(resultSet.getString("email") + ", ");
-			System.out.println(resultSet.getString("permission"));
+			System.out.println(resultSet.getString("permissions"));
 		} while (resultSet.next());
 	}
 
@@ -53,5 +55,23 @@ public class Printer {
 			System.out.print(resultSet.getString("phone") + ", ");
 			System.out.println(resultSet.getString("email"));
 		} while (resultSet.next());
+	}
+
+	public static void queryBookings(ResultSet rs) throws SQLException {
+		do {
+			System.out.println(rs.getString("bookingID") + ",");
+			System.out.println(rs.getString("startDate") + ",");
+			System.out.println(rs.getString("endDate") + ",");
+			System.out.println(rs.getString("price") + ",");
+			System.out.println(rs.getString("booker") + ",");
+			System.out.println(rs.getString("manager") + ",");
+		} while (rs.next());
+	}
+
+	public static void queryRooms(ResultSet rs) throws SQLException {
+		do {
+			System.out.println(rs.getString("bookingID"));
+			System.out.println(rs.getString("room"));
+		} while (rs.next());
 	}
 }

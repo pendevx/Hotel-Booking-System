@@ -17,7 +17,6 @@ public class Booking {
     private Date endDate;
     private List<Room> roomsBooked;
     private double totalPrice;
-    private boolean isPaid;
     private Account user;
     private Account bookingManager;
 
@@ -30,16 +29,12 @@ public class Booking {
      * @param user The user who is booking
      * @param manager The user who managed/created the booking
      */
-    public Booking(String ID, Date dateBooked, Date endDate, List<Room> roomsBooked, Account user, Account manager) {
+    public Booking(String ID, Date dateBooked, Date endDate, List<Room> roomsBooked, double totalPrice, Account user, Account manager) {
         bookingID = ID;
         this.startDate = dateBooked;
         this.endDate = endDate;
         this.roomsBooked = roomsBooked;
-        totalPrice = 0;
-        for (int i = 0; i < roomsBooked.size(); i++) {
-            totalPrice += roomsBooked.get(i).price;
-        }
-        isPaid = false;
+        this.totalPrice = totalPrice;
         this.user = user;
         bookingManager = manager;
     }
@@ -73,4 +68,5 @@ public class Booking {
     public Date endDate() { return endDate; }
     public Account getAccount() { return user; }
     public boolean equals(Booking b) { return bookingID.equals(b.bookingID); }
+    public Account getBookingManager() { return bookingManager; }
 }

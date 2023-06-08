@@ -1,5 +1,10 @@
 package com.group5.database;
 
+import com.group5.hotel.Booking;
+import com.group5.hotel.Room;
+
+import java.util.List;
+
 public class SQL {
 	//////////////////////////////////////////////////
 	// CREATE TABLE
@@ -9,7 +14,7 @@ public class SQL {
 	static String[] createHotelTable() {
 		return new String[] 
 		{
-			"CREATE TABLE hotel ( "
+			"CREATE TABLE Hotel ( "
 				+ "hotelName VARCHAR(50),"
 				+ "street VARCHAR(50),"
 				+ "suburb VARCHAR(50),"
@@ -20,7 +25,7 @@ public class SQL {
 				+ "email VARCHAR(50)"
 				+ ")",
 
-			"INSERT INTO hotel VALUES "
+			"INSERT INTO Hotel VALUES "
 			+ "('Queens Hotel', '10 Main Street', 'CBD', 'Auckland', '1010', 'New Zealand', '+64090888', 'hotel@hotel.com')"
 		};
 	}
@@ -28,12 +33,13 @@ public class SQL {
 	static String[] createCredentialTable() {
 		return new String[]
 		{
-			"CREATE TABLE credential ( "
-				+ "username VARCHAR(50),"
-				+ "password VARCHAR(50)"
-				+ ")",
+			"CREATE TABLE Credentials (\n" +
+			"    username VARCHAR(20),\n" +
+			"    password VARCHAR(20) NOT NULL,\n" +
+			"    PRIMARY KEY (username)\n" +
+			")",
 
-			"INSERT INTO credential VALUES "
+			"INSERT INTO Credentials VALUES "
 			+ "('admin', 'admin'),"
 			+ "('user', 'user')"
 		};
@@ -42,16 +48,18 @@ public class SQL {
 	static String[] createAccountTable() {
 		return new String[]
 		{
-			"CREATE TABLE account ( "
-				+ "username VARCHAR(50),"
-				+ "firstname VARCHAR(50),"
-				+ "lastname VARCHAR(50),"
-				+ "phone VARCHAR(50),"
-				+ "email VARCHAR(50),"
-				+ "permission VARCHAR(10)"
-				+ ")",
+			"CREATE TABLE Accounts (\n" +
+			"    username VARCHAR(20),\n" +
+			"    firstName VARCHAR(30) NOT NULL,\n" +
+			"    lastName VARCHAR(30) NOT NULL,\n" +
+			"    phone VARCHAR(16),\n" +
+			"    email VARCHAR(60) NOT NULL,\n" +
+			"    permissions VARCHAR(10) NOT NULL,\n" +
+			"    PRIMARY KEY (username),\n" +
+			"    FOREIGN KEY (username) REFERENCES Credentials(username)\n" +
+			")",
 
-			"INSERT INTO account VALUES "
+			"INSERT INTO Accounts VALUES "
 			+ "('admin', 'admin', 'admin', '+21153324', 'admin@hotel.com', 'ADMIN'),"
 			+ "('user', 'user', 'user', '+21152297', 'group5@comp603.com', 'USER')"
 		};
@@ -60,16 +68,26 @@ public class SQL {
 	static String[] createBookingTable() {
 		return new String[]
 		{
-			"CREATE TABLE booking ( "
-				+ "bookingID VARCHAR(50),"
-				+ "bookingID VARCHAR(50),"
-				+ "bookingID VARCHAR(50)"
-				+ ")",
+			"CREATE TABLE Bookings (\n" +
+			"    bookingID VARCHAR(22),\n" +
+			"    startDate DATE NOT NULL,\n" +
+			"    endDate DATE NOT NULL,\n" +
+			"    price REAL NOT NULL,\n" +
+			"    booker VARCHAR(20) NOT NULL,\n" +
+			"    manager VARCHAR(20) NOT NULL,\n" +
+			"\n" +
+			"    PRIMARY KEY (bookingID),\n" +
+			"    FOREIGN KEY (booker) REFERENCES Accounts(username),\n" +
+			"    FOREIGN KEY (manager) REFERENCES Accounts(username)\n" +
+			")",
+		};
+	}
 
-			"INSERT INTO booking VALUES "
-			+ "(''),"
-			+ "(''),"
-			+ "('')"
+	static String[] createRoomsTable() {
+		return new String[] {
+			"CREATE TABLE Rooms (\n" +
+			"    bookingID VARCHAR(22) NOT NULL,\n" +
+			"    room CHAR(2))"
 		};
 	}
 
@@ -79,32 +97,55 @@ public class SQL {
 	//////////////////////////////////////////////////
 	static String insertAccountTable(String username, String firstname, String lastname, 
 			String phone, String email, String permission) {
-		return "INSERT INTO account VALUES "
+		return "INSERT INTO accounts VALUES "
 			+ "('"+username+"', '"+firstname+"', '"+lastname+"', '"+phone+"', '"+email+"', '"+permission+"')";
 	}
 
 	static String insertCredentialTable(String username, String password) {
-		return "INSERT INTO credential VALUES "
+		return "INSERT INTO credentials VALUES "
 				+ "('" + username + "', '" + password + "')";
 	}
 
-	static String insertBookingTable() {
-		return "";
+	static String insertBookingTable(Booking booking) {
+		double price = booking.getRooms().size() * 100;
+		return
+			"INSERT INTO Bookings VALUES ('" +
+				booking.bookingID + "','" +
+				new java.sql.Date(booking.beginDate().getTime()) + "','" +
+				new java.sql.Date(booking.endDate().getTime()) + "'," +
+				price + ",'" +
+				booking.getAccount().username + "','" +
+				booking.getBookingManager().username + "')";
+	}
+
+	static String[] insertRoomsTable(Booking booking) {
+		String[] queries = new String[booking.getRooms().size()];
+		for (int i = 0; i < queries.length; i++) {
+			queries[i] = "INSERT INTO Rooms VALUES ('" +
+				booking.bookingID + "','" +
+				booking.getRooms().get(i).getRoomNumber() + "')";
+		}
+
+		return queries;
 	}
 
 	//////////////////////////////////////////////////
 	// UPDATE TABLE
 	//////////////////////////////////////////////////
 	static String updateAccountEmail(String username, String newEmail) {
-		return "UPDATE account "
+		return "UPDATE accounts "
 				+ "SET email = '" + newEmail + "' "
 				+ "WHERE username = '" + username + "'";
 	}
 
 	static String updateAccountPhone(String username, String newPhone) {
-		return "UPDATE account "
+		return "UPDATE accounts "
 				+ "SET phone = '" + newPhone + "' "
 				+ "WHERE username = '" + username + "'";
+	}
+
+	static String deleteBooking(String bookingID) {
+		return "DELETE FROM Bookings WHERE bookingID = '" + bookingID + "'";
 	}
 
 	//////////////////////////////////////////////////
