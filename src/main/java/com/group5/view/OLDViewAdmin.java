@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 
-public class ViewAdmin extends View {
+public class OLDViewAdmin extends OLDView {
 
     /***
      * Constructor that extends from View. Used to instantiate a
@@ -16,7 +16,7 @@ public class ViewAdmin extends View {
      * 
      * @param hotelSystem - type of system to use
      */
-	public ViewAdmin(HotelSystemAdmin hotelSystem) {
+	public OLDViewAdmin(HotelSystemAdmin hotelSystem) {
 		super(hotelSystem);
 	}
 
@@ -29,7 +29,7 @@ public class ViewAdmin extends View {
 //			System.out.println("------------------------------------");
 //			System.out.println("What would you like to do?");
 			System.out.println("1. View hotel details");
-//			System.out.println("2. View admin details");
+//			System.out.println("2. OLDView admin details");
 			System.out.println("3. View all users.");
 			System.out.println("4. View all bookings.");
 			System.out.println("5. Delete booking.");
