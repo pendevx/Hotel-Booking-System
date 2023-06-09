@@ -1,6 +1,7 @@
 package com.group5.controller;
 
 import com.group5.app.AppSession;
+import com.group5.card.CardBookingManageAdmin;
 import com.group5.view.ViewClientAdmin;
 import com.group5.view.ViewGUI;
 import java.awt.event.ActionEvent;
@@ -44,6 +45,7 @@ public class ControllerClientAdmin extends ControllerClient {
 
 	private void deleteBooking() {
 		String bookingID = getBookingAdmin().bookingRef.getText().trim();
+        System.out.println(bookingID);
 		getModel().hotelSystem.deleteBooking(bookingID);
 	}
 }
