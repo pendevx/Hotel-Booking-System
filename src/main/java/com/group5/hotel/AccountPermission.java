@@ -1,7 +1,7 @@
 package com.group5.hotel;
 
 /***
- * enum for account persmissions
+ * enum for account permissions
  */
 public enum AccountPermission {
 	USER,
