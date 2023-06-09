@@ -12,6 +12,13 @@ public class ViewClientUser extends ViewClient {
 
 	public CardBookingManageUser cardBookingManage;
 
+	/**
+	 * View for user client
+	 * @param controller, controller
+	 * @param accountInfo, container with user account info
+	 * @param hotelInfo, container with hotel info
+	 * @param bookings, all user bookings
+	 */
 	public ViewClientUser(Controller controller, Container[] accountInfo, Container[] hotelInfo, List<Booking> bookings) {
 		super(controller);
 		init(accountInfo, hotelInfo, bookings);
@@ -20,14 +27,13 @@ public class ViewClientUser extends ViewClient {
 	private void init(Container[] accountInfo, Container[] hotelInfo, List<Booking> bookings) {
 		super.resetBasePanel();
 		if (accountInfo.length > 0) setCardAccount(new CardAccount(accountInfo));
-		getCardAccount().editAccountButton.addActionListener(getController());
+		getCardAccount().editAccountButton.addActionListener(getController()); // add controller
 		getCardAccount().logoutButton.addActionListener(getController());
-
 		this.cardBookingManage = new CardBookingManageUser(hotelInfo);
 		this.cardBookingManage.cancelButton.addActionListener(getController());
 		this.cardBookingManage.bookButton.addActionListener(getController());
 		setCardBookingManage(cardBookingManage);
-		setCardBookingList(new CardBookingList(bookings));
-		super.addToBaseWithGap(getCardAccount(), cardBookingManage, getCardBookingList());
+		setCardBookingList(new CardBookingList(bookings)); // card booking list showing user booking
+		super.addToBaseWithGap(getCardAccount(), cardBookingManage, getCardBookingList()); // add to base
 	}
 }

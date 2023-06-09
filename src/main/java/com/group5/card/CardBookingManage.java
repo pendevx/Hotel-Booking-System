@@ -7,6 +7,12 @@ public abstract class CardBookingManage extends Card {
 
 	public final int W;
 
+	/**
+	 * Abstract class Panel for managing bookings.
+	 * @param title of panel
+	 * @param width of panel
+	 * @param hotelInfo of hotel
+	 */
 	public CardBookingManage(String title, int width, Container...hotelInfo) {
 		super(500);
 		this.W = this.WIDTH - 50;

@@ -11,6 +11,9 @@ public class CardAccountEdit extends Card {
 	public JTextField emailNew = new JTextField(30);
 	public JTextField phoneNew = new JTextField(30);
 	
+	/**
+	 * Creates panel for account edit.
+	 */
 	public CardAccountEdit() {
 		super(500);
 		final int W = this.WIDTH - 100;
@@ -22,10 +25,12 @@ public class CardAccountEdit extends Card {
 		this.add(new Container(W, 50, cancelButton, saveButton));
 	}
 
+	// Sets the email textfield to existing
 	public void setTextEmail(String exsitingEmail) {
 		emailNew.setText(exsitingEmail);
 	}
 
+	// Sets the phone textfield to existing
 	public void setTextPhone(String exsitingPhone) {
 		phoneNew.setText(exsitingPhone);
 	}

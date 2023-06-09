@@ -14,6 +14,10 @@ import java.util.List;
 
 public class CardBookingList extends Card {
 
+	/**
+	 * Create panel that will display bookings that client has access to.
+	 * @param bookings 
+	 */
 	public CardBookingList(List<Booking> bookings) {
 		super(500);
 		final int W = this.WIDTH - 50;
@@ -22,7 +26,6 @@ public class CardBookingList extends Card {
 
 		String[] columnNames = { "Booking ID", "Start", "End", "Price", "Rooms", "Booker", "Manager" };
 		Object[][] data = new Object[bookings.size()][];
-
 		DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 
 		for (int i = 0; i < bookings.size(); i++) {
@@ -32,10 +35,7 @@ public class CardBookingList extends Card {
 			List<Room> rooms = booking.getRooms();
 			for (int j = 0; j < rooms.size(); j++) {
 				sb.append(rooms.get(j).getRoomNumber());
-
-				if (j != booking.getRooms().size() - 1) {
-					sb.append(", ");
-				}
+				if (j != booking.getRooms().size() - 1)  sb.append(", ");
 			}
 
 			data[i] = new Object[] {

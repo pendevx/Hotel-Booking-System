@@ -7,6 +7,11 @@ import java.awt.event.ActionEvent;
 
 public class ControllerClientAdmin extends ControllerClient {
 
+	/**
+	 * Admin view of client
+	 * @param view
+	 * @param model 
+	 */
 	public ControllerClientAdmin(ViewGUI view, AppSession model) {
 		super(view, model);
 		init();
@@ -14,8 +19,9 @@ public class ControllerClientAdmin extends ControllerClient {
 
 	@Override
 	protected void init() {
+		// sets clientView to be the admin verison
 		super.clientView = new ViewClientAdmin(this, super.getAccountInfo(), super.getHotelInfo(), super.getBookings());
-		super.updateDisplay(super.clientView.getBasePanel());
+		super.updateDisplay(super.clientView.getBasePanel()); // update the ViewGUI to display it
 	}
 
 	@Override
@@ -26,6 +32,7 @@ public class ControllerClientAdmin extends ControllerClient {
 		}
 	}
 
+	// loads the Account edit panel to show, along with its controller
 	private void editHandler() {
 		if (getModel() != null) new ControllerAccountEdit(getView(), getModel());
 	}

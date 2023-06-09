@@ -8,6 +8,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class Container extends JPanel {
+	/**
+	 * Extends JPanel, acts a container that holds other JComponenets
+	 * 
+	 * @param width of panel
+	 * @param height of panel
+	 */
 	public Container(int width, int height) {
 		this.setBackground(Color.GRAY);
 		setPreferredSize(new Dimension(width, height));

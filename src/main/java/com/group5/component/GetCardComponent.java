@@ -4,5 +4,8 @@ import javax.swing.JComponent;
 
 public interface GetCardComponent {
 
+	/**
+	 * @return an array of JComponenets
+	 */
 	abstract JComponent[] getCardComponents();
 }

@@ -15,6 +15,9 @@ public class CardRegister extends Card {
 	public JTextField emailNew = new JTextField(30);
 	public JTextField phoneNew = new JTextField(30);
 
+	/**
+	 * Creates panel to show registration.
+	 */
 	public CardRegister() {
 		super(500, 500);
 		final int MARGIN = 50;

@@ -11,6 +11,10 @@ public abstract class ViewClient extends View {
 	private CardBookingList cardBookingList;
 	public CardBookingManage cardBookingManage;
 
+	/**
+	 * Abstract view that holds relevant elements for displaying client
+	 * @param controller 
+	 */
 	public ViewClient(Controller controller) {
 		super(controller);
 	}
@@ -22,8 +26,4 @@ public abstract class ViewClient extends View {
 	public void setCardAccount(CardAccount c) { this.cardAccount = c; }
 	public void setCardBookingManage(CardBookingManage c) { this.cardBookingManage = c; }
 	public void setCardBookingList(CardBookingList c) { this.cardBookingList = c; }
-
-	public void refreshBookingList(List<Booking> updateBooking) {
-		setCardBookingList(new CardBookingList(updateBooking));
-	}
 }

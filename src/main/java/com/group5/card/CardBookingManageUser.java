@@ -14,7 +14,10 @@ public class CardBookingManageUser extends CardBookingManage {
 	public CardDatePicker endDate = new CardDatePicker(325, 200);
 	public JTextField rooms = new JTextField(30); // to be parsed
 	
-	// add directly here
+	/**
+	 * Creates the panel that a user will see, with create booking functionality.
+	 * @param hotelInfo of hotel
+	 */
 	public CardBookingManageUser(Container...hotelInfo) {
 		super("Create Booking", 500, hotelInfo);
 		final int MARGIN = 50;
