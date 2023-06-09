@@ -29,11 +29,21 @@ public class ControllerClientAdmin extends ControllerClient {
 		if (getCardAccount()!= null) {
 			if (e.getSource() == getCardAccount().editAccountButton) editHandler();
 			else if (e.getSource() == getCardAccount().logoutButton) logoutHandler();
+			else if (e.getSource() == getBookingAdmin().deleteButton) deleteBooking();
 		}
 	}
 
-	// loads the Account edit panel to show, along with its controller
+	private CardBookingManageAdmin getBookingAdmin() {
+		if (clientView == null) return null;
+		else return (CardBookingManageAdmin) clientView.getCardBookingManage();
+	}
+
 	private void editHandler() {
 		if (getModel() != null) new ControllerAccountEdit(getView(), getModel());
+	}
+
+	private void deleteBooking() {
+		String bookingID = getBookingAdmin().bookingRef.getText().trim();
+		getModel().hotelSystem.deleteBooking(bookingID);
 	}
 }
