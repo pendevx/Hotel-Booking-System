@@ -36,11 +36,17 @@ public class CardBookingList extends Card {
 				sb.append(rooms.get(j).getRoomNumber());
 				if (j != booking.getRooms().size() - 1)  sb.append(", ");
 			}
+            
+            java.util.Date startDate = new java.util.Date(new java.sql.Date(booking.beginDate().getTime()).getTime());
+            java.util.Date endDate = new java.util.Date(new java.sql.Date(booking.endDate().getTime()).getTime());
+            DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+            String start = formatter.format(startDate).split(" ")[0];
+            String end = formatter.format(endDate).split(" ")[0];
 
 			data[i] = new Object[] {
 				booking.bookingID,
-				booking.beginDate().toString().split(" ")[0],
-				booking.endDate().toString().split(" ")[0],
+                start,
+                end,
 				booking.totalPrice,
 				sb.toString(),
 				booking.getAccount().getFullName(),
