@@ -25,7 +25,7 @@ public class ControllerClientUser extends ControllerClient {
 
 	@Override
 	protected void init() {
-		super.clientView = new ViewClientUser(this, super.getAccountInfo(), super.getHotelInfo());
+		super.clientView = new ViewClientUser(this, super.getAccountInfo(), super.getHotelInfo(), super.getBookings());
 		super.updateDisplay(super.clientView.getBasePanel());
 	}
 
@@ -36,6 +36,7 @@ public class ControllerClientUser extends ControllerClient {
 			else if (e.getSource() == getCardAccount().logoutButton) logoutHandler();
 			else if (e.getSource() == getBookingUser().cancelButton) cancelHandler();
 			else if (e.getSource() == getBookingUser().bookButton) bookHandler();
+			else if (e.getSource() == getCardBookingList().refreshButton) refreshHandler();
 		}
 	}
 
@@ -47,6 +48,11 @@ public class ControllerClientUser extends ControllerClient {
 		getBookingUser().rooms.setText("");
 		getBookingUser().startDate.clearDate();
 		getBookingUser().endDate.clearDate();
+	}
+
+	private void refreshHandler() {
+		System.out.println("hi");
+//		clientView.refreshBookingList(getBookings());
 	}
 
 	private void bookHandler() {

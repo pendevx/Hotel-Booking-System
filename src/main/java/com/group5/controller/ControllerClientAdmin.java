@@ -15,7 +15,7 @@ public class ControllerClientAdmin extends ControllerClient {
 
 	@Override
 	protected void init() {
-		super.clientView = new ViewClientAdmin(this, super.getAccountInfo(), super.getHotelInfo());
+		super.clientView = new ViewClientAdmin(this, super.getAccountInfo(), super.getHotelInfo(), super.getBookings());
 		super.updateDisplay(super.clientView.getBasePanel());
 	}
 
@@ -24,6 +24,7 @@ public class ControllerClientAdmin extends ControllerClient {
 		if (getCardAccount()!= null) {
 			if (e.getSource() == getCardAccount().editAccountButton) editHandler();
 			else if (e.getSource() == getCardAccount().logoutButton) logoutHandler();
+			else if (e.getSource() == getCardBookingList().refreshButton) System.out.println("Hi");
 		}
 	}
 

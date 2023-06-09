@@ -2,14 +2,18 @@ package com.group5.controller;
 
 import com.group5.app.AppSession;
 import com.group5.card.CardAccount;
+import com.group5.card.CardBookingList;
 import com.group5.component.Base;
 import com.group5.component.Card;
 import com.group5.component.Container;
 import com.group5.component.Text;
 import com.group5.component.Text.FontSize;
+import com.group5.hotel.Booking;
 import com.group5.view.ViewClient;
 import com.group5.view.ViewGUI;
 import java.awt.FlowLayout;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 
@@ -62,12 +66,17 @@ public abstract class ControllerClient extends Controller {
 		return null;
 	}
 
+	public List<Booking> getBookings() {
+		// add to a bookings collection
+		return getModel().hotelSystem.getAllBookings();
+	}
+
 	public CardAccount getCardAccount() {
 		if (clientView == null) return null;
 		else return clientView.getCardAccount();
 	}
 
-	public Card getCardBookingList() {
+	public CardBookingList getCardBookingList() {
 		if (clientView == null) return null;
 		else return clientView.getCardBookingList();
 	}

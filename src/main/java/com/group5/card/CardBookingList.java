@@ -16,7 +16,11 @@ import java.util.Arrays;
 import java.util.List;
 
 public class CardBookingList extends Card {
-	public CardBookingList(AppSession appModel) {
+
+	public JButton refreshButton = new Button("Refresh", "#94e2d5", 100, 25);
+
+	public CardBookingList(List<Booking> bookings) {
+//	public CardBookingList(AppSession appModel) {
 		// show booking for a user, reusing in admin view to filter bookings
 		super(500);
 		final int W = this.WIDTH - 50;
@@ -24,7 +28,7 @@ public class CardBookingList extends Card {
 		this.add(new Container(W, 50, new Text("Manage Bookings", FontSize.H1)));
 
 		String[] columnNames = { "Booking ID", "Start", "End", "Price", "Rooms", "Booker", "Manager" };
-		List<Booking> bookings = appModel.hotelSystem.getAllBookings();
+//		List<Booking> bookings = appModel.hotelSystem.getAllBookings();
 		Object[][] data = new Object[bookings.size()][];
 
 		DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
@@ -61,5 +65,6 @@ public class CardBookingList extends Card {
 		JScrollPane scroller = new JScrollPane(table);
 
 		add(new Container(W, 500, scroller));
+		this.add(new Container(W, 40, refreshButton));
 	}
 }

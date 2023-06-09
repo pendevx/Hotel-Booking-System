@@ -43,7 +43,7 @@ public class HotelDatabase {
 //		// TODO
 		Printer.printQuery("bookings", dbManager.query(SQL.selectAll("bookings"))); // for testing
 //		System.out.println(tableExists("bookings"));
-		Printer.printQuery("rooms", dbManager.query(SQL.selectAll("rooms")));
+//		Printer.printQuery("rooms", dbManager.query(SQL.selectAll("rooms")));
 	}
 
 	public static void main(String[] args) {
