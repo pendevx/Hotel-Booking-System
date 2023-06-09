@@ -8,20 +8,25 @@ import javax.swing.JComponent;
 public class ViewAccountEdit extends View implements GetCardComponent {
 	private CardAccountEdit cardAccountEdit;
 
+	/** 
+	 * View that holds cards(panel) required for displaying the account edit
+	 * @param controller 
+	 */
 	public ViewAccountEdit(Controller controller) {
 		super(controller);
 		init();
 	}
 
 	private void init() {
-		super.resetBasePanel();
-		this.cardAccountEdit = new CardAccountEdit();
-		cardAccountEdit.cancelButton.addActionListener(getController());
-		cardAccountEdit.saveButton.addActionListener(getController());
-		addToBase(cardAccountEdit);
+		super.resetBasePanel(); // reset panel
+		this.cardAccountEdit = new CardAccountEdit(); // instantiate
+		cardAccountEdit.cancelButton.addActionListener(getController()); // add controller
+		cardAccountEdit.saveButton.addActionListener(getController()); // add controller
+		addToBase(cardAccountEdit); // add to the base in abstract view
 	}
 
 	@Override
+	// returns array of JComponents
 	public JComponent[] getCardComponents() {
 		JComponent[] components = new JComponent[2];
 		components[0] = cardAccountEdit.emailNew;

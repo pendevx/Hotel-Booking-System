@@ -3,16 +3,16 @@ package com.group5.database;
 import com.group5.hotel.Account;
 import com.group5.hotel.Booking;
 import com.group5.hotel.Credential;
-import com.group5.hotel.Room;
-
-import java.util.List;
 
 public class SQL {
 	//////////////////////////////////////////////////
 	// CREATE TABLE
 	//////////////////////////////////////////////////
 
-	// need add input limits
+	/**
+     * Returns the default query for creating the hotel table
+     * @return Returns the default query for creating the hotel table (with preset data)
+     */
 	static String[] createHotelTable() {
 		return new String[] 
 		{
@@ -32,6 +32,10 @@ public class SQL {
 		};
 	}
 
+    /**
+     * Returns the default query for creating the credentials table
+     * @return Returns the default query for creating the credentials table (with preset data)
+     */
 	static String[] createCredentialTable() {
 		return new String[]
 		{
@@ -47,6 +51,10 @@ public class SQL {
 		};
 	}
 
+	/**
+     * Returns the default query for creating the accounts table
+     * @return Returns the default query for creating the accounts table (with preset data)
+     */
 	static String[] createAccountTable() {
 		return new String[]
 		{
@@ -67,6 +75,10 @@ public class SQL {
 		};
 	}
 
+	/**
+     * Returns the default query for creating the bookings table
+     * @return Returns the default query for creating the bookings table
+     */    
 	static String[] createBookingTable() {
 		return new String[]
 		{
@@ -85,6 +97,10 @@ public class SQL {
 		};
 	}
 
+    /**
+     * Returns the default query for creating the rooms table
+     * @return Returns the default query for creating the rooms table
+     */
 	static String[] createRoomsTable() {
 		return new String[] {
 			"CREATE TABLE Rooms (\n" +
@@ -98,15 +114,30 @@ public class SQL {
 	// INSERT TABLE
 	//////////////////////////////////////////////////
 
+    /**
+     * Gets the query to insert an account into the database
+     * @param account The account to be added to the database
+     * @return The SQL query to insert the account into the database
+     */
 	static String insertAccountTable(Account account) {
 		return String.format("INSERT INTO accounts VALUES ('%s', '%s', '%s', '%s', '%s', '%s')",
 			account.username, account.firstName, account.lastName, account.phone, account.email, account.getAccountTypeName());
 	}
 
+    /**
+     * Gets the query to insert a credential into the database
+     * @param credential The credential to be added to the database
+     * @return The SQL query to insert the credential into the database
+     */
 	static String insertCredentialTable(Credential credential) {
 		return String.format("INSERT INTO credentials VALUES ('%s', '%s')", credential.getUsername(), credential.getPassword());
 	}
 
+    /**
+     * Gets the query to insert a booking into the database
+     * @param booking The booking to be added to the database
+     * @return The SQL query to insert the booking into the database
+     */
 	static String[] insertBookingTable(Booking booking) {
 		double price = booking.getRooms().size() * 100;
 		String[] insertRoomsCommands = insertRoomsTable(booking);
@@ -127,6 +158,11 @@ public class SQL {
 		return result;
 	}
 
+    /**
+     * Gets the query to insert the rooms for a booking into the database
+     * @param booking The booking containing the rooms to be added to the database
+     * @return The SQL query to insert the rooms for the booking into the database
+     */
 	private static String[] insertRoomsTable(Booking booking) {
 		String[] queries = new String[booking.getRooms().size()];
 		for (int i = 0; i < queries.length; i++)
@@ -138,30 +174,44 @@ public class SQL {
 	//////////////////////////////////////////////////
 	// UPDATE TABLE
 	//////////////////////////////////////////////////
+    
+    /**
+     * Updates an account's email
+     * @param username The username of the account to be updated
+     * @param newEmail The new email for the account
+     * @return The query to update the email for the account
+     */
 	static String updateAccountEmail(String username, String newEmail) {
-//		return "UPDATE accounts "
-//				+ "SET email = '" + newEmail + "' "
-//				+ "WHERE username = '" + username + "'";
-
 		return String.format("UPDATE accounts SET email = '%s' WHERE username = '%s'", newEmail, username);
 	}
 
+    /**
+     * Updates an account's phone
+     * @param username The username of the account to be updated
+     * @param newPhone The new phone for the account
+     * @return The query to update the phone for the account
+     */
 	static String updateAccountPhone(String username, String newPhone) {
-//		return "UPDATE accounts "
-//				+ "SET phone = '" + newPhone + "' "
-//				+ "WHERE username = '" + username + "'";
-
 		return String.format("UPDATE accounts SET phone = '%s' WHERE username = '%s'", newPhone, username);
 	}
 
+    /**
+     * Deletes a booking 
+     * @param bookingID The booking ID of the booking to be deleted
+     * @return The query to delete the booking from the database
+     */
 	static String deleteBooking(String bookingID) {
-//		return "DELETE FROM Bookings WHERE bookingID = '" + bookingID + "'";
 		return String.format("DELETE FROM Bookings WHERE bookingID = '%s'", bookingID);
 	}
 
 	//////////////////////////////////////////////////
 	// SELECT TABLE
 	//////////////////////////////////////////////////
+    /**
+     * Selects all the rows from a table
+     * @param name The name of the table to select from
+     * @return The query to select all the rows from the table
+     */
 	static String selectAll(String name) {
 		return "SELECT * FROM " + name;
 	}
@@ -169,6 +219,11 @@ public class SQL {
 	//////////////////////////////////////////////////
 	// DROP TABLE
 	//////////////////////////////////////////////////
+    /**
+     * Deletes a table from the database
+     * @param name The name of the table to be deleted
+     * @return The query to delete the table from the database
+     */
 	static String dropTable(String name) {
 		return "DROP TABLE " + name;
 	}

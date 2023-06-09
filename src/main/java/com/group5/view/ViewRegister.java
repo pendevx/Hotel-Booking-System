@@ -8,6 +8,10 @@ import javax.swing.JComponent;
 public class ViewRegister extends View implements GetCardComponent {
 	private CardRegister cardRegister;
 	
+	/**
+	 * Register view
+	 * @param controller 
+	 */
 	public ViewRegister(Controller controller) {
 		super(controller);
 		init();

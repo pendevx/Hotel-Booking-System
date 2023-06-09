@@ -1,9 +1,7 @@
 package com.group5.card;
 
-import com.group5.app.AppSession;
 import com.group5.component.*;
 import com.group5.component.Text.FontSize;
-import com.group5.controller.Controller;
 import com.group5.hotel.Booking;
 import com.group5.hotel.Room;
 
@@ -12,22 +10,22 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.List;
 
 public class CardBookingList extends Card {
-	public CardBookingList(AppSession appModel) {
-		// show booking for a user, reusing in admin view to filter bookings
+
+	/**
+	 * Create panel that will display bookings that client has access to.
+	 * @param bookings 
+	 */
+	public CardBookingList(List<Booking> bookings) {
 		super(500);
 		final int W = this.WIDTH - 50;
 
 		this.add(new Container(W, 50, new Text("Manage Bookings", FontSize.H1)));
 
 		String[] columnNames = { "Booking ID", "Start", "End", "Price", "Rooms", "Booker", "Manager" };
-		List<Booking> bookings = appModel.hotelSystem.getAllBookings();
 		Object[][] data = new Object[bookings.size()][];
-
-		DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 
 		for (int i = 0; i < bookings.size(); i++) {
 			Booking booking = bookings.get(i);
@@ -36,16 +34,19 @@ public class CardBookingList extends Card {
 			List<Room> rooms = booking.getRooms();
 			for (int j = 0; j < rooms.size(); j++) {
 				sb.append(rooms.get(j).getRoomNumber());
-
-				if (j != booking.getRooms().size() - 1) {
-					sb.append(", ");
-				}
+				if (j != booking.getRooms().size() - 1)  sb.append(", ");
 			}
+            
+            java.util.Date startDate = new java.util.Date(new java.sql.Date(booking.beginDate().getTime()).getTime());
+            java.util.Date endDate = new java.util.Date(new java.sql.Date(booking.endDate().getTime()).getTime());
+            DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+            String start = formatter.format(startDate).split(" ")[0];
+            String end = formatter.format(endDate).split(" ")[0];
 
 			data[i] = new Object[] {
 				booking.bookingID,
-				booking.beginDate().toString().split(" ")[0],
-				booking.endDate().toString().split(" ")[0],
+                start,
+                end,
 				booking.totalPrice,
 				sb.toString(),
 				booking.getAccount().getFullName(),

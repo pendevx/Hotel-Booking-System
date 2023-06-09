@@ -10,7 +10,10 @@ public class CardBookingManageAdmin extends CardBookingManage {
 	public JButton deleteButton = new Button("Delete", "#94e2d5", 100, 25);
 	public JTextField bookingRef = new JTextField(30); // to be parsed
 	
-
+	/**
+	 * Creates the panel that an admin will see, with delete booking functionality.
+	 * @param hotelInfo of hotel
+	 */
 	public CardBookingManageAdmin(Container...hotelInfo) {
 		super("Delete Booking" ,500, hotelInfo);
 		final int MARGIN = 50;
