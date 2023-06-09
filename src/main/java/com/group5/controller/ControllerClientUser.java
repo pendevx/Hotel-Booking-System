@@ -75,10 +75,6 @@ public class ControllerClientUser extends ControllerClient {
 		else return false;
 	}
 
-	private Room[] parseRooms() {
-		List<Room> rooms = new ArrayList<>();
-	}
-
 	private CardBookingManageUser getBookingUser() {
 		if (clientView == null) return null;
 		else return (CardBookingManageUser) clientView.getCardBookingManage();
