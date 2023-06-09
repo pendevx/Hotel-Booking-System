@@ -62,18 +62,15 @@ public class ParseInput {
      * @param scan - input date
      * @return a valid date
      */
-	public static Date date(Scanner scan) {
+//	public static Date date(Scanner scan) {
+	public static Date date(String date) {
 		DateFormat formatter = new SimpleDateFormat("dd/MM/yy");
 		formatter.setLenient(false);
 		Date output = null;
-		do {
-			try {
-				String input = string(scan);
-				if (input.equals("x")) break;
-				else output = formatter.parse(input);
-			}
-			catch (ParseException e) { System.out.println("Invalid date, please enter again."); }
-		} while (output == null);
+		try {
+			output = formatter.parse(date);
+		}
+		catch (ParseException e) { System.out.println("Invalid date, please enter again."); }
 		return output;
 	}
 }

@@ -10,7 +10,7 @@ public class CardBookingList extends Card {
 		super(500);
 		final int W = this.WIDTH - 50;
 
-		this.add(new Container(W, 50, new Text("Manage Bookings", FontSize.H1)));
+		this.add(new Container(W, 50, new Text("List Bookings", FontSize.H1)));
 //		this.add(new Container(W, 690 ));
 	}
 }

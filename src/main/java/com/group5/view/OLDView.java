@@ -12,64 +12,6 @@ public abstract class OLDView {
 	public HotelSystem hotelSystem;
 
     /***
-     * Abstract constructor for View that instantiates a HotelSystem,
-     * HotelSystem is to handle backend task, while views
-     * acts as the frontend.
-     * 
-     * @param hotelSystem - will be either for user or admin
-     */
-	public OLDView(HotelSystem hotelSystem) {
-		this.hotelSystem = hotelSystem;
-	}
-	
-    /***
-     * Abstract method for a menuMain for admin and user Views
-     * @param scan
-     */
-	public abstract void menuMain(Scanner scan);
-
-    /***
-     * Prints the logged in accounts details
-     */
-//	public void printAccountDetails() {
-//		System.out.println(hotelSystem.getUserDetails());
-//	}
-//
-//    /***
-//     * Prints formatted cofirmation of login, showing userType and username
-//     */
-//	public void confirmLogin() {
-//		System.out.println(hotelSystem.getConfirmLogin());
-//	}
-
-    /***
-     * Prints the formatted string of hotel details
-     */
-	public void printHotelDetails() {
-		System.out.println(hotelSystem.getHotelDetails());
-	}
-
-//	public void updateEmail(Scanner scan) {
-//		System.out.println("Enter new email, x to cancel");
-//		String newEmail = ParseInput.string(scan).trim();
-//		if (newEmail.isEmpty() || newEmail.equalsIgnoreCase("x")) System.out.println("Email not updated.");
-//		else {
-//			hotelSystem.updateEmail(newEmail);
-//			System.out.println("Email updated to " + newEmail);
-//		}
-//	}
-//
-//	public void updatePhone(Scanner scan) {
-//		System.out.println("Enter new phone, x to cancel");
-//		String newPhone = ParseInput.string(scan).trim();
-//		if (newPhone.isEmpty() || newPhone.equalsIgnoreCase("x")) System.out.println("Phone not updated.");
-//		else {
-//			hotelSystem.updatePhone(newPhone);
-//			System.out.println("Phone updated to " + newPhone);
-//		}
-//	}
-
-    /***
      * Gets the start date of the booking that meet
  requirements.
      * 
@@ -132,16 +74,6 @@ public abstract class OLDView {
 		System.out.println("Date: " + formatter.format(begin) + " to " + formatter.format(end));
 	}
 
-    /***
-     * Gets the user to select the rooms that would like
-     * to add to their booking. Rooms can only be chosen if
-     * it is available between the begin and end dates.
-     * 
-     * @param scan - input of room, as prompted
-     * @param start - the selected start date
-     * @param start - the selected end date
-     * @return list of chosen rooms to book
-     */
 	public List<Room> getBookingRooms(Scanner scan, Date start, Date end) {
 		System.out.println("Please choose your rooms for booking, e.g. 3F.");
 		System.out.println("Room numbers range from (1-10) and (A-J).");
