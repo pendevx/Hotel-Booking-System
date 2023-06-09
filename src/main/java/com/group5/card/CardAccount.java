@@ -7,6 +7,11 @@ public class CardAccount extends Card {
 	public JButton editAccountButton = new Button("Edit", "#9399b2", 100, 25);
 	public JButton logoutButton = new Button("Logout", "#94e2d5", 100, 25);
 	
+	/**
+	 * Creates a Panel that hold the user account info.
+	 * 
+	 * @param accountInfo, account info added into the container class
+	 */
 	public CardAccount(Container[] accountInfo) {
 		super(300);
 		final int W = this.WIDTH - 50;

@@ -12,6 +12,11 @@ public class Text extends JLabel {
 		public int getSize() { return this.size; }
 	}
 
+	/**
+	 * Renders the text based on predefined font sizes.
+	 * @param text to be rendered
+	 * @param size, enum of predefined size
+	 */
 	public Text(String text, FontSize size) {
 		super(text);
 		this.setFont(new Font(getFont().getFontName(), Font.BOLD, size.getSize()));

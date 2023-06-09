@@ -11,6 +11,9 @@ public class CardLogin extends Card {
 	public JTextField usernameField = new JTextField(30);
 	public JTextField passwordField = new JPasswordField(30);
 
+	/**
+	 * Creates Panel to show login
+	 */
 	public CardLogin() {
 		super(500, 500);
 		final int MARGIN = 70;

@@ -1,13 +1,17 @@
 package com.group5.controller;
 
 import com.group5.app.AppSession;
-import com.group5.card.CardBookingManageAdmin;
 import com.group5.view.ViewClientAdmin;
 import com.group5.view.ViewGUI;
 import java.awt.event.ActionEvent;
 
 public class ControllerClientAdmin extends ControllerClient {
 
+	/**
+	 * Admin view of client
+	 * @param view
+	 * @param model 
+	 */
 	public ControllerClientAdmin(ViewGUI view, AppSession model) {
 		super(view, model);
 		init();
@@ -15,8 +19,9 @@ public class ControllerClientAdmin extends ControllerClient {
 
 	@Override
 	protected void init() {
-		super.clientView = new ViewClientAdmin(this, super.getAccountInfo(), super.getHotelInfo());
-		super.updateDisplay(super.clientView.getBasePanel());
+		// sets clientView to be the admin verison
+		super.clientView = new ViewClientAdmin(this, super.getAccountInfo(), super.getHotelInfo(), super.getBookings());
+		super.updateDisplay(super.clientView.getBasePanel()); // update the ViewGUI to display it
 	}
 
 	@Override

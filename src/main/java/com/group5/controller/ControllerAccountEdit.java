@@ -2,7 +2,6 @@ package com.group5.controller;
 
 import com.group5.app.AppSession;
 import com.group5.card.CardAccountEdit;
-import com.group5.component.Base;
 import com.group5.component.KeyPressListener;
 import com.group5.view.ViewAccountEdit;
 import com.group5.view.ViewGUI;
@@ -15,6 +14,11 @@ public class ControllerAccountEdit extends Controller implements KeyPressListene
 
 	private ViewAccountEdit accountEditView;
 
+	/**
+	 * Controller for the account edit view.
+	 * @param view, the current ViewGUI(JFrame)
+	 * @param model, AppSession
+	 */
 	public ControllerAccountEdit(ViewGUI view, AppSession model) {
 		super(view, model);
 		init();
@@ -22,11 +26,11 @@ public class ControllerAccountEdit extends Controller implements KeyPressListene
 
 	@Override
 	protected void init() {
-		this.accountEditView = new ViewAccountEdit(this);
-		getCardAccountEdit().setTextEmail(getAccount().email);
-		getCardAccountEdit().setTextPhone(getAccount().phone);
-		super.updateDisplay(accountEditView.getBasePanel());
-		addEnterKeyListener(accountEditView.getCardComponents());
+		this.accountEditView = new ViewAccountEdit(this); // new view with this as controller
+		getCardAccountEdit().setTextEmail(getAccount().email); // set emailField to populate with current
+		getCardAccountEdit().setTextPhone(getAccount().phone); // set phoneField to populate with current
+		super.updateDisplay(accountEditView.getBasePanel()); // updates the display with account edit panel
+		addEnterKeyListener(accountEditView.getCardComponents()); // add key listener to components
 	}
 
 	@Override
@@ -49,6 +53,9 @@ public class ControllerAccountEdit extends Controller implements KeyPressListene
 		}
 	}
 
+	/**
+	 * Will save the changes to db and then go back the render the client view with updated details
+	 */
 	private void saveHandler() {
 		String newEmail = getCardAccountEdit().emailNew.getText();
 		String newPhone = getCardAccountEdit().phoneNew.getText();
@@ -60,6 +67,9 @@ public class ControllerAccountEdit extends Controller implements KeyPressListene
 		}
 	}
 
+	/**
+	 * @return the accountEditView panel
+	 */
 	private CardAccountEdit getCardAccountEdit() {
 		if (accountEditView == null) return null;
 		else return accountEditView.getCard();
