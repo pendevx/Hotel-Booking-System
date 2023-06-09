@@ -2,4 +2,6 @@
 target/
 hotel_ebd/
 derby.log
-/nbproject/
+nbproject/
+nb-configuration.xml
+
