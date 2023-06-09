@@ -20,7 +20,6 @@ public class ViewClientUser extends ViewClient {
 		if (accountInfo.length > 0) setCardAccount(new CardAccount(accountInfo));
 		getCardAccount().editAccountButton.addActionListener(getController());
 		getCardAccount().logoutButton.addActionListener(getController());
-
 		this.cardBookingManage = new CardBookingManageUser(hotelInfo);
 		this.cardBookingManage.cancelButton.addActionListener(getController());
 		this.cardBookingManage.bookButton.addActionListener(getController());

@@ -1,7 +1,6 @@
 package com.group5.view;
 
 import com.group5.card.CardAccount;
-import com.group5.card.CardBookingManage;
 import com.group5.card.CardBookingList;
 import com.group5.card.CardBookingManageAdmin;
 import com.group5.component.*;
@@ -23,5 +22,4 @@ public class ViewClientAdmin extends ViewClient {
 		setCardBookingList(new CardBookingList());
 		super.addToBaseWithGap(getCardAccount(), getCardBookingManage(), getCardBookingList());
 	}
-	
 }

@@ -6,10 +6,15 @@ import com.group5.hotel.Room;
 import com.group5.view.ViewClientUser;
 import com.group5.view.ViewGUI;
 import java.awt.event.ActionEvent;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ControllerClientUser extends ControllerClient {
 
@@ -54,14 +59,81 @@ public class ControllerClientUser extends ControllerClient {
 
 		if (!hasEmptyField(getBookingUser(), start, end, rooms)) {
 			if (startBeforeToday(startDate)) {
-				getCardBookingManage().showWarningPopup("Start date is in the past. Cannot book in the past...");
+				getCardBookingManage().showWarningPopup("End date must be after start date...");
 				return;
 			}
 			if (endDate.before(startDate)) {
 				getCardBookingManage().showWarningPopup("End date must be after start date...");
 				return;
 			}
+
+			String[] parsed = parseRoom(rooms);
+			Set<Room> selectedRooms = checkValidInput(parsed);
+			if (selectedRooms != null && checkRoomAvailable(selectedRooms, startDate)) {
+				List<Room> roomsToBook = new ArrayList<>(selectedRooms);
+				createBooking(startDate, endDate, roomsToBook);
+				getCardBookingManage().showWarningPopup(getBookingConfirm(startDate, endDate, roomsToBook.size()));
+			}
 		}
+	}
+
+	private String getBookingConfirm(Date startDate, Date endDate, int qty) {
+		return "Booking created.\n" + getBookingPeriod(endDate, endDate) + "\nFor: " + qty + " rooms.";
+
+	}
+
+	private String getBookingPeriod(Date begin, Date end) {
+		DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+		return "Date: " + formatter.format(begin) + " to " + formatter.format(end);
+	}
+
+	private void createBooking(Date startDate, Date endDate, List<Room> roomsToBook) {
+		if (!roomsToBook.isEmpty()) { 
+			getModel().hotelSystem.makeBooking(startDate, endDate, roomsToBook, getAccount());
+		}
+		else getCardBookingManage().showWarningPopup("Error booking. Try again.");
+	}
+
+	private boolean checkRoomAvailable(Set<Room> selectRooms, Date startDate) {
+		for (Room r : selectRooms) {
+			if (!getModel().hotelSystem.roomIsAvailable(r, startDate)) {
+				getCardBookingManage().showWarningPopup("Room: " + r.getRoomNumber() + " is not available.");
+				return false;
+			}
+		}
+		return true;
+	}
+
+	private Set<Room> checkValidInput(String[] rooms) {
+		Set<Room> selectedRooms = new HashSet<>();
+
+		for (String r : rooms) {
+			if (r.length() < 2 || r.length() > 3) { // length is valid for format. e.g. 3F, 10F
+				getCardBookingManage().showWarningPopup("Room: " + r + " is not valid input.");
+				return null;
+			}
+
+			int floorNum = -1;
+			try { floorNum = Integer.parseInt(r.substring(0, r.length() - 1)); }
+			catch (Exception e) { System.out.println("Invalid floor number, please enter again: "); }
+
+			char roomNum = r.charAt(r.length() - 1); // gets char from room string
+
+			if (floorNum < 1 || floorNum > 10 || roomNum < 'A' || roomNum > 'J') {
+				getCardBookingManage().showWarningPopup("Room: " + r + " is invalid.");
+				return null;
+			}
+
+			Room toBook = new Room(floorNum, roomNum);
+			selectedRooms.add(toBook);
+		}
+		return selectedRooms;
+	}
+
+	private String[] parseRoom(String selectedRooms) {
+		String[] parsedRoom = selectedRooms.split(",");
+		for (int i = 0; i < parsedRoom.length; i++) parsedRoom[i] = parsedRoom[i].trim().toUpperCase();
+		return parsedRoom;
 	}
 
 	private boolean startBeforeToday(Date date) {
