@@ -75,8 +75,9 @@ public abstract class HotelSystem {
 			List<Booking> bookingsList = getBookingsWhere(x -> x.bookingID.equals(bookingId));
 			if (bookingsList.isEmpty()) return null;
 			Booking booking = bookingsList.get(0);
-			bookings.remove(booking);
 			HotelDatabase.deleteBooking(booking);
+            int index = bookings.stream().map(x -> x.bookingID).collect(Collectors.toList()).indexOf(bookingId);
+            bookings.remove(index);
 			return booking;
 		}
 		catch (BookingNotFoundException e) { return null; }

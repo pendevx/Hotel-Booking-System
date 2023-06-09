@@ -55,6 +55,8 @@ public class ControllerClientAdmin extends ControllerClient {
 		else {
 			getCardBookingManage().showWarningPopup("Booking " + deleted.bookingID + " deleted.");
 		}
+        
+        getModel().hotelSystem.deleteBooking(bookingID);
 		renderClient();
 	}
 }

@@ -261,12 +261,12 @@ public class HotelDatabase {
      */
 	public static void deleteBooking(Booking booking) throws BookingNotFoundException {
 		try {
-			ResultSet result = dbManager.query("SELECT * FROM Bookings WHERE bookingID = '" + booking + "'");
-			dbManager.update(SQL.deleteBooking(booking.bookingID));
-
+			ResultSet result = dbManager.query("SELECT * FROM Bookings WHERE bookingID = '" + booking.bookingID + "'");
             // If there is no result from the SELECT WHERE statement
 			if (!result.next()) 
                 throw new BookingNotFoundException("The booking ID does not exist.");
+            
+			dbManager.update(SQL.deleteBooking(booking.bookingID));
 		} catch (SQLException e) { 
             throw new BookingNotFoundException("The booking ID does not exist.");
         }

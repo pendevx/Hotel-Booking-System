@@ -102,9 +102,7 @@ class HotelBookingData {
 	}
 
 	// Getter methods
-	static List<Booking> getBookings() { return Collections.unmodifiableList(bookings); }
-	static List<Account> getAccounts() {
-		return Collections.unmodifiableList(accounts);
-	}
-	static Set<Credential> getCredentials() { return Collections.unmodifiableSet(credentials); }
+	static List<Booking> getBookings() { return bookings; }
+	static List<Account> getAccounts() { return accounts; }
+	static Set<Credential> getCredentials() { return credentials; }
 }
