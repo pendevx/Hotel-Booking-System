@@ -107,21 +107,27 @@ public class SQL {
 		return String.format("INSERT INTO credentials VALUES ('%s', '%s')", credential.getUsername(), credential.getPassword());
 	}
 
-	static String insertBookingTable(Booking booking) {
-		insertRoomsTable(booking);
-
+	static String[] insertBookingTable(Booking booking) {
 		double price = booking.getRooms().size() * 100;
-		return
+		String[] insertRoomsCommands = insertRoomsTable(booking);
+		String[] result = new String[insertRoomsCommands.length + 1];
+		for (int i = 0; i < insertRoomsCommands.length; i++) {
+			result[i] = insertRoomsCommands[i];
+		}
+
+		result[insertRoomsCommands.length] =
 			"INSERT INTO Bookings VALUES ('" +
-				booking.bookingID + "','" +
-				new java.sql.Date(booking.beginDate().getTime()) + "','" +
-				new java.sql.Date(booking.endDate().getTime()) + "'," +
-				price + ",'" +
-				booking.getAccount().username + "','" +
-				booking.getBookingManager().username + "')";
+			booking.bookingID + "','" +
+			new java.sql.Date(booking.beginDate().getTime()) + "','" +
+			new java.sql.Date(booking.endDate().getTime()) + "'," +
+			price + ",'" +
+			booking.getAccount().username + "','" +
+			booking.getBookingManager().username + "')";
+
+		return result;
 	}
 
-	static String[] insertRoomsTable(Booking booking) {
+	private static String[] insertRoomsTable(Booking booking) {
 		String[] queries = new String[booking.getRooms().size()];
 		for (int i = 0; i < queries.length; i++)
 			queries[i] = String.format("INSERT INTO Rooms VALUES ('%s', '%s')", booking.bookingID, booking.getRooms().get(i).getRoomNumber());

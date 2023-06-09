@@ -23,26 +23,27 @@ public class HotelDatabase {
 		createTable("rooms", SQL.createRoomsTable());
 //		loadBookings();
 
-		Account acc = new Account("user", null, null, null, null, AccountPermission.USER);
-		List<Room> roomsBooked = new LinkedList<Room>();
-		roomsBooked.add(new Room(1, 'A'));
-		roomsBooked.add(new Room(1, 'B'));
-		Booking booking = new Booking("1", new java.util.Date(), new java.util.Date(), roomsBooked, roomsBooked.size()*100, acc, acc);
+//		Account acc = new Account("user", null, null, null, null, AccountPermission.USER);
+//		List<Room> roomsBooked = new LinkedList<Room>();
+//		roomsBooked.add(new Room(1, 'A'));
+//		roomsBooked.add(new Room(1, 'B'));
+//		Booking booking = new Booking("1", new java.util.Date(), new java.util.Date(), roomsBooked, roomsBooked.size()*100, acc, acc);
 
-		String[] roomQueries = SQL.insertRoomsTable(booking);
-		for (String str : roomQueries) {
-			try {dbManager.update(str);} catch(Exception e){}
-		}
-
-		try {dbManager.update(SQL.insertBookingTable(booking));}catch(Exception e){}
+//		try {
+//			for (String command : SQL.insertBookingTable(booking)) {
+//				dbManager.update(command);
+//			}
+//		} catch (Exception e) {
+//
+//		}
 //
 //		Printer.printQuery("hotel", dbManager.query(SQL.selectAll("hotel"))); // for testing
 //		Printer.printQuery("credentials", dbManager.query(SQL.selectAll("credentials"))); // for testing
 //		Printer.printQuery("accounts", dbManager.query(SQL.selectAll("accounts"))); // for testing
 //		// TODO
-//		Printer.printQuery("bookings", dbManager.query(SQL.selectAll("bookings"))); // for testing
+		Printer.printQuery("bookings", dbManager.query(SQL.selectAll("bookings"))); // for testing
 //		System.out.println(tableExists("bookings"));
-//		Printer.printQuery("rooms", dbManager.query(SQL.selectAll("rooms")));
+		Printer.printQuery("rooms", dbManager.query(SQL.selectAll("rooms")));
 	}
 
 	public static void main(String[] args) {
@@ -139,7 +140,7 @@ public class HotelDatabase {
 				do {
 					String bookingID = resultSet.getString("bookingID");
 					String room = resultSet.getString("room");
-					Room roomObj = new Room(room.charAt(0), room.charAt(1));
+					Room roomObj = new Room(room.charAt(0) - '0', room.charAt(1));
 
 					BookingRooms.addRoom(bookingID, roomObj);
 				} while (resultSet.next());
@@ -208,7 +209,9 @@ public class HotelDatabase {
 	public static void insertBookingTable(Booking booking) {
 		new Thread(() -> {
 			try {
-				dbManager.update(SQL.insertBookingTable(booking));
+				for (String command : SQL.insertBookingTable(booking)) {
+					dbManager.update(command);
+				}
 			} catch (Exception e) {
 				throw new RuntimeException(e);
 			}

@@ -5,12 +5,14 @@ import com.group5.component.*;
 import com.group5.component.Text.FontSize;
 import com.group5.controller.Controller;
 import com.group5.hotel.Booking;
+import com.group5.hotel.Room;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.List;
 
 public class CardBookingList extends Card {
@@ -21,7 +23,7 @@ public class CardBookingList extends Card {
 
 		this.add(new Container(W, 50, new Text("Manage Bookings", FontSize.H1)));
 
-		String[] columnNames = { "Booking ID", "Start", "End", "Price", "Booker", "Manager" };
+		String[] columnNames = { "Booking ID", "Start", "End", "Price", "Rooms", "Booker", "Manager" };
 		List<Booking> bookings = appModel.hotelSystem.getAllBookings();
 		Object[][] data = new Object[bookings.size()][];
 
@@ -29,11 +31,23 @@ public class CardBookingList extends Card {
 
 		for (int i = 0; i < bookings.size(); i++) {
 			Booking booking = bookings.get(i);
+
+			StringBuilder sb = new StringBuilder();
+			List<Room> rooms = booking.getRooms();
+			for (int j = 0; j < rooms.size(); j++) {
+				sb.append(rooms.get(j).getRoomNumber());
+
+				if (j != booking.getRooms().size() - 1) {
+					sb.append(", ");
+				}
+			}
+
 			data[i] = new Object[] {
 				booking.bookingID,
 				booking.beginDate().toString().split(" ")[0],
 				booking.endDate().toString().split(" ")[0],
 				booking.totalPrice,
+				sb.toString(),
 				booking.getAccount().getFullName(),
 				booking.getBookingManager().getFullName()
 			};
