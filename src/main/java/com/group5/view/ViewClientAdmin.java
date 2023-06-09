@@ -23,7 +23,6 @@ public class ViewClientAdmin extends ViewClient {
 		setCardBookingManage(new CardBookingManageAdmin(hotelInfo));
 
 		setCardBookingList(new CardBookingList(bookings));
-		getCardBookingList().refreshButton.addActionListener(getController());
 
 		super.addToBaseWithGap(getCardAccount(), getCardBookingManage(), getCardBookingList());
 	}

@@ -27,19 +27,7 @@ public class ViewClientUser extends ViewClient {
 		this.cardBookingManage.cancelButton.addActionListener(getController());
 		this.cardBookingManage.bookButton.addActionListener(getController());
 		setCardBookingManage(cardBookingManage);
-
 		setCardBookingList(new CardBookingList(bookings));
-		getCardBookingList().refreshButton.addActionListener(getController());
-
-
 		super.addToBaseWithGap(getCardAccount(), cardBookingManage, getCardBookingList());
-//		super.addToBaseWithGap(getCardAccount(), cardBookingManage);
-//		getCardBookingManage()..addActionListener(getController());
-//		setCardBookingManage(new CardBookingManageUser(hotelInfo));
-//		super.addToBaseWithGap(getCardAccount(), getCardBookingManage(), getCardBookingList());
-	}
-
-	public void refreshBookingList(List<Booking> updateBooking) {
-		setCardBookingList(new CardBookingList(updateBooking));
 	}
 }

@@ -44,7 +44,6 @@ public class ControllerRegister extends Controller implements KeyPressListener {
 				}
 			});
 		}
-
 	}
 
 	private void cancelHandler() {

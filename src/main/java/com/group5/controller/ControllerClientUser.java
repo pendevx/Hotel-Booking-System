@@ -36,7 +36,6 @@ public class ControllerClientUser extends ControllerClient {
 			else if (e.getSource() == getCardAccount().logoutButton) logoutHandler();
 			else if (e.getSource() == getBookingUser().cancelButton) cancelHandler();
 			else if (e.getSource() == getBookingUser().bookButton) bookHandler();
-			else if (e.getSource() == getCardBookingList().refreshButton) refreshHandler();
 		}
 	}
 
@@ -48,11 +47,6 @@ public class ControllerClientUser extends ControllerClient {
 		getBookingUser().rooms.setText("");
 		getBookingUser().startDate.clearDate();
 		getBookingUser().endDate.clearDate();
-	}
-
-	private void refreshHandler() {
-		System.out.println("hi");
-//		clientView.refreshBookingList(getBookings());
 	}
 
 	private void bookHandler() {
@@ -79,6 +73,7 @@ public class ControllerClientUser extends ControllerClient {
 				List<Room> roomsToBook = new ArrayList<>(selectedRooms);
 				createBooking(startDate, endDate, roomsToBook);
 				getCardBookingManage().showWarningPopup(getBookingConfirm(startDate, endDate, roomsToBook.size()));
+				renderClient();
 			}
 		}
 	}

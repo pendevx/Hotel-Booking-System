@@ -1,7 +1,6 @@
 package com.group5.controller;
 
 import com.group5.app.AppSession;
-import com.group5.card.CardBookingManageAdmin;
 import com.group5.view.ViewClientAdmin;
 import com.group5.view.ViewGUI;
 import java.awt.event.ActionEvent;
@@ -24,7 +23,6 @@ public class ControllerClientAdmin extends ControllerClient {
 		if (getCardAccount()!= null) {
 			if (e.getSource() == getCardAccount().editAccountButton) editHandler();
 			else if (e.getSource() == getCardAccount().logoutButton) logoutHandler();
-			else if (e.getSource() == getCardBookingList().refreshButton) System.out.println("Hi");
 		}
 	}
 

@@ -26,9 +26,5 @@ public class CardBookingManageUser extends CardBookingManage {
 		this.add(new Container(W, 20, new Text("Room numbers range from (1-10 and (A-J).", FontSize.H3)));
 		this.add(new Container(W, 20, new Text("Input in comma seperated line, e.g. 1A,1B,1C", FontSize.H3)));
 		this.add(new Container(W, MARGIN, cancelButton, bookButton));
-//		// hotelSystem.makeBooking(start, end, rooms, hotelSystem.getAccount());
-//		// popup showing booked. totla price and rooms
-		// extend this for admin and add a userField
-		// check if user exists as well
 	}
 }

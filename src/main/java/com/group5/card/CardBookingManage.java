@@ -7,7 +7,6 @@ public abstract class CardBookingManage extends Card {
 
 	public final int W;
 
-	// goes inside view admin
 	public CardBookingManage(String title, int width, Container...hotelInfo) {
 		super(500);
 		this.W = this.WIDTH - 50;
