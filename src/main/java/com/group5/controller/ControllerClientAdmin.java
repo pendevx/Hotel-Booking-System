@@ -46,6 +46,7 @@ public class ControllerClientAdmin extends ControllerClient {
 
 	private void deleteBooking() {
 		String bookingID = getBookingAdmin().bookingRef.getText().trim();
+
 		Booking deleted = getModel().hotelSystem.deleteBooking(bookingID);
 		if (deleted == null) {
 			getCardBookingManage().showWarningPopup("Booking not found.");
