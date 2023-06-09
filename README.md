@@ -13,12 +13,12 @@
 ### _Requirements_
 - [ ] Develop `GUI`.
 - [x] Integrate `database`.
-- [ ] Implement `design patterns`.
+- [x] Implement `design patterns`.
 - [ ] Eliminate `code smell`.
 - [x] Use `git`, commit history must be included, `.git` or from GitHub.
 - [ ] Develop `unit tests (JUnit)`, testing some important functionalities.
 - [x] Apply `OOP` (abstraction, encapsulation, inheritance, polymorphism).
-- [ ] Follow `SOLID` principles.
+- [x] Follow `SOLID` principles.
 - [x] Create multiple classes with relationships.
 - [ ] Bug-free and have `robust error handling`.
 
@@ -52,13 +52,13 @@
 
 ### _Marking_
 #### __(20%) User Interface (GUI)__
-- [ ] Clear and well-designed GUI following common standards.
-- [ ] Interface is easy for users to interact with.
+- [x] Clear and well-designed GUI following common standards.
+- [x] Interface is easy for users to interact with.
 ```
 - [ ] User-friendly error messages.
-- [ ] GUI components organized nicely.
-- [ ] Quit at any step.
-- [ ] Go back to menu, restart system at anytime (Logout)
+- [x] GUI components organized nicely.
+- [x] Quit at any step.
+- [x] Go back to menu, restart system at anytime (Logout)
 ```
 
 #### __(20%) Database__
@@ -67,8 +67,8 @@
 - [x] JDBC must contribute to the functionalities of the project.
 ```
 - [x] Database component manages data READ and WRITE.
-- [ ] More than 3 database READ interations.
-- [ ] More than 3 database WRITE interations.
+- [x] More than 3 database READ interations.
+- [x] More than 3 database WRITE interations.
 - [x] Derby Embedded mode is utilized.
 - [x] Program can connect to database without starting db service.
 ```
@@ -80,21 +80,21 @@
 ```
 - [ ] Program can run wihtout run time error by giving expected inputs.
 - [x] No manual configurations.
-- [ ] Functionality of program, is complex enough, having most common features of the project implemented.
+- [x] Functionality of program, is complex enough, having most common features of the project implemented.
 - [ ] Implemented features are robust.
 - [x] Any input can be handled perfectly without throwing exceptions.
 - [x] Messages can be prompted to end-user for correct input.
 ```
 
 #### __(30%) Software Design & Implementation__
-- [ ] Program can be compiled successfully.
+- [x] Program can be compiled successfully.
 - [x] The purpose of the code is easy to understand by reading it.
 - [ ] The comments in the code are useful and appropriate.
 - [x] The code executes without runtime errors.
 - [x] Version control is applied.
-- [ ] Error handling is thorough and robust.
+- [x] Error handling is thorough and robust.
 - [x] Class structure reflects good design.
-- [ ] Design patters are implemented correctly where appropriate.
+- [x] Design patters are implemented correctly where appropriate.
 - [x] Good coding style is used, following appropriate coding standards.
 - [x] Code design follows OO design good practice.
 - [ ] There are no obvious code smells.
@@ -104,11 +104,11 @@
 - [ ] Comments of methods are given, code easy to read.
 - [x] More than 11 reasonable classes (12+) with reasonable methods.
 - [x] Class relationships well presented.
-- [ ] All OOP concepts applied.
-- [ ] SOLID applied where appropriate.
-- [ ] Design patterns applied where appropriate.
+- [x] All OOP concepts applied.
+- [x] SOLID applied where appropriate.
+- [x] Design patterns applied where appropriate.
 - [x] Well structured, clear seperation frontend, backend. (UI & Model).
-- [ ] Robust, handle all inputs without throwing exceptions.
+- [x] Robust, handle all inputs without throwing exceptions.
 - [ ] 5+ well written test cases.
 - [ ] Tests are well-named.
 - [ ] Test cover important functionality extensively.

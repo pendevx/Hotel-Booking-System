@@ -1,8 +1,8 @@
 package com.group5.view;
 
 import com.group5.card.CardAccount;
-import com.group5.card.CardBookingCreate;
 import com.group5.card.CardBookingList;
+import com.group5.card.CardBookingManageAdmin;
 import com.group5.component.*;
 import com.group5.controller.Controller;
 
@@ -18,9 +18,8 @@ public class ViewClientAdmin extends ViewClient {
 		if (accountInfo.length > 0) setCardAccount(new CardAccount(accountInfo));
 		getCardAccount().editAccountButton.addActionListener(getController());
 		getCardAccount().logoutButton.addActionListener(getController());
-		setCardBookingCreate(new CardBookingCreate(hotelInfo));
-		setCardBookingList(new CardBookingList(getController().getModel()));
-		super.addToBaseWithGap(getCardAccount(), getCardBookingCreate(), getCardBookingList());
+		setCardBookingManage(new CardBookingManageAdmin(hotelInfo));
+		setCardBookingList(new CardBookingList());
+		super.addToBaseWithGap(getCardAccount(), getCardBookingManage(), getCardBookingList());
 	}
-
 }

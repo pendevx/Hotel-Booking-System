@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 public class Container extends JPanel {
 	public Container(int width, int height) {
 		this.setBackground(Color.GRAY);
+//		this.setBackground(Color.WHITE);
 		setPreferredSize(new Dimension(width, height));
 	}
 

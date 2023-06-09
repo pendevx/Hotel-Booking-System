@@ -72,8 +72,8 @@ public abstract class ControllerClient extends Controller {
 		else return clientView.getCardBookingList();
 	}
 
-	public Card getCardBookingCreate() {
+	public Card getCardBookingManage() {
 		if (clientView == null) return null;
-		else return clientView.getCardBookingCreate();
+		else return clientView.getCardBookingManage();
 	}
 }
