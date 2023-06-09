@@ -15,7 +15,7 @@ public class Container extends JPanel {
 	 * @param height of panel
 	 */
 	public Container(int width, int height) {
-		this.setBackground(Color.GRAY);
+		this.setBackground(Color.WHITE);
 		setPreferredSize(new Dimension(width, height));
 	}
 
