@@ -28,13 +28,14 @@ public class HotelDatabase {
 //		roomsBooked.add(new Room(1, 'A'));
 //		roomsBooked.add(new Room(1, 'B'));
 //		Booking booking = new Booking("1", new java.util.Date(), new java.util.Date(), roomsBooked, roomsBooked.size()*100, acc, acc);
+
+//		try {
+//			for (String command : SQL.insertBookingTable(booking)) {
+//				dbManager.update(command);
+//			}
+//		} catch (Exception e) {
 //
-//		String[] roomQueries = SQL.insertRoomsTable(booking);
-//		for (String str : roomQueries) {
-//			dbManager.update(str);
 //		}
-//
-//		dbManager.update(SQL.insertBookingTable(booking));
 //
 //		Printer.printQuery("hotel", dbManager.query(SQL.selectAll("hotel"))); // for testing
 //		Printer.printQuery("credentials", dbManager.query(SQL.selectAll("credentials"))); // for testing
@@ -42,7 +43,7 @@ public class HotelDatabase {
 //		// TODO
 		Printer.printQuery("bookings", dbManager.query(SQL.selectAll("bookings"))); // for testing
 //		System.out.println(tableExists("bookings"));
-//		Printer.printQuery("rooms", dbManager.query(SQL.selectAll("rooms")));
+		Printer.printQuery("rooms", dbManager.query(SQL.selectAll("rooms")));
 	}
 
 	public static void main(String[] args) {
@@ -139,7 +140,7 @@ public class HotelDatabase {
 				do {
 					String bookingID = resultSet.getString("bookingID");
 					String room = resultSet.getString("room");
-					Room roomObj = new Room(room.charAt(0), room.charAt(1));
+					Room roomObj = new Room(room.charAt(0) - '0', room.charAt(1));
 
 					BookingRooms.addRoom(bookingID, roomObj);
 				} while (resultSet.next());
@@ -208,7 +209,9 @@ public class HotelDatabase {
 	public static void insertBookingTable(Booking booking) {
 		new Thread(() -> {
 			try {
-				dbManager.update(SQL.insertBookingTable(booking));
+				for (String command : SQL.insertBookingTable(booking)) {
+					dbManager.update(command);
+				}
 			} catch (Exception e) {
 				throw new RuntimeException(e);
 			}

@@ -22,5 +22,4 @@ public class ViewClientAdmin extends ViewClient {
 		setCardBookingList(new CardBookingList());
 		super.addToBaseWithGap(getCardAccount(), getCardBookingManage(), getCardBookingList());
 	}
-	
 }
