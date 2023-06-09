@@ -121,7 +121,7 @@ public class SQL {
 				booking.getBookingManager().username + "')";
 	}
 
-	private static String[] insertRoomsTable(Booking booking) {
+	static String[] insertRoomsTable(Booking booking) {
 		String[] queries = new String[booking.getRooms().size()];
 		for (int i = 0; i < queries.length; i++)
 			queries[i] = String.format("INSERT INTO Rooms VALUES ('%s', '%s')", booking.bookingID, booking.getRooms().get(i).getRoomNumber());

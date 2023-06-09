@@ -23,18 +23,18 @@ public class HotelDatabase {
 		createTable("rooms", SQL.createRoomsTable());
 //		loadBookings();
 
-//		Account acc = new Account("user", null, null, null, null, AccountPermission.USER);
-//		List<Room> roomsBooked = new LinkedList<Room>();
-//		roomsBooked.add(new Room(1, 'A'));
-//		roomsBooked.add(new Room(1, 'B'));
-//		Booking booking = new Booking("1", new java.util.Date(), new java.util.Date(), roomsBooked, roomsBooked.size()*100, acc, acc);
-//
-//		String[] roomQueries = SQL.insertRoomsTable(booking);
-//		for (String str : roomQueries) {
-//			dbManager.update(str);
-//		}
-//
-//		dbManager.update(SQL.insertBookingTable(booking));
+		Account acc = new Account("user", null, null, null, null, AccountPermission.USER);
+		List<Room> roomsBooked = new LinkedList<Room>();
+		roomsBooked.add(new Room(1, 'A'));
+		roomsBooked.add(new Room(1, 'B'));
+		Booking booking = new Booking("1", new java.util.Date(), new java.util.Date(), roomsBooked, roomsBooked.size()*100, acc, acc);
+
+		String[] roomQueries = SQL.insertRoomsTable(booking);
+		for (String str : roomQueries) {
+			try {dbManager.update(str);} catch(Exception e){}
+		}
+
+		try {dbManager.update(SQL.insertBookingTable(booking));}catch(Exception e){}
 //
 //		Printer.printQuery("hotel", dbManager.query(SQL.selectAll("hotel"))); // for testing
 //		Printer.printQuery("credentials", dbManager.query(SQL.selectAll("credentials"))); // for testing
