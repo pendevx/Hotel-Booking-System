@@ -16,7 +16,7 @@ public class Booking {
      */
     private Date endDate;
     private List<Room> roomsBooked;
-    private double totalPrice;
+    public final double totalPrice;
     private Account user;
     private Account bookingManager;
 

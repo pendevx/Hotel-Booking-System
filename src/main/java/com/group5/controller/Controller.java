@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 
 public abstract class Controller implements ActionListener {
 	private ViewGUI view;
-	private static AppSession model;
+	private AppSession model;
 
 	protected abstract void init();
 
