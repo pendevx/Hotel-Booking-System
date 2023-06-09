@@ -18,6 +18,12 @@ import java.util.Set;
 
 public class ControllerClientUser extends ControllerClient {
 
+	/**
+	 * User view of client
+	 * 
+	 * @param view
+	 * @param model 
+	 */
 	public ControllerClientUser(ViewGUI view, AppSession model) {
 		super(view, model);
 		init();
@@ -25,8 +31,9 @@ public class ControllerClientUser extends ControllerClient {
 
 	@Override
 	protected void init() {
-		super.clientView = new ViewClientUser(this, super.getAccountInfo(), super.getHotelInfo());
-		super.updateDisplay(super.clientView.getBasePanel());
+		// sets clientView to be the admin verison
+		super.clientView = new ViewClientUser(this, super.getAccountInfo(), super.getHotelInfo(), super.getBookings());
+		super.updateDisplay(super.clientView.getBasePanel());// update the ViewGUI to display it
 	}
 
 	@Override
@@ -39,27 +46,31 @@ public class ControllerClientUser extends ControllerClient {
 		}
 	}
 
+	// loads the Account edit panel to show, along with its controller
 	private void editHandler() {
 		if (getModel() != null) new ControllerAccountEdit(getView(), getModel());
 	}
 
+	// clears the input in the create booking panel
 	private void cancelHandler() {
 		getBookingUser().rooms.setText("");
 		getBookingUser().startDate.clearDate();
 		getBookingUser().endDate.clearDate();
 	}
 
+	// Handles the booking input, and makes booking if valid
 	private void bookHandler() {
 		Date startDate = getBookingUser().startDate.getDate();
 		Date endDate = getBookingUser().endDate.getDate();
 		String rooms = getBookingUser().rooms.getText();
+		System.out.println(startDate);
 
 		String start = (startDate != null) ? startDate.toString() : "";
 		String end = (endDate != null) ? endDate.toString() : "";
 
 		if (!hasEmptyField(getBookingUser(), start, end, rooms)) {
 			if (startBeforeToday(startDate)) {
-				getCardBookingManage().showWarningPopup("End date must be after start date...");
+				getCardBookingManage().showWarningPopup("Start date must be after today date...");
 				return;
 			}
 			if (endDate.before(startDate)) {
@@ -73,20 +84,24 @@ public class ControllerClientUser extends ControllerClient {
 				List<Room> roomsToBook = new ArrayList<>(selectedRooms);
 				createBooking(startDate, endDate, roomsToBook);
 				getCardBookingManage().showWarningPopup(getBookingConfirm(startDate, endDate, roomsToBook.size()));
+				renderClient();
 			}
 		}
 	}
 
+	// returns string showing booking dates and amount of rooms
 	private String getBookingConfirm(Date startDate, Date endDate, int qty) {
-		return "Booking created.\n" + getBookingPeriod(endDate, endDate) + "\nFor: " + qty + " rooms.";
+		return "Booking created.\n" + getBookingPeriod(startDate, endDate) + "\nFor: " + qty + " rooms.";
 
 	}
 
+	// returns formatted string of date
 	private String getBookingPeriod(Date begin, Date end) {
 		DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 		return "Date: " + formatter.format(begin) + " to " + formatter.format(end);
 	}
 
+	// create the booking through model
 	private void createBooking(Date startDate, Date endDate, List<Room> roomsToBook) {
 		if (!roomsToBook.isEmpty()) { 
 			getModel().hotelSystem.makeBooking(startDate, endDate, roomsToBook, getAccount());
@@ -94,6 +109,7 @@ public class ControllerClientUser extends ControllerClient {
 		else getCardBookingManage().showWarningPopup("Error booking. Try again.");
 	}
 
+	// check if the room is available through model
 	private boolean checkRoomAvailable(Set<Room> selectRooms, Date startDate) {
 		for (Room r : selectRooms) {
 			if (!getModel().hotelSystem.roomIsAvailable(r, startDate)) {
@@ -104,6 +120,7 @@ public class ControllerClientUser extends ControllerClient {
 		return true;
 	}
 
+	// check if inputed values are valid, returning a Set<Room>
 	private Set<Room> checkValidInput(String[] rooms) {
 		Set<Room> selectedRooms = new HashSet<>();
 
@@ -119,7 +136,7 @@ public class ControllerClientUser extends ControllerClient {
 
 			char roomNum = r.charAt(r.length() - 1); // gets char from room string
 
-			if (floorNum < 1 || floorNum > 10 || roomNum < 'A' || roomNum > 'J') {
+			if (floorNum < 1 || floorNum > 9 || roomNum < 'A' || roomNum > 'J') {
 				getCardBookingManage().showWarningPopup("Room: " + r + " is invalid.");
 				return null;
 			}
@@ -130,12 +147,14 @@ public class ControllerClientUser extends ControllerClient {
 		return selectedRooms;
 	}
 
+	// Parses the string value, returning an array that is trimmed and uppercase
 	private String[] parseRoom(String selectedRooms) {
 		String[] parsedRoom = selectedRooms.split(",");
 		for (int i = 0; i < parsedRoom.length; i++) parsedRoom[i] = parsedRoom[i].trim().toUpperCase();
 		return parsedRoom;
 	}
 
+	// Checks if start date is in the past, relative to today.
 	private boolean startBeforeToday(Date date) {
 		Calendar today = Calendar.getInstance();
 		today.setTime(new Date());
@@ -147,6 +166,7 @@ public class ControllerClientUser extends ControllerClient {
 		else return false;
 	}
 
+	// get card of booking manage user version
 	private CardBookingManageUser getBookingUser() {
 		if (clientView == null) return null;
 		else return (CardBookingManageUser) clientView.getCardBookingManage();

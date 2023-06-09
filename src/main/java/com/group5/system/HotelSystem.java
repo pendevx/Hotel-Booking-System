@@ -5,8 +5,6 @@ import com.group5.exceptions.BookingNotFoundException;
 import com.group5.hotel.Account;
 import com.group5.hotel.Room;
 import com.group5.hotel.Booking;
-
-import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -53,7 +51,8 @@ public abstract class HotelSystem {
 	protected Booking makeBooking(Date begin, Date end, List<Room> rooms, Account account, Account manager) {
 		Booking booking = new Booking(String.valueOf(System.currentTimeMillis()), begin, end, rooms, rooms.size() * 100, account, manager);
 		HotelBookingData.book(booking);
-		bookings.add(booking);
+		// add bookings to master list like accoutns etc
+//		bookings.add(booking);
 		return booking;
 	}
 
@@ -73,14 +72,24 @@ public abstract class HotelSystem {
 	 */
 	public Booking deleteBooking(String bookingId) {
 		try {
-			Booking booking = getBookingsWhere(x -> x.bookingID.equals(bookingId)).get(0);
+			List<Booking> bookingsList = getBookingsWhere(x -> x.bookingID.equals(bookingId));
+			if (bookingsList.isEmpty()) return null;
+			Booking booking = bookingsList.get(0);
 			bookings.remove(booking);
-//			FileIO.saveBookings(bookings);
 			HotelDatabase.deleteBooking(booking);
 			return booking;
-		} catch (BookingNotFoundException e) {
-			return null;
 		}
+		catch (BookingNotFoundException e) { return null; }
+//		try {
+//			Booking booking = getBookingsWhere(x -> x.bookingID.equals(bookingId)).get(0);
+////			booking = getBookingsWhere(x -> x.bookingID.equals(bookingId)).get(0);
+//			bookings.remove(booking);
+////			FileIO.saveBookings(bookings);
+//			HotelDatabase.deleteBooking(booking);
+//			return booking;
+//		} catch (BookingNotFoundException e) {
+//			return null;
+//		}
 	}
 
 	/**

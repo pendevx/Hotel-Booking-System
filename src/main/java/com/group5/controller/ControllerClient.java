@@ -2,14 +2,16 @@ package com.group5.controller;
 
 import com.group5.app.AppSession;
 import com.group5.card.CardAccount;
-import com.group5.component.Base;
+import com.group5.card.CardBookingList;
 import com.group5.component.Card;
 import com.group5.component.Container;
 import com.group5.component.Text;
 import com.group5.component.Text.FontSize;
+import com.group5.hotel.Booking;
 import com.group5.view.ViewClient;
 import com.group5.view.ViewGUI;
 import java.awt.FlowLayout;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 
@@ -17,15 +19,26 @@ public abstract class ControllerClient extends Controller {
 
 	public ViewClient clientView;
 
+	/**
+	 * Abstract controller for client view
+	 * @param view
+	 * @param model 
+	 */
 	public ControllerClient(ViewGUI view, AppSession model) {
 		super(view, model);
 	}
 
+	/**
+	 * Confirms the logout from user.
+	 */
 	public void logoutHandler() {
 		int result = JOptionPane.showConfirmDialog(getView(), "Logout?", "Confirm", JOptionPane.YES_NO_OPTION);
 		if (result == JOptionPane.YES_OPTION)  super.logout();
 	}
 
+	/**
+	 * @return Container[] holding information about the account
+	 */
 	public Container[] getAccountInfo() {
 		if (getModel().hotelSystem != null) {
 			final int width = 249;
@@ -44,6 +57,9 @@ public abstract class ControllerClient extends Controller {
 		return null;
 	}
 
+	/**
+	 * @return Container[] holding information about the hotel
+	 */
 	public Container[] getHotelInfo() {
 		if (getModel().hotelSystem != null) {
 			final int width = 450;
@@ -62,16 +78,24 @@ public abstract class ControllerClient extends Controller {
 		return null;
 	}
 
+	// get bookings
+	public List<Booking> getBookings() {
+		return getModel().hotelSystem.getAllBookings();
+	}
+
+	// get the cardAccount panel
 	public CardAccount getCardAccount() {
 		if (clientView == null) return null;
 		else return clientView.getCardAccount();
 	}
 
-	public Card getCardBookingList() {
+	// get the cardbookinglist panel
+	public CardBookingList getCardBookingList() {
 		if (clientView == null) return null;
 		else return clientView.getCardBookingList();
 	}
 
+	// get the cardbookingmanage panel
 	public Card getCardBookingManage() {
 		if (clientView == null) return null;
 		else return clientView.getCardBookingManage();

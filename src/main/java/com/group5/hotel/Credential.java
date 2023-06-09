@@ -43,7 +43,7 @@ public class Credential implements Comparable<Credential> {
     /***
      * 
      * @param o - credentials to check for string equality
-     * @return boolean of string equality of password && username
+     * @return Boolean of string equality of password && username
      */
     public boolean equals(Credential o) {
         return username.equalsIgnoreCase(o.username) && password.equals(o.password);

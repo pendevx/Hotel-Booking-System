@@ -8,6 +8,10 @@ import javax.swing.JComponent;
 public class ViewLogin extends View implements GetCardComponent {
 	private CardLogin cardLogin;
 
+	/**
+	 * Login view
+	 * @param controller 
+	 */
 	public ViewLogin(Controller controller) {
 		super(controller);
 		init();

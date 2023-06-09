@@ -3,17 +3,22 @@ package com.group5.database;
 import com.group5.exceptions.BookingNotFoundException;
 import com.group5.hotel.*;
 
-import java.awt.print.Book;
 import java.sql.DatabaseMetaData;
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
 public class HotelDatabase {
 	private static DatabaseManager dbManager;
+    
+    /**
+     * Cache storage for the accounts
+     */
 	private static List<Account> cacheAccounts;
 
+    /**
+     * Constructor calls createTable for all of the tables
+     */
 	public HotelDatabase() {
 		dbManager = new DatabaseManager();
 		createTable("hotel", SQL.createHotelTable());
@@ -21,35 +26,12 @@ public class HotelDatabase {
 		createTable("accounts", SQL.createAccountTable());
 		createTable("bookings", SQL.createBookingTable());
 		createTable("rooms", SQL.createRoomsTable());
-//		loadBookings();
-
-//		Account acc = new Account("user", null, null, null, null, AccountPermission.USER);
-//		List<Room> roomsBooked = new LinkedList<Room>();
-//		roomsBooked.add(new Room(1, 'A'));
-//		roomsBooked.add(new Room(1, 'B'));
-//		Booking booking = new Booking("1", new java.util.Date(), new java.util.Date(), roomsBooked, roomsBooked.size()*100, acc, acc);
-
-//		try {
-//			for (String command : SQL.insertBookingTable(booking)) {
-//				dbManager.update(command);
-//			}
-//		} catch (Exception e) {
-//
-//		}
-//
-//		Printer.printQuery("hotel", dbManager.query(SQL.selectAll("hotel"))); // for testing
-//		Printer.printQuery("credentials", dbManager.query(SQL.selectAll("credentials"))); // for testing
-//		Printer.printQuery("accounts", dbManager.query(SQL.selectAll("accounts"))); // for testing
-//		// TODO
-		Printer.printQuery("bookings", dbManager.query(SQL.selectAll("bookings"))); // for testing
-//		System.out.println(tableExists("bookings"));
-		Printer.printQuery("rooms", dbManager.query(SQL.selectAll("rooms")));
 	}
 
-	public static void main(String[] args) {
-		HotelDatabase t = new HotelDatabase();
-	}
-
+    /**
+     * Loads the hotel into the program's memory
+     * @return A list of all hotels in the database
+     */
 	public static List<Hotel> loadHotel() {
 		String tableName = "hotel";
 		if (!tableExists(tableName)) return null;
@@ -77,6 +59,10 @@ public class HotelDatabase {
 		return hotels;
 	}
 
+    /**
+     * Loads the credentials into the program's memory
+     * @return A set of all the credentials in the database
+     */
 	public static Set<Credential> loadCredentials() {
 		String tableName = "credentials";
 		if (!tableExists(tableName)) return null;
@@ -98,6 +84,10 @@ public class HotelDatabase {
 		return credentials;
 	}
 
+    /**
+     * Loads all the accounts into the program's memory
+     * @return A list of all the accounts in the database
+     */
 	public static List<Account> loadAccounts() {
 		String tableName = "accounts";
 		if (!tableExists(tableName)) return null;
@@ -129,6 +119,10 @@ public class HotelDatabase {
 		return accounts;
 	}
 
+    /**
+     * Loads all the rooms into the program's memory
+     * @return A mapping of all booking IDs and the rooms that were included inside that booking
+     */
 	private static Map<String, List<Room>> getRooms() {
 		String tableName = "rooms";
 		if (!tableExists(tableName)) return null;
@@ -150,7 +144,12 @@ public class HotelDatabase {
 		return BookingRooms.rooms;
 	}
 
+    /**
+     * Loads all the bookings into the program's memory
+     * @return A list of all the bookings in the database
+     */
 	public static List<Booking> loadBookings() {
+        // Gets all the rooms in the database
 		Map<String, List<Room>> bookingRooms = getRooms();
 		String tableName = "bookings";
 		if (!tableExists(tableName)) return null;
@@ -168,8 +167,11 @@ public class HotelDatabase {
 					float price = resultSet.getFloat("price");
 					String booker = resultSet.getString("booker");
 					String manager = resultSet.getString("manager");
-
+                    
+                    // Get all the rooms for the current booking ID
 					List<Room> currentRooms = bookingRooms.get(bookingID);
+                    
+                    // Gets the booker and manager account from the cached accounts, for the booking
 					Optional<Account> bookerAcc = cacheAccounts.stream().filter(x -> x.getUsername().equals(booker)).findFirst();
  					Optional<Account> managerAcc = cacheAccounts.stream().filter(x -> x.getUsername().equals(manager)).findFirst();
 
@@ -180,90 +182,115 @@ public class HotelDatabase {
 			resultSet.close();
 		} catch (SQLException ex) { System.out.println(ex.getMessage());}
 
+        // Destroy the cached accounts
 		cacheAccounts = null;
 		if (bookings == null) bookings = new ArrayList<>();
 		return bookings;
 	}
 
+    /**
+     * Inserts a credential into the credentials table
+     * @param credential The credential to insert
+     */
 	public static void insertCredentialTable(Credential credential) {
-		new Thread(() -> {
 			try {
 				dbManager.update(SQL.insertCredentialTable(credential));
 			} catch (SQLException e) {
 				throw new RuntimeException(e);
 			}
-		}).start();
 	}
 
+    /**
+     * Inserts an account into the accounts table
+     * @param account The account to insert
+     */
 	public static void insertAccountTable(Account account) {
-		new Thread(() -> {
-			try {
-				dbManager.update(SQL.insertAccountTable(account));
-			} catch (Exception e) {
-				throw new RuntimeException(e);
-			}
-		}).start();
+			try { 
+                dbManager.update(SQL.insertAccountTable(account));
+            } catch (Exception e) {
+                throw new RuntimeException(e); 
+            }
 	}
 
-
+    /**
+     * Inserts a booking in to the bookings table
+     * @param booking The booking to be inserted
+     */
 	public static void insertBookingTable(Booking booking) {
-		new Thread(() -> {
-			try {
-				for (String command : SQL.insertBookingTable(booking)) {
-					dbManager.update(command);
-				}
-			} catch (Exception e) {
-				throw new RuntimeException(e);
-			}
-		});
+			try { 
+                for (String command : SQL.insertBookingTable(booking)) dbManager.update(command);
+            } catch (Exception e) { 
+                throw new RuntimeException(e);
+            }
 	}
 
-	// need reload database after
-	// change account info in system, then write to database
-	// need modify account, change to no final
-	// only need for account
+    /**
+     * Updates the phone for an account
+     * @param account The account to update (containing the new phone number)
+     */
 	public static void updateAccountPhone(Account account) {
 		String username = account.getUsername();
 		String newPhone = account.getPhone();
+        
 		try {
-			dbManager.update(SQL.updateAccountPhone(username, newPhone));
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		}
+            dbManager.update(SQL.updateAccountPhone(username, newPhone)); 
+        } catch (SQLException e) { 
+            throw new RuntimeException(e);
+        }
 	}
 	
+    /**
+     * Updates the email for an account
+     * @param account The account to update (containing the new email)
+     */
 	public static void updateAccountEmail(Account account) {
 		String username = account.getUsername();
 		String newEmail = account.getEmail().toLowerCase();
 
-		try {
-			dbManager.update(SQL.updateAccountEmail(username, newEmail));
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		}
+		try { 
+            dbManager.update(SQL.updateAccountEmail(username, newEmail)); 
+        } catch (SQLException e) {
+            throw new RuntimeException(e); 
+        }
 	}
 
+    /**
+     * Deletes a booking from the database
+     * @param booking The booking to be deleted
+     * @throws BookingNotFoundException Throws this exception if the booking does not exist in the database
+     */
 	public static void deleteBooking(Booking booking) throws BookingNotFoundException {
 		try {
 			ResultSet result = dbManager.query("SELECT * FROM Bookings WHERE bookingID = '" + booking + "'");
 			dbManager.update(SQL.deleteBooking(booking.bookingID));
 
-			if (!result.next()) {
-				throw new BookingNotFoundException("The booking ID does not exist.");
-			}
-		} catch (SQLException e) {
-			throw new BookingNotFoundException("The booking ID does not exist.");
-		}
+            // If there is no result from the SELECT WHERE statement
+			if (!result.next()) 
+                throw new BookingNotFoundException("The booking ID does not exist.");
+		} catch (SQLException e) { 
+            throw new BookingNotFoundException("The booking ID does not exist.");
+        }
 	}
 
+    /**
+     * Creates a table in the database if it does not already exist
+     * @param name The name of the table to create
+     * @param sql The SQL queries to execute to create the table
+     */
 	private static void createTable(String name, String...sql) {
-		try {
-			if (!tableExists(name)) dbManager.updateBatch(sql);
-		} catch (SQLException e) {
-			System.out.println("Table " + name + " exists.");
-		}
+		try { 
+            if (!tableExists(name)) 
+                dbManager.updateBatch(sql);
+        } catch (SQLException e) { 
+            System.out.println("Table " + name + " exists.");
+        }
 	}
 
+    /**
+     * Checks if a table already exists in the database
+     * @param name The name of the table
+     * @return Returns whether the table already exists in the database.
+     */
 	private static boolean tableExists(String name) {
 		try {
 			DatabaseMetaData metadata = dbManager.getConnection().getMetaData();
@@ -271,19 +298,20 @@ public class HotelDatabase {
 
 			while (resultSet.next()) {
 				String tableName = resultSet.getString("TABLE_NAME");
-
 				if (tableName.equalsIgnoreCase(name))
-					return true;
+                    return true;
 			}
 			resultSet.close();
 		} catch (SQLException ex) {
-			System.out.println(ex.getMessage());
-		}
-
+            System.out.println(ex.getMessage());
+        }
+        
 		return false;
 	}
 
-	// use on logout, close
+    /**
+     * Closes the connection on the database manager
+     */
 	public void closeConnection() {
 		this.dbManager.closeConnection();
 	}

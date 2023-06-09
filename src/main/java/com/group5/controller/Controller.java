@@ -15,11 +15,20 @@ public abstract class Controller implements ActionListener {
 
 	protected abstract void init();
 
+	/**
+	 * Abstract controller class that holds the ViewGUI and AppSession
+	 * 
+	 * @param view the JFrame
+	 * @param model the AppSession.
+	 */
 	public Controller(ViewGUI view, AppSession model) {
 		this.view = view;
 		this.model = model;
 	}
 
+	/**
+	 * Factory pattern, will load relevant Controller based on type of system, user or admin.
+	 */
 	public void renderClient() {
 		if (model != null) {
 			if (model.hotelSystem instanceof HotelSystemUser) new ControllerClientUser(view, model);
@@ -27,12 +36,21 @@ public abstract class Controller implements ActionListener {
 		}
 	}
 
+	/**
+	 * Runs the AppSession logout method. Then creates a new app session and loades the loginController
+	 */
 	public void logout() { 
 		this.getModel().logout();
 		this.model = new AppSession();
 		if (model != null) new ControllerLogin(view, getModel());
 	}
 
+	/**
+	 * Takes a Card(JPanel) and the input data from JComponents, checking if any are empty.
+	 * @param card to display warning
+	 * @param fields array of String to check.
+	 * @return 
+	 */
 	public boolean hasEmptyField(Card card, String...fields) {
 		for (String s : fields) {
 			if (s.isEmpty()) {
@@ -43,7 +61,15 @@ public abstract class Controller implements ActionListener {
 		return false;
 	}
 
-	public void updateDisplay(Base newBase) { this.view.updateDisplay(newBase); }
+	/**
+	 * Updates the ViewGUI(JFrame) with a new Panel.
+	 * @param newBase 
+	 */
+	public void updateDisplay(Base newBase) {
+		this.view.updateDisplay(newBase);
+	}
+
+	// get methods
 	public ViewGUI getView() { return this.view; }
 	public AppSession getModel() { return this.model; }
 	public Account getAccount() { return getModel().hotelSystem.getAccount(); }

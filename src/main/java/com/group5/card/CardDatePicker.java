@@ -12,6 +12,7 @@ import javax.swing.JFormattedTextField.AbstractFormatter;
 import javax.swing.JPanel;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.SqlDateModel;
 import org.jdatepicker.impl.UtilDateModel;
 
 public class CardDatePicker extends JPanel {
@@ -19,10 +20,18 @@ public class CardDatePicker extends JPanel {
 	private JDatePanelImpl datePanel;
 	private JDatePickerImpl datePicker;
 
+	/**
+	 * Creates a datepicker panel used for selecting dates.
+	 * Uses JDatePicker package.
+	 * 
+	 * @param width of panel
+	 * @param height of panel
+	 */
 	public CardDatePicker(int width, int height) {
 		final int WIDTH = width;
 		final int HEIGHT = height;
 		UtilDateModel model = new UtilDateModel();
+//		SqlDateModel model = new SqlDateModel();
 		Properties p = new Properties();
 		p.put("text.today", "Today");
 		p.put("text.month", "Month");
@@ -32,6 +41,7 @@ public class CardDatePicker extends JPanel {
 		this.datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
 		this.add(datePicker); 
 
+		// updates the each time a date is selected.
 		datePicker.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -39,6 +49,8 @@ public class CardDatePicker extends JPanel {
 				calendar.set(Calendar.YEAR, getYear());
 				calendar.set(Calendar.MONTH, getMonth());
 				calendar.set(Calendar.DAY_OF_MONTH, getDay());
+
+				// sets the time to be 00:00:00, only the date info is needed
 				calendar.set(Calendar.HOUR_OF_DAY, 0);
 				calendar.set(Calendar.MINUTE, 0);
 				calendar.set(Calendar.SECOND, 0);
@@ -57,6 +69,9 @@ public class CardDatePicker extends JPanel {
 
 class DateLabelFormatter extends AbstractFormatter {
 
+	/**
+	 * AbstractFormatter to display the date inside the JDatePanel
+	 */
     private String datePattern = "dd/MM/yyyy";
     private SimpleDateFormat dateFormatter = new SimpleDateFormat(datePattern);
 

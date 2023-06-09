@@ -39,8 +39,10 @@ public final class DatabaseManager {
 	 * @return the connection of this database.
 	 */
 	public Connection getConnection() {
-		if (this.connection != null) return this.connection;
-		else return null;
+		if (this.connection != null) 
+            return this.connection;
+		else 
+            return null;
 	}
 
 	/**
@@ -52,7 +54,9 @@ public final class DatabaseManager {
 				connection.close();
 				System.out.println("Disconnected: " + dbName);
 			}
-			catch (SQLException ex) { System.out.println(ex.getMessage()); }
+			catch (SQLException ex) { 
+                System.out.println(ex.getMessage());
+            }
 		}
 	}
 
@@ -68,7 +72,10 @@ public final class DatabaseManager {
 
 	public void updateBatch(String... sql) throws SQLException {
 		Statement statement = connection.createStatement();
-		for (String s : sql) statement.addBatch(s);
+        
+		for (String s : sql) 
+            statement.addBatch(s);
+        
 		statement.executeBatch();
 	}
 

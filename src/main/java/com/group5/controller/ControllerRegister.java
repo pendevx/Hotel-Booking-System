@@ -14,6 +14,11 @@ public class ControllerRegister extends Controller implements KeyPressListener {
 
 	private ViewRegister registerView;
 
+	/**
+	 * Controller for registration
+	 * @param view
+	 * @param model 
+	 */
 	public ControllerRegister(ViewGUI view, AppSession model) {
 		super(view, model);
 		init();
@@ -39,18 +44,22 @@ public class ControllerRegister extends Controller implements KeyPressListener {
 		for (JComponent c : components) {
 			c.addKeyListener(new KeyAdapter() {
 				@Override
-				public void keyPressed(KeyEvent e) {
+				public void keyPressed(KeyEvent e) { // add enter key listener to JComponents
 					if(e.getKeyCode() == KeyEvent.VK_ENTER) getCardRegister().submitButton.doClick();
 				}
 			});
 		}
-
 	}
 
+	// Cancels and loads new login
 	private void cancelHandler() {
 		new ControllerLogin(getView(), getModel());
 	}
 
+	/**
+	 * Passes data into the model to check if username exists, and register users, saves to db
+	 * and then logs user in automatically.
+	 */
 	private void submitHandler() {
 		String usr = getCardRegister().userFieldNew.getText().toLowerCase();
 		String pwd = getCardRegister().passFieldNew.getText();
