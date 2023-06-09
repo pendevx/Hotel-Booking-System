@@ -18,7 +18,7 @@ public abstract class Card extends JPanel {
 	 */
 	public Card(int width) {
 		this.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 20));
-		this.setBackground(Color.WHITE);
+		this.setBackground(Color.LIGHT_GRAY);
 		this.setBorder(BorderFactory.createRaisedSoftBevelBorder());
 		this.WIDTH = width;
 		this.setPreferredSize(new Dimension(WIDTH, HEIGHT));

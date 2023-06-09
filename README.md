@@ -1,26 +1,15 @@
 ## __Project 2__
-### Due Date
-- Week 13, June 8th, 5PM
-
---------------------------------------------------
-
-### _NEW FEATURES TRACKER_
-- [ ] User can request to cancel booking/ cancel
-- [ ] Admin can book for user.
-
---------------------------------------------------
-
 ### _Requirements_
-- [ ] Develop `GUI`.
+- [x] Develop `GUI`.
 - [x] Integrate `database`.
 - [x] Implement `design patterns`.
-- [ ] Eliminate `code smell`.
+- [x] Eliminate `code smell`.
 - [x] Use `git`, commit history must be included, `.git` or from GitHub.
-- [ ] Develop `unit tests (JUnit)`, testing some important functionalities.
+- [x] Develop `unit tests (JUnit)`, testing some important functionalities.
 - [x] Apply `OOP` (abstraction, encapsulation, inheritance, polymorphism).
 - [x] Follow `SOLID` principles.
 - [x] Create multiple classes with relationships.
-- [ ] Bug-free and have `robust error handling`.
+- [x] Bug-free and have `robust error handling`.
 
 #### Requirements Database
 - [x] Include `database`, Apache Derby DB (JavaDB), no other types allowed.
@@ -29,10 +18,10 @@
 - [x] DB Service must launch automatically
 
 #### Requirements Report
-- [ ] Less than one-page.
+- [x] Less than one-page.
 - [x] State project setup.
 - [ ] GitHub URL (if exists).
-- [ ] Contribution of each teammate.
+- [x] Contribution of each teammate.
 
 #### Requirements Video
 - [ ] Less than 5min.
@@ -42,11 +31,11 @@
 --------------------------------------------------
 
 ### _Submission_
-- [ ] Project folder, all source codes and related files.
-- [ ] Report.
+- [x] Project folder, all source codes and related files.
+- [x] Report.
 - [ ] Video.
-- [ ] DB folder `.zip`, can set DB dir inside project folder.
-- [ ] `.git` folder, having all historical commits and branches.
+- [x] DB folder `.zip`, can set DB dir inside project folder.
+- [x] `.git` folder, having all historical commits and branches.
 
 --------------------------------------------------
 
@@ -55,7 +44,7 @@
 - [x] Clear and well-designed GUI following common standards.
 - [x] Interface is easy for users to interact with.
 ```
-- [ ] User-friendly error messages.
+- [x] User-friendly error messages.
 - [x] GUI components organized nicely.
 - [x] Quit at any step.
 - [x] Go back to menu, restart system at anytime (Logout)
@@ -75,13 +64,13 @@
 
 #### __(20%) Software Functionality & Usability__
 - [x] Program is easy to compile and run without and manual configurations (e.g., setup DB, import .jar ...).
-- [ ] Users interact with the program without any errors (e.g., the program can handle invalid data input bu giving clear error messages and instructions).
+- [x] Users interact with the program without any errors (e.g., the program can handle invalid data input bu giving clear error messages and instructions).
 - [x] Complexity of the functionality.
 ```
-- [ ] Program can run wihtout run time error by giving expected inputs.
+- [x] Program can run wihtout run time error by giving expected inputs.
 - [x] No manual configurations.
 - [x] Functionality of program, is complex enough, having most common features of the project implemented.
-- [ ] Implemented features are robust.
+- [x] Implemented features are robust.
 - [x] Any input can be handled perfectly without throwing exceptions.
 - [x] Messages can be prompted to end-user for correct input.
 ```
@@ -89,7 +78,7 @@
 #### __(30%) Software Design & Implementation__
 - [x] Program can be compiled successfully.
 - [x] The purpose of the code is easy to understand by reading it.
-- [ ] The comments in the code are useful and appropriate.
+- [x] The comments in the code are useful and appropriate.
 - [x] The code executes without runtime errors.
 - [x] Version control is applied.
 - [x] Error handling is thorough and robust.
@@ -97,11 +86,11 @@
 - [x] Design patters are implemented correctly where appropriate.
 - [x] Good coding style is used, following appropriate coding standards.
 - [x] Code design follows OO design good practice.
-- [ ] There are no obvious code smells.
-- [ ] Sufficient test cases are included, which are well written.
-- [ ] Important functionalities are properly tested.
+- [x] There are no obvious code smells.
+- [x] Sufficient test cases are included, which are well written.
+- [x] Important functionalities are properly tested.
 ```
-- [ ] Comments of methods are given, code easy to read.
+- [x] Comments of methods are given, code easy to read.
 - [x] More than 11 reasonable classes (12+) with reasonable methods.
 - [x] Class relationships well presented.
 - [x] All OOP concepts applied.
@@ -109,9 +98,9 @@
 - [x] Design patterns applied where appropriate.
 - [x] Well structured, clear seperation frontend, backend. (UI & Model).
 - [x] Robust, handle all inputs without throwing exceptions.
-- [ ] 5+ well written test cases.
-- [ ] Tests are well-named.
-- [ ] Test cover important functionality extensively.
+- [x] 5+ well written test cases.
+- [x] Tests are well-named.
+- [x] Test cover important functionality extensively.
 ```
 
 --------------------------------------------------
