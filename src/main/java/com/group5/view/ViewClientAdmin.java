@@ -10,6 +10,7 @@ import java.util.List;
 
 public class ViewClientAdmin extends ViewClient {
 	
+	public CardBookingManageAdmin cardBookingManage;
 	/**
 	 * View for admin client
 	 * @param controller, controller
@@ -27,7 +28,11 @@ public class ViewClientAdmin extends ViewClient {
 		if (accountInfo.length > 0) setCardAccount(new CardAccount(accountInfo)); // create accountCard
 		getCardAccount().editAccountButton.addActionListener(getController()); // add controller
 		getCardAccount().logoutButton.addActionListener(getController()); // add controller
-		setCardBookingManage(new CardBookingManageAdmin(hotelInfo)); // booking manager for admin
+
+		this.cardBookingManage = new CardBookingManageAdmin(hotelInfo);
+		this.cardBookingManage.deleteButton.addActionListener(getController());
+		setCardBookingManage(cardBookingManage);
+
 		setCardBookingList(new CardBookingList(bookings)); // card displays all bookings
 		super.addToBaseWithGap(getCardAccount(), getCardBookingManage(), getCardBookingList()); // add to base with gaps
 	}

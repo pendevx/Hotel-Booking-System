@@ -26,7 +26,7 @@ public class CardBookingManageUser extends CardBookingManage {
 		this.add(new Container(W, 60, "End Date:", endDate));
 		this.add(new Container(W, MARGIN, "Rooms:", rooms));
 		this.add(new Container(W, 20, new Text("Please choose your rooms for booking, e.g. 3F.", FontSize.H3)));
-		this.add(new Container(W, 20, new Text("Room numbers range from (1-10 and (A-J).", FontSize.H3)));
+		this.add(new Container(W, 20, new Text("Room numbers range from (1-9 and (A-J).", FontSize.H3)));
 		this.add(new Container(W, 20, new Text("Input in comma seperated line, e.g. 1A,1B,1C", FontSize.H3)));
 		this.add(new Container(W, MARGIN, cancelButton, bookButton));
 	}

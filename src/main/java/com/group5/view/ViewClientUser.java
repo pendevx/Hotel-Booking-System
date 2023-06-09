@@ -29,10 +29,12 @@ public class ViewClientUser extends ViewClient {
 		if (accountInfo.length > 0) setCardAccount(new CardAccount(accountInfo));
 		getCardAccount().editAccountButton.addActionListener(getController()); // add controller
 		getCardAccount().logoutButton.addActionListener(getController());
+
 		this.cardBookingManage = new CardBookingManageUser(hotelInfo);
 		this.cardBookingManage.cancelButton.addActionListener(getController());
 		this.cardBookingManage.bookButton.addActionListener(getController());
 		setCardBookingManage(cardBookingManage);
+
 		setCardBookingList(new CardBookingList(bookings)); // card booking list showing user booking
 		super.addToBaseWithGap(getCardAccount(), cardBookingManage, getCardBookingList()); // add to base
 	}

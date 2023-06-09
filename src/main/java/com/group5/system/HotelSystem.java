@@ -72,6 +72,7 @@ public abstract class HotelSystem {
 	 */
 	public Booking deleteBooking(String bookingId) {
 		try {
+//			Booking booking = getBookingsWhere(x -> x.bookingID.equals(bookingId)).get(0);
 			Booking booking = getBookingsWhere(x -> x.bookingID.equals(bookingId)).get(0);
 			bookings.remove(booking);
 //			FileIO.saveBookings(bookings);
