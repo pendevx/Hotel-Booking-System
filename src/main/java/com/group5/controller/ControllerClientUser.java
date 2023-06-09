@@ -63,13 +63,14 @@ public class ControllerClientUser extends ControllerClient {
 		Date startDate = getBookingUser().startDate.getDate();
 		Date endDate = getBookingUser().endDate.getDate();
 		String rooms = getBookingUser().rooms.getText();
+		System.out.println(startDate);
 
 		String start = (startDate != null) ? startDate.toString() : "";
 		String end = (endDate != null) ? endDate.toString() : "";
 
 		if (!hasEmptyField(getBookingUser(), start, end, rooms)) {
 			if (startBeforeToday(startDate)) {
-				getCardBookingManage().showWarningPopup("End date must be after start date...");
+				getCardBookingManage().showWarningPopup("Start date must be after today date...");
 				return;
 			}
 			if (endDate.before(startDate)) {
@@ -90,7 +91,7 @@ public class ControllerClientUser extends ControllerClient {
 
 	// returns string showing booking dates and amount of rooms
 	private String getBookingConfirm(Date startDate, Date endDate, int qty) {
-		return "Booking created.\n" + getBookingPeriod(endDate, endDate) + "\nFor: " + qty + " rooms.";
+		return "Booking created.\n" + getBookingPeriod(startDate, endDate) + "\nFor: " + qty + " rooms.";
 
 	}
 
@@ -135,7 +136,7 @@ public class ControllerClientUser extends ControllerClient {
 
 			char roomNum = r.charAt(r.length() - 1); // gets char from room string
 
-			if (floorNum < 1 || floorNum > 10 || roomNum < 'A' || roomNum > 'J') {
+			if (floorNum < 1 || floorNum > 9 || roomNum < 'A' || roomNum > 'J') {
 				getCardBookingManage().showWarningPopup("Room: " + r + " is invalid.");
 				return null;
 			}

@@ -45,7 +45,11 @@ public class ControllerClientAdmin extends ControllerClient {
 
 	private void deleteBooking() {
 		String bookingID = getBookingAdmin().bookingRef.getText().trim();
-        System.out.println(bookingID);
-		getModel().hotelSystem.deleteBooking(bookingID);
+
+		if (getModel().hotelSystem.deleteBooking(bookingID) == null) {
+			System.out.println("no");
+		}
+//		getModel().hotelSystem.deleteBooking(bookingID);
+		renderClient();
 	}
 }

@@ -12,6 +12,7 @@ import javax.swing.JFormattedTextField.AbstractFormatter;
 import javax.swing.JPanel;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.SqlDateModel;
 import org.jdatepicker.impl.UtilDateModel;
 
 public class CardDatePicker extends JPanel {
@@ -30,6 +31,7 @@ public class CardDatePicker extends JPanel {
 		final int WIDTH = width;
 		final int HEIGHT = height;
 		UtilDateModel model = new UtilDateModel();
+//		SqlDateModel model = new SqlDateModel();
 		Properties p = new Properties();
 		p.put("text.today", "Today");
 		p.put("text.month", "Month");
