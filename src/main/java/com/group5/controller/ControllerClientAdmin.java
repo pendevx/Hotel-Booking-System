@@ -2,6 +2,7 @@ package com.group5.controller;
 
 import com.group5.app.AppSession;
 import com.group5.card.CardBookingManageAdmin;
+import com.group5.hotel.Booking;
 import com.group5.view.ViewClientAdmin;
 import com.group5.view.ViewGUI;
 import java.awt.event.ActionEvent;
@@ -46,10 +47,14 @@ public class ControllerClientAdmin extends ControllerClient {
 	private void deleteBooking() {
 		String bookingID = getBookingAdmin().bookingRef.getText().trim();
 
-		if (getModel().hotelSystem.deleteBooking(bookingID) == null) {
-			System.out.println("no");
+		Booking deleted = getModel().hotelSystem.deleteBooking(bookingID);
+		if (deleted == null) {
+			getCardBookingManage().showWarningPopup("Booking not found.");
+			return;
 		}
-//		getModel().hotelSystem.deleteBooking(bookingID);
+		else {
+			getCardBookingManage().showWarningPopup("Booking " + deleted.bookingID + " deleted.");
+		}
 		renderClient();
 	}
 }

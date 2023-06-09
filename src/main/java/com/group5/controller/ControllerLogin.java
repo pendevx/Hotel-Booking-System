@@ -28,6 +28,9 @@ public class ControllerLogin extends Controller implements KeyPressListener {
 		this.loginView = new ViewLogin(this);
 		super.updateDisplay(loginView.getBasePanel()); // set display to show login
 		addEnterKeyListener(loginView.getCardComponents()); // add key listener to components
+
+		getCardLogin().usernameField.setText("admin");
+		getCardLogin().passwordField.setText("admin");
 	}
 
 	@Override

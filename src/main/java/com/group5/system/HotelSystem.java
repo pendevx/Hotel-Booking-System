@@ -72,15 +72,24 @@ public abstract class HotelSystem {
 	 */
 	public Booking deleteBooking(String bookingId) {
 		try {
-//			Booking booking = getBookingsWhere(x -> x.bookingID.equals(bookingId)).get(0);
-			Booking booking = getBookingsWhere(x -> x.bookingID.equals(bookingId)).get(0);
+			List<Booking> bookingsList = getBookingsWhere(x -> x.bookingID.equals(bookingId));
+			if (bookingsList.isEmpty()) return null;
+			Booking booking = bookingsList.get(0);
 			bookings.remove(booking);
-//			FileIO.saveBookings(bookings);
 			HotelDatabase.deleteBooking(booking);
 			return booking;
-		} catch (BookingNotFoundException e) {
-			return null;
 		}
+		catch (BookingNotFoundException e) { return null; }
+//		try {
+//			Booking booking = getBookingsWhere(x -> x.bookingID.equals(bookingId)).get(0);
+////			booking = getBookingsWhere(x -> x.bookingID.equals(bookingId)).get(0);
+//			bookings.remove(booking);
+////			FileIO.saveBookings(bookings);
+//			HotelDatabase.deleteBooking(booking);
+//			return booking;
+//		} catch (BookingNotFoundException e) {
+//			return null;
+//		}
 	}
 
 	/**
