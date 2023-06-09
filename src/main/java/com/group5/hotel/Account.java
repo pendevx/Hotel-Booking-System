@@ -75,7 +75,7 @@ public class Account {
 	}
 
     /***
-     * @return foramtted String of first and last name
+     * @return formatted String of first and last name
      */
 	public String getFullName() { return getFirstName() + " " + getLastName(); }
 	public String getFirstName() { return this.firstName; }
@@ -91,7 +91,7 @@ public class Account {
 
     /***
      * @param acc to compare with
-     * @return boolean of if usernames strings are equal
+     * @return Boolean of if usernames strings are equal
      */
 	public boolean equals(Account acc) {
 		return username.equals(acc.username);

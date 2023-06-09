@@ -5,8 +5,6 @@ import com.group5.exceptions.BookingNotFoundException;
 import com.group5.hotel.Account;
 import com.group5.hotel.Room;
 import com.group5.hotel.Booking;
-
-import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
