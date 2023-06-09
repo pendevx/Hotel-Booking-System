@@ -26,7 +26,6 @@ public class CardBookingList extends Card {
 
 		String[] columnNames = { "Booking ID", "Start", "End", "Price", "Rooms", "Booker", "Manager" };
 		Object[][] data = new Object[bookings.size()][];
-		DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 
 		for (int i = 0; i < bookings.size(); i++) {
 			Booking booking = bookings.get(i);
